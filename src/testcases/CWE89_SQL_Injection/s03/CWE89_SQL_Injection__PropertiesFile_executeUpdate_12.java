@@ -4,18 +4,19 @@ Label Definition File: CWE89_SQL_Injection.label.xml
 Template File: sources-sinks-12.tmpl.java
 */
 /*
-* @description
-* CWE: 89 SQL Injection
-* BadSource: PropertiesFile Read data from a .properties file (in property named data)
-* GoodSource: A hardcoded string
-* Sinks: executeUpdate
-*    GoodSink: Use prepared statement and executeUpdate (properly)
-*    BadSink : data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 89 SQL Injection
+ * BadSource: PropertiesFile Read data from a .properties file (in property named data)
+ * GoodSource: A hardcoded string
+ * Sinks: executeUpdate
+ *    GoodSink: Use prepared statement and executeUpdate (properly)
+ *    BadSink : data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -30,105 +31,74 @@ import java.util.logging.Level;
 import java.sql.*;
 
 
-public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
 
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and executeUpdate (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -137,34 +107,22 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
                 int rowCount = sqlStatement.executeUpdate();
 
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -174,108 +132,75 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
 
     /* goodG2B() - use goodsource and badsink by changing the first "if" so that
      * both branches use the GoodSource */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             Statement sqlStatement = null;
 
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
 
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+                int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
 
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -285,46 +210,33 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
 
     /* goodB2G() - use badsource and goodsink by changing the second "if" so that
      * both branches use the GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             data = ""; /* Initialize data */
 
@@ -333,30 +245,21 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
 
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
 
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -364,58 +267,41 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and executeUpdate (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
                 sqlStatement.setString(1, data);
                 int rowCount = sqlStatement.executeUpdate();
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
 
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and executeUpdate (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -424,34 +310,22 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
                 int rowCount = sqlStatement.executeUpdate();
 
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -459,8 +333,7 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -471,8 +344,7 @@ public class CWE89_SQL_Injection__PropertiesFile_executeUpdate_12 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

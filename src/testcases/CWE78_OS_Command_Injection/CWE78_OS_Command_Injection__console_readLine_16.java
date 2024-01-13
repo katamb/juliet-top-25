@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-16.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: console_readLine Read data from the console using readLine()
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: console_readLine Read data from the console using readLine()
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -25,54 +25,38 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             data = ""; /* Initialize data */
             {
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from the console using readLine */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -82,13 +66,10 @@ public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTes
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -100,25 +81,20 @@ public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTes
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded string */
             data = "foo";
             break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -129,8 +105,7 @@ public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTes
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -140,8 +115,7 @@ public class CWE78_OS_Command_Injection__console_readLine_16 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

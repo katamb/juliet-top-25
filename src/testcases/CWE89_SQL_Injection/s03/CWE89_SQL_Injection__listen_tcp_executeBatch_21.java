@@ -16,6 +16,7 @@ Template File: sources-sinks-21.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -31,13 +32,11 @@ import java.util.logging.Level;
 import java.sql.*;
 
 
-public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTestCase
-{
+public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -50,8 +49,7 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -62,125 +60,86 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
         }
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(String data ) throws Throwable
-    {
-        if (badPrivate)
-        {
-            if (data != null)
-            {
+    private void badSink(String data) throws Throwable {
+        if (badPrivate) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 Statement sqlStatement = null;
-                try
-                {
+                try {
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.createStatement();
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                         sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -193,16 +152,14 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -215,8 +172,7 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -227,132 +183,91 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
         }
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(String data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(String data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
-            if (data != null)
-            {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 PreparedStatement sqlStatement = null;
-                try
-                {
+                try {
                     /* FIX: Use prepared statement and executeBatch (properly) */
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.prepareStatement("update users set hitcount=hitcount+1 where name=?");
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         sqlStatement.setString(1, names[i]);
                         sqlStatement.addBatch();
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -362,8 +277,7 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -376,8 +290,7 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -388,126 +301,87 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
         }
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(String data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
-            if (data != null)
-            {
+    private void goodB2G2Sink(String data) throws Throwable {
+        if (goodB2G2Private) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 PreparedStatement sqlStatement = null;
-                try
-                {
+                try {
                     /* FIX: Use prepared statement and executeBatch (properly) */
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.prepareStatement("update users set hitcount=hitcount+1 where name=?");
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         sqlStatement.setString(1, names[i]);
                         sqlStatement.addBatch();
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -516,73 +390,53 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(String data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
-            if (data != null)
-            {
+    private void goodG2BSink(String data) throws Throwable {
+        if (goodG2BPrivate) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 Statement sqlStatement = null;
-                try
-                {
+                try {
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.createStatement();
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                         sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -596,8 +450,7 @@ public class CWE89_SQL_Injection__listen_tcp_executeBatch_21 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

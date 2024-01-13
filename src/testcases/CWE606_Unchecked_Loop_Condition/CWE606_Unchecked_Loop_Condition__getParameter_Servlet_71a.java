@@ -22,44 +22,39 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
 
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).badSink((Object)data , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).badSink((Object) data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
 
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).goodG2BSink((Object)data , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).goodG2BSink((Object) data, request, response);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
 
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).goodB2GSink((Object)data , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71b()).goodB2GSink((Object) data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -68,8 +63,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_71a extends A
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

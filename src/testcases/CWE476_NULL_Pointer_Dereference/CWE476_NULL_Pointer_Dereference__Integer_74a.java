@@ -18,58 +18,54 @@ Template File: sources-sinks-74a.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
-public class CWE476_NULL_Pointer_Dereference__Integer_74a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__Integer_74a extends AbstractTestCase {
+    public void bad() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).badSink(dataHashMap  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).badSink(dataHashMap);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         Integer data;
 
         /* FIX: hardcode data to non-null */
         data = Integer.valueOf(5);
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).goodG2BSink(dataHashMap  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).goodG2BSink(dataHashMap);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).goodB2GSink(dataHashMap  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_74b()).goodB2GSink(dataHashMap);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -78,8 +74,7 @@ public class CWE476_NULL_Pointer_Dereference__Integer_74a extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

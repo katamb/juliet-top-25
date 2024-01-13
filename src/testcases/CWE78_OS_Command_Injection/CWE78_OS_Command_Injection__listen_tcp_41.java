@@ -27,19 +27,14 @@ import java.net.ServerSocket;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
-{
-    private void badSink(String data ) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase {
+    private void badSink(String data) throws Throwable {
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -50,8 +45,7 @@ public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -64,8 +58,7 @@ public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -76,84 +69,59 @@ public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
         }
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
-    private void goodG2BSink(String data ) throws Throwable
-    {
+    private void goodG2BSink(String data) throws Throwable {
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -165,14 +133,13 @@ public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -181,8 +148,7 @@ public class CWE78_OS_Command_Injection__listen_tcp_41 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

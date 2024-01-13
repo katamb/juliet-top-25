@@ -28,10 +28,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b {
+    public String badSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -41,30 +39,21 @@ public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -74,8 +63,7 @@ public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -85,8 +73,7 @@ public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public String goodB2GSource() throws Throwable
-    {
+    public String goodB2GSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -96,30 +83,21 @@ public class CWE606_Unchecked_Loop_Condition__PropertiesFile_61b
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }

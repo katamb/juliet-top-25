@@ -16,14 +16,13 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_preinc_61b
-{
-    public short badSource() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_preinc_61b {
+    public short badSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -33,8 +32,7 @@ public class CWE190_Integer_Overflow__short_max_preinc_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public short goodG2BSource() throws Throwable
-    {
+    public short goodG2BSource() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -44,8 +42,7 @@ public class CWE190_Integer_Overflow__short_max_preinc_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public short goodB2GSource() throws Throwable
-    {
+    public short goodB2GSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */

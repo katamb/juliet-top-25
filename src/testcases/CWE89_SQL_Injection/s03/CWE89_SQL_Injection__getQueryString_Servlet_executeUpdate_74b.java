@@ -16,7 +16,9 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
@@ -25,52 +27,37 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_74b
-{
-    public void badSink(HashMap<Integer,String> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_74b {
+    public void badSink(HashMap<Integer, String> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
 
             IO.writeLine("Updated " + rowCount + " rows successfully.");
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (sqlStatement != null)
-                {
+        } finally {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -78,50 +65,36 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_74b
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,String> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, String> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
 
             IO.writeLine("Updated " + rowCount + " rows successfully.");
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (sqlStatement != null)
-                {
+        } finally {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -129,15 +102,13 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_74b
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,String> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, String> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
 
-        try
-        {
+        try {
             /* FIX: Use prepared statement and executeUpdate (properly) */
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -146,34 +117,22 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_74b
             int rowCount = sqlStatement.executeUpdate();
 
             IO.writeLine("Updated " + rowCount + " rows successfully.");
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (sqlStatement != null)
-                {
+        } finally {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }

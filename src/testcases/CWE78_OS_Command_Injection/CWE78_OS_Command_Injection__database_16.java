@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-16.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: database Read data from a database
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: database Read data from a database
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -26,23 +26,19 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             data = ""; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -50,47 +46,31 @@ public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     data = resultSet.getString(1);
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -99,13 +79,10 @@ public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -117,25 +94,20 @@ public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded string */
             data = "foo";
             break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -146,8 +118,7 @@ public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -157,8 +128,7 @@ public class CWE78_OS_Command_Injection__database_16 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

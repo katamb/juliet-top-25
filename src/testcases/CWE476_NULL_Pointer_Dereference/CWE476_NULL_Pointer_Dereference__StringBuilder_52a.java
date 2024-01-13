@@ -19,44 +19,39 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_52a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_52a extends AbstractTestCase {
+    public void bad() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).badSink(data );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
         data = new StringBuilder();
 
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).goodG2BSink(data );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).goodB2GSink(data );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_52b()).goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +60,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_52a extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,54 +16,47 @@ Template File: sources-sinks-61a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_listen_tcp_add_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_listen_tcp_add_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data = (new CWE190_Integer_Overflow__int_listen_tcp_add_61b()).badSource();
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = (new CWE190_Integer_Overflow__int_listen_tcp_add_61b()).goodG2BSource();
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data = (new CWE190_Integer_Overflow__int_listen_tcp_add_61b()).goodB2GSource();
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(data + 1);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 
@@ -75,8 +68,7 @@ public class CWE190_Integer_Overflow__int_listen_tcp_add_61a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

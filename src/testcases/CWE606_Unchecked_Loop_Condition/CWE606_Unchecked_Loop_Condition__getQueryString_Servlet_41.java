@@ -23,32 +23,25 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends AbstractTestCaseServlet
-{
-    private void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends AbstractTestCaseServlet {
+    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -56,42 +49,34 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends 
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
             }
         }
 
-        badSink(data , request, response );
+        badSink(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
-    private void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -99,35 +84,28 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
 
-        goodG2BSink(data , request, response );
+        goodG2BSink(data, request, response);
     }
 
-    private void goodB2GSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2GSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
         /* FIX: loop number thresholds validated */
-        if (numberOfLoops >= 0 && numberOfLoops <= 5)
-        {
-            for (int i=0; i < numberOfLoops; i++)
-            {
+        if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+            for (int i = 0; i < numberOfLoops; i++) {
                 IO.writeLine("hello world");
             }
         }
@@ -135,8 +113,7 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -144,18 +121,16 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends 
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
             }
         }
 
-        goodB2GSink(data , request, response );
+        goodB2GSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -164,8 +139,7 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_41 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

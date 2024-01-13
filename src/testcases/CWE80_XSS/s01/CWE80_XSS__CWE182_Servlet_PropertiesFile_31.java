@@ -15,6 +15,7 @@ Template File: sources-sink-31.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,11 +27,9 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -42,30 +41,21 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCas
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
 
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
 
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -76,8 +66,7 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCas
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
@@ -85,14 +74,12 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCas
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -105,8 +92,7 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCas
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
@@ -120,8 +106,7 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_31 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

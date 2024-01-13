@@ -16,49 +16,43 @@ Template File: sources-sinks-71b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_square_71b
-{
-    public void badSink(Object dataObject ) throws Throwable
-    {
-        long data = (Long)dataObject;
+public class CWE190_Integer_Overflow__long_max_square_71b {
+    public void badSink(Object dataObject) throws Throwable {
+        long data = (Long) dataObject;
 
         /* POTENTIAL FLAW: if (data*data) > Long.MAX_VALUE, this will overflow */
-        long result = (long)(data * data);
+        long result = (long) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject ) throws Throwable
-    {
-        long data = (Long)dataObject;
+    public void goodG2BSink(Object dataObject) throws Throwable {
+        long data = (Long) dataObject;
 
         /* POTENTIAL FLAW: if (data*data) > Long.MAX_VALUE, this will overflow */
-        long result = (long)(data * data);
+        long result = (long) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(Object dataObject ) throws Throwable
-    {
-        long data = (Long)dataObject;
+    public void goodB2GSink(Object dataObject) throws Throwable {
+        long data = (Long) dataObject;
 
         /* FIX: Add a check to prevent an overflow from occurring */
         /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Long.MAX_VALUE)))
-        {
-            long result = (long)(data * data);
+        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Long.MAX_VALUE))) {
+            long result = (long) (data * data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform squaring.");
         }
 

@@ -16,16 +16,15 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_check_42 extends AbstractTestCase
-{
-    private int badSource() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_check_42 extends AbstractTestCase {
+    private int badSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -34,12 +33,9 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         /* POTENTIAL FLAW: Read data from a system property */
         {
             String stringNumber = System.getProperty("user.home");
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
@@ -47,12 +43,11 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data = badSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -62,8 +57,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int goodG2BSource() throws Throwable
-    {
+    private int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -72,12 +66,11 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = goodG2BSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -87,8 +80,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int goodB2GSource() throws Throwable
-    {
+    private int goodB2GSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -97,12 +89,9 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         /* POTENTIAL FLAW: Read data from a system property */
         {
             String stringNumber = System.getProperty("user.home");
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
@@ -110,27 +99,22 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data = goodB2GSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before writing to array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             array[data] = 42;
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -141,8 +125,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

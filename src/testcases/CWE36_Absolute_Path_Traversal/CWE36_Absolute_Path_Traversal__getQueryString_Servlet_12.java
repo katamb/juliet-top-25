@@ -4,14 +4,14 @@ Label Definition File: CWE36_Absolute_Path_Traversal.label.xml
 Template File: sources-sink-12.tmpl.java
 */
 /*
-* @description
-* CWE: 36 Absolute Path Traversal
-* BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
-* GoodSource: A hardcoded string
-* BadSink: readFile read line from file from disk
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 36 Absolute Path Traversal
+ * BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
+ * GoodSource: A hardcoded string
+ * BadSink: readFile read line from file from disk
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE36_Absolute_Path_Traversal;
 
@@ -24,31 +24,24 @@ import java.util.StringTokenizer;
 
 import java.util.logging.Level;
 
-public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends AbstractTestCaseServlet
-{
+public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends AbstractTestCaseServlet {
     /* uses badsource and badsink - see how tools report flaws that don't always occur */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* initialize data in case id is not in query string */
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                         data = token.substring(3); /* set data to "foo" */
                         break; /* exit while loop */
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -56,61 +49,42 @@ public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends Ab
         }
 
         /* POTENTIAL FLAW: unvalidated or sandboxed value */
-        if (data != null)
-        {
+        if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -121,16 +95,12 @@ public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends Ab
 
     /* goodG2B() - use goodsource and badsink by changing the "if" so that
      * both branches use the GoodSource */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -138,61 +108,42 @@ public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends Ab
         }
 
         /* POTENTIAL FLAW: unvalidated or sandboxed value */
-        if (data != null)
-        {
+        if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -201,8 +152,7 @@ public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends Ab
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -212,8 +162,7 @@ public class CWE36_Absolute_Path_Traversal__getQueryString_Servlet_12 extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -20,16 +20,13 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE81_XSS_Error_Message__Servlet_URLConnection_52b
-{
-    public void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE81_XSS_Error_Message__Servlet_URLConnection_52c()).badSink(data , request, response);
+public class CWE81_XSS_Error_Message__Servlet_URLConnection_52b {
+    public void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE81_XSS_Error_Message__Servlet_URLConnection_52c()).badSink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE81_XSS_Error_Message__Servlet_URLConnection_52c()).goodG2BSink(data , request, response);
+    public void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE81_XSS_Error_Message__Servlet_URLConnection_52c()).goodG2BSink(data, request, response);
     }
 }

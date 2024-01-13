@@ -16,48 +16,42 @@ Template File: sources-sinks-68b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_add_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_add_68b {
+    public void badSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_rand_add_68a.data;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(data + 1);
+        short result = (short) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_rand_add_68a.data;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(data + 1);
+        short result = (short) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink() throws Throwable
-    {
+    public void goodB2GSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_rand_add_68a.data;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Short.MAX_VALUE)
-        {
-            short result = (short)(data + 1);
+        if (data < Short.MAX_VALUE) {
+            short result = (short) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 

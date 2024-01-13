@@ -15,6 +15,7 @@ Template File: sources-sink-22b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,22 +27,18 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__Servlet_connect_tcp_22b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__Servlet_connect_tcp_22b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE80_XSS__Servlet_connect_tcp_22a.badPublicStatic)
-        {
+        if (CWE80_XSS__Servlet_connect_tcp_22a.badPublicStatic) {
             data = ""; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -49,55 +46,37 @@ public class CWE80_XSS__Servlet_connect_tcp_22b
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -106,18 +85,14 @@ public class CWE80_XSS__Servlet_connect_tcp_22b
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    public String goodG2B1Source(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2B1Source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE80_XSS__Servlet_connect_tcp_22a.goodG2B1PublicStatic)
-        {
+        if (CWE80_XSS__Servlet_connect_tcp_22a.goodG2B1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -128,17 +103,13 @@ public class CWE80_XSS__Servlet_connect_tcp_22b
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    public String goodG2B2Source(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2B2Source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE80_XSS__Servlet_connect_tcp_22a.goodG2B2PublicStatic)
-        {
+        if (CWE80_XSS__Servlet_connect_tcp_22a.goodG2B2PublicStatic) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;

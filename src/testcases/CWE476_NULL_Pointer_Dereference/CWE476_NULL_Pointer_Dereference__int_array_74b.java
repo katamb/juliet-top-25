@@ -18,13 +18,12 @@ Template File: sources-sinks-74b.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_74b
-{
-    public void badSink(HashMap<Integer,int []> dataHashMap ) throws Throwable
-    {
-        int [] data = dataHashMap.get(2);
+public class CWE476_NULL_Pointer_Dereference__int_array_74b {
+    public void badSink(HashMap<Integer, int[]> dataHashMap) throws Throwable {
+        int[] data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
@@ -32,9 +31,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_74b
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,int []> dataHashMap ) throws Throwable
-    {
-        int [] data = dataHashMap.get(2);
+    public void goodG2BSink(HashMap<Integer, int[]> dataHashMap) throws Throwable {
+        int[] data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
@@ -42,17 +40,13 @@ public class CWE476_NULL_Pointer_Dereference__int_array_74b
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,int []> dataHashMap ) throws Throwable
-    {
-        int [] data = dataHashMap.get(2);
+    public void goodB2GSink(HashMap<Integer, int[]> dataHashMap) throws Throwable {
+        int[] data = dataHashMap.get(2);
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 

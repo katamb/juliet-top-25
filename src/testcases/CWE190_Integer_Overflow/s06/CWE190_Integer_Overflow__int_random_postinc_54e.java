@@ -16,48 +16,42 @@ Template File: sources-sinks-54e.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_random_postinc_54e
-{
-    public void badSink(int data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_random_postinc_54e {
+    public void badSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
         data++;
-        int result = (int)(data);
+        int result = (int) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data ) throws Throwable
-    {
+    public void goodG2BSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
         data++;
-        int result = (int)(data);
+        int result = (int) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data ) throws Throwable
-    {
+    public void goodB2GSink(int data) throws Throwable {
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
+        if (data < Integer.MAX_VALUE) {
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

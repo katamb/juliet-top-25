@@ -16,18 +16,17 @@ Template File: sources-sinks-22a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTestCase
-{
+public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTestCase {
     /* The public static variable below is used to drive control flow in the sink function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = null;
 
         /* get system property user.home */
@@ -35,7 +34,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTes
         data = System.getProperty("user.home");
 
         badPublicStatic = true;
-        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).badSink(data );
+        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).badSink(data);
     }
 
     /* The public static variables below are used to drive control flow in the sink functions.
@@ -44,16 +43,14 @@ public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTes
     public static boolean goodB2G2PublicStatic = false;
     public static boolean goodG2BPublicStatic = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data = null;
 
         /* get system property user.home */
@@ -61,12 +58,11 @@ public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTes
         data = System.getProperty("user.home");
 
         goodB2G1PublicStatic = false;
-        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodB2G1Sink(data );
+        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodB2G1Sink(data);
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data = null;
 
         /* get system property user.home */
@@ -74,19 +70,18 @@ public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTes
         data = System.getProperty("user.home");
 
         goodB2G2PublicStatic = true;
-        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodB2G2Sink(data );
+        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodB2G2Sink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = null;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
         goodG2BPublicStatic = true;
-        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodG2BSink(data );
+        (new CWE89_SQL_Injection__Property_executeUpdate_22b()).goodG2BSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -95,8 +90,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_22a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

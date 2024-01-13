@@ -22,10 +22,8 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -35,8 +33,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -46,8 +43,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */

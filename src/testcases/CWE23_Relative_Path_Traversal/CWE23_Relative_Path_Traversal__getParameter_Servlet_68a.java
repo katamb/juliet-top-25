@@ -21,12 +21,10 @@ import java.io.*;
 import javax.servlet.http.*;
 
 
-public class CWE23_Relative_Path_Traversal__getParameter_Servlet_68a extends AbstractTestCaseServlet
-{
+public class CWE23_Relative_Path_Traversal__getParameter_Servlet_68a extends AbstractTestCaseServlet {
     public static String data;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
@@ -34,14 +32,12 @@ public class CWE23_Relative_Path_Traversal__getParameter_Servlet_68a extends Abs
         (new CWE23_Relative_Path_Traversal__getParameter_Servlet_68b()).badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -55,8 +51,7 @@ public class CWE23_Relative_Path_Traversal__getParameter_Servlet_68a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

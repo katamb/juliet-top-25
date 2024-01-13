@@ -16,6 +16,7 @@ Template File: sources-sinks-81a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -28,10 +29,8 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +41,7 @@ public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends Abs
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -51,65 +49,50 @@ public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends Abs
                 /* This will be reading the first "line" of the response body,
                  * which could be very long if there are no newlines in the HTML */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
         }
 
         CWE89_SQL_Injection__URLConnection_prepareStatement_81_base baseObject = new CWE89_SQL_Injection__URLConnection_prepareStatement_81_bad();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
         CWE89_SQL_Injection__URLConnection_prepareStatement_81_base baseObject = new CWE89_SQL_Injection__URLConnection_prepareStatement_81_goodG2B();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -120,8 +103,7 @@ public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends Abs
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -129,42 +111,30 @@ public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends Abs
                 /* This will be reading the first "line" of the response body,
                  * which could be very long if there are no newlines in the HTML */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
         }
 
         CWE89_SQL_Injection__URLConnection_prepareStatement_81_base baseObject = new CWE89_SQL_Injection__URLConnection_prepareStatement_81_goodB2G();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -173,8 +143,7 @@ public class CWE89_SQL_Injection__URLConnection_prepareStatement_81a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

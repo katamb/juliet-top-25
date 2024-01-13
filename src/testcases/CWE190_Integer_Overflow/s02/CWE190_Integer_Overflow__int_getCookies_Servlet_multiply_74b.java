@@ -16,55 +16,47 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_getCookies_Servlet_multiply_74b
-{
-    public void badSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getCookies_Servlet_multiply_74b {
+    public void badSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * 2);
+            int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * 2);
+            int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Integer.MAX_VALUE/2))
-            {
-                int result = (int)(data * 2);
+            if (data < (Integer.MAX_VALUE / 2)) {
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }

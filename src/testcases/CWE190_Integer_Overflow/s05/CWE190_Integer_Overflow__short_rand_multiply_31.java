@@ -16,45 +16,41 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_multiply_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_multiply_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         short dataCopy;
         {
             short data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
             dataCopy = data;
         }
         {
             short data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-                short result = (short)(data * 2);
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short dataCopy;
         {
             short data;
@@ -67,10 +63,9 @@ public class CWE190_Integer_Overflow__short_rand_multiply_31 extends AbstractTes
         {
             short data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-                short result = (short)(data * 2);
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
@@ -78,30 +73,25 @@ public class CWE190_Integer_Overflow__short_rand_multiply_31 extends AbstractTes
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short dataCopy;
         {
             short data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
             dataCopy = data;
         }
         {
             short data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Short.MAX_VALUE/2))
-                {
-                    short result = (short)(data * 2);
+                if (data < (Short.MAX_VALUE / 2)) {
+                    short result = (short) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -115,8 +105,7 @@ public class CWE190_Integer_Overflow__short_rand_multiply_31 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -19,44 +19,39 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__Integer_71a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__Integer_71a extends AbstractTestCase {
+    public void bad() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).badSink((Object)data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).badSink((Object) data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         Integer data;
 
         /* FIX: hardcode data to non-null */
         data = Integer.valueOf(5);
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).goodG2BSink((Object)data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).goodG2BSink((Object) data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).goodB2GSink((Object)data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_71b()).goodB2GSink((Object) data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +60,7 @@ public class CWE476_NULL_Pointer_Dereference__Integer_71a extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

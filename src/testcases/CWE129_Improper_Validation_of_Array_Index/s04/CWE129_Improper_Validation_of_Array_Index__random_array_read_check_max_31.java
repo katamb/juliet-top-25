@@ -16,16 +16,15 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.security.SecureRandom;
 
-public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -39,30 +38,25 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-            if (data < array.length)
-            {
+            if (data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -76,15 +70,12 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-            if (data < array.length)
-            {
+            if (data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
@@ -92,8 +83,7 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -107,15 +97,12 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* FIX: Fully verify data before reading from array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
@@ -128,8 +115,7 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

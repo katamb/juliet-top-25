@@ -22,17 +22,14 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends AbstractTestCaseServlet
-{
+public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends AbstractTestCaseServlet {
     private String dataBad;
     private String dataGoodG2B;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataBad;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -40,8 +37,7 @@ public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends Abst
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -49,11 +45,9 @@ public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends Abst
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -64,17 +58,14 @@ public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends Abst
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodG2B;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -82,8 +73,7 @@ public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends Abst
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -99,8 +89,7 @@ public class CWE83_XSS_Attribute__Servlet_getQueryString_Servlet_45 extends Abst
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

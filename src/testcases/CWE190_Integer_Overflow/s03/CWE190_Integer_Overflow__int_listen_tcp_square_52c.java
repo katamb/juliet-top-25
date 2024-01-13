@@ -16,46 +16,40 @@ Template File: sources-sinks-52c.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_listen_tcp_square_52c
-{
-    public void badSink(int data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_listen_tcp_square_52c {
+    public void badSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data ) throws Throwable
-    {
+    public void goodG2BSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data ) throws Throwable
-    {
+    public void goodB2GSink(int data) throws Throwable {
 
         /* FIX: Add a check to prevent an overflow from occurring */
         /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-        {
-            int result = (int)(data * data);
+        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform squaring.");
         }
 

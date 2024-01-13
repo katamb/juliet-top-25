@@ -4,18 +4,19 @@ Label Definition File: CWE89_SQL_Injection.label.xml
 Template File: sources-sinks-13.tmpl.java
 */
 /*
-* @description
-* CWE: 89 SQL Injection
-* BadSource: File Read data from file (named c:\data.txt)
-* GoodSource: A hardcoded string
-* Sinks: executeBatch
-*    GoodSink: Use prepared statement and executeBatch (properly)
-*    BadSink : data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection
-* Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
-*
-* */
+ * @description
+ * CWE: 89 SQL Injection
+ * BadSource: File Read data from file (named c:\data.txt)
+ * GoodSource: A hardcoded string
+ * Sinks: executeBatch
+ *    GoodSink: Use prepared statement and executeBatch (properly)
+ *    BadSink : data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection
+ * Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
+ *
+ * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -31,21 +32,17 @@ import java.util.logging.Level;
 import java.sql.*;
 
 
-public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = ""; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -54,113 +51,77 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if (data != null)
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 Statement sqlStatement = null;
-                try
-                {
+                try {
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.createStatement();
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                         sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -169,77 +130,55 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if (data != null)
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 Statement sqlStatement = null;
-                try
-                {
+                try {
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.createStatement();
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                         sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -248,75 +187,53 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if (data != null)
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 Statement sqlStatement = null;
-                try
-                {
+                try {
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.createStatement();
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                         sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -325,19 +242,16 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = ""; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -346,120 +260,82 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
-            if (data != null)
-            {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 PreparedStatement sqlStatement = null;
-                try
-                {
+                try {
                     /* FIX: Use prepared statement and executeBatch (properly) */
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.prepareStatement("update users set hitcount=hitcount+1 where name=?");
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         sqlStatement.setString(1, names[i]);
                         sqlStatement.addBatch();
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -469,19 +345,16 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = ""; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -490,114 +363,78 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if (data != null)
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data != null) {
                 String names[] = data.split("-");
                 int successCount = 0;
                 Connection dbConnection = null;
                 PreparedStatement sqlStatement = null;
-                try
-                {
+                try {
                     /* FIX: Use prepared statement and executeBatch (properly) */
                     dbConnection = IO.getDBConnection();
                     sqlStatement = dbConnection.prepareStatement("update users set hitcount=hitcount+1 where name=?");
-                    for (int i = 0; i < names.length; i++)
-                    {
+                    for (int i = 0; i < names.length; i++) {
                         sqlStatement.setString(1, names[i]);
                         sqlStatement.addBatch();
                     }
                     int resultsArray[] = sqlStatement.executeBatch();
-                    for (int i = 0; i < names.length; i++)
-                    {
-                        if (resultsArray[i] > 0)
-                        {
+                    for (int i = 0; i < names.length; i++) {
+                        if (resultsArray[i] > 0) {
                             successCount++;
                         }
                     }
                     IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (sqlStatement != null)
-                        {
+                } finally {
+                    try {
+                        if (sqlStatement != null) {
                             sqlStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (dbConnection != null)
-                        {
+                    try {
+                        if (dbConnection != null) {
                             dbConnection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -605,8 +442,7 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -619,8 +455,7 @@ public class CWE89_SQL_Injection__File_executeBatch_13 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

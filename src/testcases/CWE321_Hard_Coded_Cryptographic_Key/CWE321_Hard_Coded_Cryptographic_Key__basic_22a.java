@@ -21,21 +21,18 @@ import testcasesupport.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_22a extends AbstractTestCase
-{
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_22a extends AbstractTestCase {
     /* The public static variable below is used to drive control flow in the source function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         badPublicStatic = true;
         data = (new CWE321_Hard_Coded_Cryptographic_Key__basic_22b()).badSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -53,22 +50,19 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_22a extends AbstractTest
     public static boolean goodG2B1PublicStatic = false;
     public static boolean goodG2B2PublicStatic = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
 
         goodG2B1PublicStatic = false;
         data = (new CWE321_Hard_Coded_Cryptographic_Key__basic_22b()).goodG2B1Source();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -82,15 +76,13 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_22a extends AbstractTest
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
 
         goodG2B2PublicStatic = true;
         data = (new CWE321_Hard_Coded_Cryptographic_Key__basic_22b()).goodG2B2Source();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -109,8 +101,7 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_22a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

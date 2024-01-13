@@ -16,6 +16,7 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,10 +24,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_61b
-{
-    public int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_61b {
+    public int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -35,12 +34,9 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -49,8 +45,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -60,8 +55,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -70,12 +64,9 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }

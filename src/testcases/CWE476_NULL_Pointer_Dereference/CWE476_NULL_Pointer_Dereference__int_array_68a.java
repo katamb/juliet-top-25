@@ -19,12 +19,10 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_68a extends AbstractTestCase
-{
-    public static int [] data;
+public class CWE476_NULL_Pointer_Dereference__int_array_68a extends AbstractTestCase {
+    public static int[] data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -32,15 +30,13 @@ public class CWE476_NULL_Pointer_Dereference__int_array_68a extends AbstractTest
         (new CWE476_NULL_Pointer_Dereference__int_array_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
@@ -49,8 +45,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_68a extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -64,8 +59,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_68a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

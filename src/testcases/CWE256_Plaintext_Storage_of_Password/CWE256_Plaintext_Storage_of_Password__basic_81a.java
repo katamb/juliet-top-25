@@ -31,10 +31,8 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -42,29 +40,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -72,18 +61,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         /* POTENTIAL FLAW: The raw password read from the .properties file is passed on (without being decrypted) */
 
         CWE256_Plaintext_Storage_of_Password__basic_81_base baseObject = new CWE256_Plaintext_Storage_of_Password__basic_81_bad();
-        baseObject.action(password );
+        baseObject.action(password);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -92,29 +79,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         Properties properties = new Properties();
 
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -132,12 +110,11 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         }
 
         CWE256_Plaintext_Storage_of_Password__basic_81_base baseObject = new CWE256_Plaintext_Storage_of_Password__basic_81_goodG2B();
-        baseObject.action(password );
+        baseObject.action(password);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -145,29 +122,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -175,7 +143,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
         /* POTENTIAL FLAW: The raw password read from the .properties file is passed on (without being decrypted) */
 
         CWE256_Plaintext_Storage_of_Password__basic_81_base baseObject = new CWE256_Plaintext_Storage_of_Password__basic_81_goodB2G();
-        baseObject.action(password );
+        baseObject.action(password);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -184,8 +152,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_81a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

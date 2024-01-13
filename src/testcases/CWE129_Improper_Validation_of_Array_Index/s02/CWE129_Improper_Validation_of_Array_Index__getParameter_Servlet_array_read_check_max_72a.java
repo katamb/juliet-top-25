@@ -16,7 +16,9 @@ Template File: sources-sinks-72a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
@@ -24,10 +26,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -36,12 +36,9 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -50,18 +47,16 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).badSink(dataVector , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).badSink(dataVector, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -71,12 +66,11 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).goodG2BSink(dataVector , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).goodG2BSink(dataVector, request, response);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -85,12 +79,9 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -99,7 +90,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).goodB2GSink(dataVector , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_max_72b()).goodB2GSink(dataVector, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -108,8 +99,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

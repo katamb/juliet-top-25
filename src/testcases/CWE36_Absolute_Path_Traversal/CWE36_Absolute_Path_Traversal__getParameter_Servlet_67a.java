@@ -22,15 +22,12 @@ import java.io.*;
 import javax.servlet.http.*;
 
 
-public class CWE36_Absolute_Path_Traversal__getParameter_Servlet_67a extends AbstractTestCaseServlet
-{
-    static class Container
-    {
+public class CWE36_Absolute_Path_Traversal__getParameter_Servlet_67a extends AbstractTestCaseServlet {
+    static class Container {
         public String containerOne;
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -38,17 +35,15 @@ public class CWE36_Absolute_Path_Traversal__getParameter_Servlet_67a extends Abs
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE36_Absolute_Path_Traversal__getParameter_Servlet_67b()).badSink(dataContainer , request, response );
+        (new CWE36_Absolute_Path_Traversal__getParameter_Servlet_67b()).badSink(dataContainer, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -56,7 +51,7 @@ public class CWE36_Absolute_Path_Traversal__getParameter_Servlet_67a extends Abs
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE36_Absolute_Path_Traversal__getParameter_Servlet_67b()).goodG2BSink(dataContainer , request, response );
+        (new CWE36_Absolute_Path_Traversal__getParameter_Servlet_67b()).goodG2BSink(dataContainer, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +60,7 @@ public class CWE36_Absolute_Path_Traversal__getParameter_Servlet_67a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

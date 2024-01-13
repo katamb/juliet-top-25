@@ -27,20 +27,17 @@ import java.util.logging.Level;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestCase
-{
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the source function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         badPrivate = true;
         data = bad_source();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -53,17 +50,13 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
 
     }
 
-    private String bad_source() throws Throwable
-    {
+    private String bad_source() throws Throwable {
         String data;
 
-        if (badPrivate)
-        {
+        if (badPrivate) {
             /* FLAW: Set data to a hardcoded value */
             data = "23 ~j;asn!@#/>as";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -76,22 +69,19 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
     private boolean goodG2B1_private = false;
     private boolean goodG2B2_private = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the variable to false instead of true */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
 
         goodG2B1_private = false;
         data = goodG2B1_source();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -104,32 +94,25 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
 
     }
 
-    private String goodG2B1_source() throws Throwable
-    {
+    private String goodG2B1_source() throws Throwable {
         String data = null;
 
-        if (goodG2B1_private)
-        {
+        if (goodG2B1_private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             data = ""; /* Initialize data */
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
                 /* FIX: Read data from the console using readLine() */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
             }
             /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
@@ -140,15 +123,13 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
 
         goodG2B2_private = true;
         data = goodG2B2_source();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -161,29 +142,22 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
 
     }
 
-    private String goodG2B2_source() throws Throwable
-    {
+    private String goodG2B2_source() throws Throwable {
         String data = null;
 
-        if (goodG2B2_private)
-        {
+        if (goodG2B2_private) {
             data = ""; /* Initialize data */
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 BufferedReader readerBuffered = new BufferedReader(readerInputStream);
                 /* FIX: Read data from the console using readLine() */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
             }
             /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -198,8 +172,7 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_21 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

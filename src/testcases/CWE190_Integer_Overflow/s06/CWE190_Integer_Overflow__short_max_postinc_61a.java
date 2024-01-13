@@ -16,57 +16,50 @@ Template File: sources-sinks-61a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_postinc_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_postinc_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         short data = (new CWE190_Integer_Overflow__short_max_postinc_61b()).badSource();
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
         data++;
-        short result = (short)(data);
+        short result = (short) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data = (new CWE190_Integer_Overflow__short_max_postinc_61b()).goodG2BSource();
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
         data++;
-        short result = (short)(data);
+        short result = (short) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data = (new CWE190_Integer_Overflow__short_max_postinc_61b()).goodB2GSource();
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Short.MAX_VALUE)
-        {
+        if (data < Short.MAX_VALUE) {
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 
@@ -78,8 +71,7 @@ public class CWE190_Integer_Overflow__short_max_postinc_61a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -21,10 +21,8 @@ import testcasesupport.*;
 import java.util.logging.Level;
 import java.io.*;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_61b {
+    public String badSource() throws Throwable {
         String data;
 
         /* FLAW: Set data to a hardcoded string */
@@ -34,23 +32,19 @@ public class CWE259_Hard_Coded_Password__kerberosKey_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         data = ""; /* init data */
 
         /* FIX: Read data from the console using readLine() */
-        try
-        {
+        try {
             InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
             BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
             /* POTENTIAL FLAW: Read data from the console using readLine */
             data = readerBuffered.readLine();
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
 

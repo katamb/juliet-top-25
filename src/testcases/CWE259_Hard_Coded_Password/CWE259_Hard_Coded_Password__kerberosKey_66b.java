@@ -24,14 +24,11 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_66b
-{
-    public void badSink(String dataArray[] ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_66b {
+    public void badSink(String dataArray[]) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -41,12 +38,10 @@ public class CWE259_Hard_Coded_Password__kerberosKey_66b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String dataArray[] ) throws Throwable
-    {
+    public void goodG2BSink(String dataArray[]) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);

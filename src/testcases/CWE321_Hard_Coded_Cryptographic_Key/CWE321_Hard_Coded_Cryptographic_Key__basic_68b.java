@@ -20,14 +20,11 @@ import testcasesupport.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_68b {
+    public void badSink() throws Throwable {
         String data = CWE321_Hard_Coded_Cryptographic_Key__basic_68a.data;
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -41,12 +38,10 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_68b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         String data = CWE321_Hard_Coded_Cryptographic_Key__basic_68a.data;
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */

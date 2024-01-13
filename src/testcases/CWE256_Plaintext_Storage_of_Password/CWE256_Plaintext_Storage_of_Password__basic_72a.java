@@ -18,6 +18,7 @@ Template File: sources-sinks-72a.tmpl.java
 package testcases.CWE256_Plaintext_Storage_of_Password;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
@@ -32,10 +33,8 @@ import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -43,29 +42,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -76,18 +66,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         passwordVector.add(0, password);
         passwordVector.add(1, password);
         passwordVector.add(2, password);
-        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).badSink(passwordVector  );
+        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).badSink(passwordVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -96,29 +84,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         Properties properties = new Properties();
 
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -139,12 +118,11 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         passwordVector.add(0, password);
         passwordVector.add(1, password);
         passwordVector.add(2, password);
-        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).goodG2BSink(passwordVector  );
+        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).goodG2BSink(passwordVector);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -152,29 +130,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -185,7 +154,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
         passwordVector.add(0, password);
         passwordVector.add(1, password);
         passwordVector.add(2, password);
-        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).goodB2GSink(passwordVector  );
+        (new CWE256_Plaintext_Storage_of_Password__basic_72b()).goodB2GSink(passwordVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -194,8 +163,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_72a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

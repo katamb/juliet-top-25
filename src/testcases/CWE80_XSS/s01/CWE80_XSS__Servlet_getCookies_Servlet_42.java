@@ -14,15 +14,14 @@ Template File: sources-sink-42.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseServlet
-{
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseServlet {
+    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -30,8 +29,7 @@ public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseSe
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
@@ -41,20 +39,17 @@ public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseSe
     }
 
     /* use badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = badSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
 
     }
 
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -64,20 +59,17 @@ public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseSe
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = goodG2BSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -87,8 +79,7 @@ public class CWE80_XSS__Servlet_getCookies_Servlet_42 extends AbstractTestCaseSe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

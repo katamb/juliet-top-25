@@ -16,16 +16,15 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -38,12 +37,9 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
                 String stringNumber = System.getenv("ADD");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
@@ -54,25 +50,22 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
         {
             int data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -85,10 +78,9 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
         {
             int data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
@@ -96,8 +88,7 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -110,12 +101,9 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
                 String stringNumber = System.getenv("ADD");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
@@ -126,16 +114,12 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
         {
             int data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -149,8 +133,7 @@ public class CWE190_Integer_Overflow__int_Environment_multiply_31 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

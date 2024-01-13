@@ -21,22 +21,18 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Property_54d
-{
-    public void badSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__Property_54e()).badSink(data );
+public class CWE606_Unchecked_Loop_Condition__Property_54d {
+    public void badSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__Property_54e()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__Property_54e()).goodG2BSink(data );
+    public void goodG2BSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__Property_54e()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__Property_54e()).goodB2GSink(data );
+    public void goodB2GSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__Property_54e()).goodB2GSink(data);
     }
 }

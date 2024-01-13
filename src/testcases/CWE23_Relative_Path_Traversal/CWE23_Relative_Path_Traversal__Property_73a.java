@@ -17,15 +17,14 @@ Template File: sources-sink-73a.tmpl.java
 package testcases.CWE23_Relative_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE23_Relative_Path_Traversal__Property_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__Property_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -36,17 +35,15 @@ public class CWE23_Relative_Path_Traversal__Property_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE23_Relative_Path_Traversal__Property_73b()).badSink(dataLinkedList  );
+        (new CWE23_Relative_Path_Traversal__Property_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -56,7 +53,7 @@ public class CWE23_Relative_Path_Traversal__Property_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE23_Relative_Path_Traversal__Property_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE23_Relative_Path_Traversal__Property_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +62,7 @@ public class CWE23_Relative_Path_Traversal__Property_73a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -16,14 +16,13 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_check_min_42 extends AbstractTestCase
-{
-    private int badSource() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_check_min_42 extends AbstractTestCase {
+    private int badSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a value greater than the size of the array */
@@ -32,28 +31,23 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_c
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data = badSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Verify that data >= 0, but don't verify that data < array.length, so may be attempting to read out of the array bounds */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int goodG2BSource() throws Throwable
-    {
+    private int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -62,28 +56,23 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_c
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = goodG2BSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Verify that data >= 0, but don't verify that data < array.length, so may be attempting to read out of the array bounds */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int goodB2GSource() throws Throwable
-    {
+    private int goodB2GSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a value greater than the size of the array */
@@ -92,27 +81,22 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_c
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data = goodB2GSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Fully verify data before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -123,8 +107,7 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_c
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

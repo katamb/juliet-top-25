@@ -4,46 +4,40 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-08.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: null_check_after_deref
-*    GoodSink: Do not check for null after the object has been dereferenced
-*    BadSink : Check for null after the object has already been dereferenced
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: null_check_after_deref
+ *    GoodSink: Do not check for null after the object has been dereferenced
+ *    BadSink : Check for null after the object has already been dereferenced
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends AbstractTestCase {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
-    public void bad() throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    public void bad() throws Throwable {
+        if (privateReturnsTrue()) {
             {
                 String myString = null;
                 myString = "Hello";
                 IO.writeLine(myString.length());
                 /* FLAW: Check for null after dereferencing the object. This null check is unnecessary. */
-                if (myString != null)
-                {
+                if (myString != null) {
                     myString = "my, how I've changed";
                 }
                 IO.writeLine(myString.length());
@@ -52,15 +46,11 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends 
     }
 
     /* good1() changes privateReturnsTrue() to privateReturnsFalse() */
-    private void good1() throws Throwable
-    {
-        if (privateReturnsFalse())
-        {
+    private void good1() throws Throwable {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             {
                 String myString = null;
@@ -78,10 +68,8 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends 
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2() throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    private void good2() throws Throwable {
+        if (privateReturnsTrue()) {
             {
                 String myString = null;
                 myString = "Hello";
@@ -93,8 +81,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
         good2();
     }
@@ -105,8 +92,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_08 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

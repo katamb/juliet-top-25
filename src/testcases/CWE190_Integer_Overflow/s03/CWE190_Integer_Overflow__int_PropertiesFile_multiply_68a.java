@@ -16,6 +16,7 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,12 +28,10 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends AbstractTestCase {
     public static int data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -41,8 +40,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -50,32 +48,21 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -84,15 +71,13 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
         (new CWE190_Integer_Overflow__int_PropertiesFile_multiply_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
@@ -101,8 +86,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -111,8 +95,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -120,32 +103,21 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -160,8 +132,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_multiply_68a extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,26 +16,23 @@ Template File: sources-sinks-53b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_connect_tcp_square_53b
-{
-    public void badSink(int data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).badSink(data );
+public class CWE190_Integer_Overflow__int_connect_tcp_square_53b {
+    public void badSink(int data) throws Throwable {
+        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).goodG2BSink(data );
+    public void goodG2BSink(int data) throws Throwable {
+        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).goodB2GSink(data );
+    public void goodB2GSink(int data) throws Throwable {
+        (new CWE190_Integer_Overflow__int_connect_tcp_square_53c()).goodB2GSink(data);
     }
 }

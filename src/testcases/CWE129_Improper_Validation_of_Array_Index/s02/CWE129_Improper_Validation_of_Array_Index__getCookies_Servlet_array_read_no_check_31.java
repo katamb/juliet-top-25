@@ -16,6 +16,7 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,10 +24,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_read_no_check_31 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_read_no_check_31 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -36,16 +35,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     String stringNumber = cookieSources[0].getValue();
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                     }
                 }
@@ -57,7 +52,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
             IO.writeLine(array[data]);
@@ -65,15 +60,13 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -87,7 +80,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
             IO.writeLine(array[data]);
@@ -96,8 +89,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -107,16 +99,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     String stringNumber = cookieSources[0].getValue();
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                     }
                 }
@@ -128,15 +116,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
             int data = dataCopy;
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* FIX: Verify index before reading from array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
@@ -149,8 +134,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

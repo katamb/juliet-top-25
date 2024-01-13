@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,68 +27,49 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends AbstractTestCaseServlet
-{
+public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends AbstractTestCaseServlet {
     private String dataBad;
     private String dataGoodG2B;
     private String dataGoodB2G;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataBad;
 
-        if (data != null)
-        {
+        if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
-                for (int i = 0; i < names.length; i++)
-                {
+                for (int i = 0; i < names.length; i++) {
                     /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                     sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                 }
                 int resultsArray[] = sqlStatement.executeBatch();
-                for (int i = 0; i < names.length; i++)
-                {
-                    if (resultsArray[i] > 0)
-                    {
+                for (int i = 0; i < names.length; i++) {
+                    if (resultsArray[i] > 0) {
                         successCount++;
                     }
                 }
                 IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -95,8 +77,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -104,11 +85,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -119,68 +98,49 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodG2B;
 
-        if (data != null)
-        {
+        if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
-                for (int i = 0; i < names.length; i++)
-                {
+                for (int i = 0; i < names.length; i++) {
                     /* POTENTIAL FLAW: data concatenated into SQL statement used in executeBatch(), which could result in SQL Injection */
                     sqlStatement.addBatch("update users set hitcount=hitcount+1 where name='" + names[i] + "'");
                 }
                 int resultsArray[] = sqlStatement.executeBatch();
-                for (int i = 0; i < names.length; i++)
-                {
-                    if (resultsArray[i] > 0)
-                    {
+                for (int i = 0; i < names.length; i++) {
+                    if (resultsArray[i] > 0) {
                         successCount++;
                     }
                 }
                 IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statament", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -189,8 +149,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -200,63 +159,45 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
         goodG2BSink(request, response);
     }
 
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodB2G;
 
-        if (data != null)
-        {
+        if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and executeBatch (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("update users set hitcount=hitcount+1 where name=?");
-                for (int i = 0; i < names.length; i++)
-                {
+                for (int i = 0; i < names.length; i++) {
                     sqlStatement.setString(1, names[i]);
                     sqlStatement.addBatch();
                 }
                 int resultsArray[] = sqlStatement.executeBatch();
-                for (int i = 0; i < names.length; i++)
-                {
-                    if (resultsArray[i] > 0)
-                    {
+                for (int i = 0; i < names.length; i++) {
+                    if (resultsArray[i] > 0) {
                         successCount++;
                     }
                 }
                 IO.writeLine("Succeeded in " + successCount + " out of " + names.length + " queries.");
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -265,8 +206,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -274,11 +214,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -295,8 +233,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeBatch_45 extends
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

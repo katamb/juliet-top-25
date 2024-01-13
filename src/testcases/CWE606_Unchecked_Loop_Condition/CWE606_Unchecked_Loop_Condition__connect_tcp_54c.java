@@ -21,22 +21,18 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__connect_tcp_54c
-{
-    public void badSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).badSink(data );
+public class CWE606_Unchecked_Loop_Condition__connect_tcp_54c {
+    public void badSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).goodG2BSink(data );
+    public void goodG2BSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(String data ) throws Throwable
-    {
-        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).goodB2GSink(data );
+    public void goodB2GSink(String data) throws Throwable {
+        (new CWE606_Unchecked_Loop_Condition__connect_tcp_54d()).goodB2GSink(data);
     }
 }

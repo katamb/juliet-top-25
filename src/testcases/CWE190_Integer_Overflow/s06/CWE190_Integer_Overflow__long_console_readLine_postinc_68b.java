@@ -16,51 +16,45 @@ Template File: sources-sinks-68b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_console_readLine_postinc_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_console_readLine_postinc_68b {
+    public void badSink() throws Throwable {
         long data = CWE190_Integer_Overflow__long_console_readLine_postinc_68a.data;
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
         data++;
-        long result = (long)(data);
+        long result = (long) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         long data = CWE190_Integer_Overflow__long_console_readLine_postinc_68a.data;
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
         data++;
-        long result = (long)(data);
+        long result = (long) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink() throws Throwable
-    {
+    public void goodB2GSink() throws Throwable {
         long data = CWE190_Integer_Overflow__long_console_readLine_postinc_68a.data;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Long.MAX_VALUE)
-        {
+        if (data < Long.MAX_VALUE) {
             data++;
-            long result = (long)(data);
+            long result = (long) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

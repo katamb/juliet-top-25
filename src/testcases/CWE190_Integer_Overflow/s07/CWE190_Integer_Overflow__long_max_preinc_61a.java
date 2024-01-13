@@ -16,54 +16,47 @@ Template File: sources-sinks-61a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_preinc_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_max_preinc_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         long data = (new CWE190_Integer_Overflow__long_max_preinc_61b()).badSource();
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-        long result = (long)(++data);
+        long result = (long) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         long data = (new CWE190_Integer_Overflow__long_max_preinc_61b()).goodG2BSource();
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-        long result = (long)(++data);
+        long result = (long) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         long data = (new CWE190_Integer_Overflow__long_max_preinc_61b()).goodB2GSource();
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Long.MAX_VALUE)
-        {
-            long result = (long)(++data);
+        if (data < Long.MAX_VALUE) {
+            long result = (long) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 
@@ -75,8 +68,7 @@ public class CWE190_Integer_Overflow__long_max_preinc_61a extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,6 +16,7 @@ Template File: sources-sinks-21.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -30,13 +31,11 @@ import java.util.logging.Level;
 import java.sql.*;
 
 
-public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTestCase
-{
+public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -46,87 +45,60 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(String data ) throws Throwable
-    {
-        if (badPrivate)
-        {
+    private void badSink(String data) throws Throwable {
+        if (badPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -138,16 +110,14 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -157,54 +127,40 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(String data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(String data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
 
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -212,42 +168,27 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
 
                 Boolean result = sqlStatement.execute();
 
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -256,8 +197,7 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -267,88 +207,61 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(String data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
+    private void goodB2G2Sink(String data) throws Throwable {
+        if (goodB2G2Private) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
                 sqlStatement.setString(1, data);
                 Boolean result = sqlStatement.execute();
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -356,65 +269,46 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(String data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
+    private void goodG2BSink(String data) throws Throwable {
+        if (goodG2BPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -427,8 +321,7 @@ public class CWE89_SQL_Injection__PropertiesFile_execute_21 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

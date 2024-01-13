@@ -16,16 +16,15 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_rand_multiply_68a extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__long_rand_multiply_68a extends AbstractTestCase {
     public static long data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* POTENTIAL FLAW: Use a random value */
         data = (new java.security.SecureRandom()).nextLong();
@@ -33,15 +32,13 @@ public class CWE190_Integer_Overflow__long_rand_multiply_68a extends AbstractTes
         (new CWE190_Integer_Overflow__long_rand_multiply_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
@@ -50,8 +47,7 @@ public class CWE190_Integer_Overflow__long_rand_multiply_68a extends AbstractTes
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* POTENTIAL FLAW: Use a random value */
         data = (new java.security.SecureRandom()).nextLong();
@@ -65,8 +61,7 @@ public class CWE190_Integer_Overflow__long_rand_multiply_68a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

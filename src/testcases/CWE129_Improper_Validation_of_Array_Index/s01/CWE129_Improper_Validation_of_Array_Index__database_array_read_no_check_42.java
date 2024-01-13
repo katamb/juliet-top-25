@@ -16,6 +16,7 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,10 +28,8 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_check_42 extends AbstractTestCase
-{
-    private int badSource() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_check_42 extends AbstractTestCase {
+    private int badSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -41,8 +40,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -52,58 +50,38 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 String stringNumber = resultSet.getString(1);
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -112,12 +90,11 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data = badSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -125,8 +102,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int goodG2BSource() throws Throwable
-    {
+    private int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -135,12 +111,11 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = goodG2BSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -148,8 +123,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int goodB2GSource() throws Throwable
-    {
+    private int goodB2GSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -160,8 +134,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -171,58 +144,38 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 String stringNumber = resultSet.getString(1);
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -231,27 +184,22 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data = goodB2GSource();
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -262,8 +210,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_no_c
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

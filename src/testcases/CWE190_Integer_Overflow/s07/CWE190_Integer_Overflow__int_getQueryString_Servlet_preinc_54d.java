@@ -16,26 +16,23 @@ Template File: sources-sinks-54d.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54d
-{
-    public void badSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).badSink(data , request, response);
+public class CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54d {
+    public void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).badSink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).goodG2BSink(data , request, response);
+    public void goodG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).goodG2BSink(data, request, response);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).goodB2GSink(data , request, response);
+    public void goodB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE190_Integer_Overflow__int_getQueryString_Servlet_preinc_54e()).goodB2GSink(data, request, response);
     }
 }

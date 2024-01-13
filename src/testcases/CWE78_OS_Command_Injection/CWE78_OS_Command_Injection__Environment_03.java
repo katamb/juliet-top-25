@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-03.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: Environment Read data from an environment variable
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 03 Control flow: if(5==5) and if(5!=5)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: Environment Read data from an environment variable
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 03 Control flow: if(5==5) and if(5!=5)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -19,33 +19,25 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
-        if (5 == 5)
-        {
+        if (5 == 5) {
             /* get environment variable ADD */
             /* POTENTIAL FLAW: Read data from an environment variable */
             data = System.getenv("ADD");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -57,17 +49,13 @@ public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
     }
 
     /* goodG2B1() - use goodsource and badsink by changing 5==5 to 5!=5 */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
-        if (5 != 5)
-        {
+        if (5 != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -75,13 +63,10 @@ public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -93,29 +78,22 @@ public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
-        if (5 == 5)
-        {
+        if (5 == 5) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -126,8 +104,7 @@ public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
@@ -138,8 +115,7 @@ public class CWE78_OS_Command_Injection__Environment_03 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

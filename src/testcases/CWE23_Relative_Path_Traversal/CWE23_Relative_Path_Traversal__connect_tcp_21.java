@@ -29,86 +29,62 @@ import java.net.Socket;
 import java.util.logging.Level;
 
 
-public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestCase
-{
+public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the source function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         badPrivate = true;
         data = bad_source();
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -117,20 +93,17 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
 
     }
 
-    private String bad_source() throws Throwable
-    {
+    private String bad_source() throws Throwable {
         String data;
 
-        if (badPrivate)
-        {
+        if (badPrivate) {
             data = ""; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -138,55 +111,37 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -199,88 +154,64 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
     private boolean goodG2B1_private = false;
     private boolean goodG2B2_private = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the variable to false instead of true */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
 
         goodG2B1_private = false;
         data = goodG2B1_source();
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -289,18 +220,14 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
 
     }
 
-    private String goodG2B1_source() throws Throwable
-    {
+    private String goodG2B1_source() throws Throwable {
         String data = null;
 
-        if (goodG2B1_private)
-        {
+        if (goodG2B1_private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -311,81 +238,58 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
 
         goodG2B2_private = true;
         data = goodG2B2_source();
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -394,17 +298,13 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
 
     }
 
-    private String goodG2B2_source() throws Throwable
-    {
+    private String goodG2B2_source() throws Throwable {
         String data = null;
 
-        if (goodG2B2_private)
-        {
+        if (goodG2B2_private) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -419,8 +319,7 @@ public class CWE23_Relative_Path_Traversal__connect_tcp_21 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -16,11 +16,11 @@ Template File: sources-sinks-81_base.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public abstract class CWE190_Integer_Overflow__byte_rand_multiply_81_base
-{
-    public abstract void action(byte data ) throws Throwable;
+public abstract class CWE190_Integer_Overflow__byte_rand_multiply_81_base {
+    public abstract void action(byte data) throws Throwable;
 }

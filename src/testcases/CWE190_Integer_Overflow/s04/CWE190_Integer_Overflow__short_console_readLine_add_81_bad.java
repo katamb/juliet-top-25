@@ -16,17 +16,16 @@ Template File: sources-sinks-81_bad.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_console_readLine_add_81_bad extends CWE190_Integer_Overflow__short_console_readLine_add_81_base
-{
-    public void action(short data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_console_readLine_add_81_bad extends CWE190_Integer_Overflow__short_console_readLine_add_81_base {
+    public void action(short data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(data + 1);
+        short result = (short) (data + 1);
 
         IO.writeLine("result: " + result);
 

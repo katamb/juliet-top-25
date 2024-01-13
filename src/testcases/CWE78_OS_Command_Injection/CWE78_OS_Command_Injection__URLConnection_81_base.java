@@ -20,7 +20,6 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public abstract class CWE78_OS_Command_Injection__URLConnection_81_base
-{
-    public abstract void action(String data ) throws Throwable;
+public abstract class CWE78_OS_Command_Injection__URLConnection_81_base {
+    public abstract void action(String data) throws Throwable;
 }

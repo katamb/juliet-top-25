@@ -20,19 +20,14 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__File_81_bad extends CWE78_OS_Command_Injection__File_81_base
-{
-    public void action(String data ) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__File_81_bad extends CWE78_OS_Command_Injection__File_81_base {
+    public void action(String data) throws Throwable {
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }

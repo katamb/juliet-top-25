@@ -16,6 +16,7 @@ Template File: sources-sinks-67a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,15 +24,12 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67a extends AbstractTestCaseServlet
-{
-    static class Container
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67a extends AbstractTestCaseServlet {
+    static class Container {
         public int containerOne;
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
@@ -39,16 +37,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 String stringNumber = cookieSources[0].getValue();
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                 }
             }
@@ -56,18 +50,16 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).badSink(dataContainer , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).badSink(dataContainer, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -75,12 +67,11 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).goodG2BSink(dataContainer , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).goodG2BSink(dataContainer, request, response);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
@@ -88,16 +79,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 String stringNumber = cookieSources[0].getValue();
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                 }
             }
@@ -105,7 +92,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).goodB2GSink(dataContainer , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_67b()).goodB2GSink(dataContainer, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -114,8 +101,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

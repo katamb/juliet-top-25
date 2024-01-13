@@ -16,48 +16,44 @@ Template File: sources-sinks-71a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_rand_add_71a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_rand_add_71a extends AbstractTestCase {
+    public void bad() throws Throwable {
         byte data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+        data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
-        (new CWE190_Integer_Overflow__byte_rand_add_71b()).badSink((Object)data  );
+        (new CWE190_Integer_Overflow__byte_rand_add_71b()).badSink((Object) data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        (new CWE190_Integer_Overflow__byte_rand_add_71b()).goodG2BSink((Object)data  );
+        (new CWE190_Integer_Overflow__byte_rand_add_71b()).goodG2BSink((Object) data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+        data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
-        (new CWE190_Integer_Overflow__byte_rand_add_71b()).goodB2GSink((Object)data  );
+        (new CWE190_Integer_Overflow__byte_rand_add_71b()).goodB2GSink((Object) data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -66,8 +62,7 @@ public class CWE190_Integer_Overflow__byte_rand_add_71a extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

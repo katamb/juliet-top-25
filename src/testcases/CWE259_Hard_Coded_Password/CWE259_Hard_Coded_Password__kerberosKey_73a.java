@@ -17,15 +17,14 @@ Template File: sources-sink-73a.tmpl.java
 package testcases.CWE259_Hard_Coded_Password;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import java.util.logging.Level;
 import java.io.*;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* FLAW: Set data to a hardcoded string */
@@ -35,32 +34,27 @@ public class CWE259_Hard_Coded_Password__kerberosKey_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE259_Hard_Coded_Password__kerberosKey_73b()).badSink(dataLinkedList  );
+        (new CWE259_Hard_Coded_Password__kerberosKey_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         data = ""; /* init data */
 
         /* FIX: Read data from the console using readLine() */
-        try
-        {
+        try {
             InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
             BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
             /* POTENTIAL FLAW: Read data from the console using readLine */
             data = readerBuffered.readLine();
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
 
@@ -70,7 +64,7 @@ public class CWE259_Hard_Coded_Password__kerberosKey_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE259_Hard_Coded_Password__kerberosKey_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE259_Hard_Coded_Password__kerberosKey_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +73,7 @@ public class CWE259_Hard_Coded_Password__kerberosKey_73a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

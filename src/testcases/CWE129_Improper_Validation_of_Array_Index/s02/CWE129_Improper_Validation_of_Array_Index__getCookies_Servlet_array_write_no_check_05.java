@@ -4,18 +4,19 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-05.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_write_no_check
-*    GoodSink: Write to array after verifying index
-*    BadSink : Write to array without any verification of index
-* Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_write_no_check
+ *    GoodSink: Write to array after verifying index
+ *    BadSink : Write to array without any verification of index
+ * Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,8 +24,7 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_write_no_check_05 extends AbstractTestCaseServlet
-{
+public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_write_no_check_05 extends AbstractTestCaseServlet {
     /* The two variables below are not defined as "final", but are never
      * assigned any other value, so a tool should be able to identify that
      * reads of these will always return their initialized values.
@@ -32,41 +32,32 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     private boolean privateTrue = true;
     private boolean privateFalse = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     String stringNumber = cookieSources[0].getValue();
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
             array[data] = 42;
             /* Skip reading back data from array since that may be another out of bounds operation */
@@ -74,27 +65,22 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first privateTrue to privateFalse */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (privateFalse)
-        {
+        if (privateFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
             array[data] = 42;
             /* Skip reading back data from array since that may be another out of bounds operation */
@@ -102,25 +88,20 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
             array[data] = 42;
             /* Skip reading back data from array since that may be another out of bounds operation */
@@ -128,56 +109,42 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second privateTrue to privateFalse */
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     String stringNumber = cookieSources[0].getValue();
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateFalse)
-        {
+        if (privateFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* FIX: Verify index before writing to array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 array[data] = 42;
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
@@ -185,55 +152,42 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     String stringNumber = cookieSources[0].getValue();
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* FIX: Verify index before writing to array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 array[data] = 42;
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
         goodB2G1(request, response);
@@ -246,8 +200,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

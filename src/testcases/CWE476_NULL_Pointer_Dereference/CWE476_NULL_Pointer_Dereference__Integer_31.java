@@ -19,10 +19,8 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         Integer dataCopy;
         {
             Integer data;
@@ -41,15 +39,13 @@ public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCas
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         Integer dataCopy;
         {
             Integer data;
@@ -69,8 +65,7 @@ public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCas
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         Integer dataCopy;
         {
             Integer data;
@@ -84,12 +79,9 @@ public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCas
             Integer data = dataCopy;
 
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.toString());
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
 
@@ -102,8 +94,7 @@ public class CWE476_NULL_Pointer_Dereference__Integer_31 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -21,12 +21,10 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Environment_68a extends AbstractTestCase
-{
+public class CWE606_Unchecked_Loop_Condition__Environment_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
@@ -35,15 +33,13 @@ public class CWE606_Unchecked_Loop_Condition__Environment_68a extends AbstractTe
         (new CWE606_Unchecked_Loop_Condition__Environment_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
@@ -52,8 +48,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_68a extends AbstractTe
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
@@ -68,8 +63,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_68a extends AbstractTe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

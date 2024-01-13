@@ -16,55 +16,47 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_console_readLine_multiply_74b
-{
-    public void badSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_console_readLine_multiply_74b {
+    public void badSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Long.MAX_VALUE, this will overflow */
-            long result = (long)(data * 2);
+            long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Long.MAX_VALUE, this will overflow */
-            long result = (long)(data * 2);
+            long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Long.MAX_VALUE/2))
-            {
-                long result = (long)(data * 2);
+            if (data < (Long.MAX_VALUE / 2)) {
+                long result = (long) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }

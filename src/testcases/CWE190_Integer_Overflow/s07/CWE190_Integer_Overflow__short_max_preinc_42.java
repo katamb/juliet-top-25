@@ -16,14 +16,13 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCase
-{
-    private short badSource() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCase {
+    private short badSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -32,20 +31,18 @@ public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCa
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         short data = badSource();
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(++data);
+        short result = (short) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private short goodG2BSource() throws Throwable
-    {
+    private short goodG2BSource() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -54,20 +51,18 @@ public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCa
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data = goodG2BSource();
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(++data);
+        short result = (short) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private short goodB2GSource() throws Throwable
-    {
+    private short goodB2GSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -76,25 +71,20 @@ public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCa
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data = goodB2GSource();
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Short.MAX_VALUE)
-        {
-            short result = (short)(++data);
+        if (data < Short.MAX_VALUE) {
+            short result = (short) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -105,8 +95,7 @@ public class CWE190_Integer_Overflow__short_max_preinc_42 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

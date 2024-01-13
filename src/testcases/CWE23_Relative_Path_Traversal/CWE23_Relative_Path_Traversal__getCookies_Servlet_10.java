@@ -4,14 +4,14 @@ Label Definition File: CWE23_Relative_Path_Traversal.label.xml
 Template File: sources-sink-10.tmpl.java
 */
 /*
-* @description
-* CWE: 23 Relative Path Traversal
-* BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
-* GoodSource: A hardcoded string
-* BadSink: readFile no validation
-* Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
-*
-* */
+ * @description
+ * CWE: 23 Relative Path Traversal
+ * BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
+ * GoodSource: A hardcoded string
+ * BadSink: readFile no validation
+ * Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
+ *
+ * */
 
 package testcases.CWE23_Relative_Path_Traversal;
 
@@ -23,100 +23,72 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends AbstractTestCaseServlet
-{
+public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             data = ""; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -126,17 +98,13 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends Abstra
     }
 
     /* goodG2B1() - use goodsource and badsink by changing IO.staticTrue to IO.staticFalse */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticFalse)
-        {
+        if (IO.staticFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -144,73 +112,51 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends Abstra
         }
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -220,89 +166,63 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends Abstra
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -311,8 +231,7 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends Abstra
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -323,8 +242,7 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_10 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

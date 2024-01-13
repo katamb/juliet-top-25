@@ -4,14 +4,14 @@ Label Definition File: CWE83_XSS_Attribute__Servlet.label.xml
 Template File: sources-sink-08.tmpl.java
 */
 /*
-* @description
-* CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
-* BadSource: URLConnection Read data from a web server with URLConnection
-* GoodSource: A hardcoded string
-* BadSink: printlnServlet XSS in img src attribute
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
+ * BadSource: URLConnection Read data from a web server with URLConnection
+ * GoodSource: A hardcoded string
+ * BadSink: printlnServlet XSS in img src attribute
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE83_XSS_Attribute;
 
@@ -27,85 +27,64 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_URLConnection_08 extends AbstractTestCaseServlet
-{
+public class CWE83_XSS_Attribute__Servlet_URLConnection_08 extends AbstractTestCaseServlet {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             data = ""; /* Initialize data */
             /* read input from URLConnection */
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from a web server with URLConnection */
                     /* This will be reading the first "line" of the response body,
                      * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -113,25 +92,20 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_08 extends AbstractTestC
     }
 
     /* goodG2B1() - use goodsource and badsink by changing privateReturnsTrue() to privateReturnsFalse() */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsFalse())
-        {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -139,31 +113,25 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_08 extends AbstractTestC
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -174,8 +142,7 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_08 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

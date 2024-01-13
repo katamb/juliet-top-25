@@ -4,62 +4,50 @@ Label Definition File: CWE190_Integer_Overflow.label.xml
 Template File: sources-sinks-12.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: rand Set data to result of rand()
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: multiply
-*    GoodSink: Ensure there will not be an overflow before multiplying data by 2
-*    BadSink : If data is positive, multiply by 2, which can cause an overflow
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: rand Set data to result of rand()
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: multiply
+ *    GoodSink: Ensure there will not be an overflow before multiplying data by 2
+ *    BadSink : If data is positive, multiply by 2, which can cause an overflow
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTestCase {
+    public void bad() throws Throwable {
         short data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
-        }
-        else
-        {
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.staticReturnsTrueOrFalse()) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-                short result = (short)(data * 2);
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Short.MAX_VALUE/2))
-                {
-                    short result = (short)(data * 2);
+                if (data < (Short.MAX_VALUE / 2)) {
+                    short result = (short) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -69,38 +57,29 @@ public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTes
 
     /* goodG2B() - use goodsource and badsink by changing the first "if" so that
      * both branches use the GoodSource */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.staticReturnsTrueOrFalse()) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-                short result = (short)(data * 2);
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-                short result = (short)(data * 2);
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
@@ -109,51 +88,36 @@ public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTes
 
     /* goodB2G() - use badsource and goodsink by changing the second "if" so that
      * both branches use the GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
-        }
-        else
-        {
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
+        } else {
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.staticReturnsTrueOrFalse()) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Short.MAX_VALUE/2))
-                {
-                    short result = (short)(data * 2);
+                if (data < (Short.MAX_VALUE / 2)) {
+                    short result = (short) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Short.MAX_VALUE/2))
-                {
-                    short result = (short)(data * 2);
+                if (data < (Short.MAX_VALUE / 2)) {
+                    short result = (short) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -161,8 +125,7 @@ public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTes
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -173,8 +136,7 @@ public class CWE190_Integer_Overflow__short_rand_multiply_12 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

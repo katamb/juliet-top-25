@@ -27,11 +27,9 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -43,30 +41,21 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends Abstract
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
 
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
 
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -77,26 +66,23 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends Abstract
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-                * The built-in J2EE server automatically does some HTML entity encoding.
-                * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-                */
+                 * The built-in J2EE server automatically does some HTML entity encoding.
+                 * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+                 */
                 response.sendError(404, "<br>bad() - Parameter name has value " + data);
             }
 
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -109,12 +95,11 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends Abstract
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-                * The built-in J2EE server automatically does some HTML entity encoding.
-                * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-                */
+                 * The built-in J2EE server automatically does some HTML entity encoding.
+                 * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+                 */
                 response.sendError(404, "<br>bad() - Parameter name has value " + data);
             }
 
@@ -127,8 +112,7 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_31 extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

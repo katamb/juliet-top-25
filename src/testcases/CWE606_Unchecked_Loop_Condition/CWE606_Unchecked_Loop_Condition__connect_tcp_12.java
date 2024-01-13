@@ -4,16 +4,16 @@ Label Definition File: CWE606_Unchecked_Loop_Condition.label.xml
 Template File: sources-sinks-12.tmpl.java
 */
 /*
-* @description
-* CWE: 606 Unchecked Input for Loop Condition
-* BadSource: connect_tcp Read data using an outbound tcp connection
-* GoodSource: hardcoded int in string form
-* Sinks:
-*    GoodSink: validate loop variable
-*    BadSink : loop variable not validated
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 606 Unchecked Input for Loop Condition
+ * BadSource: connect_tcp Read data using an outbound tcp connection
+ * GoodSource: hardcoded int in string form
+ * Sinks:
+ *    GoodSink: validate loop variable
+ *    BadSink : loop variable not validated
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE606_Unchecked_Loop_Condition;
 
@@ -28,21 +28,17 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -50,98 +46,68 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded int as a string */
             data = "5";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -151,56 +117,41 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
 
     /* goodG2B() - use goodsource and badsink by changing the first "if" so that
      * both branches use the GoodSource */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded int as a string */
             data = "5";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded int as a string */
             data = "5";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -210,19 +161,16 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
 
     /* goodB2G() - use badsource and goodsink by changing the second "if" so that
      * both branches use the GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -230,55 +178,37 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             data = ""; /* Initialize data */
 
@@ -288,8 +218,7 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
 
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
 
@@ -300,48 +229,32 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
 
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
@@ -349,46 +262,33 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -396,8 +296,7 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -408,8 +307,7 @@ public class CWE606_Unchecked_Loop_Condition__connect_tcp_12 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

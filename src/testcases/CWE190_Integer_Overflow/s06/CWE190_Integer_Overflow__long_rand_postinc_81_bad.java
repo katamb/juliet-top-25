@@ -16,18 +16,17 @@ Template File: sources-sinks-81_bad.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_rand_postinc_81_bad extends CWE190_Integer_Overflow__long_rand_postinc_81_base
-{
-    public void action(long data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_rand_postinc_81_bad extends CWE190_Integer_Overflow__long_rand_postinc_81_base {
+    public void action(long data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
         data++;
-        long result = (long)(data);
+        long result = (long) (data);
 
         IO.writeLine("result: " + result);
 

@@ -19,13 +19,11 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        int [] dataCopy;
+public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
+        int[] dataCopy;
         {
-            int [] data;
+            int[] data;
 
             /* POTENTIAL FLAW: data is null */
             data = null;
@@ -33,7 +31,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
             dataCopy = data;
         }
         {
-            int [] data = dataCopy;
+            int[] data = dataCopy;
 
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length);
@@ -41,18 +39,16 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
-        int [] dataCopy;
+    private void goodG2B() throws Throwable {
+        int[] dataCopy;
         {
-            int [] data;
+            int[] data;
 
             /* FIX: hardcode data to non-null */
             data = new int[5];
@@ -60,7 +56,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
             dataCopy = data;
         }
         {
-            int [] data = dataCopy;
+            int[] data = dataCopy;
 
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length);
@@ -69,11 +65,10 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
-        int [] dataCopy;
+    private void goodB2G() throws Throwable {
+        int[] dataCopy;
         {
-            int [] data;
+            int[] data;
 
             /* POTENTIAL FLAW: data is null */
             data = null;
@@ -81,15 +76,12 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
             dataCopy = data;
         }
         {
-            int [] data = dataCopy;
+            int[] data = dataCopy;
 
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
 
@@ -102,8 +94,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_31 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

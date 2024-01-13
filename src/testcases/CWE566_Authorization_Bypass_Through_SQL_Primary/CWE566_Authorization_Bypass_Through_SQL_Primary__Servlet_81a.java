@@ -20,34 +20,30 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FLAW: Get the user ID from a URL parameter */
         data = request.getParameter("id");
 
         CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81_base baseObject = new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81_bad();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded user ID */
         data = "10";
 
         CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81_base baseObject = new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81_goodG2B();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -56,8 +52,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_81a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

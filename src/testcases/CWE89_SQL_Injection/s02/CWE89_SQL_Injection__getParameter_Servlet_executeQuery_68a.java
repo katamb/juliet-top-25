@@ -16,17 +16,16 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68a extends AbstractTestCaseServlet
-{
+public class CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68a extends AbstractTestCaseServlet {
     public static String data;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
@@ -34,15 +33,13 @@ public class CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68a extends 
         (new CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68b()).badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -51,8 +48,7 @@ public class CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68a extends 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
@@ -66,8 +62,7 @@ public class CWE89_SQL_Injection__getParameter_Servlet_executeQuery_68a extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

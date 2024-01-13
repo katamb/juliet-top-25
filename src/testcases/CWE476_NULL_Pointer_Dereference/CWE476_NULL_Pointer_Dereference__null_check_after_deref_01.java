@@ -4,23 +4,21 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-01.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: null_check_after_deref
-*    GoodSink: Do not check for null after the object has been dereferenced
-*    BadSink : Check for null after the object has already been dereferenced
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: null_check_after_deref
+ *    GoodSink: Do not check for null after the object has been dereferenced
+ *    BadSink : Check for null after the object has already been dereferenced
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_01 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_01 extends AbstractTestCase {
+    public void bad() throws Throwable {
 
         {
             String myString = null;
@@ -29,8 +27,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_01 extends 
             IO.writeLine(myString.length());
 
             /* FLAW: Check for null after dereferencing the object. This null check is unnecessary. */
-            if (myString != null)
-            {
+            if (myString != null) {
                 myString = "my, how I've changed";
             }
 
@@ -39,13 +36,11 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_01 extends 
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
     }
 
-    private void good1() throws Throwable
-    {
+    private void good1() throws Throwable {
 
         {
             String myString = null;
@@ -67,8 +62,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_01 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

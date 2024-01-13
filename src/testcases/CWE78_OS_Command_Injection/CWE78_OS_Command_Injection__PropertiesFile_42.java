@@ -26,10 +26,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestCase
-{
-    private String badSource() throws Throwable
-    {
+public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestCase {
+    private String badSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -39,30 +37,21 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -72,18 +61,14 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
     }
 
     /* use badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = badSource();
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -94,8 +79,7 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
 
     }
 
-    private String goodG2BSource() throws Throwable
-    {
+    private String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -105,18 +89,14 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = goodG2BSource();
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -127,8 +107,7 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -138,8 +117,7 @@ public class CWE78_OS_Command_Injection__PropertiesFile_42 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

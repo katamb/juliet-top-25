@@ -16,14 +16,13 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         long dataCopy;
         {
             long data;
@@ -38,22 +37,20 @@ public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCa
 
             /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
             data++;
-            long result = (long)(data);
+            long result = (long) (data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         long dataCopy;
         {
             long data;
@@ -68,7 +65,7 @@ public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCa
 
             /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
             data++;
-            long result = (long)(data);
+            long result = (long) (data);
 
             IO.writeLine("result: " + result);
 
@@ -76,8 +73,7 @@ public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         long dataCopy;
         {
             long data;
@@ -91,14 +87,11 @@ public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCa
             long data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Long.MAX_VALUE)
-            {
+            if (data < Long.MAX_VALUE) {
                 data++;
-                long result = (long)(data);
+                long result = (long) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -111,8 +104,7 @@ public class CWE190_Integer_Overflow__long_max_postinc_31 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

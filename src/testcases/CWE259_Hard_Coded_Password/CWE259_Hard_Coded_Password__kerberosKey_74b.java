@@ -17,6 +17,7 @@ Template File: sources-sink-74b.tmpl.java
 package testcases.CWE259_Hard_Coded_Password;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import java.util.logging.Level;
@@ -25,14 +26,11 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_74b
-{
-    public void badSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_74b {
+    public void badSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -42,12 +40,10 @@ public class CWE259_Hard_Coded_Password__kerberosKey_74b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);

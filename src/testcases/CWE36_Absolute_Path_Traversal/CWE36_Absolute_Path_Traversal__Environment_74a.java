@@ -17,46 +17,43 @@ Template File: sources-sink-74a.tmpl.java
 package testcases.CWE36_Absolute_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE36_Absolute_Path_Traversal__Environment_74a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE36_Absolute_Path_Traversal__Environment_74a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
         data = System.getenv("ADD");
 
-        HashMap<Integer,String> dataHashMap = new HashMap<Integer,String>();
+        HashMap<Integer, String> dataHashMap = new HashMap<Integer, String>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE36_Absolute_Path_Traversal__Environment_74b()).badSink(dataHashMap  );
+        (new CWE36_Absolute_Path_Traversal__Environment_74b()).badSink(dataHashMap);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        HashMap<Integer,String> dataHashMap = new HashMap<Integer,String>();
+        HashMap<Integer, String> dataHashMap = new HashMap<Integer, String>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE36_Absolute_Path_Traversal__Environment_74b()).goodG2BSink(dataHashMap  );
+        (new CWE36_Absolute_Path_Traversal__Environment_74b()).goodG2BSink(dataHashMap);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +62,7 @@ public class CWE36_Absolute_Path_Traversal__Environment_74a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

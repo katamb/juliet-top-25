@@ -4,16 +4,17 @@ Label Definition File: CWE80_XSS__Servlet.label.xml
 Template File: sources-sink-12.tmpl.java
 */
 /*
-* @description
-* CWE: 80 Cross Site Scripting (XSS)
-* BadSource: PropertiesFile Read data from a .properties file (in property named data)
-* GoodSource: A hardcoded string
-* BadSink:  Display of data in web page without any encoding or validation
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 80 Cross Site Scripting (XSS)
+ * BadSource: PropertiesFile Read data from a .properties file (in property named data)
+ * GoodSource: A hardcoded string
+ * BadSink:  Display of data in web page without any encoding or validation
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE80_XSS.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -25,57 +26,42 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__Servlet_PropertiesFile_12 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__Servlet_PropertiesFile_12 extends AbstractTestCaseServlet {
     /* uses badsource and badsink - see how tools report flaws that don't always occur */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
@@ -84,32 +70,26 @@ public class CWE80_XSS__Servlet_PropertiesFile_12 extends AbstractTestCaseServle
 
     /* goodG2B() - use goodsource and badsink by changing the "if" so that
      * both branches use the GoodSource */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -119,8 +99,7 @@ public class CWE80_XSS__Servlet_PropertiesFile_12 extends AbstractTestCaseServle
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

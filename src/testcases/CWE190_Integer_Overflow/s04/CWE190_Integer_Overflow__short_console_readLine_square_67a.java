@@ -16,6 +16,7 @@ Template File: sources-sinks-67a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,15 +27,12 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends AbstractTestCase
-{
-    static class Container
-    {
+public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends AbstractTestCase {
+    static class Container {
         public short containerOne;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         short data;
 
         /* init data */
@@ -43,49 +41,31 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Short.parseShort(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -93,18 +73,16 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).badSink(dataContainer  );
+        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -112,12 +90,11 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).goodG2BSink(dataContainer  );
+        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).goodG2BSink(dataContainer);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data;
 
         /* init data */
@@ -126,49 +103,31 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Short.parseShort(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -176,7 +135,7 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).goodB2GSink(dataContainer  );
+        (new CWE190_Integer_Overflow__short_console_readLine_square_67b()).goodB2GSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -185,8 +144,7 @@ public class CWE190_Integer_Overflow__short_console_readLine_square_67a extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

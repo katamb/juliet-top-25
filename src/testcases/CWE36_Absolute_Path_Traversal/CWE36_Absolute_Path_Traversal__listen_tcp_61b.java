@@ -29,10 +29,8 @@ import java.net.ServerSocket;
 
 import java.util.logging.Level;
 
-public class CWE36_Absolute_Path_Traversal__listen_tcp_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE36_Absolute_Path_Traversal__listen_tcp_61b {
+    public String badSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -45,8 +43,7 @@ public class CWE36_Absolute_Path_Traversal__listen_tcp_61b
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -57,60 +54,40 @@ public class CWE36_Absolute_Path_Traversal__listen_tcp_61b
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
@@ -120,8 +97,7 @@ public class CWE36_Absolute_Path_Traversal__listen_tcp_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

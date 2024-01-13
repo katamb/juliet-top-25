@@ -4,14 +4,14 @@ Label Definition File: CWE36_Absolute_Path_Traversal.label.xml
 Template File: sources-sink-07.tmpl.java
 */
 /*
-* @description
-* CWE: 36 Absolute Path Traversal
-* BadSource: PropertiesFile Read data from a .properties file (in property named data)
-* GoodSource: A hardcoded string
-* BadSink: readFile read line from file from disk
-* Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
-*
-* */
+ * @description
+ * CWE: 36 Absolute Path Traversal
+ * BadSource: PropertiesFile Read data from a .properties file (in property named data)
+ * GoodSource: A hardcoded string
+ * BadSink: readFile read line from file from disk
+ * Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
+ *
+ * */
 
 package testcases.CWE36_Absolute_Path_Traversal;
 
@@ -28,8 +28,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 
-public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTestCase
-{
+public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTestCase {
     /* The variable below is not declared "final", but is never assigned
      * any other value so a tool should be able to identify that reads of
      * this will always give its initialized value.
@@ -37,107 +36,75 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
     private int privateFive = 5;
 
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
-        if (privateFive == 5)
-        {
+        if (privateFive == 5) {
             data = ""; /* Initialize data */
             /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         /* POTENTIAL FLAW: unvalidated or sandboxed value */
-        if (data != null)
-        {
+        if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -147,17 +114,13 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
     }
 
     /* goodG2B1() - use goodsource and badsink by changing privateFive==5 to privateFive!=5 */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
-        if (privateFive != 5)
-        {
+        if (privateFive != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -165,61 +128,42 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
         }
 
         /* POTENTIAL FLAW: unvalidated or sandboxed value */
-        if (data != null)
-        {
+        if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -229,77 +173,54 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
-        if (privateFive == 5)
-        {
+        if (privateFive == 5) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         /* POTENTIAL FLAW: unvalidated or sandboxed value */
-        if (data != null)
-        {
+        if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -308,8 +229,7 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
@@ -320,8 +240,7 @@ public class CWE36_Absolute_Path_Traversal__PropertiesFile_07 extends AbstractTe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

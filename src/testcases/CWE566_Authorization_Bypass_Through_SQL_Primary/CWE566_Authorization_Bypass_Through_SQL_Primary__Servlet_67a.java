@@ -20,15 +20,12 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67a extends AbstractTestCaseServlet
-{
-    static class Container
-    {
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67a extends AbstractTestCaseServlet {
+    static class Container {
         public String containerOne;
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FLAW: Get the user ID from a URL parameter */
@@ -36,17 +33,15 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67a extend
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67b()).badSink(dataContainer , request, response );
+        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67b()).badSink(dataContainer, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded user ID */
@@ -54,7 +49,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67a extend
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67b()).goodG2BSink(dataContainer , request, response );
+        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67b()).goodG2BSink(dataContainer, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -63,8 +58,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_67a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

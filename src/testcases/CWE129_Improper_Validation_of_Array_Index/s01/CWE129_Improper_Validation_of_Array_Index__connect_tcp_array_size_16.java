@@ -4,18 +4,19 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-16.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: connect_tcp Read data using an outbound tcp connection
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_size
-*    GoodSink: data is used to set the size of the array and it must be greater than 0
-*    BadSink : data is used to set the size of the array, but it could be set to 0
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: connect_tcp Read data using an outbound tcp connection
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_size
+ *    GoodSink: data is used to set the size of the array and it must be greater than 0
+ *    BadSink : data is used to set the size of the array, but it could be set to 0
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,22 +28,18 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_16 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_16 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -50,59 +47,39 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
@@ -110,16 +87,12 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -130,27 +103,21 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -162,20 +129,17 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -183,59 +147,39 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
@@ -243,17 +187,13 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
             int array[] = null;
             /* FIX: Verify that data is non-negative AND greater than 0 */
-            if (data > 0)
-            {
+            if (data > 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -263,8 +203,7 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -275,8 +214,7 @@ public class CWE129_Improper_Validation_of_Array_Index__connect_tcp_array_size_1
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

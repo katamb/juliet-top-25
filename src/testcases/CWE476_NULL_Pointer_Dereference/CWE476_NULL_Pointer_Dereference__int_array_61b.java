@@ -19,11 +19,9 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_61b
-{
-    public int [] badSource() throws Throwable
-    {
-        int [] data;
+public class CWE476_NULL_Pointer_Dereference__int_array_61b {
+    public int[] badSource() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -32,9 +30,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public int [] goodG2BSource() throws Throwable
-    {
-        int [] data;
+    public int[] goodG2BSource() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
@@ -43,9 +40,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public int [] goodB2GSource() throws Throwable
-    {
-        int [] data;
+    public int[] goodB2GSource() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;

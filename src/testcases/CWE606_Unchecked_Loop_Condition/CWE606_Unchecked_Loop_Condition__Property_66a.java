@@ -21,10 +21,8 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -33,18 +31,16 @@ public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestC
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE606_Unchecked_Loop_Condition__Property_66b()).badSink(dataArray  );
+        (new CWE606_Unchecked_Loop_Condition__Property_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -52,12 +48,11 @@ public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestC
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE606_Unchecked_Loop_Condition__Property_66b()).goodG2BSink(dataArray  );
+        (new CWE606_Unchecked_Loop_Condition__Property_66b()).goodG2BSink(dataArray);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -66,7 +61,7 @@ public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestC
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE606_Unchecked_Loop_Condition__Property_66b()).goodB2GSink(dataArray  );
+        (new CWE606_Unchecked_Loop_Condition__Property_66b()).goodB2GSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -75,8 +70,7 @@ public class CWE606_Unchecked_Loop_Condition__Property_66a extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -17,19 +17,17 @@ Template File: sources-sink-72b.tmpl.java
 package testcases.CWE321_Hard_Coded_Cryptographic_Key;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_72b
-{
-    public void badSink(Vector<String> dataVector ) throws Throwable
-    {
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_72b {
+    public void badSink(Vector<String> dataVector) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -43,12 +41,10 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_72b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Vector<String> dataVector ) throws Throwable
-    {
+    public void goodG2BSink(Vector<String> dataVector) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */

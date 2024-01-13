@@ -16,6 +16,7 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,12 +27,10 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_read_check_max_68a extends AbstractTestCase
-{
+public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_read_check_max_68a extends AbstractTestCase {
     public static int data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -40,8 +39,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -49,43 +47,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
                 String stringNumber = readerBuffered.readLine();
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -95,15 +78,13 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
         (new CWE129_Improper_Validation_of_Array_Index__console_readLine_array_read_check_max_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
@@ -112,8 +93,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -122,8 +102,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -131,43 +110,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
                 String stringNumber = readerBuffered.readLine();
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -183,8 +147,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_r
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

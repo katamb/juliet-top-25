@@ -26,22 +26,18 @@ import java.util.logging.Level;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_54c
-{
-    public void badSink(String password ) throws Throwable
-    {
-        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).badSink(password );
+public class CWE256_Plaintext_Storage_of_Password__basic_54c {
+    public void badSink(String password) throws Throwable {
+        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).badSink(password);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String password ) throws Throwable
-    {
-        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).goodG2BSink(password );
+    public void goodG2BSink(String password) throws Throwable {
+        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).goodG2BSink(password);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(String password ) throws Throwable
-    {
-        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).goodB2GSink(password );
+    public void goodB2GSink(String password) throws Throwable {
+        (new CWE256_Plaintext_Storage_of_Password__basic_54d()).goodB2GSink(password);
     }
 }

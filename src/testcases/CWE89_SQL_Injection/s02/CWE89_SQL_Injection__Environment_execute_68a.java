@@ -16,16 +16,15 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Environment_execute_68a extends AbstractTestCase
-{
+public class CWE89_SQL_Injection__Environment_execute_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
@@ -34,15 +33,13 @@ public class CWE89_SQL_Injection__Environment_execute_68a extends AbstractTestCa
         (new CWE89_SQL_Injection__Environment_execute_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -51,8 +48,7 @@ public class CWE89_SQL_Injection__Environment_execute_68a extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
@@ -67,8 +63,7 @@ public class CWE89_SQL_Injection__Environment_execute_68a extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

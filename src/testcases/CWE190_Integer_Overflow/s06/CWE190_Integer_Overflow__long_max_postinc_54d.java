@@ -16,26 +16,23 @@ Template File: sources-sinks-54d.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_postinc_54d
-{
-    public void badSink(long data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__long_max_postinc_54e()).badSink(data );
+public class CWE190_Integer_Overflow__long_max_postinc_54d {
+    public void badSink(long data) throws Throwable {
+        (new CWE190_Integer_Overflow__long_max_postinc_54e()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(long data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__long_max_postinc_54e()).goodG2BSink(data );
+    public void goodG2BSink(long data) throws Throwable {
+        (new CWE190_Integer_Overflow__long_max_postinc_54e()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(long data ) throws Throwable
-    {
-        (new CWE190_Integer_Overflow__long_max_postinc_54e()).goodB2GSink(data );
+    public void goodB2GSink(long data) throws Throwable {
+        (new CWE190_Integer_Overflow__long_max_postinc_54e()).goodB2GSink(data);
     }
 }

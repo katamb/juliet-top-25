@@ -28,10 +28,8 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCase
-{
-    private String badSource() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCase {
+    private String badSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +40,7 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -53,47 +50,31 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -102,23 +83,18 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = badSource();
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -126,8 +102,7 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private String goodG2BSource() throws Throwable
-    {
+    private String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -136,23 +111,18 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = goodG2BSource();
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -160,8 +130,7 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private String goodB2GSource() throws Throwable
-    {
+    private String goodB2GSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -172,8 +141,7 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -183,47 +151,31 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -232,34 +184,27 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data = goodB2GSource();
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
         /* FIX: loop number thresholds validated */
-        if (numberOfLoops >= 0 && numberOfLoops <= 5)
-        {
-            for (int i=0; i < numberOfLoops; i++)
-            {
+        if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+            for (int i = 0; i < numberOfLoops; i++) {
                 IO.writeLine("hello world");
             }
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -270,8 +215,7 @@ public class CWE606_Unchecked_Loop_Condition__database_42 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

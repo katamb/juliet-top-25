@@ -20,19 +20,14 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractTestCaseServlet
-{
-    private void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractTestCaseServlet {
+    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -43,8 +38,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractT
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -52,32 +46,26 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractT
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
         }
 
-        badSink(data , request, response );
+        badSink(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
-    private void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -89,14 +77,13 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractT
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        goodG2BSink(data , request, response );
+        goodG2BSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -105,8 +92,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_41 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -24,10 +24,8 @@ import java.util.StringTokenizer;
 
 import java.util.logging.Level;
 
-public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends AbstractTestCaseServlet
-{
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends AbstractTestCaseServlet {
+    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -35,11 +33,9 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -50,78 +46,55 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
     }
 
     /* use badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = badSource(request, response);
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -130,8 +103,7 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
 
     }
 
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -141,78 +113,55 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = goodG2BSource(request, response);
 
         String root;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             root = "C:\\uploads\\";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             root = "/home/user/uploads/";
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: no validation of concatenated value */
             File file = new File(root + data);
             FileInputStream streamFileInputSink = null;
             InputStreamReader readerInputStreamSink = null;
             BufferedReader readerBufferdSink = null;
-            if (file.exists() && file.isFile())
-            {
-                try
-                {
+            if (file.exists() && file.isFile()) {
+                try {
                     streamFileInputSink = new FileInputStream(file);
                     readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                     readerBufferdSink = new BufferedReader(readerInputStreamSink);
                     IO.writeLine(readerBufferdSink.readLine());
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBufferdSink != null)
-                        {
+                    try {
+                        if (readerBufferdSink != null) {
                             readerBufferdSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStreamSink != null)
-                        {
+                    try {
+                        if (readerInputStreamSink != null) {
                             readerInputStreamSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInputSink != null)
-                        {
+                    try {
+                        if (streamFileInputSink != null) {
                             streamFileInputSink.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -221,8 +170,7 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -232,8 +180,7 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_42 extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

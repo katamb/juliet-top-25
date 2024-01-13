@@ -16,20 +16,19 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         short dataCopy;
         {
             short data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
             dataCopy = data;
         }
@@ -38,22 +37,20 @@ public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTest
 
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short dataCopy;
         {
             short data;
@@ -68,7 +65,7 @@ public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTest
 
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
 
             IO.writeLine("result: " + result);
 
@@ -76,14 +73,13 @@ public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short dataCopy;
         {
             short data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+            data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
             dataCopy = data;
         }
@@ -91,14 +87,11 @@ public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTest
             short data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Short.MAX_VALUE)
-            {
+            if (data < Short.MAX_VALUE) {
                 data++;
-                short result = (short)(data);
+                short result = (short) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -111,8 +104,7 @@ public class CWE190_Integer_Overflow__short_rand_postinc_31 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

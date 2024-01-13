@@ -17,15 +17,14 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE23_Relative_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE23_Relative_Path_Traversal__Property_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__Property_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -36,17 +35,15 @@ public class CWE23_Relative_Path_Traversal__Property_72a extends AbstractTestCas
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE23_Relative_Path_Traversal__Property_72b()).badSink(dataVector  );
+        (new CWE23_Relative_Path_Traversal__Property_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -56,7 +53,7 @@ public class CWE23_Relative_Path_Traversal__Property_72a extends AbstractTestCas
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE23_Relative_Path_Traversal__Property_72b()).goodG2BSink(dataVector  );
+        (new CWE23_Relative_Path_Traversal__Property_72b()).goodG2BSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +62,7 @@ public class CWE23_Relative_Path_Traversal__Property_72a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

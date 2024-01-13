@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-12.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: Property Read data from a system property
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: Property Read data from a system property
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -19,20 +19,15 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase {
     /* uses badsource and badsink - see how tools report flaws that don't always occur */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* get system property user.home */
             /* POTENTIAL FLAW: Read data from a system property */
             data = System.getProperty("user.home");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -40,13 +35,10 @@ public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -59,16 +51,12 @@ public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
 
     /* goodG2B() - use goodsource and badsink by changing the "if" so that
      * both branches use the GoodSource */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -76,13 +64,10 @@ public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -93,8 +78,7 @@ public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -104,8 +88,7 @@ public class CWE78_OS_Command_Injection__Property_12 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

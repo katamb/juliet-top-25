@@ -24,14 +24,12 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extends AbstractTestCaseServlet
-{
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extends AbstractTestCaseServlet {
     /* The public static variable below is used to drive control flow in the source function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         badPublicStatic = true;
@@ -41,64 +39,44 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int id = 0;
-        try
-        {
+        try {
             id = Integer.parseInt(data);
-        }
-        catch ( NumberFormatException nfx )
-        {
+        } catch (NumberFormatException nfx) {
             id = -1; /* Assuming this id does not exist */
         }
 
-        try
-        {
+        try {
             preparedStatement = dBConnection.prepareStatement("select * from invoices where uid=?");
             preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
             /* POTENTIAL FLAW: no check to see whether the user has privileges to view the data */
-            IO.writeString("bad() - result requested: " + data +"\n");
-        }
-        catch (SQLException exceptSql)
-        {
+            IO.writeString("bad() - result requested: " + data + "\n");
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error executing query", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (preparedStatement != null)
-                {
+            try {
+                if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dBConnection != null)
-                {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close Connection", exceptSql);
             }
         }
@@ -110,15 +88,13 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
     public static boolean goodG2B1PublicStatic = false;
     public static boolean goodG2B2PublicStatic = false;
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         goodG2B1PublicStatic = false;
@@ -128,64 +104,44 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int id = 0;
-        try
-        {
+        try {
             id = Integer.parseInt(data);
-        }
-        catch ( NumberFormatException nfx )
-        {
+        } catch (NumberFormatException nfx) {
             id = -1; /* Assuming this id does not exist */
         }
 
-        try
-        {
+        try {
             preparedStatement = dBConnection.prepareStatement("select * from invoices where uid=?");
             preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
             /* POTENTIAL FLAW: no check to see whether the user has privileges to view the data */
-            IO.writeString("bad() - result requested: " + data +"\n");
-        }
-        catch (SQLException exceptSql)
-        {
+            IO.writeString("bad() - result requested: " + data + "\n");
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error executing query", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (preparedStatement != null)
-                {
+            try {
+                if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dBConnection != null)
-                {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close Connection", exceptSql);
             }
         }
@@ -193,8 +149,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         goodG2B2PublicStatic = true;
@@ -204,64 +159,44 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         int id = 0;
-        try
-        {
+        try {
             id = Integer.parseInt(data);
-        }
-        catch ( NumberFormatException nfx )
-        {
+        } catch (NumberFormatException nfx) {
             id = -1; /* Assuming this id does not exist */
         }
 
-        try
-        {
+        try {
             preparedStatement = dBConnection.prepareStatement("select * from invoices where uid=?");
             preparedStatement.setInt(1, id);
 
             resultSet = preparedStatement.executeQuery();
 
             /* POTENTIAL FLAW: no check to see whether the user has privileges to view the data */
-            IO.writeString("bad() - result requested: " + data +"\n");
-        }
-        catch (SQLException exceptSql)
-        {
+            IO.writeString("bad() - result requested: " + data + "\n");
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error executing query", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (preparedStatement != null)
-                {
+            try {
+                if (preparedStatement != null) {
                     preparedStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dBConnection != null)
-                {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Could not close Connection", exceptSql);
             }
         }
@@ -274,8 +209,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_22a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -20,14 +20,11 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE83_XSS_Attribute__Servlet_connect_tcp_67b
-{
-    public void badSink(CWE83_XSS_Attribute__Servlet_connect_tcp_67a.Container dataContainer , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_connect_tcp_67b {
+    public void badSink(CWE83_XSS_Attribute__Servlet_connect_tcp_67a.Container dataContainer, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataContainer.containerOne;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -35,12 +32,10 @@ public class CWE83_XSS_Attribute__Servlet_connect_tcp_67b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(CWE83_XSS_Attribute__Servlet_connect_tcp_67a.Container dataContainer , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(CWE83_XSS_Attribute__Servlet_connect_tcp_67a.Container dataContainer, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataContainer.containerOne;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }

@@ -19,21 +19,19 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_22a extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__int_array_22a extends AbstractTestCase {
     /* The public static variable below is used to drive control flow in the sink function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad() throws Throwable
-    {
-        int [] data = null;
+    public void bad() throws Throwable {
+        int[] data = null;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         badPublicStatic = true;
-        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).badSink(data );
+        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).badSink(data);
     }
 
     /* The public static variables below are used to drive control flow in the sink functions.
@@ -42,47 +40,43 @@ public class CWE476_NULL_Pointer_Dereference__int_array_22a extends AbstractTest
     public static boolean goodB2G2PublicStatic = false;
     public static boolean goodG2BPublicStatic = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
-        int [] data = null;
+    private void goodB2G1() throws Throwable {
+        int[] data = null;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         goodB2G1PublicStatic = false;
-        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodB2G1Sink(data );
+        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodB2G1Sink(data);
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
-        int [] data = null;
+    private void goodB2G2() throws Throwable {
+        int[] data = null;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         goodB2G2PublicStatic = true;
-        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodB2G2Sink(data );
+        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodB2G2Sink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data = null;
+    private void goodG2B() throws Throwable {
+        int[] data = null;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
         goodG2BPublicStatic = true;
-        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodG2BSink(data );
+        (new CWE476_NULL_Pointer_Dereference__int_array_22b()).goodG2BSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -91,8 +85,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_22a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

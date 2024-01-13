@@ -4,14 +4,14 @@ Label Definition File: CWE81_XSS_Error_Message__Servlet.label.xml
 Template File: sources-sink-08.tmpl.java
 */
 /*
-* @description
-* CWE: 81 Cross Site Scripting (XSS) in Error Message
-* BadSource: database Read data from a database
-* GoodSource: A hardcoded string
-* BadSink: sendErrorServlet XSS in sendError
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 81 Cross Site Scripting (XSS) in Error Message
+ * BadSource: database Read data from a database
+ * GoodSource: A hardcoded string
+ * BadSink: sendErrorServlet XSS in sendError
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE81_XSS_Error_Message;
 
@@ -26,36 +26,30 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE81_XSS_Error_Message__Servlet_database_08 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_database_08 extends AbstractTestCaseServlet {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             data = ""; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -63,128 +57,98 @@ public class CWE81_XSS_Error_Message__Servlet_database_08 extends AbstractTestCa
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     data = resultSet.getString(1);
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B1() - use goodsource and badsink by changing privateReturnsTrue() to privateReturnsFalse() */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsFalse())
-        {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -195,8 +159,7 @@ public class CWE81_XSS_Error_Message__Servlet_database_08 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

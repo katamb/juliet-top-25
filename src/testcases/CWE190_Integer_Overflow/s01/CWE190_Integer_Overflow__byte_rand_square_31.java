@@ -16,20 +16,19 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         byte dataCopy;
         {
             byte data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+            data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
             dataCopy = data;
         }
@@ -37,22 +36,20 @@ public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCa
             byte data = dataCopy;
 
             /* POTENTIAL FLAW: if (data*data) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * data);
+            byte result = (byte) (data * data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte dataCopy;
         {
             byte data;
@@ -66,7 +63,7 @@ public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCa
             byte data = dataCopy;
 
             /* POTENTIAL FLAW: if (data*data) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * data);
+            byte result = (byte) (data * data);
 
             IO.writeLine("result: " + result);
 
@@ -74,14 +71,13 @@ public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte dataCopy;
         {
             byte data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+            data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
             dataCopy = data;
         }
@@ -90,13 +86,10 @@ public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCa
 
             /* FIX: Add a check to prevent an overflow from occurring */
             /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Byte.MAX_VALUE)))
-            {
-                byte result = (byte)(data * data);
+            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Byte.MAX_VALUE))) {
+                byte result = (byte) (data * data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform squaring.");
             }
 
@@ -109,8 +102,7 @@ public class CWE190_Integer_Overflow__byte_rand_square_31 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

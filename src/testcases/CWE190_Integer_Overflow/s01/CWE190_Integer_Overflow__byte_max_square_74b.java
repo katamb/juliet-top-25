@@ -16,50 +16,45 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_max_square_74b
-{
-    public void badSink(HashMap<Integer,Byte> dataHashMap ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_max_square_74b {
+    public void badSink(HashMap<Integer, Byte> dataHashMap) throws Throwable {
         byte data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: if (data*data) > Byte.MAX_VALUE, this will overflow */
-        byte result = (byte)(data * data);
+        byte result = (byte) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,Byte> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, Byte> dataHashMap) throws Throwable {
         byte data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: if (data*data) > Byte.MAX_VALUE, this will overflow */
-        byte result = (byte)(data * data);
+        byte result = (byte) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,Byte> dataHashMap ) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, Byte> dataHashMap) throws Throwable {
         byte data = dataHashMap.get(2);
 
         /* FIX: Add a check to prevent an overflow from occurring */
         /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Byte.MAX_VALUE)))
-        {
-            byte result = (byte)(data * data);
+        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Byte.MAX_VALUE))) {
+            byte result = (byte) (data * data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform squaring.");
         }
 

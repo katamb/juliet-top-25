@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-16.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: Environment Read data from an environment variable
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: Environment Read data from an environment variable
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -19,15 +19,12 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             /* get environment variable ADD */
             /* POTENTIAL FLAW: Read data from an environment variable */
             data = System.getenv("ADD");
@@ -35,13 +32,10 @@ public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -53,25 +47,20 @@ public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded string */
             data = "foo";
             break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -82,8 +71,7 @@ public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -93,8 +81,7 @@ public class CWE78_OS_Command_Injection__Environment_16 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

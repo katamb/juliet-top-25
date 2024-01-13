@@ -4,18 +4,19 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-07.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: File Read data from file (named c:\data.txt)
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: square
-*    GoodSink: Ensure there will not be an overflow before squaring data
-*    BadSink : Square data, which can lead to overflow
-* Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: File Read data from file (named c:\data.txt)
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: square
+ *    GoodSink: Ensure there will not be an overflow before squaring data
+ *    BadSink : Square data, which can lead to overflow
+ * Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -28,26 +29,22 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCase {
     /* The variable below is not declared "final", but is never assigned
      * any other value so a tool should be able to identify that reads of
      * this will always give its initialized value. */
     private int privateFive = 5;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -56,142 +53,106 @@ public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCas
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first privateFive==5 to privateFive!=5 */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         int data;
-        if (privateFive!=5)
-        {
+        if (privateFive != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         int data;
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second privateFive==5 to privateFive!=5 */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -200,87 +161,59 @@ public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCas
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateFive!=5)
-        {
+        if (privateFive != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Add a check to prevent an overflow from occurring */
             /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-            {
-                int result = (int)(data * data);
+            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+                int result = (int) (data * data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform squaring.");
             }
 
@@ -288,19 +221,16 @@ public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCas
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             {
                 File file = new File("C:\\data.txt");
                 FileInputStream streamFileInput = null;
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -309,88 +239,61 @@ public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCas
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (privateFive==5)
-        {
+        if (privateFive == 5) {
             /* FIX: Add a check to prevent an overflow from occurring */
             /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-            {
-                int result = (int)(data * data);
+            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+                int result = (int) (data * data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform squaring.");
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -403,8 +306,7 @@ public class CWE190_Integer_Overflow__int_File_square_07 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

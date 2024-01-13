@@ -16,6 +16,7 @@ Template File: sources-sinks-21.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,13 +27,11 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_size_21 extends AbstractTestCase
-{
+public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_size_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -42,8 +41,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -51,43 +49,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                 String stringNumber = readerBuffered.readLine();
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -95,21 +78,16 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
         /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(int data ) throws Throwable
-    {
-        if (badPrivate)
-        {
+    private void badSink(int data) throws Throwable {
+        if (badPrivate) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -123,16 +101,14 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -142,8 +118,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -151,43 +126,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                 String stringNumber = readerBuffered.readLine();
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -195,29 +155,22 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
         /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(int data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(int data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
             int array[] = null;
 
             /* FIX: Verify that data is non-negative AND greater than 0 */
-            if (data > 0)
-            {
+            if (data > 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
 
@@ -229,8 +182,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -240,8 +192,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -249,43 +200,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                 String stringNumber = readerBuffered.readLine();
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -293,22 +229,17 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
         /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(int data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
+    private void goodB2G2Sink(int data) throws Throwable {
+        if (goodB2G2Private) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
             int array[] = null;
             /* FIX: Verify that data is non-negative AND greater than 0 */
-            if (data > 0)
-            {
+            if (data > 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -318,29 +249,23 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(int data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
+    private void goodG2BSink(int data) throws Throwable {
+        if (goodG2BPrivate) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -355,8 +280,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,66 +16,54 @@ Template File: sources-sinks-68b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_68b {
+    public void badSink() throws Throwable {
         int data = CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_68a.data;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-        if (data < array.length)
-        {
+        if (data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         int data = CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_68a.data;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-        if (data < array.length)
-        {
+        if (data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink() throws Throwable
-    {
+    public void goodB2GSink() throws Throwable {
         int data = CWE129_Improper_Validation_of_Array_Index__random_array_read_check_max_68a.data;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Fully verify data before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 

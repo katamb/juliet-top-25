@@ -27,49 +27,35 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_PropertiesFile_22b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_PropertiesFile_22b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.badPublicStatic)
-        {
+        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.badPublicStatic) {
             data = ""; /* Initialize data */
             /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -78,18 +64,14 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_22b
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    public String goodG2B1Source(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2B1Source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.goodG2B1PublicStatic)
-        {
+        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.goodG2B1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -100,17 +82,13 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_22b
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    public String goodG2B2Source(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2B2Source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.goodG2B2PublicStatic)
-        {
+        if (CWE83_XSS_Attribute__Servlet_PropertiesFile_22a.goodG2B2PublicStatic) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;

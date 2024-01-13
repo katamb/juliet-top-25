@@ -21,13 +21,11 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTestCase
-{
+public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -35,25 +33,19 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
         data = System.getenv("ADD");
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(String data ) throws Throwable
-    {
-        if (badPrivate)
-        {
+    private void badSink(String data) throws Throwable {
+        if (badPrivate) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -65,16 +57,14 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -82,35 +72,26 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
         data = System.getenv("ADD");
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(String data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(String data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -119,8 +100,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -128,28 +108,21 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
         data = System.getenv("ADD");
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(String data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
+    private void goodB2G2Sink(String data) throws Throwable {
+        if (goodB2G2Private) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -157,33 +130,26 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(String data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
+    private void goodG2BSink(String data) throws Throwable {
+        if (goodG2BPrivate) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -196,8 +162,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_21 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

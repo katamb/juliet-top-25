@@ -16,6 +16,7 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,10 +25,8 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -38,17 +37,12 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
-                        try
-                        {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                        try {
                             data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                         }
                         break; /* exit while loop */
@@ -63,22 +57,20 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
 
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -93,7 +85,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
 
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
 
             IO.writeLine("result: " + result);
 
@@ -101,8 +93,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int dataCopy;
         {
             int data;
@@ -113,17 +104,12 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
-                        try
-                        {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                        try {
                             data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                         }
                         break; /* exit while loop */
@@ -137,14 +123,11 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
             int data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Integer.MAX_VALUE)
-            {
+            if (data < Integer.MAX_VALUE) {
                 data++;
-                int result = (int)(data);
+                int result = (int) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -157,8 +140,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_postinc_31 exte
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

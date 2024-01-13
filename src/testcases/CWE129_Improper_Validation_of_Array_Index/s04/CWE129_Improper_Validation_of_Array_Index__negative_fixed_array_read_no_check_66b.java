@@ -16,18 +16,17 @@ Template File: sources-sinks-66b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_read_no_check_66b
-{
-    public void badSink(int dataArray[] ) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_read_no_check_66b {
+    public void badSink(int dataArray[]) throws Throwable {
         int data = dataArray[2];
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -35,12 +34,11 @@ public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_rea
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int dataArray[] ) throws Throwable
-    {
+    public void goodG2BSink(int dataArray[]) throws Throwable {
         int data = dataArray[2];
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -48,20 +46,16 @@ public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_rea
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int dataArray[] ) throws Throwable
-    {
+    public void goodB2GSink(int dataArray[]) throws Throwable {
         int data = dataArray[2];
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 

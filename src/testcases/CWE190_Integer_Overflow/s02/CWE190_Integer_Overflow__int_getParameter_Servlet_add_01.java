@@ -4,18 +4,19 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-01.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: getParameter_Servlet Read data from a querystring using getParameter()
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: add
-*    GoodSink: Ensure there will not be an overflow before adding 1 to data
-*    BadSink : Add 1 to data, which can cause an overflow
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: getParameter_Servlet Read data from a querystring using getParameter()
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: add
+ *    GoodSink: Ensure there will not be an overflow before adding 1 to data
+ *    BadSink : Add 1 to data, which can cause an overflow
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,10 +24,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getParameter_Servlet_add_01 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getParameter_Servlet_add_01 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -35,47 +34,41 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_add_01 extends Ab
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -84,24 +77,18 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_add_01 extends Ab
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(data + 1);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 
@@ -113,8 +100,7 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_add_01 extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

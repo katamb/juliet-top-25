@@ -4,14 +4,14 @@ Label Definition File: CWE523_Unprotected_Cred_Transport__Servlet.label.xml
 Template File: point-flaw-08.tmpl.java
 */
 /*
-* @description
-* CWE: 523 Unprotected Transport of Credentials
-* Sinks: non_ssl
-*    GoodSink: Send across SSL connection
-*    BadSink : Send across non-SSL connection
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 523 Unprotected Transport of Credentials
+ * Sinks: non_ssl
+ *    GoodSink: Send across SSL connection
+ *    BadSink : Send across non-SSL connection
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE523_Unprotected_Cred_Transport;
 
@@ -24,29 +24,23 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestCaseServlet
-{
+public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestCaseServlet {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateReturnsTrue()) {
             PrintWriter writer = null;
-            try
-            {
+            try {
                 writer = response.getWriter();
                 /* FLAW: transmitting login credentials across a non-SSL connection */
                 writer.println("<form action='http://hostname.com/j_security_check' method='post'>");
@@ -59,15 +53,10 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
                 writer.println("</table><br />");
                 writer.println("<input type='submit' value='login'>");
                 writer.println("</form>");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "There was a problem writing", exceptIO);
-            }
-            finally
-            {
-                if (writer != null)
-                {
+            } finally {
+                if (writer != null) {
                     writer.close();
                 }
             }
@@ -75,19 +64,14 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
     }
 
     /* good1() changes privateReturnsTrue() to privateReturnsFalse() */
-    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateReturnsFalse())
-        {
+    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             PrintWriter writer = null;
-            try
-            {
+            try {
                 writer = response.getWriter();
 
                 /* FIX: ensure the connection is secure (https) */
@@ -101,15 +85,10 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
                 writer.println("</table><br />");
                 writer.println("<input type='submit' value='login'>");
                 writer.println("</form>");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "There was a problem writing", exceptIO);
-            }
-            finally
-            {
-                if (writer != null)
-                {
+            } finally {
+                if (writer != null) {
                     writer.close();
                 }
             }
@@ -118,13 +97,10 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateReturnsTrue()) {
             PrintWriter writer = null;
-            try
-            {
+            try {
                 writer = response.getWriter();
                 /* FIX: ensure the connection is secure (https) */
                 writer.println("<form action='https://hostname.com/j_security_check' method='post'>");
@@ -137,23 +113,17 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
                 writer.println("</table><br />");
                 writer.println("<input type='submit' value='login'>");
                 writer.println("</form>");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "There was a problem writing", exceptIO);
-            }
-            finally
-            {
-                if (writer != null)
-                {
+            } finally {
+                if (writer != null) {
                     writer.close();
                 }
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         good1(request, response);
         good2(request, response);
     }
@@ -164,8 +134,7 @@ public class CWE523_Unprotected_Cred_Transport__Servlet_08 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

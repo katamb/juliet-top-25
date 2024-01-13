@@ -4,14 +4,14 @@ Label Definition File: CWE83_XSS_Attribute__Servlet.label.xml
 Template File: sources-sink-01.tmpl.java
 */
 /*
-* @description
-* CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
-* BadSource: PropertiesFile Read data from a .properties file (in property named data)
-* GoodSource: A hardcoded string
-* BadSink: printlnServlet XSS in img src attribute
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
+ * BadSource: PropertiesFile Read data from a .properties file (in property named data)
+ * GoodSource: A hardcoded string
+ * BadSink: printlnServlet XSS in img src attribute
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE83_XSS_Attribute;
 
@@ -26,11 +26,9 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_PropertiesFile_01 extends AbstractTestCaseServlet
-{
+public class CWE83_XSS_Attribute__Servlet_PropertiesFile_01 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -40,58 +38,45 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_01 extends AbstractTest
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - uses goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -104,8 +89,7 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_01 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

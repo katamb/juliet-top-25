@@ -21,10 +21,8 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -39,18 +37,14 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
             String data = dataCopy;
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -58,15 +52,13 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -80,18 +72,14 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
             String data = dataCopy;
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -100,8 +88,7 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -116,21 +103,16 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
             String data = dataCopy;
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -144,8 +126,7 @@ public class CWE606_Unchecked_Loop_Condition__Property_31 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

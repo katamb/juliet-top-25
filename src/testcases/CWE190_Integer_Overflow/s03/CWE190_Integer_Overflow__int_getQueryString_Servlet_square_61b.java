@@ -16,6 +16,7 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,10 +25,8 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b
-{
-    public int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b {
+    public int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -36,17 +35,12 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -58,8 +52,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -69,8 +62,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -79,17 +71,12 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_square_61b
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */

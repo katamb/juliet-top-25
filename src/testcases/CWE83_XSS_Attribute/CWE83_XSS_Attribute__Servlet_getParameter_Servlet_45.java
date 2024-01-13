@@ -21,17 +21,14 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends AbstractTestCaseServlet
-{
+public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends AbstractTestCaseServlet {
     private String dataBad;
     private String dataGoodG2B;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataBad;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -39,8 +36,7 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends Abstra
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -50,17 +46,14 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends Abstra
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodG2B;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -68,8 +61,7 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends Abstra
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -85,8 +77,7 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_45 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

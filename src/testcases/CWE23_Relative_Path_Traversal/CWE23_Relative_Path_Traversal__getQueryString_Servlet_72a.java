@@ -17,6 +17,7 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE23_Relative_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import java.io.*;
@@ -24,10 +25,8 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -35,11 +34,9 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends A
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -50,17 +47,15 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends A
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE23_Relative_Path_Traversal__getQueryString_Servlet_72b()).badSink(dataVector , request, response );
+        (new CWE23_Relative_Path_Traversal__getQueryString_Servlet_72b()).badSink(dataVector, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -70,7 +65,7 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends A
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE23_Relative_Path_Traversal__getQueryString_Servlet_72b()).goodG2BSink(dataVector , request, response );
+        (new CWE23_Relative_Path_Traversal__getQueryString_Servlet_72b()).goodG2BSink(dataVector, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +74,7 @@ public class CWE23_Relative_Path_Traversal__getQueryString_Servlet_72a extends A
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -4,14 +4,14 @@ Label Definition File: CWE23_Relative_Path_Traversal.label.xml
 Template File: sources-sink-17.tmpl.java
 */
 /*
-* @description
-* CWE: 23 Relative Path Traversal
-* BadSource: File Read data from file (named c:\data.txt)
-* GoodSource: A hardcoded string
-* BadSink: readFile no validation
-* Flow Variant: 17 Control flow: for loops
-*
-* */
+ * @description
+ * CWE: 23 Relative Path Traversal
+ * BadSource: File Read data from file (named c:\data.txt)
+ * GoodSource: A hardcoded string
+ * BadSink: readFile no validation
+ * Flow Variant: 17 Control flow: for loops
+ *
+ * */
 
 package testcases.CWE23_Relative_Path_Traversal;
 
@@ -29,11 +29,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 
-public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
-{
+public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -43,8 +41,7 @@ public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
             InputStreamReader readerInputStream = null;
             BufferedReader readerBuffered = null;
 
-            try
-            {
+            try {
                 /* read string from file into data */
                 streamFileInput = new FileInputStream(file);
                 readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -54,121 +51,82 @@ public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
                 /* This will be reading the first "line" of the file, which
                  * could be very long if there are little or no newlines in the file */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             String root;
-            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-            {
+            if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 /* running on Windows */
                 root = "C:\\uploads\\";
-            }
-            else
-            {
+            } else {
                 /* running on non-Windows */
                 root = "/home/user/uploads/";
             }
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: no validation of concatenated value */
                 File file = new File(root + data);
                 FileInputStream streamFileInputSink = null;
                 InputStreamReader readerInputStreamSink = null;
                 BufferedReader readerBufferdSink = null;
-                if (file.exists() && file.isFile())
-                {
-                    try
-                    {
+                if (file.exists() && file.isFile()) {
+                    try {
                         streamFileInputSink = new FileInputStream(file);
                         readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                         readerBufferdSink = new BufferedReader(readerInputStreamSink);
                         IO.writeLine(readerBufferdSink.readLine());
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                    }
-                    finally
-                    {
+                    } finally {
                         /* Close stream reading objects */
-                        try
-                        {
-                            if (readerBufferdSink != null)
-                            {
+                        try {
+                            if (readerBufferdSink != null) {
                                 readerBufferdSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (readerInputStreamSink != null)
-                            {
+                        try {
+                            if (readerInputStreamSink != null) {
                                 readerInputStreamSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (streamFileInputSink != null)
-                            {
+                        try {
+                            if (streamFileInputSink != null) {
                                 streamFileInputSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                         }
                     }
@@ -179,82 +137,58 @@ public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
 
     /* goodG2B() - use goodsource and badsink by reversing the block outside the
      * for statement with the one in the for statement */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             String root;
-            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-            {
+            if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 /* running on Windows */
                 root = "C:\\uploads\\";
-            }
-            else
-            {
+            } else {
                 /* running on non-Windows */
                 root = "/home/user/uploads/";
             }
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: no validation of concatenated value */
                 File file = new File(root + data);
                 FileInputStream streamFileInputSink = null;
                 InputStreamReader readerInputStreamSink = null;
                 BufferedReader readerBufferdSink = null;
-                if (file.exists() && file.isFile())
-                {
-                    try
-                    {
+                if (file.exists() && file.isFile()) {
+                    try {
                         streamFileInputSink = new FileInputStream(file);
                         readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                         readerBufferdSink = new BufferedReader(readerInputStreamSink);
                         IO.writeLine(readerBufferdSink.readLine());
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                    }
-                    finally
-                    {
+                    } finally {
                         /* Close stream reading objects */
-                        try
-                        {
-                            if (readerBufferdSink != null)
-                            {
+                        try {
+                            if (readerBufferdSink != null) {
                                 readerBufferdSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (readerInputStreamSink != null)
-                            {
+                        try {
+                            if (readerInputStreamSink != null) {
                                 readerInputStreamSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (streamFileInputSink != null)
-                            {
+                        try {
+                            if (streamFileInputSink != null) {
                                 streamFileInputSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                         }
                     }
@@ -263,8 +197,7 @@ public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -274,8 +207,7 @@ public class CWE23_Relative_Path_Traversal__File_17 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

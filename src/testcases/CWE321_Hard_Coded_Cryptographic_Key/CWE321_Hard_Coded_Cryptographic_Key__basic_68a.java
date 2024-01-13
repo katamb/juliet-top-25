@@ -23,12 +23,10 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_68a extends AbstractTestCase
-{
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* FLAW: Set data to a hardcoded value */
         data = "23 ~j;asn!@#/>as";
@@ -36,28 +34,23 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_68a extends AbstractTest
         (new CWE321_Hard_Coded_Cryptographic_Key__basic_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         data = ""; /* Initialize data */
 
         /* read user input from console with readLine */
-        try
-        {
+        try {
             InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
             BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
             /* FIX: Read data from the console using readLine() */
             data = readerBuffered.readLine();
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
         /* NOTE: Tools may report a flaw here because readerBuffered and readerInputStream are not closed.  Unfortunately, closing those will close System.in, which will cause any future attempts to read from the console to fail and throw an exception */
@@ -71,8 +64,7 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_68a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

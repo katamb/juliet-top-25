@@ -4,16 +4,16 @@ Label Definition File: CWE606_Unchecked_Loop_Condition.label.xml
 Template File: sources-sinks-12.tmpl.java
 */
 /*
-* @description
-* CWE: 606 Unchecked Input for Loop Condition
-* BadSource: getParameter_Servlet Read data from a querystring using getParameter()
-* GoodSource: hardcoded int in string form
-* Sinks:
-*    GoodSink: validate loop variable
-*    BadSink : loop variable not validated
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 606 Unchecked Input for Loop Condition
+ * BadSource: getParameter_Servlet Read data from a querystring using getParameter()
+ * GoodSource: hardcoded int in string form
+ * Sinks:
+ *    GoodSink: validate loop variable
+ *    BadSink : loop variable not validated
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE606_Unchecked_Loop_Condition;
 
@@ -22,61 +22,44 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: Read data from a querystring using getParameter */
             data = request.getParameter("name");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded int as a string */
             data = "5";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -86,56 +69,41 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends Ab
 
     /* goodG2B() - use goodsource and badsink by changing the first "if" so that
      * both branches use the GoodSource */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded int as a string */
             data = "5";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded int as a string */
             data = "5";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
@@ -145,62 +113,45 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends Ab
 
     /* goodB2G() - use badsource and goodsink by changing the second "if" so that
      * both branches use the GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: Read data from a querystring using getParameter */
             data = request.getParameter("name");
-        }
-        else
-        {
+        } else {
 
             /* POTENTIAL FLAW: Read data from a querystring using getParameter */
             data = request.getParameter("name");
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
-        }
-        else
-        {
+        } else {
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
@@ -208,8 +159,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends Ab
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
@@ -220,8 +170,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_12 extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

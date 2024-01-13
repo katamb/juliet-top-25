@@ -4,18 +4,19 @@ Label Definition File: CWE89_SQL_Injection.label.xml
 Template File: sources-sinks-11.tmpl.java
 */
 /*
-* @description
-* CWE: 89 SQL Injection
-* BadSource: Property Read data from a system property
-* GoodSource: A hardcoded string
-* Sinks: execute
-*    GoodSink: Use prepared statement and execute (properly)
-*    BadSink : data concatenated into SQL statement used in execute(), which could result in SQL Injection
-* Flow Variant: 11 Control flow: if(IO.staticReturnsTrue()) and if(IO.staticReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 89 SQL Injection
+ * BadSource: Property Read data from a system property
+ * GoodSource: A hardcoded string
+ * Sinks: execute
+ *    GoodSink: Use prepared statement and execute (properly)
+ *    BadSink : data concatenated into SQL statement used in execute(), which could result in SQL Injection
+ * Flow Variant: 11 Control flow: if(IO.staticReturnsTrue()) and if(IO.staticReturnsFalse())
+ *
+ * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,70 +25,48 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             /* get system property user.home */
             /* POTENTIAL FLAW: Read data from a system property */
             data = System.getProperty("user.home");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if(IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -95,69 +74,48 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.staticReturnsTrue() to IO.staticReturnsFalse() */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data;
-        if (IO.staticReturnsFalse())
-        {
+        if (IO.staticReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -165,68 +123,47 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data;
 
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -234,35 +171,27 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.staticReturnsTrue() to IO.staticReturnsFalse() */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         String data;
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             /* get system property user.home */
             /* POTENTIAL FLAW: Read data from a system property */
             data = System.getProperty("user.home");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.staticReturnsFalse())
-        {
+        if (IO.staticReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
 
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -270,42 +199,27 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
 
                 Boolean result = sqlStatement.execute();
 
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -314,77 +228,55 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         String data;
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             /* get system property user.home */
             /* POTENTIAL FLAW: Read data from a system property */
             data = System.getProperty("user.home");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (IO.staticReturnsTrue())
-        {
+        if (IO.staticReturnsTrue()) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
                 sqlStatement.setString(1, data);
                 Boolean result = sqlStatement.execute();
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -397,8 +289,7 @@ public class CWE89_SQL_Injection__Property_execute_11 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

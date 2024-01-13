@@ -23,14 +23,11 @@ import java.io.*;
 
 import java.net.PasswordAuthentication;
 
-public class CWE259_Hard_Coded_Password__passwordAuth_66b
-{
-    public void badSink(String dataArray[] ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__passwordAuth_66b {
+    public void badSink(String dataArray[]) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());
@@ -39,12 +36,10 @@ public class CWE259_Hard_Coded_Password__passwordAuth_66b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String dataArray[] ) throws Throwable
-    {
+    public void goodG2BSink(String dataArray[]) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());

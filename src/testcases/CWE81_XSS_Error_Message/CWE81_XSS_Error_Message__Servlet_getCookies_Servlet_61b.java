@@ -21,10 +21,8 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -32,8 +30,7 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_61b
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
@@ -43,8 +40,7 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

@@ -15,19 +15,18 @@ Template File: sources-sink-72b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__CWE182_Servlet_getQueryString_Servlet_72b
-{
-    public void badSink(Vector<String> dataVector , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_getQueryString_Servlet_72b {
+    public void badSink(Vector<String> dataVector, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -35,12 +34,10 @@ public class CWE80_XSS__CWE182_Servlet_getQueryString_Servlet_72b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Vector<String> dataVector , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(Vector<String> dataVector, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }

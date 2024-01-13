@@ -16,7 +16,9 @@ Template File: sources-sinks-74a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
@@ -24,10 +26,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -36,47 +36,41 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).badSink(dataHashMap , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).badSink(dataHashMap, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).goodG2BSink(dataHashMap , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).goodG2BSink(dataHashMap, request, response);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -85,21 +79,18 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).goodB2GSink(dataHashMap , request, response );
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_74b()).goodB2GSink(dataHashMap, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -108,8 +99,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

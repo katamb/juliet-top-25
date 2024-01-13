@@ -16,6 +16,7 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,10 +24,8 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_42 extends AbstractTestCaseServlet
-{
-    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_size_42 extends AbstractTestCaseServlet {
+    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
@@ -34,16 +33,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 String stringNumber = cookieSources[0].getValue();
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                 }
             }
@@ -52,19 +47,15 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         return data;
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = badSource(request, response);
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -75,8 +66,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -85,19 +75,15 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         return data;
     }
 
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = goodG2BSource(request, response);
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -108,8 +94,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case there are no cookies */
@@ -117,16 +102,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 String stringNumber = cookieSources[0].getValue();
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from cookie", exceptNumberFormat);
                 }
             }
@@ -135,20 +116,16 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
         return data;
     }
 
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = goodB2GSource(request, response);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
         int array[] = null;
 
         /* FIX: Verify that data is non-negative AND greater than 0 */
-        if (data > 0)
-        {
+        if (data > 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -158,8 +135,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
@@ -170,8 +146,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

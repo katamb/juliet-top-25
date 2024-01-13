@@ -17,6 +17,7 @@ Template File: sources-sink-73a.tmpl.java
 package testcases.CWE36_Absolute_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import java.io.*;
@@ -29,10 +30,8 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -43,8 +42,7 @@ public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCas
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -54,47 +52,31 @@ public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCas
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -104,17 +86,15 @@ public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE36_Absolute_Path_Traversal__database_73b()).badSink(dataLinkedList  );
+        (new CWE36_Absolute_Path_Traversal__database_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -124,7 +104,7 @@ public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCas
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE36_Absolute_Path_Traversal__database_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE36_Absolute_Path_Traversal__database_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -133,8 +113,7 @@ public class CWE36_Absolute_Path_Traversal__database_73a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

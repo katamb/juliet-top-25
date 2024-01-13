@@ -14,6 +14,7 @@ Template File: sources-sink-42.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.net.ServerSocket;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseServlet
-{
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseServlet {
+    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +41,7 @@ public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseSer
             InputStreamReader readerInputStream = null;
 
             /* Read data using a listening tcp connection */
-            try
-            {
+            try {
                 listener = new ServerSocket(39543);
                 socket = listener.accept();
 
@@ -54,60 +52,40 @@ public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseSer
 
                 /* POTENTIAL FLAW: Read data using a listening tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* Close socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
 
-                try
-                {
-                    if (listener != null)
-                    {
+                try {
+                    if (listener != null) {
                         listener.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing ServerSocket", exceptIO);
                 }
             }
@@ -117,20 +95,17 @@ public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseSer
     }
 
     /* use badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = badSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
 
     }
 
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -140,20 +115,17 @@ public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseSer
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = goodG2BSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -163,8 +135,7 @@ public class CWE80_XSS__CWE182_Servlet_listen_tcp_42 extends AbstractTestCaseSer
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

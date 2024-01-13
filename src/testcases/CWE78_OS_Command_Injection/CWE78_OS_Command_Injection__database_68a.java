@@ -26,12 +26,10 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         data = ""; /* Initialize data */
 
@@ -41,8 +39,7 @@ public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -52,47 +49,31 @@ public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -101,14 +82,12 @@ public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase
         (new CWE78_OS_Command_Injection__database_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -122,8 +101,7 @@ public class CWE78_OS_Command_Injection__database_68a extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

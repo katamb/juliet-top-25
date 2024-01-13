@@ -16,51 +16,42 @@ Template File: sources-sinks-51b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_multiply_51b
-{
-    public void badSink(long data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_max_multiply_51b {
+    public void badSink(long data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Long.MAX_VALUE, this will overflow */
-            long result = (long)(data * 2);
+            long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(long data ) throws Throwable
-    {
+    public void goodG2BSink(long data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Long.MAX_VALUE, this will overflow */
-            long result = (long)(data * 2);
+            long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(long data ) throws Throwable
-    {
+    public void goodB2GSink(long data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Long.MAX_VALUE/2))
-            {
-                long result = (long)(data * 2);
+            if (data < (Long.MAX_VALUE / 2)) {
+                long result = (long) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }

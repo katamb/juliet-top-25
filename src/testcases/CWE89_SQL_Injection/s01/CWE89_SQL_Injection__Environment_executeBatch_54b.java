@@ -16,26 +16,23 @@ Template File: sources-sinks-54b.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Environment_executeBatch_54b
-{
-    public void badSink(String data ) throws Throwable
-    {
-        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).badSink(data );
+public class CWE89_SQL_Injection__Environment_executeBatch_54b {
+    public void badSink(String data) throws Throwable {
+        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data ) throws Throwable
-    {
-        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).goodG2BSink(data );
+    public void goodG2BSink(String data) throws Throwable {
+        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(String data ) throws Throwable
-    {
-        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).goodB2GSink(data );
+    public void goodB2GSink(String data) throws Throwable {
+        (new CWE89_SQL_Injection__Environment_executeBatch_54c()).goodB2GSink(data);
     }
 }

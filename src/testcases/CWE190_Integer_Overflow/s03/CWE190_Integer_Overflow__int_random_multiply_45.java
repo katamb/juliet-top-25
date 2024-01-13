@@ -16,33 +16,30 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.security.SecureRandom;
 
-public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTestCase {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         int data = dataBad;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * 2);
+            int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a random value */
@@ -52,28 +49,24 @@ public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTes
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         int data = dataGoodG2B;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * 2);
+            int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -83,20 +76,15 @@ public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTes
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         int data = dataGoodB2G;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Integer.MAX_VALUE/2))
-            {
-                int result = (int)(data * 2);
+            if (data < (Integer.MAX_VALUE / 2)) {
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }
@@ -104,8 +92,7 @@ public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTes
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a random value */
@@ -121,8 +108,7 @@ public class CWE190_Integer_Overflow__int_random_multiply_45 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

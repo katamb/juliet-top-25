@@ -27,10 +27,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_PropertiesFile_71a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_PropertiesFile_71a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -40,52 +38,41 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_71a extends AbstractTes
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
-        (new CWE83_XSS_Attribute__Servlet_PropertiesFile_71b()).badSink((Object)data , request, response );
+        (new CWE83_XSS_Attribute__Servlet_PropertiesFile_71b()).badSink((Object) data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        (new CWE83_XSS_Attribute__Servlet_PropertiesFile_71b()).goodG2BSink((Object)data , request, response );
+        (new CWE83_XSS_Attribute__Servlet_PropertiesFile_71b()).goodG2BSink((Object) data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -94,8 +81,7 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_71a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args)
-    throws ClassNotFoundException, InstantiationException, IllegalAccessException
-    {
+            throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

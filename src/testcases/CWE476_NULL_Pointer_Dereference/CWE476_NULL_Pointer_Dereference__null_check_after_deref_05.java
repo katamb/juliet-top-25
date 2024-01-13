@@ -4,21 +4,20 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-05.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: null_check_after_deref
-*    GoodSink: Do not check for null after the object has been dereferenced
-*    BadSink : Check for null after the object has already been dereferenced
-* Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: null_check_after_deref
+ *    GoodSink: Do not check for null after the object has been dereferenced
+ *    BadSink : Check for null after the object has already been dereferenced
+ * Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends AbstractTestCase {
     /* The two variables below are not defined as "final", but are never
      * assigned any other value, so a tool should be able to identify that
      * reads of these will always return their initialized values.
@@ -26,17 +25,14 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends 
     private boolean privateTrue = true;
     private boolean privateFalse = false;
 
-    public void bad() throws Throwable
-    {
-        if (privateTrue)
-        {
+    public void bad() throws Throwable {
+        if (privateTrue) {
             {
                 String myString = null;
                 myString = "Hello";
                 IO.writeLine(myString.length());
                 /* FLAW: Check for null after dereferencing the object. This null check is unnecessary. */
-                if (myString != null)
-                {
+                if (myString != null) {
                     myString = "my, how I've changed";
                 }
                 IO.writeLine(myString.length());
@@ -45,15 +41,11 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends 
     }
 
     /* good1() changes privateTrue to privateFalse */
-    private void good1() throws Throwable
-    {
-        if (privateFalse)
-        {
+    private void good1() throws Throwable {
+        if (privateFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             {
                 String myString = null;
@@ -71,10 +63,8 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends 
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2() throws Throwable
-    {
-        if (privateTrue)
-        {
+    private void good2() throws Throwable {
+        if (privateTrue) {
             {
                 String myString = null;
                 myString = "Hello";
@@ -86,8 +76,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
         good2();
     }
@@ -98,8 +87,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_05 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

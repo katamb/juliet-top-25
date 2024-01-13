@@ -19,14 +19,11 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE83_XSS_Attribute__Servlet_connect_tcp_68b
-{
-    public void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_connect_tcp_68b {
+    public void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = CWE83_XSS_Attribute__Servlet_connect_tcp_68a.data;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -34,12 +31,10 @@ public class CWE83_XSS_Attribute__Servlet_connect_tcp_68b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = CWE83_XSS_Attribute__Servlet_connect_tcp_68a.data;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }

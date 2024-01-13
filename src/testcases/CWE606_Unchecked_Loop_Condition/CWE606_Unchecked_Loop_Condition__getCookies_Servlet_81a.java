@@ -22,10 +22,8 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -33,38 +31,34 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81a extends Abs
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
         }
 
         CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_base baseObject = new CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_bad();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
 
         CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_base baseObject = new CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_goodG2B();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -72,15 +66,14 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81a extends Abs
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
         }
 
         CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_base baseObject = new CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81_goodB2G();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -89,8 +82,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_81a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

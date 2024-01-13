@@ -19,32 +19,28 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FLAW: Get the user ID from a URL parameter */
         data = request.getParameter("id");
 
-        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51b()).badSink(data , request, response );
+        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51b()).badSink(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded user ID */
         data = "10";
 
-        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51b()).goodG2BSink(data , request, response );
+        (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51b()).goodG2BSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -53,8 +49,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_51a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

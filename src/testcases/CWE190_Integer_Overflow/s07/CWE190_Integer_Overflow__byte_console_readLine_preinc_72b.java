@@ -16,49 +16,44 @@ Template File: sources-sinks-72b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_console_readLine_preinc_72b
-{
-    public void badSink(Vector<Byte> dataVector ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_console_readLine_preinc_72b {
+    public void badSink(Vector<Byte> dataVector) throws Throwable {
         byte data = dataVector.remove(2);
 
         /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
-        byte result = (byte)(++data);
+        byte result = (byte) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(Vector<Byte> dataVector ) throws Throwable
-    {
+    public void goodG2BSink(Vector<Byte> dataVector) throws Throwable {
         byte data = dataVector.remove(2);
 
         /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
-        byte result = (byte)(++data);
+        byte result = (byte) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(Vector<Byte> dataVector ) throws Throwable
-    {
+    public void goodB2GSink(Vector<Byte> dataVector) throws Throwable {
         byte data = dataVector.remove(2);
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Byte.MAX_VALUE)
-        {
-            byte result = (byte)(++data);
+        if (data < Byte.MAX_VALUE) {
+            byte result = (byte) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

@@ -16,48 +16,42 @@ Template File: sources-sinks-67b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_listen_tcp_add_67b
-{
-    public void badSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_listen_tcp_add_67b {
+    public void badSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer) throws Throwable {
         int data = dataContainer.containerOne;
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer ) throws Throwable
-    {
+    public void goodG2BSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer) throws Throwable {
         int data = dataContainer.containerOne;
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer ) throws Throwable
-    {
+    public void goodB2GSink(CWE190_Integer_Overflow__int_listen_tcp_add_67a.Container dataContainer) throws Throwable {
         int data = dataContainer.containerOne;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(data + 1);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 

@@ -4,16 +4,17 @@ Label Definition File: CWE80_XSS__CWE182_Servlet.label.xml
 Template File: sources-sink-09.tmpl.java
 */
 /*
-* @description
-* CWE: 80 Cross Site Scripting (XSS)
-* BadSource: connect_tcp Read data using an outbound tcp connection
-* GoodSource: A hardcoded string
-* BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
-* Flow Variant: 09 Control flow: if(IO.STATIC_FINAL_TRUE) and if(IO.STATIC_FINAL_FALSE)
-*
-* */
+ * @description
+ * CWE: 80 Cross Site Scripting (XSS)
+ * BadSource: connect_tcp Read data using an outbound tcp connection
+ * GoodSource: A hardcoded string
+ * BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
+ * Flow Variant: 09 Control flow: if(IO.STATIC_FINAL_TRUE) and if(IO.STATIC_FINAL_FALSE)
+ *
+ * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -25,22 +26,18 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             data = ""; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -48,62 +45,43 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseSe
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -111,25 +89,20 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseSe
     }
 
     /* goodG2B1() - use goodsource and badsink by changing IO.STATIC_FINAL_TRUE to IO.STATIC_FINAL_FALSE */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FALSE)
-        {
+        if (IO.STATIC_FINAL_FALSE) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -137,31 +110,25 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseSe
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -172,8 +139,7 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_09 extends AbstractTestCaseSe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

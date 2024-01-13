@@ -4,55 +4,48 @@ Label Definition File: CWE80_XSS__Servlet.label.xml
 Template File: sources-sink-08.tmpl.java
 */
 /*
-* @description
-* CWE: 80 Cross Site Scripting (XSS)
-* BadSource: getParameter_Servlet Read data from a querystring using getParameter()
-* GoodSource: A hardcoded string
-* BadSink:  Display of data in web page without any encoding or validation
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 80 Cross Site Scripting (XSS)
+ * BadSource: getParameter_Servlet Read data from a querystring using getParameter()
+ * GoodSource: A hardcoded string
+ * BadSink:  Display of data in web page without any encoding or validation
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__Servlet_getParameter_Servlet_08 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__Servlet_getParameter_Servlet_08 extends AbstractTestCaseServlet {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             /* POTENTIAL FLAW: Read data from a querystring using getParameter */
             data = request.getParameter("name");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
@@ -60,25 +53,20 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_08 extends AbstractTestCase
     }
 
     /* goodG2B1() - use goodsource and badsink by changing privateReturnsTrue() to privateReturnsFalse() */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsFalse())
-        {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
@@ -86,31 +74,25 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_08 extends AbstractTestCase
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateReturnsTrue())
-        {
+        if (privateReturnsTrue()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -121,8 +103,7 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_08 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

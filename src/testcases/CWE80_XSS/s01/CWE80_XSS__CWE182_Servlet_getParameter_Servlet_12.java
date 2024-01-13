@@ -4,42 +4,37 @@ Label Definition File: CWE80_XSS__CWE182_Servlet.label.xml
 Template File: sources-sink-12.tmpl.java
 */
 /*
-* @description
-* CWE: 80 Cross Site Scripting (XSS)
-* BadSource: getParameter_Servlet Read data from a querystring using getParameter()
-* GoodSource: A hardcoded string
-* BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 80 Cross Site Scripting (XSS)
+ * BadSource: getParameter_Servlet Read data from a querystring using getParameter()
+ * GoodSource: A hardcoded string
+ * BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__CWE182_Servlet_getParameter_Servlet_12 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__CWE182_Servlet_getParameter_Servlet_12 extends AbstractTestCaseServlet {
     /* uses badsource and badsink - see how tools report flaws that don't always occur */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: Read data from a querystring using getParameter */
             data = request.getParameter("name");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -48,32 +43,26 @@ public class CWE80_XSS__CWE182_Servlet_getParameter_Servlet_12 extends AbstractT
 
     /* goodG2B() - use goodsource and badsink by changing the "if" so that
      * both branches use the GoodSource */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -83,8 +72,7 @@ public class CWE80_XSS__CWE182_Servlet_getParameter_Servlet_12 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

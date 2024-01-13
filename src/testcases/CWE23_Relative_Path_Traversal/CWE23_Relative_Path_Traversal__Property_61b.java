@@ -21,10 +21,8 @@ import testcasesupport.*;
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE23_Relative_Path_Traversal__Property_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__Property_61b {
+    public String badSource() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -35,8 +33,7 @@ public class CWE23_Relative_Path_Traversal__Property_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

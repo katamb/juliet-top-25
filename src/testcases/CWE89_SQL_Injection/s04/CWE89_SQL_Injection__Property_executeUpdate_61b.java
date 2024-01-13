@@ -16,14 +16,13 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Property_executeUpdate_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE89_SQL_Injection__Property_executeUpdate_61b {
+    public String badSource() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -34,8 +33,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -45,8 +43,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public String goodB2GSource() throws Throwable
-    {
+    public String goodB2GSource() throws Throwable {
         String data;
 
         /* get system property user.home */

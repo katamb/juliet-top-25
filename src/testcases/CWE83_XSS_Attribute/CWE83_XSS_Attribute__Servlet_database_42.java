@@ -26,10 +26,8 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseServlet
-{
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseServlet {
+    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -40,8 +38,7 @@ public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseSe
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -51,47 +48,31 @@ public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseSe
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -101,20 +82,17 @@ public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseSe
     }
 
     /* use badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = badSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -124,20 +102,17 @@ public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseSe
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = goodG2BSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -147,8 +122,7 @@ public class CWE83_XSS_Attribute__Servlet_database_42 extends AbstractTestCaseSe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

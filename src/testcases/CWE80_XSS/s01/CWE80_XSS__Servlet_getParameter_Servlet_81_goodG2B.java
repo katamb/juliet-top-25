@@ -15,17 +15,15 @@ Template File: sources-sink-81_goodG2B.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__Servlet_getParameter_Servlet_81_goodG2B extends CWE80_XSS__Servlet_getParameter_Servlet_81_base
-{
-    public void action(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__Servlet_getParameter_Servlet_81_goodG2B extends CWE80_XSS__Servlet_getParameter_Servlet_81_base {
+    public void action(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }

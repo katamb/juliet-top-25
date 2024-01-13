@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,25 +25,20 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_45 extends AbstractTestCaseServlet
-{
+public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_45 extends AbstractTestCaseServlet {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataBad;
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -52,8 +48,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -62,17 +57,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -84,25 +74,20 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGoodG2B;
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -113,8 +98,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -124,20 +108,16 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         goodG2BSink(request, response);
     }
 
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGoodB2G;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
         int array[] = null;
 
         /* FIX: Verify that data is non-negative AND greater than 0 */
-        if (data > 0)
-        {
+        if (data > 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -148,8 +128,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -158,17 +137,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -186,8 +160,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

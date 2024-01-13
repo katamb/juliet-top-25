@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,25 +24,22 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends AbstractTestCaseServlet
-{
+public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends AbstractTestCaseServlet {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataBad;
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -50,12 +48,9 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -64,26 +59,23 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGoodG2B;
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -93,27 +85,22 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends
         goodG2BSink(request, response);
     }
 
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGoodB2G;
 
         /* FIX: Add a check to prevent an overflow from occurring */
         /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-        {
-            int result = (int)(data * data);
+        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform squaring.");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -122,12 +109,9 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -142,8 +126,7 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_square_45 extends
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

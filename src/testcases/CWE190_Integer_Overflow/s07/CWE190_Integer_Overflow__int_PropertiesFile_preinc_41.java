@@ -16,6 +16,7 @@ Template File: sources-sinks-41.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,20 +28,17 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends AbstractTestCase
-{
-    private void badSink(int data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends AbstractTestCase {
+    private void badSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(++data);
+        int result = (int) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -50,8 +48,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends Abstr
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -59,86 +56,67 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends Abstr
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink(int data ) throws Throwable
-    {
+    private void goodG2BSink(int data) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(++data);
+        int result = (int) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
-    private void goodB2GSink(int data ) throws Throwable
-    {
+    private void goodB2GSink(int data) throws Throwable {
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(++data);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -148,8 +126,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends Abstr
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -157,38 +134,27 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends Abstr
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
         }
 
-        goodB2GSink(data  );
+        goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -197,8 +163,7 @@ public class CWE190_Integer_Overflow__int_PropertiesFile_preinc_41 extends Abstr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,14 +16,13 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         short dataCopy;
         {
             short data;
@@ -37,22 +36,20 @@ public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
             short data = dataCopy;
 
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-            short result = (short)(data + 1);
+            short result = (short) (data + 1);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short dataCopy;
         {
             short data;
@@ -66,7 +63,7 @@ public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
             short data = dataCopy;
 
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-            short result = (short)(data + 1);
+            short result = (short) (data + 1);
 
             IO.writeLine("result: " + result);
 
@@ -74,8 +71,7 @@ public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short dataCopy;
         {
             short data;
@@ -89,13 +85,10 @@ public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
             short data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Short.MAX_VALUE)
-            {
-                short result = (short)(data + 1);
+            if (data < Short.MAX_VALUE) {
+                short result = (short) (data + 1);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform addition.");
             }
 
@@ -108,8 +101,7 @@ public class CWE190_Integer_Overflow__short_max_add_31 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

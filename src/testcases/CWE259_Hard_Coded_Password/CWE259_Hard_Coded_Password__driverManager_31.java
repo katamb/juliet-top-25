@@ -23,11 +23,9 @@ import java.io.*;
 
 import java.sql.*;
 
-public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCase
-{
+public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -44,54 +42,36 @@ public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCa
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            if (data != null)
-            {
-                try
-                {
+            if (data != null) {
+                try {
                     /* POTENTIAL FLAW: data used as password in database connection */
                     connection = DriverManager.getConnection("data-url", "root", data);
                     preparedStatement = connection.prepareStatement("select * from test_table");
                     resultSet = preparedStatement.executeQuery();
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                } finally {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -100,14 +80,12 @@ public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCa
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -115,16 +93,13 @@ public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCa
             data = ""; /* init data */
 
             /* FIX: Read data from the console using readLine() */
-            try
-            {
+            try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
                 /* POTENTIAL FLAW: Read data from the console using readLine */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
             }
 
@@ -139,54 +114,36 @@ public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCa
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            if (data != null)
-            {
-                try
-                {
+            if (data != null) {
+                try {
                     /* POTENTIAL FLAW: data used as password in database connection */
                     connection = DriverManager.getConnection("data-url", "root", data);
                     preparedStatement = connection.prepareStatement("select * from test_table");
                     resultSet = preparedStatement.executeQuery();
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with database connection", exceptSql);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                } finally {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
@@ -201,8 +158,7 @@ public class CWE259_Hard_Coded_Password__driverManager_31 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -4,45 +4,38 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-12.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: binary_if
-*    GoodSink: Do not check for null after the object has been dereferenced
-*    BadSink : Check for null after an object has already been dereferenced
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: binary_if
+ *    GoodSink: Do not check for null after the object has been dereferenced
+ *    BadSink : Check for null after an object has already been dereferenced
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__binary_if_12 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        if (IO.staticReturnsTrueOrFalse())
-        {
+public class CWE476_NULL_Pointer_Dereference__binary_if_12 extends AbstractTestCase {
+    public void bad() throws Throwable {
+        if (IO.staticReturnsTrueOrFalse()) {
             {
                 String myString = null;
                 /* FLAW: Using a single & in the if statement will cause both sides of the expression to be evaluated
                  * thus causing a NPD */
-                if ((myString != null) & (myString.length() > 0))
-                {
+                if ((myString != null) & (myString.length() > 0)) {
                     IO.writeLine("The string length is greater than 0");
                 }
             }
-        }
-        else
-        {
+        } else {
 
             {
                 String myString = null;
 
                 /* FIX: Use && in the if statement so that if the left side of the expression fails then
                  * the right side will not be evaluated */
-                if ((myString != null) && (myString.length() > 0))
-                {
+                if ((myString != null) && (myString.length() > 0)) {
                     IO.writeLine("The string length is greater than 0");
                 }
             }
@@ -51,30 +44,24 @@ public class CWE476_NULL_Pointer_Dereference__binary_if_12 extends AbstractTestC
     }
 
     /* good1() changes the "if" so that both branches use the GoodSink */
-    private void good1() throws Throwable
-    {
-        if (IO.staticReturnsTrueOrFalse())
-        {
+    private void good1() throws Throwable {
+        if (IO.staticReturnsTrueOrFalse()) {
             {
                 String myString = null;
                 /* FIX: Use && in the if statement so that if the left side of the expression fails then
                  * the right side will not be evaluated */
-                if ((myString != null) && (myString.length() > 0))
-                {
+                if ((myString != null) && (myString.length() > 0)) {
                     IO.writeLine("The string length is greater than 0");
                 }
             }
-        }
-        else
-        {
+        } else {
 
             {
                 String myString = null;
 
                 /* FIX: Use && in the if statement so that if the left side of the expression fails then
                  * the right side will not be evaluated */
-                if ((myString != null) && (myString.length() > 0))
-                {
+                if ((myString != null) && (myString.length() > 0)) {
                     IO.writeLine("The string length is greater than 0");
                 }
             }
@@ -82,8 +69,7 @@ public class CWE476_NULL_Pointer_Dereference__binary_if_12 extends AbstractTestC
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
     }
 
@@ -93,8 +79,7 @@ public class CWE476_NULL_Pointer_Dereference__binary_if_12 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

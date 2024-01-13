@@ -22,11 +22,9 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -36,11 +34,9 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends 
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                         data = token.substring(3); /* set data to "foo" */
                         break; /* exit while loop */
                     }
@@ -52,26 +48,23 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends 
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-                * The built-in J2EE server automatically does some HTML entity encoding.
-                * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-                */
+                 * The built-in J2EE server automatically does some HTML entity encoding.
+                 * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+                 */
                 response.sendError(404, "<br>bad() - Parameter name has value " + data);
             }
 
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -84,12 +77,11 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends 
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-                * The built-in J2EE server automatically does some HTML entity encoding.
-                * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-                */
+                 * The built-in J2EE server automatically does some HTML entity encoding.
+                 * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+                 */
                 response.sendError(404, "<br>bad() - Parameter name has value " + data);
             }
 
@@ -102,8 +94,7 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_31 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

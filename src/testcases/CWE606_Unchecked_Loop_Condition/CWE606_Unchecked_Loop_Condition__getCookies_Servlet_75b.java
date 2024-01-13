@@ -18,6 +18,7 @@ Template File: sources-sinks-75b.tmpl.java
 package testcases.CWE606_Unchecked_Loop_Condition;
 
 import testcasesupport.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
@@ -25,78 +26,8 @@ import java.util.logging.Level;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_75b
-{
-    public void badSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        /* unserialize data */
-        ByteArrayInputStream streamByteArrayInput = null;
-        ObjectInputStream streamObjectInput = null;
-
-        try
-        {
-            streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
-            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
-
-            int numberOfLoops;
-            try
-            {
-                numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
-                IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
-                numberOfLoops = 1;
-            }
-
-            for (int i=0; i < numberOfLoops; i++)
-            {
-                /* POTENTIAL FLAW: user supplied input used for loop counter test */
-                IO.writeLine("hello world");
-            }
-
-        }
-        catch (IOException exceptIO)
-        {
-            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
-            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
-            /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
-                    streamObjectInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
-            }
-
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
-                    streamByteArrayInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
-            }
-        }
-    }
-
-    /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_75b {
+    public void badSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
@@ -104,129 +35,138 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_75b
         try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
-            for (int i=0; i < numberOfLoops; i++)
-            {
+            for (int i = 0; i < numberOfLoops; i++) {
                 /* POTENTIAL FLAW: user supplied input used for loop counter test */
                 IO.writeLine("hello world");
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
-            catch (IOException exceptIO)
-            {
+        }
+    }
+
+    /* goodG2B() - use GoodSource and BadSink */
+    public void goodG2BSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        /* unserialize data */
+        ByteArrayInputStream streamByteArrayInput = null;
+        ObjectInputStream streamObjectInput = null;
+
+        try {
+            streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
+            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
+            String data = (String) streamObjectInput.readObject();
+
+            int numberOfLoops;
+            try {
+                numberOfLoops = Integer.parseInt(data);
+            } catch (NumberFormatException exceptNumberFormat) {
+                IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
+                numberOfLoops = 1;
+            }
+
+            for (int i = 0; i < numberOfLoops; i++) {
+                /* POTENTIAL FLAW: user supplied input used for loop counter test */
+                IO.writeLine("hello world");
+            }
+
+        } catch (IOException exceptIO) {
+            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
+        } catch (ClassNotFoundException exceptClassNotFound) {
+            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
+        } finally {
+            /* clean up stream reading objects */
+            try {
+                if (streamObjectInput != null) {
+                    streamObjectInput.close();
+                }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
+            }
+
+            try {
+                if (streamByteArrayInput != null) {
+                    streamByteArrayInput.close();
+                }
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
             int numberOfLoops;
-            try
-            {
+            try {
                 numberOfLoops = Integer.parseInt(data);
-            }
-            catch (NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
                 numberOfLoops = 1;
             }
 
             /* FIX: loop number thresholds validated */
-            if (numberOfLoops >= 0 && numberOfLoops <= 5)
-            {
-                for (int i=0; i < numberOfLoops; i++)
-                {
+            if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+                for (int i = 0; i < numberOfLoops; i++) {
                     IO.writeLine("hello world");
                 }
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }

@@ -26,12 +26,10 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_68a extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_68a extends AbstractTestCaseServlet {
     public static String data;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         data = ""; /* Initialize data */
 
@@ -40,30 +38,21 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_68a extends Abstrac
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -72,14 +61,12 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_68a extends Abstrac
         (new CWE81_XSS_Error_Message__Servlet_PropertiesFile_68b()).badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -93,8 +80,7 @@ public class CWE81_XSS_Error_Message__Servlet_PropertiesFile_68a extends Abstrac
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

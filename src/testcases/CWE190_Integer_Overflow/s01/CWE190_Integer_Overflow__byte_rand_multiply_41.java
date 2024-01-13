@@ -16,76 +16,64 @@ Template File: sources-sinks-41.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_rand_multiply_41 extends AbstractTestCase
-{
-    private void badSink(byte data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_rand_multiply_41 extends AbstractTestCase {
+    private void badSink(byte data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * 2);
+            byte result = (byte) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         byte data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+        data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink(byte data ) throws Throwable
-    {
+    private void goodG2BSink(byte data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * 2);
+            byte result = (byte) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
-    private void goodB2GSink(byte data ) throws Throwable
-    {
+    private void goodB2GSink(byte data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Byte.MAX_VALUE/2))
-            {
-                byte result = (byte)(data * 2);
+            if (data < (Byte.MAX_VALUE / 2)) {
+                byte result = (byte) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }
@@ -93,14 +81,13 @@ public class CWE190_Integer_Overflow__byte_rand_multiply_41 extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+        data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
-        goodB2GSink(data  );
+        goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -109,8 +96,7 @@ public class CWE190_Integer_Overflow__byte_rand_multiply_41 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

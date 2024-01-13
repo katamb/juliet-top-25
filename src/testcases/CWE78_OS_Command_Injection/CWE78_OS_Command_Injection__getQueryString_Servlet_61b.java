@@ -22,10 +22,8 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE78_OS_Command_Injection__getQueryString_Servlet_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__getQueryString_Servlet_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -33,11 +31,9 @@ public class CWE78_OS_Command_Injection__getQueryString_Servlet_61b
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -48,8 +44,7 @@ public class CWE78_OS_Command_Injection__getQueryString_Servlet_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

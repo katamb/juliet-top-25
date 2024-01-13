@@ -16,6 +16,7 @@ Template File: sources-sinks-22a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,14 +25,12 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22a extends AbstractTestCaseServlet
-{
+public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22a extends AbstractTestCaseServlet {
     /* The public static variable below is used to drive control flow in the sink function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -40,17 +39,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -59,7 +53,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         }
 
         badPublicStatic = true;
-        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).badSink(data , request, response);
+        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).badSink(data, request, response);
     }
 
     /* The public static variables below are used to drive control flow in the sink functions.
@@ -68,16 +62,14 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
     public static boolean goodB2G2PublicStatic = false;
     public static boolean goodG2BPublicStatic = false;
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodB2G1(request, response);
         goodB2G2(request, response);
         goodG2B(request, response);
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -86,17 +78,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -105,12 +92,11 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         }
 
         goodB2G1PublicStatic = false;
-        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodB2G1Sink(data , request, response);
+        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodB2G1Sink(data, request, response);
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -119,17 +105,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -138,19 +119,18 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         }
 
         goodB2G2PublicStatic = true;
-        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodB2G2Sink(data , request, response);
+        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodB2G2Sink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = 0;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         goodG2BPublicStatic = true;
-        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodG2BSink(data , request, response);
+        (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_read_no_check_22b()).goodG2BSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -159,8 +139,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

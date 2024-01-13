@@ -19,26 +19,22 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_21 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__int_array_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
-        int [] data;
+    public void bad() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(int [] data ) throws Throwable
-    {
-        if (badPrivate)
-        {
+    private void badSink(int[] data) throws Throwable {
+        if (badPrivate) {
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length);
         }
@@ -49,42 +45,33 @@ public class CWE476_NULL_Pointer_Dereference__int_array_21 extends AbstractTestC
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
-        int [] data;
+    private void goodB2G1() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(int [] data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(int[] data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
 
@@ -92,49 +79,40 @@ public class CWE476_NULL_Pointer_Dereference__int_array_21 extends AbstractTestC
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
-        int [] data;
+    private void goodB2G2() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(int [] data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
+    private void goodB2G2Sink(int[] data) throws Throwable {
+        if (goodB2G2Private) {
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
         }
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data;
+    private void goodG2B() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(int [] data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
+    private void goodG2BSink(int[] data) throws Throwable {
+        if (goodG2BPrivate) {
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length);
         }
@@ -146,8 +124,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_21 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

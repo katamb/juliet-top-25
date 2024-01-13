@@ -20,34 +20,29 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_66b
-{
-    public void badSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_66b {
+    public void badSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 

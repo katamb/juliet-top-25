@@ -16,38 +16,34 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_multiply_42 extends AbstractTestCase
-{
-    private short badSource() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_multiply_42 extends AbstractTestCase {
+    private short badSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+        data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         short data = badSource();
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private short goodG2BSource() throws Throwable
-    {
+    private short goodG2BSource() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -56,52 +52,43 @@ public class CWE190_Integer_Overflow__short_rand_multiply_42 extends AbstractTes
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data = goodG2BSource();
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private short goodB2GSource() throws Throwable
-    {
+    private short goodB2GSource() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+        data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data = goodB2GSource();
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Short.MAX_VALUE/2))
-            {
-                short result = (short)(data * 2);
+            if (data < (Short.MAX_VALUE / 2)) {
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -112,8 +99,7 @@ public class CWE190_Integer_Overflow__short_rand_multiply_42 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -15,18 +15,16 @@ Template File: sources-sink-66b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__Servlet_PropertiesFile_66b
-{
-    public void badSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__Servlet_PropertiesFile_66b {
+    public void badSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
@@ -34,12 +32,10 @@ public class CWE80_XSS__Servlet_PropertiesFile_66b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }

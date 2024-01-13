@@ -20,39 +20,33 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_61a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_61a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = (new CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_61b()).badSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = (new CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_61b()).goodG2BSource(request, response);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
@@ -64,8 +58,7 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_61a extends
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

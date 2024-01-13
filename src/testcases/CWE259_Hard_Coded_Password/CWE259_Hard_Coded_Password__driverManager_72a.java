@@ -17,15 +17,14 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE259_Hard_Coded_Password;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import java.util.logging.Level;
 import java.io.*;
 
-public class CWE259_Hard_Coded_Password__driverManager_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__driverManager_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* FLAW: Set data to a hardcoded string */
@@ -35,32 +34,27 @@ public class CWE259_Hard_Coded_Password__driverManager_72a extends AbstractTestC
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE259_Hard_Coded_Password__driverManager_72b()).badSink(dataVector  );
+        (new CWE259_Hard_Coded_Password__driverManager_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         data = ""; /* init data */
 
         /* FIX: Read data from the console using readLine() */
-        try
-        {
+        try {
             InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
             BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
             /* POTENTIAL FLAW: Read data from the console using readLine */
             data = readerBuffered.readLine();
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
 
@@ -70,7 +64,7 @@ public class CWE259_Hard_Coded_Password__driverManager_72a extends AbstractTestC
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE259_Hard_Coded_Password__driverManager_72b()).goodG2BSink(dataVector  );
+        (new CWE259_Hard_Coded_Password__driverManager_72b()).goodG2BSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +73,7 @@ public class CWE259_Hard_Coded_Password__driverManager_72a extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

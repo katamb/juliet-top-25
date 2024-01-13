@@ -35,46 +35,34 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTestCase
-{
+public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTestCase {
     private String passwordBad;
     private String passwordGoodG2B;
     private String passwordGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         String password = passwordBad;
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -82,29 +70,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -115,38 +94,27 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         String password = passwordGoodG2B;
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -154,8 +122,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -164,29 +131,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         Properties properties = new Properties();
 
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -207,8 +165,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         String password = passwordGoodB2G;
 
         /* FIX: password is decrypted before being used as a database password */
@@ -224,25 +181,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         }
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -250,8 +198,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String password;
 
         password = ""; /* init password */
@@ -259,29 +206,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
         /* retrieve the property */
         Properties properties = new Properties();
         FileInputStream streamFileInput = null;
-        try
-        {
+        try {
             streamFileInput = new FileInputStream("../common/config.properties");
             properties.load(streamFileInput);
 
             password = properties.getProperty("password");
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamFileInput != null)
-                {
+            try {
+                if (streamFileInput != null) {
                     streamFileInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
@@ -298,8 +236,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_45 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,14 +16,13 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         byte dataCopy;
         {
             byte data;
@@ -38,22 +37,20 @@ public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCa
 
             /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
             data++;
-            byte result = (byte)(data);
+            byte result = (byte) (data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte dataCopy;
         {
             byte data;
@@ -68,7 +65,7 @@ public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCa
 
             /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
             data++;
-            byte result = (byte)(data);
+            byte result = (byte) (data);
 
             IO.writeLine("result: " + result);
 
@@ -76,8 +73,7 @@ public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCa
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte dataCopy;
         {
             byte data;
@@ -91,14 +87,11 @@ public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCa
             byte data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Byte.MAX_VALUE)
-            {
+            if (data < Byte.MAX_VALUE) {
                 data++;
-                byte result = (byte)(data);
+                byte result = (byte) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -111,8 +104,7 @@ public class CWE190_Integer_Overflow__byte_max_postinc_31 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

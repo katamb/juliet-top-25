@@ -26,10 +26,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -39,41 +37,28 @@ public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTe
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
                 /* POTENTIAL FLAW: Read data from the console using readLine */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -82,17 +67,15 @@ public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTe
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE78_OS_Command_Injection__console_readLine_66b()).badSink(dataArray  );
+        (new CWE78_OS_Command_Injection__console_readLine_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -100,7 +83,7 @@ public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTe
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE78_OS_Command_Injection__console_readLine_66b()).goodG2BSink(dataArray  );
+        (new CWE78_OS_Command_Injection__console_readLine_66b()).goodG2BSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -109,8 +92,7 @@ public class CWE78_OS_Command_Injection__console_readLine_66a extends AbstractTe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

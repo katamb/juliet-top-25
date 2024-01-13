@@ -4,18 +4,19 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-09.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: database Read data from a database
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_read_check_max
-*    GoodSink: Read from array after verifying index is at least 0 and less than array.length
-*    BadSink : Read from array after verifying that data less than array.length (but not verifying that data is at least 0)
-* Flow Variant: 09 Control flow: if(IO.STATIC_FINAL_TRUE) and if(IO.STATIC_FINAL_FALSE)
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: database Read data from a database
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_read_check_max
+ *    GoodSink: Read from array after verifying index is at least 0 and less than array.length
+ *    BadSink : Read from array after verifying that data less than array.length (but not verifying that data is at least 0)
+ * Flow Variant: 09 Control flow: if(IO.STATIC_FINAL_TRUE) and if(IO.STATIC_FINAL_FALSE)
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,21 +28,17 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__database_array_read_check_max_09 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__database_array_read_check_max_09 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -49,166 +46,121 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_chec
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     String stringNumber = resultSet.getString(1);
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch (NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-            if (data < array.length)
-            {
+            if (data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.STATIC_FINAL_TRUE to IO.STATIC_FINAL_FALSE */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FALSE)
-        {
+        if (IO.STATIC_FINAL_FALSE) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-            if (data < array.length)
-            {
+            if (data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Verify that data < array.length, but don't verify that data > 0, so may be attempting to read out of the array bounds */
-            if (data < array.length)
-            {
+            if (data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.STATIC_FINAL_TRUE to IO.STATIC_FINAL_FALSE */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -216,88 +168,60 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_chec
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     String stringNumber = resultSet.getString(1);
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch (NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FALSE)
-        {
+        if (IO.STATIC_FINAL_FALSE) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
 
             /* FIX: Fully verify data before reading from array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
 
@@ -305,19 +229,16 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_chec
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -325,88 +246,61 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_chec
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     String stringNumber = resultSet.getString(1);
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch (NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_TRUE)
-        {
+        if (IO.STATIC_FINAL_TRUE) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* FIX: Fully verify data before reading from array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -419,8 +313,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_read_chec
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

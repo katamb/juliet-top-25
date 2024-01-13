@@ -16,15 +16,15 @@ Template File: sources-sinks-73a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         long data;
 
         /* POTENTIAL FLAW: Use a random value */
@@ -34,18 +34,16 @@ public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTes
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).badSink(dataLinkedList  );
+        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         long data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -55,12 +53,11 @@ public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTes
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         long data;
 
         /* POTENTIAL FLAW: Use a random value */
@@ -70,7 +67,7 @@ public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTes
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).goodB2GSink(dataLinkedList  );
+        (new CWE190_Integer_Overflow__long_rand_multiply_73b()).goodB2GSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +76,7 @@ public class CWE190_Integer_Overflow__long_rand_multiply_73a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

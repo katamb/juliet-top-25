@@ -16,49 +16,44 @@ Template File: sources-sinks-73b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_console_readLine_preinc_73b
-{
-    public void badSink(LinkedList<Long> dataLinkedList ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_console_readLine_preinc_73b {
+    public void badSink(LinkedList<Long> dataLinkedList) throws Throwable {
         long data = dataLinkedList.remove(2);
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-        long result = (long)(++data);
+        long result = (long) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(LinkedList<Long> dataLinkedList ) throws Throwable
-    {
+    public void goodG2BSink(LinkedList<Long> dataLinkedList) throws Throwable {
         long data = dataLinkedList.remove(2);
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-        long result = (long)(++data);
+        long result = (long) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(LinkedList<Long> dataLinkedList ) throws Throwable
-    {
+    public void goodB2GSink(LinkedList<Long> dataLinkedList) throws Throwable {
         long data = dataLinkedList.remove(2);
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Long.MAX_VALUE)
-        {
-            long result = (long)(++data);
+        if (data < Long.MAX_VALUE) {
+            long result = (long) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

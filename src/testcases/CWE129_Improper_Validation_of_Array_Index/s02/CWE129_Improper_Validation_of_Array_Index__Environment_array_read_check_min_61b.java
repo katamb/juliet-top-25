@@ -16,16 +16,15 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_check_min_61b
-{
-    public int badSource() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_check_min_61b {
+    public int badSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -36,12 +35,9 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_c
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
@@ -51,8 +47,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_c
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public int goodG2BSource() throws Throwable
-    {
+    public int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -62,8 +57,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_c
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public int goodB2GSource() throws Throwable
-    {
+    public int goodB2GSource() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -74,12 +68,9 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_read_c
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }

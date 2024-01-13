@@ -16,6 +16,7 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,12 +24,10 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a extends AbstractTestCaseServlet
-{
+public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a extends AbstractTestCaseServlet {
     public static int data;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -36,12 +35,9 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a exte
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -49,15 +45,13 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a exte
         (new CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68b()).badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
@@ -66,8 +60,7 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a exte
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         data = Integer.MIN_VALUE; /* Initialize data */
 
@@ -75,12 +68,9 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a exte
         {
             String stringNumber = request.getParameter("name");
 
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
@@ -94,8 +84,7 @@ public class CWE190_Integer_Overflow__int_getParameter_Servlet_multiply_68a exte
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

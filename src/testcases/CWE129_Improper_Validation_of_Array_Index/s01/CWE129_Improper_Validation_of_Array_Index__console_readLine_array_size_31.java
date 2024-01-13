@@ -16,6 +16,7 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_size_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_size_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -41,8 +40,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                 BufferedReader readerBuffered = null;
 
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
 
@@ -50,43 +48,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                     String stringNumber = readerBuffered.readLine();
                     if (stringNumber != null) // avoid NPD incidental warnings
                     {
-                        try
-                        {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -101,12 +84,9 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             int array[] = null;
 
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
 
@@ -117,15 +97,13 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -141,12 +119,9 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             int array[] = null;
 
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
 
@@ -158,8 +133,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -171,8 +145,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                 BufferedReader readerBuffered = null;
 
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
 
@@ -180,43 +153,28 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
                     String stringNumber = readerBuffered.readLine();
                     if (stringNumber != null) // avoid NPD incidental warnings
                     {
-                        try
-                        {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -232,12 +190,9 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
             int array[] = null;
 
             /* FIX: Verify that data is non-negative AND greater than 0 */
-            if (data > 0)
-            {
+            if (data > 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
 
@@ -254,8 +209,7 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_s
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,6 +16,7 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,10 +28,8 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b {
+    public String badSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -41,8 +40,7 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -53,48 +51,32 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
@@ -104,8 +86,7 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -115,8 +96,7 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public String goodB2GSource() throws Throwable
-    {
+    public String goodB2GSource() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -127,8 +107,7 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -139,48 +118,32 @@ public class CWE89_SQL_Injection__connect_tcp_prepareStatement_61b
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }

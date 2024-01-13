@@ -19,11 +19,9 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__Integer_71b
-{
-    public void badSink(Object dataObject ) throws Throwable
-    {
-        Integer data = (Integer)dataObject;
+public class CWE476_NULL_Pointer_Dereference__Integer_71b {
+    public void badSink(Object dataObject) throws Throwable {
+        Integer data = (Integer) dataObject;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.toString());
@@ -31,9 +29,8 @@ public class CWE476_NULL_Pointer_Dereference__Integer_71b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject ) throws Throwable
-    {
-        Integer data = (Integer)dataObject;
+    public void goodG2BSink(Object dataObject) throws Throwable {
+        Integer data = (Integer) dataObject;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.toString());
@@ -41,17 +38,13 @@ public class CWE476_NULL_Pointer_Dereference__Integer_71b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(Object dataObject ) throws Throwable
-    {
-        Integer data = (Integer)dataObject;
+    public void goodB2GSink(Object dataObject) throws Throwable {
+        Integer data = (Integer) dataObject;
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.toString());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 

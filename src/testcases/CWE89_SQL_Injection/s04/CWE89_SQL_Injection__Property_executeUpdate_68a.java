@@ -16,16 +16,15 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Property_executeUpdate_68a extends AbstractTestCase
-{
+public class CWE89_SQL_Injection__Property_executeUpdate_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* get system property user.home */
         /* POTENTIAL FLAW: Read data from a system property */
@@ -34,15 +33,13 @@ public class CWE89_SQL_Injection__Property_executeUpdate_68a extends AbstractTes
         (new CWE89_SQL_Injection__Property_executeUpdate_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -51,8 +48,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_68a extends AbstractTes
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* get system property user.home */
         /* POTENTIAL FLAW: Read data from a system property */
@@ -67,8 +63,7 @@ public class CWE89_SQL_Injection__Property_executeUpdate_68a extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

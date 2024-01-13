@@ -16,46 +16,42 @@ Template File: sources-sinks-41.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.security.SecureRandom;
 
-public class CWE129_Improper_Validation_of_Array_Index__random_array_read_no_check_41 extends AbstractTestCase
-{
-    private void badSink(int data ) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__random_array_read_no_check_41 extends AbstractTestCase {
+    private void badSink(int data) throws Throwable {
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a random value */
         data = (new SecureRandom()).nextInt();
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink(int data ) throws Throwable
-    {
+    private void goodG2BSink(int data) throws Throwable {
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -63,43 +59,37 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_no_che
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
-    private void goodB2GSink(int data ) throws Throwable
-    {
+    private void goodB2GSink(int data) throws Throwable {
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a random value */
         data = (new SecureRandom()).nextInt();
 
-        goodB2GSink(data  );
+        goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -108,8 +98,7 @@ public class CWE129_Improper_Validation_of_Array_Index__random_array_read_no_che
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

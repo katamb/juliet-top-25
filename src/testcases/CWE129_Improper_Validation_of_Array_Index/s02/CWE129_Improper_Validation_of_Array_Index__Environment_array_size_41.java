@@ -16,26 +16,22 @@ Template File: sources-sinks-41.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_41 extends AbstractTestCase
-{
-    private void badSink(int data ) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_41 extends AbstractTestCase {
+    private void badSink(int data) throws Throwable {
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -45,8 +41,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -57,38 +52,30 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
         }
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink(int data ) throws Throwable
-    {
+    private void goodG2BSink(int data) throws Throwable {
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -99,29 +86,24 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
-    private void goodB2GSink(int data ) throws Throwable
-    {
+    private void goodB2GSink(int data) throws Throwable {
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
         int array[] = null;
 
         /* FIX: Verify that data is non-negative AND greater than 0 */
-        if (data > 0)
-        {
+        if (data > 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -132,8 +114,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -144,18 +125,15 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
         }
 
-        goodB2GSink(data  );
+        goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -164,8 +142,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Environment_array_size_4
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

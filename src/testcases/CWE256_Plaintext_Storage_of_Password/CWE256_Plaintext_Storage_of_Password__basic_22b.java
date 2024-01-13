@@ -30,39 +30,25 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_22b
-{
-    public void badSink(String password ) throws Throwable
-    {
-        if (CWE256_Plaintext_Storage_of_Password__basic_22a.badPublicStatic)
-        {
+public class CWE256_Plaintext_Storage_of_Password__basic_22b {
+    public void badSink(String password) throws Throwable {
+        if (CWE256_Plaintext_Storage_of_Password__basic_22a.badPublicStatic) {
             /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure password is inititialized before the Sink to avoid compiler errors */
             password = null;
@@ -70,16 +56,12 @@ public class CWE256_Plaintext_Storage_of_Password__basic_22b
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    public void goodB2G1Sink(String password ) throws Throwable
-    {
-        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodB2G1PublicStatic)
-        {
+    public void goodB2G1Sink(String password) throws Throwable {
+        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodB2G1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure password is inititialized before the Sink to avoid compiler errors */
             password = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: password is decrypted before being used as a database password */
             {
@@ -94,25 +76,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_22b
             }
 
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -121,10 +94,8 @@ public class CWE256_Plaintext_Storage_of_Password__basic_22b
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    public void goodB2G2Sink(String password ) throws Throwable
-    {
-        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodB2G2PublicStatic)
-        {
+    public void goodB2G2Sink(String password) throws Throwable {
+        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodB2G2PublicStatic) {
             /* FIX: password is decrypted before being used as a database password */
             {
                 Cipher aesCipher = Cipher.getInstance("AES");
@@ -135,31 +106,20 @@ public class CWE256_Plaintext_Storage_of_Password__basic_22b
                 password = decryptedPassword;
             }
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure password is inititialized before the Sink to avoid compiler errors */
             password = null;
@@ -167,37 +127,24 @@ public class CWE256_Plaintext_Storage_of_Password__basic_22b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String password ) throws Throwable
-    {
-        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodG2BPublicStatic)
-        {
+    public void goodG2BSink(String password) throws Throwable {
+        if (CWE256_Plaintext_Storage_of_Password__basic_22a.goodG2BPublicStatic) {
             /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure password is inititialized before the Sink to avoid compiler errors */
             password = null;

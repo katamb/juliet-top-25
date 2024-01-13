@@ -16,16 +16,15 @@ Template File: sources-sinks-66a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -33,11 +32,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -46,18 +43,16 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).badSink(dataArray , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).badSink(dataArray, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -65,12 +60,11 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).goodG2BSink(dataArray , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).goodG2BSink(dataArray, request, response);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -78,11 +72,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -91,7 +83,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).goodB2GSink(dataArray , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66b()).goodB2GSink(dataArray, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -100,8 +92,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeQuery_66a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

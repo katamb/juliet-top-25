@@ -27,29 +27,25 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTestCaseServlet {
     private String dataBad;
     private String dataGoodG2B;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataBad;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -60,8 +56,7 @@ public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTes
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -72,48 +67,32 @@ public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTes
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
@@ -123,29 +102,25 @@ public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTes
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodG2B;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -161,8 +136,7 @@ public class CWE81_XSS_Error_Message__Servlet_connect_tcp_45 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

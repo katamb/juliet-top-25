@@ -4,14 +4,14 @@ Label Definition File: CWE81_XSS_Error_Message__Servlet.label.xml
 Template File: sources-sink-12.tmpl.java
 */
 /*
-* @description
-* CWE: 81 Cross Site Scripting (XSS) in Error Message
-* BadSource: URLConnection Read data from a web server with URLConnection
-* GoodSource: A hardcoded string
-* BadSink: sendErrorServlet XSS in sendError
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 81 Cross Site Scripting (XSS) in Error Message
+ * BadSource: URLConnection Read data from a web server with URLConnection
+ * GoodSource: A hardcoded string
+ * BadSink: sendErrorServlet XSS in sendError
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE81_XSS_Error_Message;
 
@@ -27,76 +27,57 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE81_XSS_Error_Message__Servlet_URLConnection_12 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_URLConnection_12 extends AbstractTestCaseServlet {
     /* uses badsource and badsink - see how tools report flaws that don't always occur */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             data = ""; /* Initialize data */
             /* read input from URLConnection */
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from a web server with URLConnection */
                     /* This will be reading the first "line" of the response body,
                      * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
@@ -104,35 +85,29 @@ public class CWE81_XSS_Error_Message__Servlet_URLConnection_12 extends AbstractT
 
     /* goodG2B() - use goodsource and badsink by changing the "if" so that
      * both branches use the GoodSource */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -142,8 +117,7 @@ public class CWE81_XSS_Error_Message__Servlet_URLConnection_12 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

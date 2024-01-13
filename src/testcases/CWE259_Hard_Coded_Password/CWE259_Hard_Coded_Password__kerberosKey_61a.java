@@ -24,14 +24,11 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data = (new CWE259_Hard_Coded_Password__kerberosKey_61b()).badSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -40,18 +37,15 @@ public class CWE259_Hard_Coded_Password__kerberosKey_61a extends AbstractTestCas
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = (new CWE259_Hard_Coded_Password__kerberosKey_61b()).goodG2BSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -66,8 +60,7 @@ public class CWE259_Hard_Coded_Password__kerberosKey_61a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

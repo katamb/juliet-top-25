@@ -4,18 +4,19 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-13.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: multiply
-*    GoodSink: Ensure there will not be an overflow before multiplying data by 2
-*    BadSink : If data is positive, multiply by 2, which can cause an overflow
-* Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: multiply
+ *    GoodSink: Ensure there will not be an overflow before multiplying data by 2
+ *    BadSink : If data is positive, multiply by 2, which can cause an overflow
+ * Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,162 +25,122 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_getQueryString_Servlet_multiply_13 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getQueryString_Servlet_multiply_13 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParam) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
-                        try
-                        {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                        try {
                             data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                         }
                         break; /* exit while loop */
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParam) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
-                        try
-                        {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                        try {
                             data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                         }
                         break; /* exit while loop */
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -188,60 +149,45 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_multiply_13 ext
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParam) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
-                        try
-                        {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                        try {
                             data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                         }
                         break; /* exit while loop */
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
         goodB2G1(request, response);
@@ -254,8 +200,7 @@ public class CWE190_Integer_Overflow__int_getQueryString_Servlet_multiply_13 ext
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

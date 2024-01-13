@@ -16,7 +16,9 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
@@ -25,65 +27,46 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__File_executeQuery_74b
-{
-    public void badSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+public class CWE89_SQL_Injection__File_executeQuery_74b {
+    public void badSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeQuery(), which could result in SQL Injection */
-            resultSet = sqlStatement.executeQuery("select * from users where name='"+data+"'");
+            resultSet = sqlStatement.executeQuery("select * from users where name='" + data + "'");
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -91,63 +74,45 @@ public class CWE89_SQL_Injection__File_executeQuery_74b
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeQuery(), which could result in SQL Injection */
-            resultSet = sqlStatement.executeQuery("select * from users where name='"+data+"'");
+            resultSet = sqlStatement.executeQuery("select * from users where name='" + data + "'");
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -155,16 +120,14 @@ public class CWE89_SQL_Injection__File_executeQuery_74b
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             /* FIX: Use prepared statement and executeQuery (properly) */
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.prepareStatement("select * from users where name=?");
@@ -173,46 +136,30 @@ public class CWE89_SQL_Injection__File_executeQuery_74b
             resultSet = sqlStatement.executeQuery();
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }

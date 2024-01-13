@@ -18,6 +18,7 @@ Template File: sources-sinks-75b.tmpl.java
 package testcases.CWE256_Plaintext_Storage_of_Password;
 
 import testcasesupport.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
@@ -33,87 +34,8 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_75b
-{
-    public void badSink(byte[] passwordSerialized ) throws Throwable
-    {
-        /* unserialize password */
-        ByteArrayInputStream streamByteArrayInput = null;
-        ObjectInputStream streamObjectInput = null;
-
-        try
-        {
-            streamByteArrayInput = new ByteArrayInputStream(passwordSerialized);
-            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String password = (String)streamObjectInput.readObject();
-
-            /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
-
-            Connection dBConnection = null;
-            try
-            {
-                dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
-                IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
-                        dBConnection.close();
-                    }
-                }
-                catch (SQLException exceptSql)
-                {
-                    IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
-                }
-            }
-
-        }
-        catch (IOException exceptIO)
-        {
-            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
-            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
-            /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
-                    streamObjectInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
-            }
-
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
-                    streamByteArrayInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
-            }
-        }
-    }
-
-    /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(byte[] passwordSerialized ) throws Throwable
-    {
+public class CWE256_Plaintext_Storage_of_Password__basic_75b {
+    public void badSink(byte[] passwordSerialized) throws Throwable {
         /* unserialize password */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
@@ -121,84 +43,111 @@ public class CWE256_Plaintext_Storage_of_Password__basic_75b
         try {
             streamByteArrayInput = new ByteArrayInputStream(passwordSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String password = (String)streamObjectInput.readObject();
+            String password = (String) streamObjectInput.readObject();
 
             /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
-            catch (IOException exceptIO)
-            {
+        }
+    }
+
+    /* goodG2B() - use GoodSource and BadSink */
+    public void goodG2BSink(byte[] passwordSerialized) throws Throwable {
+        /* unserialize password */
+        ByteArrayInputStream streamByteArrayInput = null;
+        ObjectInputStream streamObjectInput = null;
+
+        try {
+            streamByteArrayInput = new ByteArrayInputStream(passwordSerialized);
+            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
+            String password = (String) streamObjectInput.readObject();
+
+            /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
+
+            Connection dBConnection = null;
+            try {
+                dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
+            } catch (SQLException exceptSql) {
+                IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
+            } finally {
+                try {
+                    if (dBConnection != null) {
+                        dBConnection.close();
+                    }
+                } catch (SQLException exceptSql) {
+                    IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
+                }
+            }
+
+        } catch (IOException exceptIO) {
+            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
+        } catch (ClassNotFoundException exceptClassNotFound) {
+            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
+        } finally {
+            /* clean up stream reading objects */
+            try {
+                if (streamObjectInput != null) {
+                    streamObjectInput.close();
+                }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
+            }
+
+            try {
+                if (streamByteArrayInput != null) {
+                    streamByteArrayInput.close();
+                }
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(byte[] passwordSerialized ) throws Throwable
-    {
+    public void goodB2GSink(byte[] passwordSerialized) throws Throwable {
         /* unserialize password */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(passwordSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String password = (String)streamObjectInput.readObject();
+            String password = (String) streamObjectInput.readObject();
 
             /* FIX: password is decrypted before being used as a database password */
             {
@@ -213,62 +162,39 @@ public class CWE256_Plaintext_Storage_of_Password__basic_75b
             }
 
             Connection dBConnection = null;
-            try
-            {
+            try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (dBConnection != null)
-                    {
+            } finally {
+                try {
+                    if (dBConnection != null) {
                         dBConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }

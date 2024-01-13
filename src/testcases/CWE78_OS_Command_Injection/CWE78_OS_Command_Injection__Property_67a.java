@@ -20,15 +20,12 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Property_67a extends AbstractTestCase
-{
-    static class Container
-    {
+public class CWE78_OS_Command_Injection__Property_67a extends AbstractTestCase {
+    static class Container {
         public String containerOne;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -37,17 +34,15 @@ public class CWE78_OS_Command_Injection__Property_67a extends AbstractTestCase
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE78_OS_Command_Injection__Property_67b()).badSink(dataContainer  );
+        (new CWE78_OS_Command_Injection__Property_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -55,7 +50,7 @@ public class CWE78_OS_Command_Injection__Property_67a extends AbstractTestCase
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE78_OS_Command_Injection__Property_67b()).goodG2BSink(dataContainer  );
+        (new CWE78_OS_Command_Injection__Property_67b()).goodG2BSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -64,8 +59,7 @@ public class CWE78_OS_Command_Injection__Property_67a extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

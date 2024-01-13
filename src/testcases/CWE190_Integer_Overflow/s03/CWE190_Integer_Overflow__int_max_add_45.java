@@ -16,29 +16,27 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_max_add_45 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_max_add_45 extends AbstractTestCase {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         int data = dataBad;
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
@@ -48,26 +46,23 @@ public class CWE190_Integer_Overflow__int_max_add_45 extends AbstractTestCase
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         int data = dataGoodG2B;
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -77,26 +72,21 @@ public class CWE190_Integer_Overflow__int_max_add_45 extends AbstractTestCase
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         int data = dataGoodB2G;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(data + 1);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
@@ -112,8 +102,7 @@ public class CWE190_Integer_Overflow__int_max_add_45 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

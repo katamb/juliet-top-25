@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -28,26 +29,23 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_45 extends AbstractTestCase
-{
+public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_45 extends AbstractTestCase {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         int data = dataBad;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -58,8 +56,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -70,44 +67,29 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -117,18 +99,16 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         int data = dataGoodG2B;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
         IO.writeLine(array[data]);
@@ -136,8 +116,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -147,28 +126,23 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         int data = dataGoodB2G;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before reading from array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -179,8 +153,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -191,44 +164,29 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -244,8 +202,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,19 +16,17 @@ Template File: sources-sinks-67a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTestCase
-{
-    static class Container
-    {
+public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTestCase {
+    static class Container {
         public String containerOne;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -37,18 +35,16 @@ public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTest
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__Property_executeBatch_67b()).badSink(dataContainer  );
+        (new CWE89_SQL_Injection__Property_executeBatch_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -56,12 +52,11 @@ public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTest
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__Property_executeBatch_67b()).goodG2BSink(dataContainer  );
+        (new CWE89_SQL_Injection__Property_executeBatch_67b()).goodG2BSink(dataContainer);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -70,7 +65,7 @@ public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTest
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__Property_executeBatch_67b()).goodB2GSink(dataContainer  );
+        (new CWE89_SQL_Injection__Property_executeBatch_67b()).goodB2GSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +74,7 @@ public class CWE89_SQL_Injection__Property_executeBatch_67a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

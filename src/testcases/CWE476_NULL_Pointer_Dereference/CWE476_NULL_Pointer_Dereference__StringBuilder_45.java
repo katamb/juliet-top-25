@@ -19,14 +19,12 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractTestCase {
     private StringBuilder dataBad;
     private StringBuilder dataGoodG2B;
     private StringBuilder dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         StringBuilder data = dataBad;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -34,8 +32,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractT
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -45,14 +42,12 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractT
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         StringBuilder data = dataGoodG2B;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -61,8 +56,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractT
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
@@ -72,25 +66,20 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractT
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         StringBuilder data = dataGoodB2G;
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -106,8 +95,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_45 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

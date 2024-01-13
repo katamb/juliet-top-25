@@ -16,23 +16,19 @@ Template File: sources-sinks-22b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_console_readLine_postinc_22b
-{
-    public void badSink(short data ) throws Throwable
-    {
-        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.badPublicStatic)
-        {
+public class CWE190_Integer_Overflow__short_console_readLine_postinc_22b {
+    public void badSink(short data) throws Throwable {
+        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.badPublicStatic) {
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
@@ -40,26 +36,19 @@ public class CWE190_Integer_Overflow__short_console_readLine_postinc_22b
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    public void goodB2G1Sink(short data ) throws Throwable
-    {
-        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodB2G1PublicStatic)
-        {
+    public void goodB2G1Sink(short data) throws Throwable {
+        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodB2G1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Short.MAX_VALUE)
-            {
+            if (data < Short.MAX_VALUE) {
                 data++;
-                short result = (short)(data);
+                short result = (short) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -67,24 +56,17 @@ public class CWE190_Integer_Overflow__short_console_readLine_postinc_22b
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    public void goodB2G2Sink(short data ) throws Throwable
-    {
-        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodB2G2PublicStatic)
-        {
+    public void goodB2G2Sink(short data) throws Throwable {
+        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodB2G2PublicStatic) {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Short.MAX_VALUE)
-            {
+            if (data < Short.MAX_VALUE) {
                 data++;
-                short result = (short)(data);
+                short result = (short) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
@@ -92,17 +74,13 @@ public class CWE190_Integer_Overflow__short_console_readLine_postinc_22b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(short data ) throws Throwable
-    {
-        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodG2BPublicStatic)
-        {
+    public void goodG2BSink(short data) throws Throwable {
+        if (CWE190_Integer_Overflow__short_console_readLine_postinc_22a.goodG2BPublicStatic) {
             /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;

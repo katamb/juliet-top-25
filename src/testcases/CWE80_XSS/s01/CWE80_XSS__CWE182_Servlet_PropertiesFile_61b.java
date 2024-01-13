@@ -15,6 +15,7 @@ Template File: sources-sink-61b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_PropertiesFile_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_PropertiesFile_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -39,30 +38,21 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_61b
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
                 /* POTENTIAL FLAW: Read data from a .properties file */
                 data = properties.getProperty("data");
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -72,8 +62,7 @@ public class CWE80_XSS__CWE182_Servlet_PropertiesFile_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

@@ -21,25 +21,19 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_66b
-{
-    public void badSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_66b {
+    public void badSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -47,23 +41,18 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_66b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -71,26 +60,20 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_66b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(String dataArray[] , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(String dataArray[], HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataArray[2];
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
         /* FIX: loop number thresholds validated */
-        if (numberOfLoops >= 0 && numberOfLoops <= 5)
-        {
-            for (int i=0; i < numberOfLoops; i++)
-            {
+        if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+            for (int i = 0; i < numberOfLoops; i++) {
                 IO.writeLine("hello world");
             }
         }

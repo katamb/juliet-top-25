@@ -16,61 +16,58 @@ Template File: sources-sinks-74a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_max_multiply_74a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_max_multiply_74a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
         data = Integer.MAX_VALUE;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE190_Integer_Overflow__int_max_multiply_74b()).badSink(dataHashMap  );
+        (new CWE190_Integer_Overflow__int_max_multiply_74b()).badSink(dataHashMap);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE190_Integer_Overflow__int_max_multiply_74b()).goodG2BSink(dataHashMap  );
+        (new CWE190_Integer_Overflow__int_max_multiply_74b()).goodG2BSink(dataHashMap);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
         data = Integer.MAX_VALUE;
 
-        HashMap<Integer,Integer> dataHashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer, Integer> dataHashMap = new HashMap<Integer, Integer>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE190_Integer_Overflow__int_max_multiply_74b()).goodB2GSink(dataHashMap  );
+        (new CWE190_Integer_Overflow__int_max_multiply_74b()).goodB2GSink(dataHashMap);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +76,7 @@ public class CWE190_Integer_Overflow__int_max_multiply_74a extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

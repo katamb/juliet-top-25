@@ -16,31 +16,28 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTestCase {
     private short dataBad;
     private short dataGoodG2B;
     private short dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         short data = dataBad;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -50,28 +47,24 @@ public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTest
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         short data = dataGoodG2B;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -81,20 +74,15 @@ public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTest
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         short data = dataGoodB2G;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Short.MAX_VALUE/2))
-            {
-                short result = (short)(data * 2);
+            if (data < (Short.MAX_VALUE / 2)) {
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }
@@ -102,8 +90,7 @@ public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -119,8 +106,7 @@ public class CWE190_Integer_Overflow__short_max_multiply_45 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

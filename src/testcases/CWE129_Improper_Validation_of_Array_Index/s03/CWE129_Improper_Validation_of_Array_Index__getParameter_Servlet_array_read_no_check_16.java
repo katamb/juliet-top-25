@@ -4,18 +4,19 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-16.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: getParameter_Servlet Read data from a querystring using getParameter()
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_read_no_check
-*    GoodSink: Read from array after verifying index
-*    BadSink : Read from array without any verification of index
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: getParameter_Servlet Read data from a querystring using getParameter()
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_read_no_check
+ *    GoodSink: Read from array after verifying index
+ *    BadSink : Read from array without any verification of index
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -23,34 +24,27 @@ import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_16 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_no_check_16 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* POTENTIAL FLAW: Read data from a querystring using getParameter() */
             {
                 String stringNumber = request.getParameter("name");
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
                 }
             }
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
             IO.writeLine(array[data]);
             break;
@@ -58,21 +52,18 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* POTENTIAL FLAW: Attempt to read from array at location data, which may be outside the array bounds */
             IO.writeLine(array[data]);
             break;
@@ -81,47 +72,37 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* POTENTIAL FLAW: Read data from a querystring using getParameter() */
             {
                 String stringNumber = request.getParameter("name");
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
                 }
             }
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-            int array[] = { 0, 1, 2, 3, 4 };
+            int array[] = {0, 1, 2, 3, 4};
             /* FIX: Verify index before reading from array at location data */
-            if (data >= 0 && data < array.length)
-            {
+            if (data >= 0 && data < array.length) {
                 IO.writeLine(array[data]);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array index out of bounds");
             }
             break;
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
@@ -132,8 +113,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_arr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

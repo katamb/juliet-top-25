@@ -16,19 +16,19 @@ Template File: sources-sinks-73b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_write_no_check_73b
-{
-    public void badSink(LinkedList<Integer> dataLinkedList ) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_write_no_check_73b {
+    public void badSink(LinkedList<Integer> dataLinkedList) throws Throwable {
         int data = dataLinkedList.remove(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -38,12 +38,11 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_w
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(LinkedList<Integer> dataLinkedList ) throws Throwable
-    {
+    public void goodG2BSink(LinkedList<Integer> dataLinkedList) throws Throwable {
         int data = dataLinkedList.remove(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -53,20 +52,16 @@ public class CWE129_Improper_Validation_of_Array_Index__console_readLine_array_w
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(LinkedList<Integer> dataLinkedList ) throws Throwable
-    {
+    public void goodB2GSink(LinkedList<Integer> dataLinkedList) throws Throwable {
         int data = dataLinkedList.remove(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before writing to array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             array[data] = 42;
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 

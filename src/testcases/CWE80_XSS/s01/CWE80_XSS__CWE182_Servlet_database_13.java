@@ -4,16 +4,17 @@ Label Definition File: CWE80_XSS__CWE182_Servlet.label.xml
 Template File: sources-sink-13.tmpl.java
 */
 /*
-* @description
-* CWE: 80 Cross Site Scripting (XSS)
-* BadSource: database Read data from a database
-* GoodSource: A hardcoded string
-* BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
-* Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
-*
-* */
+ * @description
+ * CWE: 80 Cross Site Scripting (XSS)
+ * BadSource: database Read data from a database
+ * GoodSource: A hardcoded string
+ * BadSink:  Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS (CWE 182: Collapse of Data into Unsafe Value)
+ * Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
+ *
+ * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -25,22 +26,18 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE == 5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = ""; /* Initialize data */
             /* Read data from a database */
             {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                try
-                {
+                try {
                     /* setup the connection */
                     connection = IO.getDBConnection();
                     /* prepare and execute a (hardcoded) query */
@@ -48,61 +45,42 @@ public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServl
                     resultSet = preparedStatement.executeQuery();
                     /* POTENTIAL FLAW: Read data from a database query resultset */
                     data = resultSet.getString(1);
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-                }
-                finally
-                {
+                } finally {
                     /* Close database objects */
-                    try
-                    {
-                        if (resultSet != null)
-                        {
+                    try {
+                        if (resultSet != null) {
                             resultSet.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                     }
 
-                    try
-                    {
-                        if (preparedStatement != null)
-                        {
+                    try {
+                        if (preparedStatement != null) {
                             preparedStatement.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                     }
 
-                    try
-                    {
-                        if (connection != null)
-                        {
+                    try {
+                        if (connection != null) {
                             connection.close();
                         }
-                    }
-                    catch (SQLException exceptSql)
-                    {
+                    } catch (SQLException exceptSql) {
                         IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -110,25 +88,20 @@ public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServl
     }
 
     /* goodG2B1() - use goodsource and badsink by changing IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE != 5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -136,31 +109,25 @@ public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServl
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (IO.STATIC_FINAL_FIVE == 5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -171,8 +138,7 @@ public class CWE80_XSS__CWE182_Servlet_database_13 extends AbstractTestCaseServl
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

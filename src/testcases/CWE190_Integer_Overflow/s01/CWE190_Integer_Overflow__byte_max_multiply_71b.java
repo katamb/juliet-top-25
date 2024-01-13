@@ -16,54 +16,45 @@ Template File: sources-sinks-71b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_max_multiply_71b
-{
-    public void badSink(Object dataObject ) throws Throwable
-    {
-        byte data = (Byte)dataObject;
+public class CWE190_Integer_Overflow__byte_max_multiply_71b {
+    public void badSink(Object dataObject) throws Throwable {
+        byte data = (Byte) dataObject;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * 2);
+            byte result = (byte) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject ) throws Throwable
-    {
-        byte data = (Byte)dataObject;
+    public void goodG2BSink(Object dataObject) throws Throwable {
+        byte data = (Byte) dataObject;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data * 2);
+            byte result = (byte) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(Object dataObject ) throws Throwable
-    {
-        byte data = (Byte)dataObject;
+    public void goodB2GSink(Object dataObject) throws Throwable {
+        byte data = (Byte) dataObject;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Byte.MAX_VALUE/2))
-            {
-                byte result = (byte)(data * 2);
+            if (data < (Byte.MAX_VALUE / 2)) {
+                byte result = (byte) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }

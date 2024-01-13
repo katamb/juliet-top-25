@@ -22,37 +22,30 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends AbstractTestCaseServlet
-{
+public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends AbstractTestCaseServlet {
     private String dataBad;
     private String dataGoodG2B;
     private String dataGoodB2G;
 
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataBad;
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -60,8 +53,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
@@ -71,29 +63,23 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
         badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodG2B;
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }
@@ -101,8 +87,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -112,26 +97,20 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
         goodG2BSink(request, response);
     }
 
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGoodB2G;
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
         /* FIX: loop number thresholds validated */
-        if (numberOfLoops >= 0 && numberOfLoops <= 5)
-        {
-            for (int i=0; i < numberOfLoops; i++)
-            {
+        if (numberOfLoops >= 0 && numberOfLoops <= 5) {
+            for (int i = 0; i < numberOfLoops; i++) {
                 IO.writeLine("hello world");
             }
         }
@@ -139,8 +118,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -148,8 +126,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
@@ -165,8 +142,7 @@ public class CWE606_Unchecked_Loop_Condition__getCookies_Servlet_45 extends Abst
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

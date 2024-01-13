@@ -19,55 +19,49 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_67a extends AbstractTestCase
-{
-    static class Container
-    {
-        public int [] containerOne;
+public class CWE476_NULL_Pointer_Dereference__int_array_67a extends AbstractTestCase {
+    static class Container {
+        public int[] containerOne;
     }
 
-    public void bad() throws Throwable
-    {
-        int [] data;
+    public void bad() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).badSink(dataContainer  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data;
+    private void goodG2B() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).goodG2BSink(dataContainer  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).goodG2BSink(dataContainer);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
-        int [] data;
+    private void goodB2G() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).goodB2GSink(dataContainer  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_67b()).goodB2GSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -76,8 +70,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_67a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

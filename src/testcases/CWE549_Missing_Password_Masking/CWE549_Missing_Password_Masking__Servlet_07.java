@@ -4,14 +4,14 @@ Label Definition File: CWE549_Missing_Password_Masking__Servlet.label.xml
 Template File: point-flaw-07.tmpl.java
 */
 /*
-* @description
-* CWE: 549 Passwords should be masked during entry to prevent others from stealing them
-* Sinks:
-*    GoodSink: password field masked
-*    BadSink : password field unmasked
-* Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
-*
-* */
+ * @description
+ * CWE: 549 Passwords should be masked during entry to prevent others from stealing them
+ * Sinks:
+ *    GoodSink: password field masked
+ *    BadSink : password field unmasked
+ * Flow Variant: 07 Control flow: if(privateFive==5) and if(privateFive!=5)
+ *
+ * */
 
 package testcases.CWE549_Missing_Password_Masking;
 
@@ -19,18 +19,15 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCaseServlet
-{
+public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCaseServlet {
     /* The variable below is not declared "final", but is never assigned
      * any other value so a tool should be able to identify that reads of
      * this will always give its initialized value.
      */
     private int privateFive = 5;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateFive == 5)
-        {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateFive == 5) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             /* FLAW: password field should be masked (type="text") */
@@ -40,15 +37,11 @@ public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCas
     }
 
     /* good1() changes privateFive==5 to privateFive!=5 */
-    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateFive != 5)
-        {
+    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateFive != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
@@ -60,10 +53,8 @@ public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCas
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (privateFive == 5)
-        {
+    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (privateFive == 5) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             /* FIX: password field is masked with type="password" instead of type="text" */
@@ -72,8 +63,7 @@ public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCas
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         good1(request, response);
         good2(request, response);
     }
@@ -84,8 +74,7 @@ public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

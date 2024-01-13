@@ -16,26 +16,23 @@ Template File: sources-sinks-52b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52b
-{
-    public void badSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).badSink(data );
+public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52b {
+    public void badSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).goodG2BSink(data );
+    public void goodG2BSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).goodB2GSink(data );
+    public void goodB2GSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_read_no_check_52c()).goodB2GSink(data);
     }
 }

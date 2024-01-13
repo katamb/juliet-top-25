@@ -20,10 +20,8 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Property_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE78_OS_Command_Injection__Property_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get system property user.home */
@@ -32,17 +30,15 @@ public class CWE78_OS_Command_Injection__Property_66a extends AbstractTestCase
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE78_OS_Command_Injection__Property_66b()).badSink(dataArray  );
+        (new CWE78_OS_Command_Injection__Property_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -50,7 +46,7 @@ public class CWE78_OS_Command_Injection__Property_66a extends AbstractTestCase
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE78_OS_Command_Injection__Property_66b()).goodG2BSink(dataArray  );
+        (new CWE78_OS_Command_Injection__Property_66b()).goodG2BSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -59,8 +55,7 @@ public class CWE78_OS_Command_Injection__Property_66a extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

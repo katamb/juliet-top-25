@@ -15,16 +15,15 @@ Template File: sources-sink-31.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -37,8 +36,7 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCase
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
                 response.getWriter().println("<br>bad(): data = " + data);
             }
@@ -46,14 +44,12 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCase
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -66,8 +62,7 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCase
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
                 response.getWriter().println("<br>bad(): data = " + data);
             }
@@ -81,8 +76,7 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_31 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

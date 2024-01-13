@@ -23,63 +23,43 @@ import java.io.*;
 
 import java.sql.*;
 
-public class CWE259_Hard_Coded_Password__driverManager_81_goodG2B extends CWE259_Hard_Coded_Password__driverManager_81_base
-{
-    public void action(String data ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__driverManager_81_goodG2B extends CWE259_Hard_Coded_Password__driverManager_81_base {
+    public void action(String data) throws Throwable {
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
-        if (data != null)
-        {
-            try
-            {
+        if (data != null) {
+            try {
                 /* POTENTIAL FLAW: data used as password in database connection */
                 connection = DriverManager.getConnection("data-url", "root", data);
                 preparedStatement = connection.prepareStatement("select * from test_table");
                 resultSet = preparedStatement.executeQuery();
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (resultSet != null)
-                    {
+            } finally {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }

@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-15.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: PropertiesFile Read data from a .properties file (in property named data)
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 15 Control flow: switch(6)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: PropertiesFile Read data from a .properties file (in property named data)
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 15 Control flow: switch(6)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -26,64 +26,49 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = null;
 
-        switch (6)
-        {
-        case 6:
-            data = ""; /* Initialize data */
-            /* retrieve the property */
+        switch (6) {
+            case 6:
+                data = ""; /* Initialize data */
+                /* retrieve the property */
             {
                 Properties properties = new Properties();
                 FileInputStream streamFileInput = null;
-                try
-                {
+                try {
                     streamFileInput = new FileInputStream("../common/config.properties");
                     properties.load(streamFileInput);
                     /* POTENTIAL FLAW: Read data from a .properties file */
                     data = properties.getProperty("data");
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading object */
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
             }
             break;
-        default:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
+            default:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -95,31 +80,26 @@ public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestC
     }
 
     /* goodG2B1() - use goodsource and badsink by changing the  switch to switch(5) */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data = null;
 
-        switch (5)
-        {
-        case 6:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
-        default:
-            /* FIX: Use a hardcoded string */
-            data = "foo";
-            break;
+        switch (5) {
+            case 6:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
+            default:
+                /* FIX: Use a hardcoded string */
+                data = "foo";
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -131,31 +111,26 @@ public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestC
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the switch  */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data = null;
 
-        switch (6)
-        {
-        case 6:
-            /* FIX: Use a hardcoded string */
-            data = "foo";
-            break;
-        default:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
+        switch (6) {
+            case 6:
+                /* FIX: Use a hardcoded string */
+                data = "foo";
+                break;
+            default:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -166,8 +141,7 @@ public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestC
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
@@ -178,8 +152,7 @@ public class CWE78_OS_Command_Injection__PropertiesFile_15 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

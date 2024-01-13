@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -28,25 +29,22 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends AbstractTestCase {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         int data = dataBad;
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -57,8 +55,7 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -69,44 +66,29 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -116,26 +98,23 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         int data = dataGoodG2B;
 
         /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data * data);
+        int result = (int) (data * data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -145,27 +124,22 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         int data = dataGoodB2G;
 
         /* FIX: Add a check to prevent an overflow from occurring */
         /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-        {
-            int result = (int)(data * data);
+        if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform squaring.");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -176,8 +150,7 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -188,44 +161,29 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -241,8 +199,7 @@ public class CWE190_Integer_Overflow__int_URLConnection_square_45 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

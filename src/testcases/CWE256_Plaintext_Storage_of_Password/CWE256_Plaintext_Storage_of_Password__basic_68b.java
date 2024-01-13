@@ -30,34 +30,23 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE256_Plaintext_Storage_of_Password__basic_68b {
+    public void badSink() throws Throwable {
         String password = CWE256_Plaintext_Storage_of_Password__basic_68a.password;
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -65,32 +54,22 @@ public class CWE256_Plaintext_Storage_of_Password__basic_68b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         String password = CWE256_Plaintext_Storage_of_Password__basic_68a.password;
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -98,8 +77,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_68b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink() throws Throwable
-    {
+    public void goodB2GSink() throws Throwable {
         String password = CWE256_Plaintext_Storage_of_Password__basic_68a.password;
 
         /* FIX: password is decrypted before being used as a database password */
@@ -115,25 +93,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_68b
         }
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }

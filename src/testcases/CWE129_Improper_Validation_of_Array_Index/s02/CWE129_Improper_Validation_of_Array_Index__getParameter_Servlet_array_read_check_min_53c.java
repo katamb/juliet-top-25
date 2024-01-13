@@ -16,26 +16,23 @@ Template File: sources-sinks-53c.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53c
-{
-    public void badSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).badSink(data , request, response);
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53c {
+    public void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).badSink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).goodG2BSink(data , request, response);
+    public void goodG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).goodG2BSink(data, request, response);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).goodB2GSink(data , request, response);
+    public void goodB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_read_check_min_53d()).goodB2GSink(data, request, response);
     }
 }

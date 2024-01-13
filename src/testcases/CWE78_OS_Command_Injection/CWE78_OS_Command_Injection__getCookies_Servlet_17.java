@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-17.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 17 Control flow: for loops
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 17 Control flow: for loops
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -20,11 +20,9 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractTestCaseServlet
-{
+public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -32,23 +30,18 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractT
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
         }
 
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             String osCommand;
-            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-            {
+            if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 /* running on Windows */
                 osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-            }
-            else
-            {
+            } else {
                 /* running on non-Windows */
                 osCommand = "/bin/ls ";
             }
@@ -60,23 +53,18 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractT
 
     /* goodG2B() - use goodsource and badsink by reversing the block outside the
      * for statement with the one in the for statement */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             String osCommand;
-            if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-            {
+            if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 /* running on Windows */
                 osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-            }
-            else
-            {
+            } else {
                 /* running on non-Windows */
                 osCommand = "/bin/ls ";
             }
@@ -86,8 +74,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractT
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
@@ -97,8 +84,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_17 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

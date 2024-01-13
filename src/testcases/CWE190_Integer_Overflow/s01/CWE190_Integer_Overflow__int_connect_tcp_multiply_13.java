@@ -4,18 +4,19 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-13.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: connect_tcp Read data using an outbound tcp connection
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: multiply
-*    GoodSink: Ensure there will not be an overflow before multiplying data by 2
-*    BadSink : If data is positive, multiply by 2, which can cause an overflow
-* Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: connect_tcp Read data using an outbound tcp connection
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: multiply
+ *    GoodSink: Ensure there will not be an overflow before multiplying data by 2
+ *    BadSink : If data is positive, multiply by 2, which can cause an overflow
+ * Flow Variant: 13 Control flow: if(IO.STATIC_FINAL_FIVE==5) and if(IO.STATIC_FINAL_FIVE!=5)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,21 +28,17 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -49,152 +46,113 @@ public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends Abstra
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.STATIC_FINAL_FIVE==5 to IO.STATIC_FINAL_FIVE!=5 */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -202,89 +160,60 @@ public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends Abstra
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE!=5)
-        {
+        if (IO.STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -293,19 +222,16 @@ public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends Abstra
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
+        if (IO.STATIC_FINAL_FIVE == 5) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* Read data using an outbound tcp connection */
             {
                 Socket socket = null;
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     /* Read data using an outbound tcp connection */
                     socket = new Socket("host.example.org", 39544);
                     /* read input from socket */
@@ -313,91 +239,63 @@ public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends Abstra
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
                     /* clean up socket objects */
-                    try
-                    {
-                        if (socket != null)
-                        {
+                    try {
+                        if (socket != null) {
                             socket.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (IO.STATIC_FINAL_FIVE==5)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+        if (IO.STATIC_FINAL_FIVE == 5) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -410,8 +308,7 @@ public class CWE190_Integer_Overflow__int_connect_tcp_multiply_13 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

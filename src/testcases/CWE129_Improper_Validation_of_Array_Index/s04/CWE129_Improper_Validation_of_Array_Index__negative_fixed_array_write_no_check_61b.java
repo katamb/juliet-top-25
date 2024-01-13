@@ -16,14 +16,13 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_write_no_check_61b
-{
-    public int badSource() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_write_no_check_61b {
+    public int badSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a negative value */
@@ -33,8 +32,7 @@ public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_wri
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public int goodG2BSource() throws Throwable
-    {
+    public int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -44,8 +42,7 @@ public class CWE129_Improper_Validation_of_Array_Index__negative_fixed_array_wri
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public int goodB2GSource() throws Throwable
-    {
+    public int goodB2GSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a negative value */

@@ -21,24 +21,18 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_81_bad extends CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_81_base
-{
-    public void action(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_81_bad extends CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_81_base {
+    public void action(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         int numberOfLoops;
-        try
-        {
+        try {
             numberOfLoops = Integer.parseInt(data);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.writeLine("Invalid response. Numeric input expected. Assuming 1.");
             numberOfLoops = 1;
         }
 
-        for (int i=0; i < numberOfLoops; i++)
-        {
+        for (int i = 0; i < numberOfLoops; i++) {
             /* POTENTIAL FLAW: user supplied input used for loop counter test */
             IO.writeLine("hello world");
         }

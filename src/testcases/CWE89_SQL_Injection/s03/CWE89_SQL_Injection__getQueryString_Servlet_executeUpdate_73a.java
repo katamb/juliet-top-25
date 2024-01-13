@@ -16,17 +16,17 @@ Template File: sources-sinks-73a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -34,11 +34,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -49,18 +47,16 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).badSink(dataLinkedList , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).badSink(dataLinkedList, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -70,12 +66,11 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).goodG2BSink(dataLinkedList , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).goodG2BSink(dataLinkedList, request, response);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -83,11 +78,9 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -98,7 +91,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).goodB2GSink(dataLinkedList , request, response );
+        (new CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73b()).goodB2GSink(dataLinkedList, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -107,8 +100,7 @@ public class CWE89_SQL_Injection__getQueryString_Servlet_executeUpdate_73a exten
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

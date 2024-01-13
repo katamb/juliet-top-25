@@ -18,6 +18,7 @@ Template File: sources-sinks-73b.tmpl.java
 package testcases.CWE256_Plaintext_Storage_of_Password;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
@@ -31,34 +32,23 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class CWE256_Plaintext_Storage_of_Password__basic_73b
-{
-    public void badSink(LinkedList<String> passwordLinkedList ) throws Throwable
-    {
+public class CWE256_Plaintext_Storage_of_Password__basic_73b {
+    public void badSink(LinkedList<String> passwordLinkedList) throws Throwable {
         String password = passwordLinkedList.remove(2);
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -66,32 +56,22 @@ public class CWE256_Plaintext_Storage_of_Password__basic_73b
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(LinkedList<String> passwordLinkedList ) throws Throwable
-    {
+    public void goodG2BSink(LinkedList<String> passwordLinkedList) throws Throwable {
         String password = passwordLinkedList.remove(2);
 
         /* POTENTIAL FLAW: Use password as a password to connect to a DB  (without being decrypted) */
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -99,8 +79,7 @@ public class CWE256_Plaintext_Storage_of_Password__basic_73b
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(LinkedList<String> passwordLinkedList ) throws Throwable
-    {
+    public void goodB2GSink(LinkedList<String> passwordLinkedList) throws Throwable {
         String password = passwordLinkedList.remove(2);
 
         /* FIX: password is decrypted before being used as a database password */
@@ -116,25 +95,16 @@ public class CWE256_Plaintext_Storage_of_Password__basic_73b
         }
 
         Connection dBConnection = null;
-        try
-        {
+        try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (dBConnection != null)
-                {
+        } finally {
+            try {
+                if (dBConnection != null) {
                     dBConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }

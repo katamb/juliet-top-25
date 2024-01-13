@@ -17,15 +17,14 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE81_XSS_Error_Message;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
 
-public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -33,8 +32,7 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends Abs
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
@@ -44,17 +42,15 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends Abs
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72b()).badSink(dataVector , request, response );
+        (new CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72b()).badSink(dataVector, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -64,7 +60,7 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends Abs
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72b()).goodG2BSink(dataVector , request, response );
+        (new CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72b()).goodG2BSink(dataVector, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -73,8 +69,7 @@ public class CWE81_XSS_Error_Message__Servlet_getCookies_Servlet_72a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

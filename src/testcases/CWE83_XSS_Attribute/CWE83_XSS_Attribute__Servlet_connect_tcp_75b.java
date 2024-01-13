@@ -17,6 +17,7 @@ Template File: sources-sink-75b.tmpl.java
 package testcases.CWE83_XSS_Attribute;
 
 import testcasesupport.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
@@ -24,116 +25,81 @@ import java.util.logging.Level;
 
 import javax.servlet.http.*;
 
-public class CWE83_XSS_Attribute__Servlet_connect_tcp_75b
-{
-    public void badSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_connect_tcp_75b {
+    public void badSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
                 response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
                 response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }

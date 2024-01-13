@@ -21,16 +21,13 @@ import testcasesupport.*;
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE36_Absolute_Path_Traversal__Property_54d
-{
-    public void badSink(String data ) throws Throwable
-    {
-        (new CWE36_Absolute_Path_Traversal__Property_54e()).badSink(data );
+public class CWE36_Absolute_Path_Traversal__Property_54d {
+    public void badSink(String data) throws Throwable {
+        (new CWE36_Absolute_Path_Traversal__Property_54e()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data ) throws Throwable
-    {
-        (new CWE36_Absolute_Path_Traversal__Property_54e()).goodG2BSink(data );
+    public void goodG2BSink(String data) throws Throwable {
+        (new CWE36_Absolute_Path_Traversal__Property_54e()).goodG2BSink(data);
     }
 }

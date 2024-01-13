@@ -18,15 +18,14 @@ Template File: sources-sinks-72a.tmpl.java
 package testcases.CWE606_Unchecked_Loop_Condition;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
 
-public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -36,18 +35,16 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends A
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).badSink(dataVector , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).badSink(dataVector, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -57,12 +54,11 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends A
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).goodG2BSink(dataVector , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).goodG2BSink(dataVector, request, response);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -72,7 +68,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends A
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).goodB2GSink(dataVector , request, response );
+        (new CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72b()).goodB2GSink(dataVector, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -81,8 +77,7 @@ public class CWE606_Unchecked_Loop_Condition__getParameter_Servlet_72a extends A
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

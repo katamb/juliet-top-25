@@ -16,14 +16,13 @@ Template File: sources-sinks-42.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCase
-{
-    private int badSource() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCase {
+    private int badSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
@@ -32,21 +31,19 @@ public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCas
         return data;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data = badSource();
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
         data++;
-        int result = (int)(data);
+        int result = (int) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int goodG2BSource() throws Throwable
-    {
+    private int goodG2BSource() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -55,21 +52,19 @@ public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCas
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = goodG2BSource();
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
         data++;
-        int result = (int)(data);
+        int result = (int) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int goodB2GSource() throws Throwable
-    {
+    private int goodB2GSource() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
@@ -78,26 +73,21 @@ public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCas
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data = goodB2GSource();
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
+        if (data < Integer.MAX_VALUE) {
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -108,8 +98,7 @@ public class CWE190_Integer_Overflow__int_max_postinc_42 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -4,14 +4,14 @@ Label Definition File: CWE549_Missing_Password_Masking__Servlet.label.xml
 Template File: point-flaw-04.tmpl.java
 */
 /*
-* @description
-* CWE: 549 Passwords should be masked during entry to prevent others from stealing them
-* Sinks:
-*    GoodSink: password field masked
-*    BadSink : password field unmasked
-* Flow Variant: 04 Control flow: if(PRIVATE_STATIC_FINAL_TRUE) and if(PRIVATE_STATIC_FINAL_FALSE)
-*
-* */
+ * @description
+ * CWE: 549 Passwords should be masked during entry to prevent others from stealing them
+ * Sinks:
+ *    GoodSink: password field masked
+ *    BadSink : password field unmasked
+ * Flow Variant: 04 Control flow: if(PRIVATE_STATIC_FINAL_TRUE) and if(PRIVATE_STATIC_FINAL_FALSE)
+ *
+ * */
 
 package testcases.CWE549_Missing_Password_Masking;
 
@@ -19,8 +19,7 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCaseServlet
-{
+public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCaseServlet {
     /* The two variables below are declared "final", so a tool should
      * be able to identify that reads of these will always return their
      * initialized values.
@@ -28,10 +27,8 @@ public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCas
     private static final boolean PRIVATE_STATIC_FINAL_TRUE = true;
     private static final boolean PRIVATE_STATIC_FINAL_FALSE = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (PRIVATE_STATIC_FINAL_TRUE)
-        {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (PRIVATE_STATIC_FINAL_TRUE) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             /* FLAW: password field should be masked (type="text") */
@@ -41,15 +38,11 @@ public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCas
     }
 
     /* good1() changes PRIVATE_STATIC_FINAL_TRUE to PRIVATE_STATIC_FINAL_FALSE */
-    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (PRIVATE_STATIC_FINAL_FALSE)
-        {
+    private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (PRIVATE_STATIC_FINAL_FALSE) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
@@ -61,10 +54,8 @@ public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCas
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        if (PRIVATE_STATIC_FINAL_TRUE)
-        {
+    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (PRIVATE_STATIC_FINAL_TRUE) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             /* FIX: password field is masked with type="password" instead of type="text" */
@@ -73,8 +64,7 @@ public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCas
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         good1(request, response);
         good2(request, response);
     }
@@ -85,8 +75,7 @@ public class CWE549_Missing_Password_Masking__Servlet_04 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

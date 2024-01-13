@@ -21,13 +21,10 @@ import testcasesupport.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_81_goodG2B extends CWE321_Hard_Coded_Cryptographic_Key__basic_81_base
-{
-    public void action(String data ) throws Throwable
-    {
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_81_goodG2B extends CWE321_Hard_Coded_Cryptographic_Key__basic_81_base {
+    public void action(String data) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */

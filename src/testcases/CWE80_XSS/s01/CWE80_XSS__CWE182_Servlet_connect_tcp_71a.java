@@ -15,6 +15,7 @@ Template File: sources-sink-71a.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE80_XSS__CWE182_Servlet_connect_tcp_71a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_connect_tcp_71a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -40,8 +39,7 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_71a extends AbstractTestCaseS
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -52,70 +50,52 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_71a extends AbstractTestCaseS
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
         }
 
-        (new CWE80_XSS__CWE182_Servlet_connect_tcp_71b()).badSink((Object)data , request, response );
+        (new CWE80_XSS__CWE182_Servlet_connect_tcp_71b()).badSink((Object) data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        (new CWE80_XSS__CWE182_Servlet_connect_tcp_71b()).goodG2BSink((Object)data , request, response );
+        (new CWE80_XSS__CWE182_Servlet_connect_tcp_71b()).goodG2BSink((Object) data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -124,8 +104,7 @@ public class CWE80_XSS__CWE182_Servlet_connect_tcp_71a extends AbstractTestCaseS
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args)
-    throws ClassNotFoundException, InstantiationException, IllegalAccessException
-    {
+            throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

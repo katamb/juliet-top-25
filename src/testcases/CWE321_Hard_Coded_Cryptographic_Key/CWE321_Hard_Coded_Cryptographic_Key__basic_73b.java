@@ -17,19 +17,17 @@ Template File: sources-sink-73b.tmpl.java
 package testcases.CWE321_Hard_Coded_Cryptographic_Key;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_73b
-{
-    public void badSink(LinkedList<String> dataLinkedList ) throws Throwable
-    {
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_73b {
+    public void badSink(LinkedList<String> dataLinkedList) throws Throwable {
         String data = dataLinkedList.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -43,12 +41,10 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_73b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(LinkedList<String> dataLinkedList ) throws Throwable
-    {
+    public void goodG2BSink(LinkedList<String> dataLinkedList) throws Throwable {
         String data = dataLinkedList.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */

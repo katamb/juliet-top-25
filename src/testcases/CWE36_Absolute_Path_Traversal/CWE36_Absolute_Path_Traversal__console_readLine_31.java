@@ -28,11 +28,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 
-public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends AbstractTestCase
-{
+public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -44,41 +42,28 @@ public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends Abstract
                 BufferedReader readerBuffered = null;
 
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
 
                     /* POTENTIAL FLAW: Read data from the console using readLine */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -91,61 +76,42 @@ public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends Abstract
             String data = dataCopy;
 
             /* POTENTIAL FLAW: unvalidated or sandboxed value */
-            if (data != null)
-            {
+            if (data != null) {
                 File file = new File(data);
                 FileInputStream streamFileInputSink = null;
                 InputStreamReader readerInputStreamSink = null;
                 BufferedReader readerBufferdSink = null;
-                if (file.exists() && file.isFile())
-                {
-                    try
-                    {
+                if (file.exists() && file.isFile()) {
+                    try {
                         streamFileInputSink = new FileInputStream(file);
                         readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                         readerBufferdSink = new BufferedReader(readerInputStreamSink);
                         IO.writeLine(readerBufferdSink.readLine());
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                    }
-                    finally
-                    {
+                    } finally {
                         /* Close stream reading objects */
-                        try
-                        {
-                            if (readerBufferdSink != null)
-                            {
+                        try {
+                            if (readerBufferdSink != null) {
                                 readerBufferdSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (readerInputStreamSink != null)
-                            {
+                        try {
+                            if (readerInputStreamSink != null) {
                                 readerInputStreamSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (streamFileInputSink != null)
-                            {
+                        try {
+                            if (streamFileInputSink != null) {
                                 streamFileInputSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                         }
                     }
@@ -155,14 +121,12 @@ public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends Abstract
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -176,61 +140,42 @@ public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends Abstract
             String data = dataCopy;
 
             /* POTENTIAL FLAW: unvalidated or sandboxed value */
-            if (data != null)
-            {
+            if (data != null) {
                 File file = new File(data);
                 FileInputStream streamFileInputSink = null;
                 InputStreamReader readerInputStreamSink = null;
                 BufferedReader readerBufferdSink = null;
-                if (file.exists() && file.isFile())
-                {
-                    try
-                    {
+                if (file.exists() && file.isFile()) {
+                    try {
                         streamFileInputSink = new FileInputStream(file);
                         readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
                         readerBufferdSink = new BufferedReader(readerInputStreamSink);
                         IO.writeLine(readerBufferdSink.readLine());
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                    }
-                    finally
-                    {
+                    } finally {
                         /* Close stream reading objects */
-                        try
-                        {
-                            if (readerBufferdSink != null)
-                            {
+                        try {
+                            if (readerBufferdSink != null) {
                                 readerBufferdSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (readerInputStreamSink != null)
-                            {
+                        try {
+                            if (readerInputStreamSink != null) {
                                 readerInputStreamSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                         }
 
-                        try
-                        {
-                            if (streamFileInputSink != null)
-                            {
+                        try {
+                            if (streamFileInputSink != null) {
                                 streamFileInputSink.close();
                             }
-                        }
-                        catch (IOException exceptIO)
-                        {
+                        } catch (IOException exceptIO) {
                             IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                         }
                     }
@@ -246,8 +191,7 @@ public class CWE36_Absolute_Path_Traversal__console_readLine_31 extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

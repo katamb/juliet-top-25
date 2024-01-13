@@ -16,33 +16,30 @@ Template File: sources-sinks-66a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_preinc_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_preinc_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+        data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
         short[] dataArray = new short[5];
         dataArray[2] = data;
-        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).badSink(dataArray  );
+        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -50,20 +47,19 @@ public class CWE190_Integer_Overflow__short_rand_preinc_66a extends AbstractTest
 
         short[] dataArray = new short[5];
         dataArray[2] = data;
-        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).goodG2BSink(dataArray  );
+        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).goodG2BSink(dataArray);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use a random value */
-        data = (short)((new java.security.SecureRandom()).nextInt(1+Short.MAX_VALUE-Short.MIN_VALUE)+Short.MIN_VALUE);
+        data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
 
         short[] dataArray = new short[5];
         dataArray[2] = data;
-        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).goodB2GSink(dataArray  );
+        (new CWE190_Integer_Overflow__short_rand_preinc_66b()).goodB2GSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -72,8 +68,7 @@ public class CWE190_Integer_Overflow__short_rand_preinc_66a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -16,24 +16,20 @@ Template File: sources-sinks-81_goodG2B.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_size_81_goodG2B extends CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_size_81_base
-{
-    public void action(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_size_81_goodG2B extends CWE129_Improper_Validation_of_Array_Index__getParameter_Servlet_array_size_81_base {
+    public void action(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 

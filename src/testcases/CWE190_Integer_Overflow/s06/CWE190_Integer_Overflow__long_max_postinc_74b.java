@@ -16,52 +16,47 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_max_postinc_74b
-{
-    public void badSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_max_postinc_74b {
+    public void badSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
         data++;
-        long result = (long)(data);
+        long result = (long) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
         /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
         data++;
-        long result = (long)(data);
+        long result = (long) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,Long> dataHashMap ) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, Long> dataHashMap) throws Throwable {
         long data = dataHashMap.get(2);
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Long.MAX_VALUE)
-        {
+        if (data < Long.MAX_VALUE) {
             data++;
-            long result = (long)(data);
+            long result = (long) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

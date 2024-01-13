@@ -29,64 +29,46 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE23_Relative_Path_Traversal__URLConnection_22b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__URLConnection_22b {
+    public String badSource() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__URLConnection_22a.badPublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__URLConnection_22a.badPublicStatic) {
             data = ""; /* Initialize data */
             /* read input from URLConnection */
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from a web server with URLConnection */
                     /* This will be reading the first "line" of the response body,
                      * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -95,18 +77,14 @@ public class CWE23_Relative_Path_Traversal__URLConnection_22b
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    public String goodG2B1Source() throws Throwable
-    {
+    public String goodG2B1Source() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__URLConnection_22a.goodG2B1PublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__URLConnection_22a.goodG2B1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -117,17 +95,13 @@ public class CWE23_Relative_Path_Traversal__URLConnection_22b
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    public String goodG2B2Source() throws Throwable
-    {
+    public String goodG2B2Source() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__URLConnection_22a.goodG2B2PublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__URLConnection_22a.goodG2B2PublicStatic) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;

@@ -23,10 +23,8 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 
-public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
-{
-    private String badSource() throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase {
+    private String badSource() throws Throwable {
         String data;
 
         /* FLAW: Set data to a hardcoded string */
@@ -36,12 +34,10 @@ public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
     }
 
     /* use badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = badSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -50,23 +46,19 @@ public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
 
     }
 
-    private String goodG2BSource() throws Throwable
-    {
+    private String goodG2BSource() throws Throwable {
         String data;
 
         data = ""; /* init data */
 
         /* FIX: Read data from the console using readLine() */
-        try
-        {
+        try {
             InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
             BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
             /* POTENTIAL FLAW: Read data from the console using readLine */
             data = readerBuffered.readLine();
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
 
@@ -76,12 +68,10 @@ public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = goodG2BSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             /* POTENTIAL FLAW: data used as password in KerberosKey() */
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -90,8 +80,7 @@ public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
@@ -101,8 +90,7 @@ public class CWE259_Hard_Coded_Password__kerberosKey_42 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -16,6 +16,7 @@ Template File: sources-sinks-45.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,25 +28,20 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 extends AbstractTestCase
-{
+public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 extends AbstractTestCase {
     private int dataBad;
     private int dataGoodG2B;
     private int dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         int data = dataBad;
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -55,8 +51,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -67,8 +62,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -78,58 +72,38 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 String stringNumber = resultSet.getString(1);
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -139,25 +113,20 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         int data = dataGoodG2B;
 
         int array[] = null;
 
         /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-        if (data >= 0)
-        {
+        if (data >= 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -168,8 +137,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -179,20 +147,16 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         int data = dataGoodB2G;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
         int array[] = null;
 
         /* FIX: Verify that data is non-negative AND greater than 0 */
-        if (data > 0)
-        {
+        if (data > 0) {
             array = new int[data];
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array size is negative");
         }
 
@@ -203,8 +167,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -215,8 +178,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -226,58 +188,38 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 String stringNumber = resultSet.getString(1);
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -293,8 +235,7 @@ public class CWE129_Improper_Validation_of_Array_Index__database_array_size_45 e
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

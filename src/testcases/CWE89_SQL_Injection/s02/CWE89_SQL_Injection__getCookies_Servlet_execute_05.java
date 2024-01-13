@@ -4,18 +4,19 @@ Label Definition File: CWE89_SQL_Injection.label.xml
 Template File: sources-sinks-05.tmpl.java
 */
 /*
-* @description
-* CWE: 89 SQL Injection
-* BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
-* GoodSource: A hardcoded string
-* Sinks: execute
-*    GoodSink: Use prepared statement and execute (properly)
-*    BadSink : data concatenated into SQL statement used in execute(), which could result in SQL Injection
-* Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
-*
-* */
+ * @description
+ * CWE: 89 SQL Injection
+ * BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
+ * GoodSource: A hardcoded string
+ * Sinks: execute
+ *    GoodSink: Use prepared statement and execute (properly)
+ *    BadSink : data concatenated into SQL statement used in execute(), which could result in SQL Injection
+ * Flow Variant: 05 Control flow: if(privateTrue) and if(privateFalse)
+ *
+ * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -25,8 +26,7 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends AbstractTestCaseServlet
-{
+public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends AbstractTestCaseServlet {
     /* The two variables below are not defined as "final", but are never
      * assigned any other value, so a tool should be able to identify that
      * reads of these will always return their initialized values.
@@ -34,75 +34,53 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
     private boolean privateTrue = true;
     private boolean privateFalse = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = ""; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -110,69 +88,48 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first privateTrue to privateFalse */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateFalse)
-        {
+        if (privateFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -180,67 +137,46 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
-            try
-            {
+            try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
                 /* POTENTIAL FLAW: data concatenated into SQL statement used in execute(), which could result in SQL Injection */
-                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='"+data+"'");
-                if(result)
-                {
+                Boolean result = sqlStatement.execute("insert into users (status) values ('updated') where name='" + data + "'");
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -248,43 +184,34 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second privateTrue to privateFalse */
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = ""; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (privateFalse)
-        {
+        if (privateFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
 
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
@@ -292,42 +219,27 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
 
                 Boolean result = sqlStatement.execute();
 
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -336,84 +248,61 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (privateTrue)
-        {
+        if (privateTrue) {
             data = ""; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (privateTrue)
-        {
+        if (privateTrue) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
-            try
-            {
+            try {
                 /* FIX: Use prepared statement and execute (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
                 sqlStatement.setString(1, data);
                 Boolean result = sqlStatement.execute();
-                if (result)
-                {
+                if (result) {
                     IO.writeLine("Name, " + data + ", updated successfully");
-                }
-                else
-                {
+                } else {
                     IO.writeLine("Unable to update records for user: " + data);
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-            }
-            finally
-            {
-                try
-                {
-                    if (sqlStatement != null)
-                    {
+            } finally {
+                try {
+                    if (sqlStatement != null) {
                         sqlStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (dbConnection != null)
-                    {
+                try {
+                    if (dbConnection != null) {
                         dbConnection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
         goodB2G1(request, response);
@@ -426,8 +315,7 @@ public class CWE89_SQL_Injection__getCookies_Servlet_execute_05 extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,7 +16,9 @@ Template File: sources-sinks-75a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s01;
+
 import testcasesupport.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -25,10 +27,8 @@ import java.util.logging.Level;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -39,56 +39,41 @@ public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractT
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).badSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).badSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -98,50 +83,36 @@ public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractT
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).goodG2BSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).goodG2BSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -152,42 +123,29 @@ public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractT
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).goodB2GSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE89_SQL_Injection__Environment_executeBatch_75b()).goodB2GSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
@@ -199,8 +157,7 @@ public class CWE89_SQL_Injection__Environment_executeBatch_75a extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

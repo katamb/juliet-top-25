@@ -16,17 +16,16 @@ Template File: sources-sinks-81_goodG2B.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_square_81_goodG2B extends CWE190_Integer_Overflow__short_max_square_81_base
-{
-    public void action(short data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_square_81_goodG2B extends CWE190_Integer_Overflow__short_max_square_81_base {
+    public void action(short data) throws Throwable {
 
         /* POTENTIAL FLAW: if (data*data) > Short.MAX_VALUE, this will overflow */
-        short result = (short)(data * data);
+        short result = (short) (data * data);
 
         IO.writeLine("result: " + result);
 

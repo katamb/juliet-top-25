@@ -16,45 +16,39 @@ Template File: sources-sinks-53d.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_getCookies_Servlet_add_53d
-{
-    public void badSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_getCookies_Servlet_add_53d {
+    public void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-        int result = (int)(data + 1);
+        int result = (int) (data + 1);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Integer.MAX_VALUE)
-        {
-            int result = (int)(data + 1);
+        if (data < Integer.MAX_VALUE) {
+            int result = (int) (data + 1);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to perform addition.");
         }
 

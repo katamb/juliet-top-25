@@ -4,31 +4,29 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-02.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: Environment Read data from an environment variable
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: square
-*    GoodSink: Ensure there will not be an overflow before squaring data
-*    BadSink : Square data, which can lead to overflow
-* Flow Variant: 02 Control flow: if(true) and if(false)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: Environment Read data from an environment variable
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: square
+ *    GoodSink: Ensure there will not be an overflow before squaring data
+ *    BadSink : Square data, which can lead to overflow
+ * Flow Variant: 02 Control flow: if(true) and if(false)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_Environment_square_02 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_Environment_square_02 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
-        if (true)
-        {
+        if (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* get environment variable ADD */
             /* POTENTIAL FLAW: Read data from an environment variable */
@@ -36,88 +34,70 @@ public class CWE190_Integer_Overflow__int_Environment_square_02 extends Abstract
                 String stringNumber = System.getenv("ADD");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (true)
-        {
+        if (true) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first true to false */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         int data;
-        if (false)
-        {
+        if (false) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (true)
-        {
+        if (true) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         int data;
-        if (true)
-        {
+        if (true) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (true)
-        {
+        if (true) {
             /* POTENTIAL FLAW: if (data*data) > Integer.MAX_VALUE, this will overflow */
-            int result = (int)(data * data);
+            int result = (int) (data * data);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second true to false */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
-        if (true)
-        {
+        if (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* get environment variable ADD */
             /* POTENTIAL FLAW: Read data from an environment variable */
@@ -125,41 +105,30 @@ public class CWE190_Integer_Overflow__int_Environment_square_02 extends Abstract
                 String stringNumber = System.getenv("ADD");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (false)
-        {
+        if (false) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Add a check to prevent an overflow from occurring */
             /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-            {
-                int result = (int)(data * data);
+            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+                int result = (int) (data * data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform squaring.");
             }
 
@@ -167,11 +136,9 @@ public class CWE190_Integer_Overflow__int_Environment_square_02 extends Abstract
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
-        if (true)
-        {
+        if (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             /* get environment variable ADD */
             /* POTENTIAL FLAW: Read data from an environment variable */
@@ -179,42 +146,32 @@ public class CWE190_Integer_Overflow__int_Environment_square_02 extends Abstract
                 String stringNumber = System.getenv("ADD");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0;
         }
 
-        if (true)
-        {
+        if (true) {
             /* FIX: Add a check to prevent an overflow from occurring */
             /* NOTE: Math.abs of the minimum int or long will return that same value, so we must check for it */
-            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long)Math.sqrt(Integer.MAX_VALUE)))
-            {
-                int result = (int)(data * data);
+            if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
+                int result = (int) (data * data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform squaring.");
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -227,8 +184,7 @@ public class CWE190_Integer_Overflow__int_Environment_square_02 extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

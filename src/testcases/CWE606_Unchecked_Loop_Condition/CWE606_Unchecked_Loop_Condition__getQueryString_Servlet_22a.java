@@ -23,14 +23,12 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends AbstractTestCaseServlet
-{
+public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends AbstractTestCaseServlet {
     /* The public static variable below is used to drive control flow in the sink function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -38,11 +36,9 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -50,7 +46,7 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         }
 
         badPublicStatic = true;
-        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).badSink(data , request, response);
+        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).badSink(data, request, response);
     }
 
     /* The public static variables below are used to drive control flow in the sink functions.
@@ -59,16 +55,14 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
     public static boolean goodB2G2PublicStatic = false;
     public static boolean goodG2BPublicStatic = false;
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodB2G1(request, response);
         goodB2G2(request, response);
         goodG2B(request, response);
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -76,11 +70,9 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -88,12 +80,11 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         }
 
         goodB2G1PublicStatic = false;
-        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodB2G1Sink(data , request, response);
+        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodB2G1Sink(data, request, response);
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
 
         data = ""; /* initialize data in case id is not in query string */
@@ -101,11 +92,9 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                     data = token.substring(3); /* set data to "foo" */
                     break; /* exit while loop */
                 }
@@ -113,19 +102,18 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
         }
 
         goodB2G2PublicStatic = true;
-        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodB2G2Sink(data , request, response);
+        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodB2G2Sink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
 
         /* FIX: Use a hardcoded int as a string */
         data = "5";
 
         goodG2BPublicStatic = true;
-        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodG2BSink(data , request, response);
+        (new CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22b()).goodG2BSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -134,8 +122,7 @@ public class CWE606_Unchecked_Loop_Condition__getQueryString_Servlet_22a extends
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

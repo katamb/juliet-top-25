@@ -16,51 +16,45 @@ Template File: sources-sinks-71b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_postinc_71b
-{
-    public void badSink(Object dataObject ) throws Throwable
-    {
-        short data = (Short)dataObject;
+public class CWE190_Integer_Overflow__short_rand_postinc_71b {
+    public void badSink(Object dataObject) throws Throwable {
+        short data = (Short) dataObject;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
         data++;
-        short result = (short)(data);
+        short result = (short) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject ) throws Throwable
-    {
-        short data = (Short)dataObject;
+    public void goodG2BSink(Object dataObject) throws Throwable {
+        short data = (Short) dataObject;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
         data++;
-        short result = (short)(data);
+        short result = (short) (data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(Object dataObject ) throws Throwable
-    {
-        short data = (Short)dataObject;
+    public void goodB2GSink(Object dataObject) throws Throwable {
+        short data = (Short) dataObject;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Short.MAX_VALUE)
-        {
+        if (data < Short.MAX_VALUE) {
             data++;
-            short result = (short)(data);
+            short result = (short) (data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

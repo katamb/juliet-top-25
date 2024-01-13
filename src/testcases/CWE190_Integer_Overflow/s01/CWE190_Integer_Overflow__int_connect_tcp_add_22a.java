@@ -16,6 +16,7 @@ Template File: sources-sinks-22a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,14 +28,12 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTestCase {
     /* The public static variable below is used to drive control flow in the sink function.
      * The public static variable mimics a global variable in the C/C++ language family. */
     public static boolean badPublicStatic = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -45,8 +44,7 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -57,66 +55,46 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 String stringNumber = readerBuffered.readLine();
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
         }
 
         badPublicStatic = true;
-        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).badSink(data );
+        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).badSink(data);
     }
 
     /* The public static variables below are used to drive control flow in the sink functions.
@@ -125,16 +103,14 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
     public static boolean goodB2G2PublicStatic = false;
     public static boolean goodG2BPublicStatic = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use badsource and goodsink by setting the static variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -145,8 +121,7 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -157,71 +132,50 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 String stringNumber = readerBuffered.readLine();
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
         }
 
         goodB2G1PublicStatic = false;
-        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodB2G1Sink(data );
+        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodB2G1Sink(data);
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data = 0;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -232,8 +186,7 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -244,78 +197,57 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 String stringNumber = readerBuffered.readLine();
-                if (stringNumber != null) /* avoid NPD incidental warnings */
-                {
-                    try
-                    {
+                if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
         }
 
         goodB2G2PublicStatic = true;
-        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodB2G2Sink(data );
+        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodB2G2Sink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data = 0;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         goodG2BPublicStatic = true;
-        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodG2BSink(data );
+        (new CWE190_Integer_Overflow__int_connect_tcp_add_22b()).goodG2BSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -324,8 +256,7 @@ public class CWE190_Integer_Overflow__int_connect_tcp_add_22a extends AbstractTe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

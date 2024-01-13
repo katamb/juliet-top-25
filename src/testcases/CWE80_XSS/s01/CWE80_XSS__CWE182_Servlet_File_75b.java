@@ -15,7 +15,9 @@ Template File: sources-sink-75b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
@@ -23,116 +25,81 @@ import java.util.logging.Level;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__CWE182_Servlet_File_75b
-{
-    public void badSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_File_75b {
+    public void badSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(byte[] dataSerialized , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(byte[] dataSerialized, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            String data = (String)streamObjectInput.readObject();
+            String data = (String) streamObjectInput.readObject();
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }

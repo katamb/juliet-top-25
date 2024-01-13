@@ -16,14 +16,13 @@ Template File: sources-sinks-66a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a value greater than the size of the array */
@@ -31,18 +30,16 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_n
 
         int[] dataArray = new int[5];
         dataArray[2] = data;
-        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).badSink(dataArray  );
+        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -50,12 +47,11 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_n
 
         int[] dataArray = new int[5];
         dataArray[2] = data;
-        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).goodG2BSink(dataArray  );
+        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).goodG2BSink(dataArray);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Set data to a value greater than the size of the array */
@@ -63,7 +59,7 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_n
 
         int[] dataArray = new int[5];
         dataArray[2] = data;
-        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).goodB2GSink(dataArray  );
+        (new CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_no_check_66b()).goodB2GSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -72,8 +68,7 @@ public class CWE129_Improper_Validation_of_Array_Index__large_fixed_array_read_n
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

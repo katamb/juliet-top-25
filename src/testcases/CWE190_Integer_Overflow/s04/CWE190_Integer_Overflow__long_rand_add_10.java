@@ -4,129 +4,104 @@ Label Definition File: CWE190_Integer_Overflow.label.xml
 Template File: sources-sinks-10.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: rand Set data to result of rand()
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: add
-*    GoodSink: Ensure there will not be an overflow before adding 1 to data
-*    BadSink : Add 1 to data, which can cause an overflow
-* Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: rand Set data to result of rand()
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: add
+ *    GoodSink: Ensure there will not be an overflow before adding 1 to data
+ *    BadSink : Add 1 to data, which can cause an overflow
+ * Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_rand_add_10 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_rand_add_10 extends AbstractTestCase {
+    public void bad() throws Throwable {
         long data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: Use a random value */
             data = (new java.security.SecureRandom()).nextLong();
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0L;
         }
 
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-            long result = (long)(data + 1);
+            long result = (long) (data + 1);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B1() - use goodsource and badsink by changing first IO.staticTrue to IO.staticFalse */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         long data;
-        if (IO.staticFalse)
-        {
+        if (IO.staticFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0L;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
 
         }
 
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-            long result = (long)(data + 1);
+            long result = (long) (data + 1);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in first if */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         long data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0L;
         }
 
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: if data == Long.MAX_VALUE, this will overflow */
-            long result = (long)(data + 1);
+            long result = (long) (data + 1);
             IO.writeLine("result: " + result);
         }
     }
 
     /* goodB2G1() - use badsource and goodsink by changing second IO.staticTrue to IO.staticFalse */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         long data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: Use a random value */
             data = (new java.security.SecureRandom()).nextLong();
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0L;
         }
 
-        if (IO.staticFalse)
-        {
+        if (IO.staticFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Long.MAX_VALUE)
-            {
-                long result = (long)(data + 1);
+            if (data < Long.MAX_VALUE) {
+                long result = (long) (data + 1);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform addition.");
             }
 
@@ -134,38 +109,29 @@ public class CWE190_Integer_Overflow__long_rand_add_10 extends AbstractTestCase
     }
 
     /* goodB2G2() - use badsource and goodsink by reversing statements in second if  */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         long data;
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* POTENTIAL FLAW: Use a random value */
             data = (new java.security.SecureRandom()).nextLong();
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = 0L;
         }
 
-        if (IO.staticTrue)
-        {
+        if (IO.staticTrue) {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Long.MAX_VALUE)
-            {
-                long result = (long)(data + 1);
+            if (data < Long.MAX_VALUE) {
+                long result = (long) (data + 1);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform addition.");
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
         goodB2G1();
@@ -178,8 +144,7 @@ public class CWE190_Integer_Overflow__long_rand_add_10 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

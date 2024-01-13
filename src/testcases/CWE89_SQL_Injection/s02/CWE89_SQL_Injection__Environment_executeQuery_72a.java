@@ -16,15 +16,15 @@ Template File: sources-sinks-72a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
-public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -35,18 +35,16 @@ public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractT
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).badSink(dataVector  );
+        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -56,12 +54,11 @@ public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractT
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).goodG2BSink(dataVector  );
+        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).goodG2BSink(dataVector);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -72,7 +69,7 @@ public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractT
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).goodB2GSink(dataVector  );
+        (new CWE89_SQL_Injection__Environment_executeQuery_72b()).goodB2GSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -81,8 +78,7 @@ public class CWE89_SQL_Injection__Environment_executeQuery_72a extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -16,21 +16,19 @@ Template File: sources-sinks-67a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTestCase
-{
-    static class Container
-    {
+public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTestCase {
+    static class Container {
         public int containerOne;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -41,12 +39,9 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
@@ -54,18 +49,16 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__int_Environment_add_67b()).badSink(dataContainer  );
+        (new CWE190_Integer_Overflow__int_Environment_add_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -73,12 +66,11 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__int_Environment_add_67b()).goodG2BSink(dataContainer  );
+        (new CWE190_Integer_Overflow__int_Environment_add_67b()).goodG2BSink(dataContainer);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -89,12 +81,9 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
@@ -102,7 +91,7 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE190_Integer_Overflow__int_Environment_add_67b()).goodB2GSink(dataContainer  );
+        (new CWE190_Integer_Overflow__int_Environment_add_67b()).goodB2GSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -111,8 +100,7 @@ public class CWE190_Integer_Overflow__int_Environment_add_67a extends AbstractTe
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

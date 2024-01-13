@@ -16,6 +16,7 @@ Template File: sources-sinks-61a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,135 +25,97 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__Environment_executeQuery_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__Environment_executeQuery_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data = (new CWE89_SQL_Injection__Environment_executeQuery_61b()).badSource();
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeQuery(), which could result in SQL Injection */
-            resultSet = sqlStatement.executeQuery("select * from users where name='"+data+"'");
+            resultSet = sqlStatement.executeQuery("select * from users where name='" + data + "'");
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = (new CWE89_SQL_Injection__Environment_executeQuery_61b()).goodG2BSource();
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeQuery(), which could result in SQL Injection */
-            resultSet = sqlStatement.executeQuery("select * from users where name='"+data+"'");
+            resultSet = sqlStatement.executeQuery("select * from users where name='" + data + "'");
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -160,16 +123,14 @@ public class CWE89_SQL_Injection__Environment_executeQuery_61a extends AbstractT
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data = (new CWE89_SQL_Injection__Environment_executeQuery_61b()).goodB2GSource();
 
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         ResultSet resultSet = null;
 
-        try
-        {
+        try {
             /* FIX: Use prepared statement and executeQuery (properly) */
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.prepareStatement("select * from users where name=?");
@@ -178,46 +139,30 @@ public class CWE89_SQL_Injection__Environment_executeQuery_61a extends AbstractT
             resultSet = sqlStatement.executeQuery();
 
             IO.writeLine(resultSet.getRow()); /* Use ResultSet in some way */
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (resultSet != null)
-                {
+        } finally {
+            try {
+                if (resultSet != null) {
                     resultSet.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
             }
 
-            try
-            {
-                if (sqlStatement != null)
-                {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }
@@ -230,8 +175,7 @@ public class CWE89_SQL_Injection__Environment_executeQuery_61a extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

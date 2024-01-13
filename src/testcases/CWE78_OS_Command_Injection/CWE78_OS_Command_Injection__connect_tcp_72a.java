@@ -17,6 +17,7 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE78_OS_Command_Injection;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
@@ -28,10 +29,8 @@ import java.net.Socket;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +41,7 @@ public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCas
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 /* Read data using an outbound tcp connection */
                 socket = new Socket("host.example.org", 39544);
 
@@ -54,48 +52,32 @@ public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCas
 
                 /* POTENTIAL FLAW: Read data using an outbound tcp connection */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
 
                 /* clean up socket objects */
-                try
-                {
-                    if (socket != null)
-                    {
+                try {
+                    if (socket != null) {
                         socket.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing Socket", exceptIO);
                 }
             }
@@ -105,17 +87,15 @@ public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCas
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE78_OS_Command_Injection__connect_tcp_72b()).badSink(dataVector  );
+        (new CWE78_OS_Command_Injection__connect_tcp_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -125,7 +105,7 @@ public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCas
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE78_OS_Command_Injection__connect_tcp_72b()).goodG2BSink(dataVector  );
+        (new CWE78_OS_Command_Injection__connect_tcp_72b()).goodG2BSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -134,8 +114,7 @@ public class CWE78_OS_Command_Injection__connect_tcp_72a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

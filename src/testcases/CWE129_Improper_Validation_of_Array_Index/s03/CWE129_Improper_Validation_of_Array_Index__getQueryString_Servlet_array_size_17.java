@@ -4,18 +4,19 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-17.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_size
-*    GoodSink: data is used to set the size of the array and it must be greater than 0
-*    BadSink : data is used to set the size of the array, but it could be set to 0
-* Flow Variant: 17 Control flow: for loops
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_size
+ *    GoodSink: data is used to set the size of the array and it must be greater than 0
+ *    BadSink : data is used to set the size of the array, but it could be set to 0
+ * Flow Variant: 17 Control flow: for loops
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,10 +25,8 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_17 extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_17 extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* We need to have one source outside of a for loop in order
@@ -41,17 +40,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -59,16 +53,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
             }
         }
 
-        for (int j = 0; j < 1; j++)
-        {
+        for (int j = 0; j < 1; j++) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -78,23 +68,18 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
-        for (int j = 0; j < 1; j++)
-        {
+        for (int j = 0; j < 1; j++) {
             int array[] = null;
             /* POTENTIAL FLAW: Verify that data is non-negative, but still allow it to be 0 */
-            if (data >= 0)
-            {
+            if (data >= 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -104,8 +89,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
     }
 
     /* goodB2G() - use badsource and goodsink*/
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -114,17 +98,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -132,17 +111,13 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
             }
         }
 
-        for (int k = 0; k < 1; k++)
-        {
+        for (int k = 0; k < 1; k++) {
             /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
             int array[] = null;
             /* FIX: Verify that data is non-negative AND greater than 0 */
-            if (data > 0)
-            {
+            if (data > 0) {
                 array = new int[data];
-            }
-            else
-            {
+            } else {
                 IO.writeLine("Array size is negative");
             }
             /* do something with the array */
@@ -151,8 +126,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
@@ -163,8 +137,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

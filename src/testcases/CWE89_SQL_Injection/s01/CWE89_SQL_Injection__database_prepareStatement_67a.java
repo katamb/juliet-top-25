@@ -16,6 +16,7 @@ Template File: sources-sinks-67a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -27,15 +28,12 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__database_prepareStatement_67a extends AbstractTestCase
-{
-    static class Container
-    {
+public class CWE89_SQL_Injection__database_prepareStatement_67a extends AbstractTestCase {
+    static class Container {
         public String containerOne;
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -46,8 +44,7 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -57,47 +54,31 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -105,18 +86,16 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__database_prepareStatement_67b()).badSink(dataContainer  );
+        (new CWE89_SQL_Injection__database_prepareStatement_67b()).badSink(dataContainer);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -124,12 +103,11 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__database_prepareStatement_67b()).goodG2BSink(dataContainer  );
+        (new CWE89_SQL_Injection__database_prepareStatement_67b()).goodG2BSink(dataContainer);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -140,8 +118,7 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -151,47 +128,31 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -199,7 +160,7 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
 
         Container dataContainer = new Container();
         dataContainer.containerOne = data;
-        (new CWE89_SQL_Injection__database_prepareStatement_67b()).goodB2GSink(dataContainer  );
+        (new CWE89_SQL_Injection__database_prepareStatement_67b()).goodB2GSink(dataContainer);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -208,8 +169,7 @@ public class CWE89_SQL_Injection__database_prepareStatement_67a extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

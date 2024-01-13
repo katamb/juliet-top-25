@@ -20,39 +20,32 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_41 extends AbstractTestCaseServlet
-{
-    private void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_41 extends AbstractTestCaseServlet {
+    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
 
-        badSink(data , request, response );
+        badSink(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
-    private void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -60,14 +53,13 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_41 extends Abstra
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        goodG2BSink(data , request, response );
+        goodG2BSink(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -76,8 +68,7 @@ public class CWE83_XSS_Attribute__Servlet_getParameter_Servlet_41 extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

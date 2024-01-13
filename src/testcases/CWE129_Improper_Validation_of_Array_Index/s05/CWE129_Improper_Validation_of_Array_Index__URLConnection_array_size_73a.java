@@ -16,7 +16,9 @@ Template File: sources-sinks-73a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s05;
+
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
 import javax.servlet.http.*;
@@ -29,10 +31,8 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -43,8 +43,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -55,44 +54,29 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -102,18 +86,16 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).badSink(dataLinkedList  );
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -123,12 +105,11 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -139,8 +120,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -151,44 +131,29 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
 
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch (NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -198,7 +163,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).goodB2GSink(dataLinkedList  );
+        (new CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size_73b()).goodB2GSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -207,8 +172,7 @@ public class CWE129_Improper_Validation_of_Array_Index__URLConnection_array_size
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

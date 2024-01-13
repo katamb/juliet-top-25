@@ -16,6 +16,7 @@ Template File: sources-sinks-68a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,12 +27,10 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends AbstractTestCase {
     public static byte data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* init data */
         data = -1;
@@ -39,49 +38,31 @@ public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends 
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Byte.parseByte(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -90,15 +71,13 @@ public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends 
         (new CWE190_Integer_Overflow__byte_console_readLine_postinc_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
@@ -107,8 +86,7 @@ public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* init data */
         data = -1;
@@ -116,49 +94,31 @@ public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends 
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Byte.parseByte(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -173,8 +133,7 @@ public class CWE190_Integer_Overflow__byte_console_readLine_postinc_68a extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -15,39 +15,36 @@ Template File: sources-sink-81a.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__Servlet_getParameter_Servlet_81a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__Servlet_getParameter_Servlet_81a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
         data = request.getParameter("name");
 
         CWE80_XSS__Servlet_getParameter_Servlet_81_base baseObject = new CWE80_XSS__Servlet_getParameter_Servlet_81_bad();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
         CWE80_XSS__Servlet_getParameter_Servlet_81_base baseObject = new CWE80_XSS__Servlet_getParameter_Servlet_81_goodG2B();
-        baseObject.action(data , request, response);
+        baseObject.action(data, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -56,8 +53,7 @@ public class CWE80_XSS__Servlet_getParameter_Servlet_81a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

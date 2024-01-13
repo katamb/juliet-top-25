@@ -16,54 +16,45 @@ Template File: sources-sinks-68b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_console_readLine_multiply_68b
-{
-    public void badSink() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_console_readLine_multiply_68b {
+    public void badSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_console_readLine_multiply_68a.data;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink() throws Throwable
-    {
+    public void goodG2BSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_console_readLine_multiply_68a.data;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Short.MAX_VALUE, this will overflow */
-            short result = (short)(data * 2);
+            short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink() throws Throwable
-    {
+    public void goodB2GSink() throws Throwable {
         short data = CWE190_Integer_Overflow__short_console_readLine_multiply_68a.data;
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < (Short.MAX_VALUE/2))
-            {
-                short result = (short)(data * 2);
+            if (data < (Short.MAX_VALUE / 2)) {
+                short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform multiplication.");
             }
         }

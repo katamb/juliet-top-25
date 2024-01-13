@@ -21,10 +21,8 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE78_OS_Command_Injection__getParameter_Servlet_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__getParameter_Servlet_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -34,8 +32,7 @@ public class CWE78_OS_Command_Injection__getParameter_Servlet_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */

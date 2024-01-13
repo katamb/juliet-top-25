@@ -15,18 +15,16 @@ Template File: sources-sink-71b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__Servlet_getQueryString_Servlet_71b
-{
-    public void badSink(Object dataObject , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        String data = (String)dataObject;
+public class CWE80_XSS__Servlet_getQueryString_Servlet_71b {
+    public void badSink(Object dataObject, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = (String) dataObject;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }
@@ -34,12 +32,10 @@ public class CWE80_XSS__Servlet_getQueryString_Servlet_71b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        String data = (String)dataObject;
+    public void goodG2BSink(Object dataObject, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = (String) dataObject;
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page without any encoding or validation */
             response.getWriter().println("<br>bad(): data = " + data);
         }

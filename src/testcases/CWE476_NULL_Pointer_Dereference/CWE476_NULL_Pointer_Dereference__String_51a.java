@@ -19,44 +19,39 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__String_51a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__String_51a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__String_51b()).badSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__String_51b()).badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: hardcode data to non-null */
         data = "This is not null";
 
-        (new CWE476_NULL_Pointer_Dereference__String_51b()).goodG2BSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__String_51b()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__String_51b()).goodB2GSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__String_51b()).goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +60,7 @@ public class CWE476_NULL_Pointer_Dereference__String_51a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

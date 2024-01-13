@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-06.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 06 Control flow: if(PRIVATE_STATIC_FINAL_FIVE==5) and if(PRIVATE_STATIC_FINAL_FIVE!=5)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: getCookies_Servlet Read data from the first cookie using getCookies()
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 06 Control flow: if(PRIVATE_STATIC_FINAL_FIVE==5) and if(PRIVATE_STATIC_FINAL_FIVE!=5)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -20,8 +20,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 
 
-public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractTestCaseServlet
-{
+public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractTestCaseServlet {
     /* The variable below is declared "final", so a tool should be able
      * to identify that reads of this will always give its initialized
      * value.
@@ -29,37 +28,29 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
     private static final int PRIVATE_STATIC_FINAL_FIVE = 5;
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_FIVE == 5)
-        {
+        if (PRIVATE_STATIC_FINAL_FIVE == 5) {
             data = ""; /* initialize data in case there are no cookies */
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -71,17 +62,13 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
     }
 
     /* goodG2B1() - use goodsource and badsink by changing PRIVATE_STATIC_FINAL_FIVE==5 to PRIVATE_STATIC_FINAL_FIVE!=5 */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_FIVE != 5)
-        {
+        if (PRIVATE_STATIC_FINAL_FIVE != 5) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -89,13 +76,10 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -107,29 +91,22 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_FIVE == 5)
-        {
+        if (PRIVATE_STATIC_FINAL_FIVE == 5) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -140,8 +117,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -152,8 +128,7 @@ public class CWE78_OS_Command_Injection__getCookies_Servlet_06 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

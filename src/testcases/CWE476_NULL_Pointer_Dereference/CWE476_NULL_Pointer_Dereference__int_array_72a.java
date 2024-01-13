@@ -18,58 +18,54 @@ Template File: sources-sinks-72a.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        int [] data;
+public class CWE476_NULL_Pointer_Dereference__int_array_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        Vector<int []> dataVector = new Vector<int []>(5);
+        Vector<int[]> dataVector = new Vector<int[]>(5);
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).badSink(dataVector  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data;
+    private void goodG2B() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
-        Vector<int []> dataVector = new Vector<int []>(5);
+        Vector<int[]> dataVector = new Vector<int[]>(5);
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).goodG2BSink(dataVector  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).goodG2BSink(dataVector);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
-        int [] data;
+    private void goodB2G() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        Vector<int []> dataVector = new Vector<int []>(5);
+        Vector<int[]> dataVector = new Vector<int[]>(5);
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).goodB2GSink(dataVector  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_72b()).goodB2GSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -78,8 +74,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_72a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

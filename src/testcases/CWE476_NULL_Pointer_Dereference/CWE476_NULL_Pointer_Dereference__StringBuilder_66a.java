@@ -19,10 +19,8 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -30,18 +28,16 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends Abstract
 
         StringBuilder[] dataArray = new StringBuilder[5];
         dataArray[2] = data;
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).badSink(dataArray  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
@@ -49,12 +45,11 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends Abstract
 
         StringBuilder[] dataArray = new StringBuilder[5];
         dataArray[2] = data;
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).goodG2BSink(dataArray  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).goodG2BSink(dataArray);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -62,7 +57,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends Abstract
 
         StringBuilder[] dataArray = new StringBuilder[5];
         dataArray[2] = data;
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).goodB2GSink(dataArray  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_66b()).goodB2GSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -71,8 +66,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66a extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

@@ -15,16 +15,15 @@ Template File: sources-sink-31.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 
-public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTestCaseServlet
-{
+public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -34,8 +33,7 @@ public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTes
             /* Read data from cookies */
             {
                 Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null)
-                {
+                if (cookieSources != null) {
                     /* POTENTIAL FLAW: Read data from the first cookie value */
                     data = cookieSources[0].getValue();
                 }
@@ -46,8 +44,7 @@ public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTes
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
@@ -55,14 +52,12 @@ public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTes
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String dataCopy;
         {
             String data;
@@ -75,8 +70,7 @@ public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTes
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
                 response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
             }
@@ -90,8 +84,7 @@ public class CWE80_XSS__CWE182_Servlet_getCookies_Servlet_31 extends AbstractTes
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

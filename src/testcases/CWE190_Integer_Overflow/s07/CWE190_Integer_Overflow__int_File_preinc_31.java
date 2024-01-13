@@ -16,6 +16,7 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -28,10 +29,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -44,8 +43,7 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
 
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -55,58 +53,38 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -118,22 +96,20 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
             int data = dataCopy;
 
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-            int result = (int)(++data);
+            int result = (int) (++data);
 
             IO.writeLine("result: " + result);
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -147,7 +123,7 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
             int data = dataCopy;
 
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
-            int result = (int)(++data);
+            int result = (int) (++data);
 
             IO.writeLine("result: " + result);
 
@@ -155,8 +131,7 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int dataCopy;
         {
             int data;
@@ -169,8 +144,7 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
 
-                try
-                {
+                try {
                     /* read string from file into data */
                     streamFileInput = new FileInputStream(file);
                     readerInputStream = new InputStreamReader(streamFileInput, "UTF-8");
@@ -180,58 +154,38 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
                     /* This will be reading the first "line" of the file, which
                      * could be very long if there are little or no newlines in the file */
                     String stringNumber = readerBuffered.readLine();
-                    if (stringNumber != null) /* avoid NPD incidental warnings */
-                    {
-                        try
-                        {
+                    if (stringNumber != null) /* avoid NPD incidental warnings */ {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* Close stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (streamFileInput != null)
-                        {
+                    try {
+                        if (streamFileInput != null) {
                             streamFileInput.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                     }
                 }
@@ -243,13 +197,10 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
             int data = dataCopy;
 
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Integer.MAX_VALUE)
-            {
-                int result = (int)(++data);
+            if (data < Integer.MAX_VALUE) {
+                int result = (int) (++data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
 
@@ -262,8 +213,7 @@ public class CWE190_Integer_Overflow__int_File_preinc_31 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -23,13 +23,10 @@ import java.io.*;
 
 import java.net.PasswordAuthentication;
 
-public class CWE259_Hard_Coded_Password__passwordAuth_81_bad extends CWE259_Hard_Coded_Password__passwordAuth_81_base
-{
-    public void action(String data ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__passwordAuth_81_bad extends CWE259_Hard_Coded_Password__passwordAuth_81_base {
+    public void action(String data) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());

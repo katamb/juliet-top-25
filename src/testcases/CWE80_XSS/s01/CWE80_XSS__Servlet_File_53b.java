@@ -15,20 +15,18 @@ Template File: sources-sink-53b.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__Servlet_File_53b
-{
-    public void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE80_XSS__Servlet_File_53c()).badSink(data , request, response);
+public class CWE80_XSS__Servlet_File_53b {
+    public void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE80_XSS__Servlet_File_53c()).badSink(data, request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
-        (new CWE80_XSS__Servlet_File_53c()).goodG2BSink(data , request, response);
+    public void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        (new CWE80_XSS__Servlet_File_53c()).goodG2BSink(data, request, response);
     }
 }

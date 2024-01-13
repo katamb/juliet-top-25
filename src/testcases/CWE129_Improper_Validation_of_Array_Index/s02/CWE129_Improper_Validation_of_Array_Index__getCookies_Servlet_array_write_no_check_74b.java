@@ -16,19 +16,19 @@ Template File: sources-sinks-74b.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s02;
+
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_write_no_check_74b
-{
-    public void badSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array_write_no_check_74b {
+    public void badSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -38,12 +38,11 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -53,20 +52,16 @@ public class CWE129_Improper_Validation_of_Array_Index__getCookies_Servlet_array
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(HashMap<Integer,Integer> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodB2GSink(HashMap<Integer, Integer> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataHashMap.get(2);
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before writing to array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             array[data] = 42;
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 

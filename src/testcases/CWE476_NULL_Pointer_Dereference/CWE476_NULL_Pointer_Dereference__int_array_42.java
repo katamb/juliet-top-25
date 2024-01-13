@@ -19,11 +19,9 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestCase
-{
-    private int [] badSource() throws Throwable
-    {
-        int [] data;
+public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestCase {
+    private int[] badSource() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -31,9 +29,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
         return data;
     }
 
-    public void bad() throws Throwable
-    {
-        int [] data = badSource();
+    public void bad() throws Throwable {
+        int[] data = badSource();
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
@@ -41,9 +38,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private int [] goodG2BSource() throws Throwable
-    {
-        int [] data;
+    private int[] goodG2BSource() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
@@ -51,9 +47,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
         return data;
     }
 
-    private void goodG2B() throws Throwable
-    {
-        int [] data = goodG2BSource();
+    private void goodG2B() throws Throwable {
+        int[] data = goodG2BSource();
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
@@ -61,9 +56,8 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private int [] goodB2GSource() throws Throwable
-    {
-        int [] data;
+    private int[] goodB2GSource() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -71,24 +65,19 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
         return data;
     }
 
-    private void goodB2G() throws Throwable
-    {
-        int [] data = goodB2GSource();
+    private void goodB2G() throws Throwable {
+        int[] data = goodB2GSource();
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -99,8 +88,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_42 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

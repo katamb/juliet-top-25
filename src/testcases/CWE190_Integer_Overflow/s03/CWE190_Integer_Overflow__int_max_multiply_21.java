@@ -16,34 +16,30 @@ Template File: sources-sinks-21.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCase
-{
+public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCase {
     /* The variable below is used to drive control flow in the sink function */
     private boolean badPrivate = false;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
         data = Integer.MAX_VALUE;
 
         badPrivate = true;
-        badSink(data );
+        badSink(data);
     }
 
-    private void badSink(int data ) throws Throwable
-    {
-        if (badPrivate)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+    private void badSink(int data) throws Throwable {
+        if (badPrivate) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
@@ -54,45 +50,35 @@ public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCa
     private boolean goodB2G2Private = false;
     private boolean goodG2BPrivate = false;
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodB2G1();
         goodB2G2();
         goodG2B();
     }
 
     /* goodB2G1() - use BadSource and GoodSink by setting the variable to false instead of true */
-    private void goodB2G1() throws Throwable
-    {
+    private void goodB2G1() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
         data = Integer.MAX_VALUE;
 
         goodB2G1Private = false;
-        goodB2G1Sink(data );
+        goodB2G1Sink(data);
     }
 
-    private void goodB2G1Sink(int data ) throws Throwable
-    {
-        if (goodB2G1Private)
-        {
+    private void goodB2G1Sink(int data) throws Throwable {
+        if (goodB2G1Private) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -101,31 +87,24 @@ public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCa
     }
 
     /* goodB2G2() - use BadSource and GoodSink by reversing the blocks in the if in the sink function */
-    private void goodB2G2() throws Throwable
-    {
+    private void goodB2G2() throws Throwable {
         int data;
 
         /* POTENTIAL FLAW: Use the maximum value for this type */
         data = Integer.MAX_VALUE;
 
         goodB2G2Private = true;
-        goodB2G2Sink(data );
+        goodB2G2Sink(data);
     }
 
-    private void goodB2G2Sink(int data ) throws Throwable
-    {
-        if (goodB2G2Private)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+    private void goodB2G2Sink(int data) throws Throwable {
+        if (goodB2G2Private) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -133,25 +112,21 @@ public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCa
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         goodG2BPrivate = true;
-        goodG2BSink(data );
+        goodG2BSink(data);
     }
 
-    private void goodG2BSink(int data ) throws Throwable
-    {
-        if (goodG2BPrivate)
-        {
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+    private void goodG2BSink(int data) throws Throwable {
+        if (goodG2BPrivate) {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
@@ -163,8 +138,7 @@ public class CWE190_Integer_Overflow__int_max_multiply_21 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

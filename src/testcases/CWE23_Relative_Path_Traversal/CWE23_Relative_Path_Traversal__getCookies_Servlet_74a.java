@@ -17,16 +17,15 @@ Template File: sources-sink-74a.tmpl.java
 package testcases.CWE23_Relative_Path_Traversal;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import java.io.*;
 import javax.servlet.http.*;
 
 
-public class CWE23_Relative_Path_Traversal__getCookies_Servlet_74a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__getCookies_Servlet_74a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* initialize data in case there are no cookies */
@@ -34,38 +33,35 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_74a extends Abstr
         /* Read data from cookies */
         {
             Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null)
-            {
+            if (cookieSources != null) {
                 /* POTENTIAL FLAW: Read data from the first cookie value */
                 data = cookieSources[0].getValue();
             }
         }
 
-        HashMap<Integer,String> dataHashMap = new HashMap<Integer,String>();
+        HashMap<Integer, String> dataHashMap = new HashMap<Integer, String>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE23_Relative_Path_Traversal__getCookies_Servlet_74b()).badSink(dataHashMap , request, response );
+        (new CWE23_Relative_Path_Traversal__getCookies_Servlet_74b()).badSink(dataHashMap, request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        HashMap<Integer,String> dataHashMap = new HashMap<Integer,String>();
+        HashMap<Integer, String> dataHashMap = new HashMap<Integer, String>();
         dataHashMap.put(0, data);
         dataHashMap.put(1, data);
         dataHashMap.put(2, data);
-        (new CWE23_Relative_Path_Traversal__getCookies_Servlet_74b()).goodG2BSink(dataHashMap , request, response );
+        (new CWE23_Relative_Path_Traversal__getCookies_Servlet_74b()).goodG2BSink(dataHashMap, request, response);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -74,8 +70,7 @@ public class CWE23_Relative_Path_Traversal__getCookies_Servlet_74a extends Abstr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

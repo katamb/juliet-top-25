@@ -20,10 +20,8 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_61b
-{
-    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_61b {
+    public String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FLAW: Get the user ID from a URL parameter */
@@ -33,8 +31,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded user ID */

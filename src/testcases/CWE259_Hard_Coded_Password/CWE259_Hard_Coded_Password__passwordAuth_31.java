@@ -23,11 +23,9 @@ import java.io.*;
 
 import java.net.PasswordAuthentication;
 
-public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCase
-{
+public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -40,8 +38,7 @@ public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCas
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
                 PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
                 IO.writeLine(credentials.toString());
@@ -50,14 +47,12 @@ public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCas
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String dataCopy;
         {
             String data;
@@ -65,16 +60,13 @@ public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCas
             data = ""; /* init data */
 
             /* FIX: Read data from the console using readLine() */
-            try
-            {
+            try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 BufferedReader readerBuffered = new BufferedReader(readerInputStream);
 
                 /* POTENTIAL FLAW: Read data from the console using readLine */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
             }
 
@@ -85,8 +77,7 @@ public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCas
         {
             String data = dataCopy;
 
-            if (data != null)
-            {
+            if (data != null) {
                 /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
                 PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
                 IO.writeLine(credentials.toString());
@@ -101,8 +92,7 @@ public class CWE259_Hard_Coded_Password__passwordAuth_31 extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -16,6 +16,7 @@ Template File: sources-sinks-81_goodG2B.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s03;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -24,51 +25,36 @@ import java.sql.*;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_81_goodG2B extends CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_81_base
-{
-    public void action(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_81_goodG2B extends CWE89_SQL_Injection__getParameter_Servlet_executeUpdate_81_base {
+    public void action(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         Connection dbConnection = null;
         Statement sqlStatement = null;
 
-        try
-        {
+        try {
             dbConnection = IO.getDBConnection();
             sqlStatement = dbConnection.createStatement();
 
             /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
-            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='"+data+"'");
+            int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
 
             IO.writeLine("Updated " + rowCount + " rows successfully.");
-        }
-        catch (SQLException exceptSql)
-        {
+        } catch (SQLException exceptSql) {
             IO.logger.log(Level.WARNING, "Error getting database connection", exceptSql);
-        }
-        finally
-        {
-            try
-            {
-                if (sqlStatement != null)
-                {
+        } finally {
+            try {
+                if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
             }
 
-            try
-            {
-                if (dbConnection != null)
-                {
+            try {
+                if (dbConnection != null) {
                     dbConnection.close();
                 }
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
             }
         }

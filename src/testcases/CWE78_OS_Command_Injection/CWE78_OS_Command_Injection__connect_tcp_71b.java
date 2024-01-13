@@ -20,20 +20,15 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__connect_tcp_71b
-{
-    public void badSink(Object dataObject ) throws Throwable
-    {
-        String data = (String)dataObject;
+public class CWE78_OS_Command_Injection__connect_tcp_71b {
+    public void badSink(Object dataObject) throws Throwable {
+        String data = (String) dataObject;
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -45,18 +40,14 @@ public class CWE78_OS_Command_Injection__connect_tcp_71b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Object dataObject ) throws Throwable
-    {
-        String data = (String)dataObject;
+    public void goodG2BSink(Object dataObject) throws Throwable {
+        String data = (String) dataObject;
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }

@@ -4,14 +4,14 @@ Label Definition File: CWE83_XSS_Attribute__Servlet.label.xml
 Template File: sources-sink-01.tmpl.java
 */
 /*
-* @description
-* CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
-* BadSource: URLConnection Read data from a web server with URLConnection
-* GoodSource: A hardcoded string
-* BadSink: printlnServlet XSS in img src attribute
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 83 Cross Site Scripting (XSS) in attributes; Examples(replace QUOTE with an actual double quote): ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEalert(1) and ?img_loc=http://www.google.comQUOTE%20onerror=QUOTEjavascript:alert(1)
+ * BadSource: URLConnection Read data from a web server with URLConnection
+ * GoodSource: A hardcoded string
+ * BadSink: printlnServlet XSS in img src attribute
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE83_XSS_Attribute;
 
@@ -27,11 +27,9 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE83_XSS_Attribute__Servlet_URLConnection_01 extends AbstractTestCaseServlet
-{
+public class CWE83_XSS_Attribute__Servlet_URLConnection_01 extends AbstractTestCaseServlet {
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +40,7 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_01 extends AbstractTestC
             BufferedReader readerBuffered = null;
             InputStreamReader readerInputStream = null;
 
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
@@ -51,63 +48,47 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_01 extends AbstractTestC
                 /* This will be reading the first "line" of the response body,
                  * which could be very long if there are no newlines in the HTML */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* clean up stream reading objects */
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - uses goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
         data = "foo";
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -120,8 +101,7 @@ public class CWE83_XSS_Attribute__Servlet_URLConnection_01 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

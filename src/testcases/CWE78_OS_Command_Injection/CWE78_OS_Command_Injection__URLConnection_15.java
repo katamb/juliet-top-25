@@ -4,14 +4,14 @@ Label Definition File: CWE78_OS_Command_Injection.label.xml
 Template File: sources-sink-15.tmpl.java
 */
 /*
-* @description
-* CWE: 78 OS Command Injection
-* BadSource: URLConnection Read data from a web server with URLConnection
-* GoodSource: A hardcoded string
-* BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
-* Flow Variant: 15 Control flow: switch(6)
-*
-* */
+ * @description
+ * CWE: 78 OS Command Injection
+ * BadSource: URLConnection Read data from a web server with URLConnection
+ * GoodSource: A hardcoded string
+ * BadSink: exec dynamic command execution with Runtime.getRuntime().exec()
+ * Flow Variant: 15 Control flow: switch(6)
+ *
+ * */
 
 package testcases.CWE78_OS_Command_Injection;
 
@@ -27,79 +27,60 @@ import java.net.URLConnection;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCase {
     /* uses badsource and badsink */
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data = null;
 
-        switch (6)
-        {
-        case 6:
-            data = ""; /* Initialize data */
-            /* read input from URLConnection */
+        switch (6) {
+            case 6:
+                data = ""; /* Initialize data */
+                /* read input from URLConnection */
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
                 InputStreamReader readerInputStream = null;
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from a web server with URLConnection */
                     /* This will be reading the first "line" of the response body,
                      * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
+                } finally {
                     /* clean up stream reading objects */
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
             }
             break;
-        default:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
+            default:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -111,31 +92,26 @@ public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCa
     }
 
     /* goodG2B1() - use goodsource and badsink by changing the  switch to switch(5) */
-    private void goodG2B1() throws Throwable
-    {
+    private void goodG2B1() throws Throwable {
         String data = null;
 
-        switch (5)
-        {
-        case 6:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
-        default:
-            /* FIX: Use a hardcoded string */
-            data = "foo";
-            break;
+        switch (5) {
+            case 6:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
+            default:
+                /* FIX: Use a hardcoded string */
+                data = "foo";
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -147,31 +123,26 @@ public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCa
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the switch  */
-    private void goodG2B2() throws Throwable
-    {
+    private void goodG2B2() throws Throwable {
         String data = null;
 
-        switch (6)
-        {
-        case 6:
-            /* FIX: Use a hardcoded string */
-            data = "foo";
-            break;
-        default:
-            /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
-             * but ensure data is inititialized before the Sink to avoid compiler errors */
-            data = null;
-            break;
+        switch (6) {
+            case 6:
+                /* FIX: Use a hardcoded string */
+                data = "foo";
+                break;
+            default:
+                /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
+                 * but ensure data is inititialized before the Sink to avoid compiler errors */
+                data = null;
+                break;
         }
 
         String osCommand;
-        if(System.getProperty("os.name").toLowerCase().indexOf("win") >= 0)
-        {
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             /* running on Windows */
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
-        }
-        else
-        {
+        } else {
             /* running on non-Windows */
             osCommand = "/bin/ls ";
         }
@@ -182,8 +153,7 @@ public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCa
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B1();
         goodG2B2();
     }
@@ -194,8 +164,7 @@ public class CWE78_OS_Command_Injection__URLConnection_15 extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

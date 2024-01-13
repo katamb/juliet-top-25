@@ -17,6 +17,7 @@ Template File: sources-sink-75a.tmpl.java
 package testcases.CWE78_OS_Command_Injection;
 
 import testcasesupport.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -26,10 +27,8 @@ import java.util.logging.Level;
 import javax.servlet.http.*;
 
 
-public class CWE78_OS_Command_Injection__getParameter_Servlet_75a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE78_OS_Command_Injection__getParameter_Servlet_75a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: Read data from a querystring using getParameter */
@@ -39,55 +38,40 @@ public class CWE78_OS_Command_Injection__getParameter_Servlet_75a extends Abstra
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE78_OS_Command_Injection__getParameter_Servlet_75b()).badSink(dataSerialized , request, response );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE78_OS_Command_Injection__getParameter_Servlet_75b()).badSink(dataSerialized, request, response);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -97,42 +81,29 @@ public class CWE78_OS_Command_Injection__getParameter_Servlet_75a extends Abstra
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE78_OS_Command_Injection__getParameter_Servlet_75b()).goodG2BSink(dataSerialized , request, response );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE78_OS_Command_Injection__getParameter_Servlet_75b()).goodG2BSink(dataSerialized, request, response);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
@@ -144,8 +115,7 @@ public class CWE78_OS_Command_Injection__getParameter_Servlet_75a extends Abstra
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

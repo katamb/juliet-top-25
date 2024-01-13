@@ -15,17 +15,15 @@ Template File: sources-sink-54e.tmpl.java
  * */
 
 package testcases.CWE80_XSS.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE80_XSS__CWE182_Servlet_database_54e
-{
-    public void badSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE80_XSS__CWE182_Servlet_database_54e {
+    public void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -33,11 +31,9 @@ public class CWE80_XSS__CWE182_Servlet_database_54e
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Display of data in web page after using replaceAll() to remove script tags, which will still allow XSS with strings like <scr<script>ipt> (CWE 182: Collapse of Data into Unsafe Value) */
             response.getWriter().println("<br>bad(): data = " + data.replaceAll("(<script>)", ""));
         }

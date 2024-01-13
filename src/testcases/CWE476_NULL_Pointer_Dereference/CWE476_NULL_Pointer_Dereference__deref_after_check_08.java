@@ -4,44 +4,38 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-08.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: deref_after_check
-*    GoodSink: Do not dereference an object if it is null
-*    BadSink : Dereference after checking to see if an object is null
-* Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: deref_after_check
+ *    GoodSink: Do not dereference an object if it is null
+ *    BadSink : Dereference after checking to see if an object is null
+ * Flow Variant: 08 Control flow: if(privateReturnsTrue()) and if(privateReturnsFalse())
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__deref_after_check_08 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__deref_after_check_08 extends AbstractTestCase {
     /* The methods below always return the same value, so a tool
      * should be able to figure out that every call to these
      * methods will return true or return false.
      */
-    private boolean privateReturnsTrue()
-    {
+    private boolean privateReturnsTrue() {
         return true;
     }
 
-    private boolean privateReturnsFalse()
-    {
+    private boolean privateReturnsFalse() {
         return false;
     }
 
-    public void bad() throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    public void bad() throws Throwable {
+        if (privateReturnsTrue()) {
             {
                 /* FLAW: Check for null, but still dereference the object */
                 String myString = null;
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine(myString.length());
                 }
             }
@@ -49,22 +43,17 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_08 extends Abstr
     }
 
     /* good1() changes privateReturnsTrue() to privateReturnsFalse() */
-    private void good1() throws Throwable
-    {
-        if (privateReturnsFalse())
-        {
+    private void good1() throws Throwable {
+        if (privateReturnsFalse()) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             {
                 /* FIX: Check for null and do not dereference the object if it is null */
                 String myString = null;
 
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine("The string is null");
                 }
             }
@@ -73,23 +62,19 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_08 extends Abstr
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2() throws Throwable
-    {
-        if (privateReturnsTrue())
-        {
+    private void good2() throws Throwable {
+        if (privateReturnsTrue()) {
             {
                 /* FIX: Check for null and do not dereference the object if it is null */
                 String myString = null;
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine("The string is null");
                 }
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
         good2();
     }
@@ -100,8 +85,7 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_08 extends Abstr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

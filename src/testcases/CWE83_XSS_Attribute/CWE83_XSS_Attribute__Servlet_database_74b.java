@@ -17,18 +17,16 @@ Template File: sources-sink-74b.tmpl.java
 package testcases.CWE83_XSS_Attribute;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import javax.servlet.http.*;
 
-public class CWE83_XSS_Attribute__Servlet_database_74b
-{
-    public void badSink(HashMap<Integer,String> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_database_74b {
+    public void badSink(HashMap<Integer, String> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -36,12 +34,10 @@ public class CWE83_XSS_Attribute__Servlet_database_74b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(HashMap<Integer,String> dataHashMap , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, String> dataHashMap, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }

@@ -16,16 +16,15 @@ Template File: sources-sinks-81a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_Environment_square_81a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_Environment_square_81a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -36,42 +35,36 @@ public class CWE190_Integer_Overflow__int_Environment_square_81a extends Abstrac
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
         }
 
         CWE190_Integer_Overflow__int_Environment_square_81_base baseObject = new CWE190_Integer_Overflow__int_Environment_square_81_bad();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         CWE190_Integer_Overflow__int_Environment_square_81_base baseObject = new CWE190_Integer_Overflow__int_Environment_square_81_goodG2B();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -82,19 +75,16 @@ public class CWE190_Integer_Overflow__int_Environment_square_81a extends Abstrac
             String stringNumber = System.getenv("ADD");
             if (stringNumber != null) // avoid NPD incidental warnings
             {
-                try
-                {
+                try {
                     data = Integer.parseInt(stringNumber.trim());
-                }
-                catch(NumberFormatException exceptNumberFormat)
-                {
+                } catch (NumberFormatException exceptNumberFormat) {
                     IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                 }
             }
         }
 
         CWE190_Integer_Overflow__int_Environment_square_81_base baseObject = new CWE190_Integer_Overflow__int_Environment_square_81_goodB2G();
-        baseObject.action(data );
+        baseObject.action(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -103,8 +93,7 @@ public class CWE190_Integer_Overflow__int_Environment_square_81a extends Abstrac
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

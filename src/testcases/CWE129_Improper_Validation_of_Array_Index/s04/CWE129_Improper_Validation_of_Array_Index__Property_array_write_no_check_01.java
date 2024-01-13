@@ -4,28 +4,27 @@ Label Definition File: CWE129_Improper_Validation_of_Array_Index.label.xml
 Template File: sources-sinks-01.tmpl.java
 */
 /*
-* @description
-* CWE: 129 Improper Validation of Array Index
-* BadSource: Property Read data from a system property
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: array_write_no_check
-*    GoodSink: Write to array after verifying index
-*    BadSink : Write to array without any verification of index
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 129 Improper Validation of Array Index
+ * BadSource: Property Read data from a system property
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: array_write_no_check
+ *    GoodSink: Write to array after verifying index
+ *    BadSink : Write to array without any verification of index
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
 import java.util.logging.Level;
 
-public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_check_01 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_check_01 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -34,18 +33,15 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         /* POTENTIAL FLAW: Read data from a system property */
         {
             String stringNumber = System.getProperty("user.home");
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -54,22 +50,20 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
         data = 2;
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* POTENTIAL FLAW: Attempt to write to array at location data, which may be outside the array bounds */
         array[data] = 42;
@@ -79,8 +73,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -89,26 +82,20 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
         /* POTENTIAL FLAW: Read data from a system property */
         {
             String stringNumber = System.getProperty("user.home");
-            try
-            {
+            try {
                 data = Integer.parseInt(stringNumber.trim());
-            }
-            catch(NumberFormatException exceptNumberFormat)
-            {
+            } catch (NumberFormatException exceptNumberFormat) {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
 
         /* Need to ensure that the array is of size > 3  and < 101 due to the GoodSource and the large_fixed BadSource */
-        int array[] = { 0, 1, 2, 3, 4 };
+        int array[] = {0, 1, 2, 3, 4};
 
         /* FIX: Verify index before writing to array at location data */
-        if (data >= 0 && data < array.length)
-        {
+        if (data >= 0 && data < array.length) {
             array[data] = 42;
-        }
-        else
-        {
+        } else {
             IO.writeLine("Array index out of bounds");
         }
 
@@ -120,8 +107,7 @@ public class CWE129_Improper_Validation_of_Array_Index__Property_array_write_no_
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

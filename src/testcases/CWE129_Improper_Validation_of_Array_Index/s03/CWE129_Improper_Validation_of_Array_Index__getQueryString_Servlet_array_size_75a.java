@@ -16,7 +16,9 @@ Template File: sources-sinks-75a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
+
 import testcasesupport.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -28,10 +30,8 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75a extends AbstractTestCaseServlet
-{
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75a extends AbstractTestCaseServlet {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -40,17 +40,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -62,56 +57,41 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).badSink(dataSerialized , request, response );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).badSink(dataSerialized, request, response);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
         goodB2G(request, response);
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -121,50 +101,36 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).goodG2BSink(dataSerialized , request, response );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).goodG2BSink(dataSerialized, request, response);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* initialize data in case id is not in query string */
@@ -173,17 +139,12 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         {
             StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
 
-            while (tokenizer.hasMoreTokens())
-            {
+            while (tokenizer.hasMoreTokens()) {
                 String token = tokenizer.nextToken(); /* a token will be like "id=33" */
-                if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                {
-                    try
-                    {
+                if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
+                    try {
                         data = Integer.parseInt(token.substring(3)); /* set data to the int 33 */
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception reading id from query string", exceptNumberFormat);
                     }
                     break; /* exit while loop */
@@ -195,42 +156,29 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).goodB2GSink(dataSerialized , request, response );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_array_size_75b()).goodB2GSink(dataSerialized, request, response);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
@@ -242,8 +190,7 @@ public class CWE129_Improper_Validation_of_Array_Index__getQueryString_Servlet_a
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

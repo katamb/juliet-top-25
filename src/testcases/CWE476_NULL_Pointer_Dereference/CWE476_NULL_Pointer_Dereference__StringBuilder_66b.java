@@ -19,10 +19,8 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_66b
-{
-    public void badSink(StringBuilder dataArray[] ) throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_66b {
+    public void badSink(StringBuilder dataArray[]) throws Throwable {
         StringBuilder data = dataArray[2];
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -31,8 +29,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(StringBuilder dataArray[] ) throws Throwable
-    {
+    public void goodG2BSink(StringBuilder dataArray[]) throws Throwable {
         StringBuilder data = dataArray[2];
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -41,17 +38,13 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_66b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(StringBuilder dataArray[] ) throws Throwable
-    {
+    public void goodB2GSink(StringBuilder dataArray[]) throws Throwable {
         StringBuilder data = dataArray[2];
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 

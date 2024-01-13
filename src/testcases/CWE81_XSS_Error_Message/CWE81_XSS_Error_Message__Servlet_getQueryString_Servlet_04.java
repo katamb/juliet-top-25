@@ -4,14 +4,14 @@ Label Definition File: CWE81_XSS_Error_Message__Servlet.label.xml
 Template File: sources-sink-04.tmpl.java
 */
 /*
-* @description
-* CWE: 81 Cross Site Scripting (XSS) in Error Message
-* BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
-* GoodSource: A hardcoded string
-* BadSink: sendErrorServlet XSS in sendError
-* Flow Variant: 04 Control flow: if(PRIVATE_STATIC_FINAL_TRUE) and if(PRIVATE_STATIC_FINAL_FALSE)
-*
-* */
+ * @description
+ * CWE: 81 Cross Site Scripting (XSS) in Error Message
+ * BadSource: getQueryString_Servlet Parse id param out of the URL query string (without using getParameter())
+ * GoodSource: A hardcoded string
+ * BadSink: sendErrorServlet XSS in sendError
+ * Flow Variant: 04 Control flow: if(PRIVATE_STATIC_FINAL_TRUE) and if(PRIVATE_STATIC_FINAL_FALSE)
+ *
+ * */
 
 package testcases.CWE81_XSS_Error_Message;
 
@@ -21,8 +21,7 @@ import javax.servlet.http.*;
 
 import java.util.StringTokenizer;
 
-public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_04 extends AbstractTestCaseServlet
-{
+public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_04 extends AbstractTestCaseServlet {
     /* The two variables below are declared "final", so a tool should
      * be able to identify that reads of these will always return their
      * initialized values.
@@ -31,102 +30,84 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_04 extends 
     private static final boolean PRIVATE_STATIC_FINAL_FALSE = false;
 
     /* uses badsource and badsink */
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_TRUE)
-        {
+        if (PRIVATE_STATIC_FINAL_TRUE) {
             data = ""; /* initialize data in case id is not in query string */
             /* POTENTIAL FLAW: Parse id param out of the URL querystring (without using getParameter()) */
             {
                 StringTokenizer tokenizer = new StringTokenizer(request.getQueryString(), "&");
-                while (tokenizer.hasMoreTokens())
-                {
+                while (tokenizer.hasMoreTokens()) {
                     String token = tokenizer.nextToken(); /* a token will be like "id=foo" */
-                    if(token.startsWith("id=")) /* check if we have the "id" parameter" */
-                    {
+                    if (token.startsWith("id=")) /* check if we have the "id" parameter" */ {
                         data = token.substring(3); /* set data to "foo" */
                         break; /* exit while loop */
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B1() - use goodsource and badsink by changing PRIVATE_STATIC_FINAL_TRUE to PRIVATE_STATIC_FINAL_FALSE */
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_FALSE)
-        {
+        if (PRIVATE_STATIC_FINAL_FALSE) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
 
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing statements in if */
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (PRIVATE_STATIC_FINAL_TRUE)
-        {
+        if (PRIVATE_STATIC_FINAL_TRUE) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
         }
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: script code (e.g. id=<script>alert('xss')</script>) is sent to the client;
-            * The built-in J2EE server automatically does some HTML entity encoding.
-            * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
-            */
+             * The built-in J2EE server automatically does some HTML entity encoding.
+             * Therefore, to test this, change response.sendError to response.getWriter().println and remove the 404,
+             */
             response.sendError(404, "<br>bad() - Parameter name has value " + data);
         }
 
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B1(request, response);
         goodG2B2(request, response);
     }
@@ -137,8 +118,7 @@ public class CWE81_XSS_Error_Message__Servlet_getQueryString_Servlet_04 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

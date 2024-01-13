@@ -4,30 +4,26 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-10.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: deref_after_check
-*    GoodSink: Do not dereference an object if it is null
-*    BadSink : Dereference after checking to see if an object is null
-* Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: deref_after_check
+ *    GoodSink: Do not dereference an object if it is null
+ *    BadSink : Dereference after checking to see if an object is null
+ * Flow Variant: 10 Control flow: if(IO.staticTrue) and if(IO.staticFalse)
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__deref_after_check_10 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        if (IO.staticTrue)
-        {
+public class CWE476_NULL_Pointer_Dereference__deref_after_check_10 extends AbstractTestCase {
+    public void bad() throws Throwable {
+        if (IO.staticTrue) {
             {
                 /* FLAW: Check for null, but still dereference the object */
                 String myString = null;
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine(myString.length());
                 }
             }
@@ -35,22 +31,17 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_10 extends Abstr
     }
 
     /* good1() changes IO.staticTrue to IO.staticFalse */
-    private void good1() throws Throwable
-    {
-        if (IO.staticFalse)
-        {
+    private void good1() throws Throwable {
+        if (IO.staticFalse) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run */
             IO.writeLine("Benign, fixed string");
-        }
-        else
-        {
+        } else {
 
             {
                 /* FIX: Check for null and do not dereference the object if it is null */
                 String myString = null;
 
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine("The string is null");
                 }
             }
@@ -59,23 +50,19 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_10 extends Abstr
     }
 
     /* good2() reverses the bodies in the if statement */
-    private void good2() throws Throwable
-    {
-        if (IO.staticTrue)
-        {
+    private void good2() throws Throwable {
+        if (IO.staticTrue) {
             {
                 /* FIX: Check for null and do not dereference the object if it is null */
                 String myString = null;
-                if (myString == null)
-                {
+                if (myString == null) {
                     IO.writeLine("The string is null");
                 }
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
         good2();
     }
@@ -86,8 +73,7 @@ public class CWE476_NULL_Pointer_Dereference__deref_after_check_10 extends Abstr
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

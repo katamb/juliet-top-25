@@ -16,19 +16,17 @@ Template File: sources-sinks-81_goodG2B.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__long_console_readLine_multiply_81_goodG2B extends CWE190_Integer_Overflow__long_console_readLine_multiply_81_base
-{
-    public void action(long data ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__long_console_readLine_multiply_81_goodG2B extends CWE190_Integer_Overflow__long_console_readLine_multiply_81_base {
+    public void action(long data) throws Throwable {
 
-        if(data > 0) /* ensure we won't have an underflow */
-        {
+        if (data > 0) /* ensure we won't have an underflow */ {
             /* POTENTIAL FLAW: if (data*2) > Long.MAX_VALUE, this will overflow */
-            long result = (long)(data * 2);
+            long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
 

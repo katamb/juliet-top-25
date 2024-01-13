@@ -16,6 +16,7 @@ Template File: sources-sinks-66a.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -39,41 +38,28 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
                 /* POTENTIAL FLAW: Read data from the console using readLine */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -82,18 +68,16 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).badSink(dataArray  );
+        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).badSink(dataArray);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -101,12 +85,11 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).goodG2BSink(dataArray  );
+        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).goodG2BSink(dataArray);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -116,41 +99,28 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
             BufferedReader readerBuffered = null;
 
             /* read user input from console with readLine */
-            try
-            {
+            try {
                 readerInputStream = new InputStreamReader(System.in, "UTF-8");
                 readerBuffered = new BufferedReader(readerInputStream);
 
                 /* POTENTIAL FLAW: Read data from the console using readLine */
                 data = readerBuffered.readLine();
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerBuffered != null)
-                    {
+            } finally {
+                try {
+                    if (readerBuffered != null) {
                         readerBuffered.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                 }
 
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -159,7 +129,7 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
 
         String[] dataArray = new String[5];
         dataArray[2] = data;
-        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).goodB2GSink(dataArray  );
+        (new CWE89_SQL_Injection__console_readLine_executeUpdate_66b()).goodB2GSink(dataArray);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -168,8 +138,7 @@ public class CWE89_SQL_Injection__console_readLine_executeUpdate_66a extends Abs
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

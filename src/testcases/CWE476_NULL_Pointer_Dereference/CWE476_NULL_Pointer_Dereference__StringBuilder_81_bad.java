@@ -19,10 +19,8 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_81_bad extends CWE476_NULL_Pointer_Dereference__StringBuilder_81_base
-{
-    public void action(StringBuilder data ) throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_81_bad extends CWE476_NULL_Pointer_Dereference__StringBuilder_81_base {
+    public void action(StringBuilder data) throws Throwable {
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length());

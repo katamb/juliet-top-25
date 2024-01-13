@@ -16,48 +16,42 @@ Template File: sources-sinks-67b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s07;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_rand_preinc_67b
-{
-    public void badSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_rand_preinc_67b {
+    public void badSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer) throws Throwable {
         short data = dataContainer.containerOne;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(++data);
+        short result = (short) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer ) throws Throwable
-    {
+    public void goodG2BSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer) throws Throwable {
         short data = dataContainer.containerOne;
 
         /* POTENTIAL FLAW: if data == Short.MAX_VALUE, this will overflow */
-        short result = (short)(++data);
+        short result = (short) (++data);
 
         IO.writeLine("result: " + result);
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer ) throws Throwable
-    {
+    public void goodB2GSink(CWE190_Integer_Overflow__short_rand_preinc_67a.Container dataContainer) throws Throwable {
         short data = dataContainer.containerOne;
 
         /* FIX: Add a check to prevent an overflow from occurring */
-        if (data < Short.MAX_VALUE)
-        {
-            short result = (short)(++data);
+        if (data < Short.MAX_VALUE) {
+            short result = (short) (++data);
             IO.writeLine("result: " + result);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data value is too large to increment.");
         }
 

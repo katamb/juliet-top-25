@@ -19,34 +19,29 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_41 extends AbstractTestCase
-{
-    private void badSink(int [] data ) throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__int_array_41 extends AbstractTestCase {
+    private void badSink(int[] data) throws Throwable {
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
 
     }
 
-    public void bad() throws Throwable
-    {
-        int [] data;
+    public void bad() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        badSink(data  );
+        badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink(int [] data ) throws Throwable
-    {
+    private void goodG2BSink(int[] data) throws Throwable {
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
         IO.writeLine("" + data.length);
@@ -54,40 +49,34 @@ public class CWE476_NULL_Pointer_Dereference__int_array_41 extends AbstractTestC
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data;
+    private void goodG2B() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
-        goodG2BSink(data  );
+        goodG2BSink(data);
     }
 
-    private void goodB2GSink(int [] data ) throws Throwable
-    {
+    private void goodB2GSink(int[] data) throws Throwable {
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length);
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
-        int [] data;
+    private void goodB2G() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        goodB2GSink(data  );
+        goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -96,8 +85,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_41 extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

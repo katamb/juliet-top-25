@@ -20,7 +20,6 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public abstract class CWE81_XSS_Error_Message__Servlet_URLConnection_81_base
-{
-    public abstract void action(String data , HttpServletRequest request, HttpServletResponse response) throws Throwable;
+public abstract class CWE81_XSS_Error_Message__Servlet_URLConnection_81_base {
+    public abstract void action(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable;
 }

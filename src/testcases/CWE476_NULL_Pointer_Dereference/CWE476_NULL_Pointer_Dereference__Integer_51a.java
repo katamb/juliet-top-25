@@ -19,44 +19,39 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__Integer_51a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__Integer_51a extends AbstractTestCase {
+    public void bad() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).badSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).badSink(data);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         Integer data;
 
         /* FIX: hardcode data to non-null */
         data = Integer.valueOf(5);
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).goodG2BSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         Integer data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).goodB2GSink(data  );
+        (new CWE476_NULL_Pointer_Dereference__Integer_51b()).goodB2GSink(data);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -65,8 +60,7 @@ public class CWE476_NULL_Pointer_Dereference__Integer_51a extends AbstractTestCa
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

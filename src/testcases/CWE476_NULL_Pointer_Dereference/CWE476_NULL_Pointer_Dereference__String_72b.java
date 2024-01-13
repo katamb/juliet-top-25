@@ -18,12 +18,11 @@ Template File: sources-sinks-72b.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
-public class CWE476_NULL_Pointer_Dereference__String_72b
-{
-    public void badSink(Vector<String> dataVector ) throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__String_72b {
+    public void badSink(Vector<String> dataVector) throws Throwable {
         String data = dataVector.remove(2);
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -32,8 +31,7 @@ public class CWE476_NULL_Pointer_Dereference__String_72b
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(Vector<String> dataVector ) throws Throwable
-    {
+    public void goodG2BSink(Vector<String> dataVector) throws Throwable {
         String data = dataVector.remove(2);
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -42,17 +40,13 @@ public class CWE476_NULL_Pointer_Dereference__String_72b
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(Vector<String> dataVector ) throws Throwable
-    {
+    public void goodB2GSink(Vector<String> dataVector) throws Throwable {
         String data = dataVector.remove(2);
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 

@@ -4,32 +4,28 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.pointflaw.label.xml
 Template File: point-flaw-17.tmpl.java
 */
 /*
-* @description
-* CWE: 476 NULL Pointer Dereference
-* Sinks: null_check_after_deref
-*    GoodSink: Do not check for null after the object has been dereferenced
-*    BadSink : Check for null after the object has already been dereferenced
-* Flow Variant: 17 Control flow: for loops
-*
-* */
+ * @description
+ * CWE: 476 NULL Pointer Dereference
+ * Sinks: null_check_after_deref
+ *    GoodSink: Do not check for null after the object has been dereferenced
+ *    BadSink : Check for null after the object has already been dereferenced
+ * Flow Variant: 17 Control flow: for loops
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_17 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        for(int j = 0; j < 1; j++)
-        {
+public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_17 extends AbstractTestCase {
+    public void bad() throws Throwable {
+        for (int j = 0; j < 1; j++) {
             {
                 String myString = null;
                 myString = "Hello";
                 IO.writeLine(myString.length());
                 /* FLAW: Check for null after dereferencing the object. This null check is unnecessary. */
-                if (myString != null)
-                {
+                if (myString != null) {
                     myString = "my, how I've changed";
                 }
                 IO.writeLine(myString.length());
@@ -38,10 +34,8 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_17 extends 
     }
 
     /* good1() use the GoodSinkBody in the for statement */
-    private void good1() throws Throwable
-    {
-        for(int k = 0; k < 1; k++)
-        {
+    private void good1() throws Throwable {
+        for (int k = 0; k < 1; k++) {
             {
                 String myString = null;
                 myString = "Hello";
@@ -53,8 +47,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_17 extends 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         good1();
     }
 
@@ -64,8 +57,7 @@ public class CWE476_NULL_Pointer_Dereference__null_check_after_deref_17 extends 
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -18,12 +18,11 @@ Template File: sources-sinks-73a.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -33,18 +32,16 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends Abstract
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).badSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
@@ -54,12 +51,11 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends Abstract
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -69,7 +65,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends Abstract
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).goodB2GSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__StringBuilder_73b()).goodB2GSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -78,8 +74,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_73a extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

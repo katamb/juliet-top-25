@@ -19,14 +19,12 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase {
     private String dataBad;
     private String dataGoodG2B;
     private String dataGoodB2G;
 
-    private void badSink() throws Throwable
-    {
+    private void badSink() throws Throwable {
         String data = dataBad;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -34,8 +32,7 @@ public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
 
     }
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: data is null */
@@ -45,14 +42,12 @@ public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
         badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
-    private void goodG2BSink() throws Throwable
-    {
+    private void goodG2BSink() throws Throwable {
         String data = dataGoodG2B;
 
         /* POTENTIAL FLAW: null dereference will occur if data is null */
@@ -61,8 +56,7 @@ public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: hardcode data to non-null */
@@ -72,25 +66,20 @@ public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
         goodG2BSink();
     }
 
-    private void goodB2GSink() throws Throwable
-    {
+    private void goodB2GSink() throws Throwable {
         String data = dataGoodB2G;
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
 
         /* POTENTIAL FLAW: data is null */
@@ -106,8 +95,7 @@ public class CWE476_NULL_Pointer_Dereference__String_45 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

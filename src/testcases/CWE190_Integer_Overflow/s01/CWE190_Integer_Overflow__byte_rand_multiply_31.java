@@ -16,45 +16,41 @@ Template File: sources-sinks-31.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_rand_multiply_31 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_rand_multiply_31 extends AbstractTestCase {
+    public void bad() throws Throwable {
         byte dataCopy;
         {
             byte data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+            data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
             dataCopy = data;
         }
         {
             byte data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-                byte result = (byte)(data * 2);
+                byte result = (byte) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte dataCopy;
         {
             byte data;
@@ -67,10 +63,9 @@ public class CWE190_Integer_Overflow__byte_rand_multiply_31 extends AbstractTest
         {
             byte data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Byte.MAX_VALUE, this will overflow */
-                byte result = (byte)(data * 2);
+                byte result = (byte) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
@@ -78,30 +73,25 @@ public class CWE190_Integer_Overflow__byte_rand_multiply_31 extends AbstractTest
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte dataCopy;
         {
             byte data;
 
             /* POTENTIAL FLAW: Use a random value */
-            data = (byte)((new java.security.SecureRandom()).nextInt(1+Byte.MAX_VALUE-Byte.MIN_VALUE) + Byte.MIN_VALUE);
+            data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
 
             dataCopy = data;
         }
         {
             byte data = dataCopy;
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Byte.MAX_VALUE/2))
-                {
-                    byte result = (byte)(data * 2);
+                if (data < (Byte.MAX_VALUE / 2)) {
+                    byte result = (byte) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
@@ -115,8 +105,7 @@ public class CWE190_Integer_Overflow__byte_rand_multiply_31 extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

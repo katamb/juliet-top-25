@@ -17,18 +17,16 @@ Template File: sources-sink-72b.tmpl.java
 package testcases.CWE83_XSS_Attribute;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
-public class CWE83_XSS_Attribute__Servlet_PropertiesFile_72b
-{
-    public void badSink(Vector<String> dataVector , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+public class CWE83_XSS_Attribute__Servlet_PropertiesFile_72b {
+    public void badSink(Vector<String> dataVector, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }
@@ -36,12 +34,10 @@ public class CWE83_XSS_Attribute__Servlet_PropertiesFile_72b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(Vector<String> dataVector , HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void goodG2BSink(Vector<String> dataVector, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataVector.remove(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: Input is not verified/sanitized before use in an image tag */
             response.getWriter().println("<br>bad() - <img src=\"" + data + "\">");
         }

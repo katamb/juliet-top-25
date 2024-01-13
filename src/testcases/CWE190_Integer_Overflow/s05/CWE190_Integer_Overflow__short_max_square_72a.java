@@ -16,15 +16,15 @@ Template File: sources-sinks-72a.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s05;
+
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -34,18 +34,16 @@ public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestC
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE190_Integer_Overflow__short_max_square_72b()).badSink(dataVector  );
+        (new CWE190_Integer_Overflow__short_max_square_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         short data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -55,12 +53,11 @@ public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestC
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE190_Integer_Overflow__short_max_square_72b()).goodG2BSink(dataVector  );
+        (new CWE190_Integer_Overflow__short_max_square_72b()).goodG2BSink(dataVector);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         short data;
 
         /* POTENTIAL FLAW: Use the maximum size of the data type */
@@ -70,7 +67,7 @@ public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestC
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE190_Integer_Overflow__short_max_square_72b()).goodB2GSink(dataVector  );
+        (new CWE190_Integer_Overflow__short_max_square_72b()).goodB2GSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -79,8 +76,7 @@ public class CWE190_Integer_Overflow__short_max_square_72a extends AbstractTestC
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

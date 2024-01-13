@@ -4,54 +4,43 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.label.xml
 Template File: sources-sinks-12.tmpl.java
 */
 /*
-* @description
-* CWE: 476 Null Pointer Dereference
-* BadSource:  Set data to null
-* GoodSource: Set data to a non-null value
-* Sinks:
-*    GoodSink: add check to prevent possibility of null dereference
-*    BadSink : possibility of null dereference
-* Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
-*
-* */
+ * @description
+ * CWE: 476 Null Pointer Dereference
+ * BadSource:  Set data to null
+ * GoodSource: Set data to a non-null value
+ * Sinks:
+ *    GoodSink: add check to prevent possibility of null dereference
+ *    BadSink : possibility of null dereference
+ * Flow Variant: 12 Control flow: if(IO.staticReturnsTrueOrFalse())
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__String_12 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__String_12 extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: data is null */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: hardcode data to non-null */
             data = "This is not null";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
 
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length());
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
 
@@ -60,29 +49,22 @@ public class CWE476_NULL_Pointer_Dereference__String_12 extends AbstractTestCase
 
     /* goodG2B() - use goodsource and badsink by changing the first "if" so that
      * both branches use the GoodSource */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: hardcode data to non-null */
             data = "This is not null";
-        }
-        else
-        {
+        } else {
 
             /* FIX: hardcode data to non-null */
             data = "This is not null";
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
 
             /* POTENTIAL FLAW: null dereference will occur if data is null */
             IO.writeLine("" + data.length());
@@ -92,52 +74,38 @@ public class CWE476_NULL_Pointer_Dereference__String_12 extends AbstractTestCase
 
     /* goodB2G() - use badsource and goodsink by changing the second "if" so that
      * both branches use the GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         String data;
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* POTENTIAL FLAW: data is null */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* POTENTIAL FLAW: data is null */
             data = null;
 
         }
 
-        if(IO.staticReturnsTrueOrFalse())
-        {
+        if (IO.staticReturnsTrueOrFalse()) {
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length());
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
-        }
-        else
-        {
+        } else {
 
             /* FIX: validate that data is non-null */
-            if (data != null)
-            {
+            if (data != null) {
                 IO.writeLine("" + data.length());
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data is null");
             }
 
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -148,8 +116,7 @@ public class CWE476_NULL_Pointer_Dereference__String_12 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

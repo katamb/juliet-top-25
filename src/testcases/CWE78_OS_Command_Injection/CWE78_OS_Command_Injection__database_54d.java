@@ -20,16 +20,13 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__database_54d
-{
-    public void badSink(String data ) throws Throwable
-    {
-        (new CWE78_OS_Command_Injection__database_54e()).badSink(data );
+public class CWE78_OS_Command_Injection__database_54d {
+    public void badSink(String data) throws Throwable {
+        (new CWE78_OS_Command_Injection__database_54e()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(String data ) throws Throwable
-    {
-        (new CWE78_OS_Command_Injection__database_54e()).goodG2BSink(data );
+    public void goodG2BSink(String data) throws Throwable {
+        (new CWE78_OS_Command_Injection__database_54e()).goodG2BSink(data);
     }
 }

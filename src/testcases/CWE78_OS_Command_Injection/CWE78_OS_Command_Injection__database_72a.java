@@ -17,6 +17,7 @@ Template File: sources-sink-72a.tmpl.java
 package testcases.CWE78_OS_Command_Injection;
 
 import testcasesupport.*;
+
 import java.util.Vector;
 
 import javax.servlet.http.*;
@@ -28,10 +29,8 @@ import java.sql.SQLException;
 
 import java.util.logging.Level;
 
-public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data;
 
         data = ""; /* Initialize data */
@@ -42,8 +41,7 @@ public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
             PreparedStatement preparedStatement = null;
             ResultSet resultSet = null;
 
-            try
-            {
+            try {
                 /* setup the connection */
                 connection = IO.getDBConnection();
 
@@ -53,47 +51,31 @@ public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
 
                 /* POTENTIAL FLAW: Read data from a database query resultset */
                 data = resultSet.getString(1);
-            }
-            catch (SQLException exceptSql)
-            {
+            } catch (SQLException exceptSql) {
                 IO.logger.log(Level.WARNING, "Error with SQL statement", exceptSql);
-            }
-            finally
-            {
+            } finally {
                 /* Close database objects */
-                try
-                {
-                    if (resultSet != null)
-                    {
+                try {
+                    if (resultSet != null) {
                         resultSet.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing ResultSet", exceptSql);
                 }
 
-                try
-                {
-                    if (preparedStatement != null)
-                    {
+                try {
+                    if (preparedStatement != null) {
                         preparedStatement.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
 
-                try
-                {
-                    if (connection != null)
-                    {
+                try {
+                    if (connection != null) {
                         connection.close();
                     }
-                }
-                catch (SQLException exceptSql)
-                {
+                } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Connection", exceptSql);
                 }
             }
@@ -103,17 +85,15 @@ public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE78_OS_Command_Injection__database_72b()).badSink(dataVector  );
+        (new CWE78_OS_Command_Injection__database_72b()).badSink(dataVector);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded string */
@@ -123,7 +103,7 @@ public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
         dataVector.add(0, data);
         dataVector.add(1, data);
         dataVector.add(2, data);
-        (new CWE78_OS_Command_Injection__database_72b()).goodG2BSink(dataVector  );
+        (new CWE78_OS_Command_Injection__database_72b()).goodG2BSink(dataVector);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -132,8 +112,7 @@ public class CWE78_OS_Command_Injection__database_72a extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

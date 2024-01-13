@@ -21,20 +21,15 @@ import testcasesupport.*;
 import java.io.*;
 import javax.servlet.http.*;
 
-public class CWE23_Relative_Path_Traversal__Property_22b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE23_Relative_Path_Traversal__Property_22b {
+    public String badSource() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__Property_22a.badPublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__Property_22a.badPublicStatic) {
             /* get system property user.home */
             /* POTENTIAL FLAW: Read data from a system property */
             data = System.getProperty("user.home");
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
@@ -43,18 +38,14 @@ public class CWE23_Relative_Path_Traversal__Property_22b
     }
 
     /* goodG2B1() - use goodsource and badsink by setting the static variable to false instead of true */
-    public String goodG2B1Source() throws Throwable
-    {
+    public String goodG2B1Source() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__Property_22a.goodG2B1PublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__Property_22a.goodG2B1PublicStatic) {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;
-        }
-        else
-        {
+        } else {
 
             /* FIX: Use a hardcoded string */
             data = "foo";
@@ -65,17 +56,13 @@ public class CWE23_Relative_Path_Traversal__Property_22b
     }
 
     /* goodG2B2() - use goodsource and badsink by reversing the blocks in the if in the sink function */
-    public String goodG2B2Source() throws Throwable
-    {
+    public String goodG2B2Source() throws Throwable {
         String data;
 
-        if (CWE23_Relative_Path_Traversal__Property_22a.goodG2B2PublicStatic)
-        {
+        if (CWE23_Relative_Path_Traversal__Property_22a.goodG2B2PublicStatic) {
             /* FIX: Use a hardcoded string */
             data = "foo";
-        }
-        else
-        {
+        } else {
             /* INCIDENTAL: CWE 561 Dead Code, the code below will never run
              * but ensure data is inititialized before the Sink to avoid compiler errors */
             data = null;

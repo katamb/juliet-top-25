@@ -21,14 +21,11 @@ import testcasesupport.*;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 
-public class CWE321_Hard_Coded_Cryptographic_Key__basic_61a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE321_Hard_Coded_Cryptographic_Key__basic_61a extends AbstractTestCase {
+    public void bad() throws Throwable {
         String data = (new CWE321_Hard_Coded_Cryptographic_Key__basic_61b()).badSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -41,18 +38,15 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_61a extends AbstractTest
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         String data = (new CWE321_Hard_Coded_Cryptographic_Key__basic_61b()).goodG2BSource();
 
-        if (data != null)
-        {
+        if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
             /* POTENTIAL FLAW: Use data as a cryptographic key */
@@ -71,8 +65,7 @@ public class CWE321_Hard_Coded_Cryptographic_Key__basic_61a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

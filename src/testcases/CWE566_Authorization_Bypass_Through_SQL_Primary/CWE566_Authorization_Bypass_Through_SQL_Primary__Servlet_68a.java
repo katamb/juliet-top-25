@@ -19,12 +19,10 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_68a extends AbstractTestCaseServlet
-{
+public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_68a extends AbstractTestCaseServlet {
     public static String data;
 
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FLAW: Get the user ID from a URL parameter */
         data = request.getParameter("id");
@@ -32,14 +30,12 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_68a extend
         (new CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_68b()).badSink(request, response);
     }
 
-    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    public void good(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodG2B(request, response);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable
-    {
+    private void goodG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 
         /* FIX: Use a hardcoded user ID */
         data = "10";
@@ -53,8 +49,7 @@ public class CWE566_Authorization_Bypass_Through_SQL_Primary__Servlet_68a extend
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -19,10 +19,8 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_61b
-{
-    public StringBuilder badSource() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_61b {
+    public StringBuilder badSource() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -32,8 +30,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public StringBuilder goodG2BSource() throws Throwable
-    {
+    public StringBuilder goodG2BSource() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
@@ -43,8 +40,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public StringBuilder goodB2GSource() throws Throwable
-    {
+    public StringBuilder goodB2GSource() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */

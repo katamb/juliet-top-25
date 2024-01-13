@@ -18,58 +18,54 @@ Template File: sources-sinks-73a.tmpl.java
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
+
 import java.util.LinkedList;
 
-public class CWE476_NULL_Pointer_Dereference__int_array_73a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
-        int [] data;
+public class CWE476_NULL_Pointer_Dereference__int_array_73a extends AbstractTestCase {
+    public void bad() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        LinkedList<int []> dataLinkedList = new LinkedList<int []>();
+        LinkedList<int[]> dataLinkedList = new LinkedList<int[]>();
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).badSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).badSink(dataLinkedList);
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
-        int [] data;
+    private void goodG2B() throws Throwable {
+        int[] data;
 
         /* FIX: hardcode data to non-null */
         data = new int[5];
 
-        LinkedList<int []> dataLinkedList = new LinkedList<int []>();
+        LinkedList<int[]> dataLinkedList = new LinkedList<int[]>();
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).goodG2BSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).goodG2BSink(dataLinkedList);
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
-        int [] data;
+    private void goodB2G() throws Throwable {
+        int[] data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
-        LinkedList<int []> dataLinkedList = new LinkedList<int []>();
+        LinkedList<int[]> dataLinkedList = new LinkedList<int[]>();
         dataLinkedList.add(0, data);
         dataLinkedList.add(1, data);
         dataLinkedList.add(2, data);
-        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).goodB2GSink(dataLinkedList  );
+        (new CWE476_NULL_Pointer_Dereference__int_array_73b()).goodB2GSink(dataLinkedList);
     }
 
     /* Below is the main(). It is only used when building this testcase on
@@ -78,8 +74,7 @@ public class CWE476_NULL_Pointer_Dereference__int_array_73a extends AbstractTest
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 

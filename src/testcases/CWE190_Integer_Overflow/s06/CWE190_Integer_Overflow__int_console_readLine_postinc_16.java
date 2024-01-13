@@ -4,18 +4,19 @@ Label Definition File: CWE190_Integer_Overflow__int.label.xml
 Template File: sources-sinks-16.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: console_readLine Read data from the console using readLine
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: increment
-*    GoodSink: Ensure there will not be an overflow before incrementing data
-*    BadSink : Increment data, which can cause an overflow
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: console_readLine Read data from the console using readLine
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: increment
+ *    GoodSink: Ensure there will not be an overflow before incrementing data
+ *    BadSink : Increment data, which can cause an overflow
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s06;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,64 +27,45 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             {
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from the console using readLine */
                     String stringNumber = readerBuffered.readLine();
                     if (stringNumber != null) // avoid NPD incidental warnings
                     {
-                        try
-                        {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -92,33 +74,29 @@ public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends Ab
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
             IO.writeLine("result: " + result);
             break;
         }
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: if data == Integer.MAX_VALUE, this will overflow */
             data++;
-            int result = (int)(data);
+            int result = (int) (data);
             IO.writeLine("result: " + result);
             break;
         }
@@ -126,62 +104,44 @@ public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends Ab
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
-        while (true)
-        {
+        while (true) {
             data = Integer.MIN_VALUE; /* Initialize data */
             {
                 InputStreamReader readerInputStream = null;
                 BufferedReader readerBuffered = null;
                 /* read user input from console with readLine */
-                try
-                {
+                try {
                     readerInputStream = new InputStreamReader(System.in, "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
                     /* POTENTIAL FLAW: Read data from the console using readLine */
                     String stringNumber = readerBuffered.readLine();
                     if (stringNumber != null) // avoid NPD incidental warnings
                     {
-                        try
-                        {
+                        try {
                             data = Integer.parseInt(stringNumber.trim());
-                        }
-                        catch(NumberFormatException exceptNumberFormat)
-                        {
+                        } catch (NumberFormatException exceptNumberFormat) {
                             IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                         }
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-                }
-                finally
-                {
-                    try
-                    {
-                        if (readerBuffered != null)
-                        {
+                } finally {
+                    try {
+                        if (readerBuffered != null) {
                             readerBuffered.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
 
-                    try
-                    {
-                        if (readerInputStream != null)
-                        {
+                    try {
+                        if (readerInputStream != null) {
                             readerInputStream.close();
                         }
-                    }
-                    catch (IOException exceptIO)
-                    {
+                    } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                 }
@@ -190,25 +150,20 @@ public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends Ab
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Integer.MAX_VALUE)
-            {
+            if (data < Integer.MAX_VALUE) {
                 data++;
-                int result = (int)(data);
+                int result = (int) (data);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to increment.");
             }
             break;
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -219,8 +174,7 @@ public class CWE190_Integer_Overflow__int_console_readLine_postinc_16 extends Ab
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

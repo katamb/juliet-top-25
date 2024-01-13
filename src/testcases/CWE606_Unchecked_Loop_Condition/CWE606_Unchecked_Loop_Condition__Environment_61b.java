@@ -21,10 +21,8 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE606_Unchecked_Loop_Condition__Environment_61b
-{
-    public String badSource() throws Throwable
-    {
+public class CWE606_Unchecked_Loop_Condition__Environment_61b {
+    public String badSource() throws Throwable {
         String data;
 
         /* get environment variable ADD */
@@ -35,8 +33,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public String goodG2BSource() throws Throwable
-    {
+    public String goodG2BSource() throws Throwable {
         String data;
 
         /* FIX: Use a hardcoded int as a string */
@@ -46,8 +43,7 @@ public class CWE606_Unchecked_Loop_Condition__Environment_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public String goodB2GSource() throws Throwable
-    {
+    public String goodB2GSource() throws Throwable {
         String data;
 
         /* get environment variable ADD */

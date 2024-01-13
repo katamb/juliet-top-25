@@ -16,11 +16,11 @@ Template File: sources-sinks-81_base.tmpl.java
  * */
 
 package testcases.CWE89_SQL_Injection.s02;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public abstract class CWE89_SQL_Injection__File_prepareStatement_81_base
-{
-    public abstract void action(String data ) throws Throwable;
+public abstract class CWE89_SQL_Injection__File_prepareStatement_81_base {
+    public abstract void action(String data) throws Throwable;
 }

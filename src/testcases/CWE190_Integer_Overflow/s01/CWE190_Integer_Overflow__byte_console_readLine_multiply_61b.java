@@ -16,6 +16,7 @@ Template File: sources-sinks-61b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
@@ -26,10 +27,8 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b
-{
-    public byte badSource() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b {
+    public byte badSource() throws Throwable {
         byte data;
 
         /* init data */
@@ -38,49 +37,31 @@ public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Byte.parseByte(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }
@@ -90,8 +71,7 @@ public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public byte goodG2BSource() throws Throwable
-    {
+    public byte goodG2BSource() throws Throwable {
         byte data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -101,8 +81,7 @@ public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public byte goodB2GSource() throws Throwable
-    {
+    public byte goodB2GSource() throws Throwable {
         byte data;
 
         /* init data */
@@ -111,49 +90,31 @@ public class CWE190_Integer_Overflow__byte_console_readLine_multiply_61b
         /* POTENTIAL FLAW: Read data from console with readLine*/
         BufferedReader readerBuffered = null;
         InputStreamReader readerInputStream = null;
-        try
-        {
+        try {
             readerInputStream = new InputStreamReader(System.in, "UTF-8");
             readerBuffered = new BufferedReader(readerInputStream);
             String stringNumber = readerBuffered.readLine();
-            if (stringNumber != null)
-            {
+            if (stringNumber != null) {
                 data = Byte.parseByte(stringNumber.trim());
             }
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-        }
-        catch (NumberFormatException exceptNumberFormat)
-        {
+        } catch (NumberFormatException exceptNumberFormat) {
             IO.logger.log(Level.WARNING, "Error with number parsing", exceptNumberFormat);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (readerBuffered != null)
-                {
+            try {
+                if (readerBuffered != null) {
                     readerBuffered.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
-            }
-            finally
-            {
-                try
-                {
-                    if (readerInputStream != null)
-                    {
+            } finally {
+                try {
+                    if (readerInputStream != null) {
                         readerInputStream.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                 }
             }

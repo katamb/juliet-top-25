@@ -19,12 +19,10 @@ package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_68a extends AbstractTestCase
-{
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_68a extends AbstractTestCase {
     public static StringBuilder data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -32,15 +30,13 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_68a extends Abstract
         (new CWE476_NULL_Pointer_Dereference__StringBuilder_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: hardcode data to non-null */
         data = new StringBuilder();
@@ -49,8 +45,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_68a extends Abstract
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
 
         /* POTENTIAL FLAW: data is null */
         data = null;
@@ -64,8 +59,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_68a extends Abstract
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

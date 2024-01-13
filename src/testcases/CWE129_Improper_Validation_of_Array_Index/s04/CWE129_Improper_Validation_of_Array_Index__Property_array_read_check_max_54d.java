@@ -16,26 +16,23 @@ Template File: sources-sinks-54d.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54d
-{
-    public void badSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).badSink(data );
+public class CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54d {
+    public void badSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).badSink(data);
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).goodG2BSink(data );
+    public void goodG2BSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).goodG2BSink(data);
     }
 
     /* goodB2G() - use badsource and goodsink */
-    public void goodB2GSink(int data ) throws Throwable
-    {
-        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).goodB2GSink(data );
+    public void goodB2GSink(int data) throws Throwable {
+        (new CWE129_Improper_Validation_of_Array_Index__Property_array_read_check_max_54e()).goodB2GSink(data);
     }
 }

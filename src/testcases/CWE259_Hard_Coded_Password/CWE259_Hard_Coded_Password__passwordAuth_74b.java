@@ -17,6 +17,7 @@ Template File: sources-sink-74b.tmpl.java
 package testcases.CWE259_Hard_Coded_Password;
 
 import testcasesupport.*;
+
 import java.util.HashMap;
 
 import java.util.logging.Level;
@@ -24,14 +25,11 @@ import java.io.*;
 
 import java.net.PasswordAuthentication;
 
-public class CWE259_Hard_Coded_Password__passwordAuth_74b
-{
-    public void badSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+public class CWE259_Hard_Coded_Password__passwordAuth_74b {
+    public void badSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());
@@ -40,12 +38,10 @@ public class CWE259_Hard_Coded_Password__passwordAuth_74b
     }
 
     /* goodG2B() - use goodsource and badsink */
-    public void goodG2BSink(HashMap<Integer,String> dataHashMap ) throws Throwable
-    {
+    public void goodG2BSink(HashMap<Integer, String> dataHashMap) throws Throwable {
         String data = dataHashMap.get(2);
 
-        if (data != null)
-        {
+        if (data != null) {
             /* POTENTIAL FLAW: data used as password in PasswordAuthentication() */
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());

@@ -16,7 +16,9 @@ Template File: sources-sinks-75a.tmpl.java
  * */
 
 package testcases.CWE129_Improper_Validation_of_Array_Index.s04;
+
 import testcasesupport.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
@@ -30,10 +32,8 @@ import java.util.Properties;
 import java.io.FileInputStream;
 
 
-public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75a extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75a extends AbstractTestCase {
+    public void bad() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -43,8 +43,7 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -52,32 +51,21 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -87,56 +75,41 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).badSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).badSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use GoodSource and BadSink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         int data;
 
         /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
@@ -146,50 +119,36 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).goodG2BSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).goodG2BSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         int data;
 
         data = Integer.MIN_VALUE; /* Initialize data */
@@ -199,8 +158,7 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
             Properties properties = new Properties();
             FileInputStream streamFileInput = null;
 
-            try
-            {
+            try {
                 streamFileInput = new FileInputStream("../common/config.properties");
                 properties.load(streamFileInput);
 
@@ -208,32 +166,21 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
                 String stringNumber = properties.getProperty("data");
                 if (stringNumber != null) // avoid NPD incidental warnings
                 {
-                    try
-                    {
+                    try {
                         data = Integer.parseInt(stringNumber.trim());
-                    }
-                    catch(NumberFormatException exceptNumberFormat)
-                    {
+                    } catch (NumberFormatException exceptNumberFormat) {
                         IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
                     }
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
-            }
-            finally
-            {
+            } finally {
                 /* Close stream reading object */
-                try
-                {
-                    if (streamFileInput != null)
-                    {
+                try {
+                    if (streamFileInput != null) {
                         streamFileInput.close();
                     }
-                }
-                catch (IOException exceptIO)
-                {
+                } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
                 }
             }
@@ -243,42 +190,29 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
         ByteArrayOutputStream streamByteArrayOutput = null;
         ObjectOutput outputObject = null;
 
-        try
-        {
-            streamByteArrayOutput = new ByteArrayOutputStream() ;
-            outputObject = new ObjectOutputStream(streamByteArrayOutput) ;
+        try {
+            streamByteArrayOutput = new ByteArrayOutputStream();
+            outputObject = new ObjectOutputStream(streamByteArrayOutput);
             outputObject.writeObject(data);
             byte[] dataSerialized = streamByteArrayOutput.toByteArray();
-            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).goodB2GSink(dataSerialized  );
-        }
-        catch (IOException exceptIO)
-        {
+            (new CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_read_no_check_75b()).goodB2GSink(dataSerialized);
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in serialization", exceptIO);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream writing objects */
-            try
-            {
-                if (outputObject != null)
-                {
+            try {
+                if (outputObject != null) {
                     outputObject.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectOutputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayOutput != null)
-                {
+            try {
+                if (streamByteArrayOutput != null) {
                     streamByteArrayOutput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayOutputStream", exceptIO);
             }
         }
@@ -290,8 +224,7 @@ public class CWE129_Improper_Validation_of_Array_Index__PropertiesFile_array_rea
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

@@ -4,25 +4,23 @@ Label Definition File: CWE476_NULL_Pointer_Dereference.label.xml
 Template File: sources-sinks-01.tmpl.java
 */
 /*
-* @description
-* CWE: 476 Null Pointer Dereference
-* BadSource:  Set data to null
-* GoodSource: Set data to a non-null value
-* Sinks:
-*    GoodSink: add check to prevent possibility of null dereference
-*    BadSink : possibility of null dereference
-* Flow Variant: 01 Baseline
-*
-* */
+ * @description
+ * CWE: 476 Null Pointer Dereference
+ * BadSource:  Set data to null
+ * GoodSource: Set data to a non-null value
+ * Sinks:
+ *    GoodSink: add check to prevent possibility of null dereference
+ *    BadSink : possibility of null dereference
+ * Flow Variant: 01 Baseline
+ *
+ * */
 
 package testcases.CWE476_NULL_Pointer_Dereference;
 
 import testcasesupport.*;
 
-public class CWE476_NULL_Pointer_Dereference__StringBuilder_01 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE476_NULL_Pointer_Dereference__StringBuilder_01 extends AbstractTestCase {
+    public void bad() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
@@ -33,15 +31,13 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_01 extends AbstractT
 
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         StringBuilder data;
 
         /* FIX: hardcode data to non-null */
@@ -53,20 +49,16 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_01 extends AbstractT
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         StringBuilder data;
 
         /* POTENTIAL FLAW: data is null */
         data = null;
 
         /* FIX: validate that data is non-null */
-        if (data != null)
-        {
+        if (data != null) {
             IO.writeLine("" + data.length());
-        }
-        else
-        {
+        } else {
             IO.writeLine("data is null");
         }
 
@@ -78,8 +70,7 @@ public class CWE476_NULL_Pointer_Dereference__StringBuilder_01 extends AbstractT
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

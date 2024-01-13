@@ -4,60 +4,54 @@ Label Definition File: CWE190_Integer_Overflow.label.xml
 Template File: sources-sinks-16.tmpl.java
 */
 /*
-* @description
-* CWE: 190 Integer Overflow
-* BadSource: max Set data to the max value for byte
-* GoodSource: A hardcoded non-zero, non-min, non-max, even number
-* Sinks: add
-*    GoodSink: Ensure there will not be an overflow before adding 1 to data
-*    BadSink : Add 1 to data, which can cause an overflow
-* Flow Variant: 16 Control flow: while(true)
-*
-* */
+ * @description
+ * CWE: 190 Integer Overflow
+ * BadSource: max Set data to the max value for byte
+ * GoodSource: A hardcoded non-zero, non-min, non-max, even number
+ * Sinks: add
+ *    GoodSink: Ensure there will not be an overflow before adding 1 to data
+ *    BadSink : Add 1 to data, which can cause an overflow
+ * Flow Variant: 16 Control flow: while(true)
+ *
+ * */
 
 package testcases.CWE190_Integer_Overflow.s01;
+
 import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__byte_max_add_16 extends AbstractTestCase
-{
-    public void bad() throws Throwable
-    {
+public class CWE190_Integer_Overflow__byte_max_add_16 extends AbstractTestCase {
+    public void bad() throws Throwable {
         byte data;
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: Use the maximum size of the data type */
             data = Byte.MAX_VALUE;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data + 1);
+            byte result = (byte) (data + 1);
             IO.writeLine("result: " + result);
             break;
         }
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
         byte data;
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Use a hardcoded number that won't cause underflow, overflow, divide by zero, or loss-of-precision issues */
             data = 2;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: if data == Byte.MAX_VALUE, this will overflow */
-            byte result = (byte)(data + 1);
+            byte result = (byte) (data + 1);
             IO.writeLine("result: " + result);
             break;
         }
@@ -65,35 +59,28 @@ public class CWE190_Integer_Overflow__byte_max_add_16 extends AbstractTestCase
     }
 
     /* goodB2G() - use badsource and goodsink */
-    private void goodB2G() throws Throwable
-    {
+    private void goodB2G() throws Throwable {
         byte data;
 
-        while (true)
-        {
+        while (true) {
             /* POTENTIAL FLAW: Use the maximum size of the data type */
             data = Byte.MAX_VALUE;
             break;
         }
 
-        while (true)
-        {
+        while (true) {
             /* FIX: Add a check to prevent an overflow from occurring */
-            if (data < Byte.MAX_VALUE)
-            {
-                byte result = (byte)(data + 1);
+            if (data < Byte.MAX_VALUE) {
+                byte result = (byte) (data + 1);
                 IO.writeLine("result: " + result);
-            }
-            else
-            {
+            } else {
                 IO.writeLine("data value is too large to perform addition.");
             }
             break;
         }
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
@@ -104,8 +91,7 @@ public class CWE190_Integer_Overflow__byte_max_add_16 extends AbstractTestCase
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }

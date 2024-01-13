@@ -16,7 +16,9 @@ Template File: sources-sinks-75b.tmpl.java
  * */
 
 package testcases.CWE190_Integer_Overflow.s04;
+
 import testcasesupport.*;
+
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
@@ -24,68 +26,8 @@ import java.util.logging.Level;
 
 import javax.servlet.http.*;
 
-public class CWE190_Integer_Overflow__int_URLConnection_multiply_75b
-{
-    public void badSink(byte[] dataSerialized ) throws Throwable
-    {
-        /* unserialize data */
-        ByteArrayInputStream streamByteArrayInput = null;
-        ObjectInputStream streamObjectInput = null;
-
-        try
-        {
-            streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
-            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            int data = (Integer)streamObjectInput.readObject();
-
-            if(data > 0) /* ensure we won't have an underflow */
-            {
-                /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
-                IO.writeLine("result: " + result);
-            }
-
-        }
-        catch (IOException exceptIO)
-        {
-            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
-            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
-            /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
-                    streamObjectInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
-            }
-
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
-                    streamByteArrayInput.close();
-                }
-            }
-            catch (IOException exceptIO)
-            {
-                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
-            }
-        }
-    }
-
-    /* goodG2B() - use GoodSource and BadSink */
-    public void goodG2BSink(byte[] dataSerialized ) throws Throwable
-    {
+public class CWE190_Integer_Overflow__int_URLConnection_multiply_75b {
+    public void badSink(byte[] dataSerialized) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
@@ -93,113 +35,119 @@ public class CWE190_Integer_Overflow__int_URLConnection_multiply_75b
         try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            int data = (Integer)streamObjectInput.readObject();
+            int data = (Integer) streamObjectInput.readObject();
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
-                int result = (int)(data * 2);
+                int result = (int) (data * 2);
                 IO.writeLine("result: " + result);
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
-            catch (IOException exceptIO)
-            {
+        }
+    }
+
+    /* goodG2B() - use GoodSource and BadSink */
+    public void goodG2BSink(byte[] dataSerialized) throws Throwable {
+        /* unserialize data */
+        ByteArrayInputStream streamByteArrayInput = null;
+        ObjectInputStream streamObjectInput = null;
+
+        try {
+            streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
+            streamObjectInput = new ObjectInputStream(streamByteArrayInput);
+            int data = (Integer) streamObjectInput.readObject();
+
+            if (data > 0) /* ensure we won't have an underflow */ {
+                /* POTENTIAL FLAW: if (data*2) > Integer.MAX_VALUE, this will overflow */
+                int result = (int) (data * 2);
+                IO.writeLine("result: " + result);
+            }
+
+        } catch (IOException exceptIO) {
+            IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
+        } catch (ClassNotFoundException exceptClassNotFound) {
+            IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
+        } finally {
+            /* clean up stream reading objects */
+            try {
+                if (streamObjectInput != null) {
+                    streamObjectInput.close();
+                }
+            } catch (IOException exceptIO) {
+                IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
+            }
+
+            try {
+                if (streamByteArrayInput != null) {
+                    streamByteArrayInput.close();
+                }
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }
     }
 
     /* goodB2G() - use BadSource and GoodSink */
-    public void goodB2GSink(byte[] dataSerialized ) throws Throwable
-    {
+    public void goodB2GSink(byte[] dataSerialized) throws Throwable {
         /* unserialize data */
         ByteArrayInputStream streamByteArrayInput = null;
         ObjectInputStream streamObjectInput = null;
 
-        try
-        {
+        try {
             streamByteArrayInput = new ByteArrayInputStream(dataSerialized);
             streamObjectInput = new ObjectInputStream(streamByteArrayInput);
-            int data = (Integer)streamObjectInput.readObject();
+            int data = (Integer) streamObjectInput.readObject();
 
-            if(data > 0) /* ensure we won't have an underflow */
-            {
+            if (data > 0) /* ensure we won't have an underflow */ {
                 /* FIX: Add a check to prevent an overflow from occurring */
-                if (data < (Integer.MAX_VALUE/2))
-                {
-                    int result = (int)(data * 2);
+                if (data < (Integer.MAX_VALUE / 2)) {
+                    int result = (int) (data * 2);
                     IO.writeLine("result: " + result);
-                }
-                else
-                {
+                } else {
                     IO.writeLine("data value is too large to perform multiplication.");
                 }
             }
 
-        }
-        catch (IOException exceptIO)
-        {
+        } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "IOException in deserialization", exceptIO);
-        }
-        catch (ClassNotFoundException exceptClassNotFound)
-        {
+        } catch (ClassNotFoundException exceptClassNotFound) {
             IO.logger.log(Level.WARNING, "ClassNotFoundException in deserialization", exceptClassNotFound);
-        }
-        finally
-        {
+        } finally {
             /* clean up stream reading objects */
-            try
-            {
-                if (streamObjectInput != null)
-                {
+            try {
+                if (streamObjectInput != null) {
                     streamObjectInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ObjectInputStream", exceptIO);
             }
 
-            try
-            {
-                if (streamByteArrayInput != null)
-                {
+            try {
+                if (streamByteArrayInput != null) {
                     streamByteArrayInput.close();
                 }
-            }
-            catch (IOException exceptIO)
-            {
+            } catch (IOException exceptIO) {
                 IO.logger.log(Level.WARNING, "Error closing ByteArrayInputStream", exceptIO);
             }
         }

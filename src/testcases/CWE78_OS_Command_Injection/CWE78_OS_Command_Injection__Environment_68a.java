@@ -19,12 +19,10 @@ import testcasesupport.*;
 
 import javax.servlet.http.*;
 
-public class CWE78_OS_Command_Injection__Environment_68a extends AbstractTestCase
-{
+public class CWE78_OS_Command_Injection__Environment_68a extends AbstractTestCase {
     public static String data;
 
-    public void bad() throws Throwable
-    {
+    public void bad() throws Throwable {
 
         /* get environment variable ADD */
         /* POTENTIAL FLAW: Read data from an environment variable */
@@ -33,14 +31,12 @@ public class CWE78_OS_Command_Injection__Environment_68a extends AbstractTestCas
         (new CWE78_OS_Command_Injection__Environment_68b()).badSink();
     }
 
-    public void good() throws Throwable
-    {
+    public void good() throws Throwable {
         goodG2B();
     }
 
     /* goodG2B() - use goodsource and badsink */
-    private void goodG2B() throws Throwable
-    {
+    private void goodG2B() throws Throwable {
 
         /* FIX: Use a hardcoded string */
         data = "foo";
@@ -54,8 +50,7 @@ public class CWE78_OS_Command_Injection__Environment_68a extends AbstractTestCas
      * application, which is how source code analysis tools are tested.
      */
     public static void main(String[] args) throws ClassNotFoundException,
-           InstantiationException, IllegalAccessException
-    {
+            InstantiationException, IllegalAccessException {
         mainFromParent(args);
     }
 }
