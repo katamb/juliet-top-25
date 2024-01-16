@@ -1,4 +1,4 @@
 /build
 /.gradle
 /.idea
-/codeql
+/codeql-analysis-top-25
