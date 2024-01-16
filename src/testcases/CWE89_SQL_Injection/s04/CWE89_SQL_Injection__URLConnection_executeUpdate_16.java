@@ -1,44 +1,18 @@
-/* TEMPLATE GENERATED TESTCASE FILE
-Filename: CWE89_SQL_Injection__URLConnection_executeUpdate_16.java
-Label Definition File: CWE89_SQL_Injection.label.xml
-Template File: sources-sinks-16.tmpl.java
-*/
-/*
- * @description
- * CWE: 89 SQL Injection
- * BadSource: URLConnection Read data from a web server with URLConnection
- * GoodSource: A hardcoded string
- * Sinks: executeUpdate
- *    GoodSink: Use prepared statement and executeUpdate (properly)
- *    BadSink : data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection
- * Flow Variant: 16 Control flow: while(true)
- *
- * */
-
 package testcases.CWE89_SQL_Injection.s04;
-
 import testcasesupport.*;
-
 import javax.servlet.http.*;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import java.util.logging.Level;
-
 import java.sql.*;
-
-
 public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends AbstractTestCase {
     public void bad() throws Throwable {
         String data;
-
         while (true) {
-            data = ""; /* Initialize data */
-            /* read input from URLConnection */
+            data = "";
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
@@ -46,14 +20,10 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                 try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
-                    /* POTENTIAL FLAW: Read data from a web server with URLConnection */
-                    /* This will be reading the first "line" of the response body,
-                     * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
-                    /* clean up stream reading objects */
                     try {
                         if (readerBuffered != null) {
                             readerBuffered.close();
@@ -61,7 +31,6 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
-
                     try {
                         if (readerInputStream != null) {
                             readerInputStream.close();
@@ -73,14 +42,12 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
             }
             break;
         }
-
         while (true) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
             try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
-                /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
                 int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
             } catch (SQLException exceptSql) {
@@ -93,7 +60,6 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                 } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
-
                 try {
                     if (dbConnection != null) {
                         dbConnection.close();
@@ -105,24 +71,18 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
             break;
         }
     }
-
-    /* goodG2B() - use goodsource and badsink */
     private void goodG2B() throws Throwable {
         String data;
-
         while (true) {
-            /* FIX: Use a hardcoded string */
             data = "foo";
             break;
         }
-
         while (true) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
             try {
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.createStatement();
-                /* POTENTIAL FLAW: data concatenated into SQL statement used in executeUpdate(), which could result in SQL Injection */
                 int rowCount = sqlStatement.executeUpdate("insert into users (status) values ('updated') where name='" + data + "'");
                 IO.writeLine("Updated " + rowCount + " rows successfully.");
             } catch (SQLException exceptSql) {
@@ -135,7 +95,6 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                 } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing Statement", exceptSql);
                 }
-
                 try {
                     if (dbConnection != null) {
                         dbConnection.close();
@@ -146,16 +105,11 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
             }
             break;
         }
-
     }
-
-    /* goodB2G() - use badsource and goodsink */
     private void goodB2G() throws Throwable {
         String data;
-
         while (true) {
-            data = ""; /* Initialize data */
-            /* read input from URLConnection */
+            data = "";
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();
                 BufferedReader readerBuffered = null;
@@ -163,14 +117,10 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                 try {
                     readerInputStream = new InputStreamReader(urlConnection.getInputStream(), "UTF-8");
                     readerBuffered = new BufferedReader(readerInputStream);
-                    /* POTENTIAL FLAW: Read data from a web server with URLConnection */
-                    /* This will be reading the first "line" of the response body,
-                     * which could be very long if there are no newlines in the HTML */
                     data = readerBuffered.readLine();
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
-                    /* clean up stream reading objects */
                     try {
                         if (readerBuffered != null) {
                             readerBuffered.close();
@@ -178,7 +128,6 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
-
                     try {
                         if (readerInputStream != null) {
                             readerInputStream.close();
@@ -190,12 +139,10 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
             }
             break;
         }
-
         while (true) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
             try {
-                /* FIX: Use prepared statement and executeUpdate (properly) */
                 dbConnection = IO.getDBConnection();
                 sqlStatement = dbConnection.prepareStatement("insert into users (status) values ('updated') where name=?");
                 sqlStatement.setString(1, data);
@@ -211,7 +158,6 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
                 } catch (SQLException exceptSql) {
                     IO.logger.log(Level.WARNING, "Error closing PreparedStatement", exceptSql);
                 }
-
                 try {
                     if (dbConnection != null) {
                         dbConnection.close();
@@ -223,17 +169,10 @@ public class CWE89_SQL_Injection__URLConnection_executeUpdate_16 extends Abstrac
             break;
         }
     }
-
     public void good() throws Throwable {
         goodG2B();
         goodB2G();
     }
-
-    /* Below is the main(). It is only used when building this testcase on
-     * its own for testing or for building a binary to use in testing binary
-     * analysis tools. It is not used when compiling all the testcases as one
-     * application, which is how source code analysis tools are tested.
-     */
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);
