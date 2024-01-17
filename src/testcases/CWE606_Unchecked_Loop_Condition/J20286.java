@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J20286 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "";
         {
@@ -58,7 +58,7 @@ public class J20286 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -70,12 +70,12 @@ public class J20286 extends AbstractTestCase {
             IO.writeLine("hello world");
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "5";
         return data;
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String data;
         data = "";
         {

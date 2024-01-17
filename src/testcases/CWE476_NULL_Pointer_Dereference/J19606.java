@@ -6,9 +6,9 @@ public class J19606 extends AbstractTestCase {
         Integer data;
         data = null;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(Integer data) throws Throwable {
+    private void bS(Integer data) throws Throwable {
         if (bPrivate) {
             IO.writeLine("" + data.toString());
         }

@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J10786 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         IO.writeLine(array[data]);
     }
@@ -21,7 +21,7 @@ public class J10786 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

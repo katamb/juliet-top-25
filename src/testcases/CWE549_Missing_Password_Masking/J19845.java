@@ -11,17 +11,17 @@ public class J19845 extends AbstractTestCaseServlet {
                 response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
                 response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
                 response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-                response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+                response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
                 break;
         }
     }
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void g2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         switch (7) {
             case 7:
                 response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
                 response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
                 response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-                response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+                response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
                 break;
             default:
                 IO.writeLine("Benign, fixed string");
@@ -30,7 +30,7 @@ public class J19845 extends AbstractTestCaseServlet {
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         process1(request, response);
-        good2(request, response);
+        g2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

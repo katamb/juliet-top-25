@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J20815 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "";
         {
@@ -57,13 +57,13 @@ public class J20815 extends AbstractTestCase {
         }
         return data;
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = processG2BSource();
+        String data = processG2BSce();
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";

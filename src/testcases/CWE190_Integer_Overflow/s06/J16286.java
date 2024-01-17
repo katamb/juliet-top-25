@@ -2,7 +2,7 @@ package testcases.CWE190_Integer_Overflow.s06;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J16286 extends AbstractTestCase {
-    private void badSink(byte data) throws Throwable {
+    private void bS(byte data) throws Throwable {
         data++;
         byte result = (byte) (data);
         IO.writeLine("result: " + result);
@@ -10,7 +10,7 @@ public class J16286 extends AbstractTestCase {
     public void handle() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

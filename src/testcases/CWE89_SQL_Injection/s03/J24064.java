@@ -9,9 +9,9 @@ public class J24064 extends AbstractTestCaseServlet {
         String data;
         data = request.getParameter("name");
         bPrivate = true;
-        badSink(data, request, response);
+        bS(data, request, response);
     }
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (bPrivate) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;

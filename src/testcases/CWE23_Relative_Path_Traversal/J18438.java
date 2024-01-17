@@ -13,7 +13,7 @@ public class J18438 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         bPrivate = true;
-        data = bad_source();
+        data = b_source();
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -22,35 +22,35 @@ public class J18438 extends AbstractTestCase {
         }
         if (data != null) {
             File file = new File(root + data);
-            FileInputStream streamFileInputSink = null;
-            InputStreamReader readerInputStreamSink = null;
-            BufferedReader readerBufferdSink = null;
+            FileInputStream streamFileInputS = null;
+            InputStreamReader readerInputStreamS = null;
+            BufferedReader readerBufferdS = null;
             if (file.exists() && file.isFile()) {
                 try {
-                    streamFileInputSink = new FileInputStream(file);
-                    readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
-                    readerBufferdSink = new BufferedReader(readerInputStreamSink);
-                    IO.writeLine(readerBufferdSink.readLine());
+                    streamFileInputS = new FileInputStream(file);
+                    readerInputStreamS = new InputStreamReader(streamFileInputS, "UTF-8");
+                    readerBufferdS = new BufferedReader(readerInputStreamS);
+                    IO.writeLine(readerBufferdS.readLine());
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
                     try {
-                        if (readerBufferdSink != null) {
-                            readerBufferdSink.close();
+                        if (readerBufferdS != null) {
+                            readerBufferdS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
                     try {
-                        if (readerInputStreamSink != null) {
-                            readerInputStreamSink.close();
+                        if (readerInputStreamS != null) {
+                            readerInputStreamS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                     try {
-                        if (streamFileInputSink != null) {
-                            streamFileInputSink.close();
+                        if (streamFileInputS != null) {
+                            streamFileInputS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
@@ -59,7 +59,7 @@ public class J18438 extends AbstractTestCase {
             }
         }
     }
-    private String bad_source() throws Throwable {
+    private String b_source() throws Throwable {
         String data;
         if (bPrivate) {
             data = "";
@@ -104,20 +104,20 @@ public class J18438 extends AbstractTestCase {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
-    private String goodG2B1_source() throws Throwable {
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
+    private String gdG2B1_source() throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "foo";
         }
         return data;
     }
-    private String goodG2B2_source() throws Throwable {
+    private String gdG2B2_source() throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "foo";
         } else {
             data = null;

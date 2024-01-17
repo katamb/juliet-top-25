@@ -9,7 +9,7 @@ public class J15498 extends AbstractTestCase {
     private long dataB;
     private long dataGdG2B;
     private long dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         long data = dataB;
         if (data > 0)  {
             long result = (long) (data * 2);
@@ -50,7 +50,7 @@ public class J15498 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

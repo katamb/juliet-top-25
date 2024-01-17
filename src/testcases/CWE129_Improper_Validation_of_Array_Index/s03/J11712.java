@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J11712 extends AbstractTestCaseServlet {
-    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -24,7 +24,7 @@ public class J11712 extends AbstractTestCaseServlet {
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = badSource(request, response);
+        int data = bSce(request, response);
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -34,12 +34,12 @@ public class J11712 extends AbstractTestCaseServlet {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {

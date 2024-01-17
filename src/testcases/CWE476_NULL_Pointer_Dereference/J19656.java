@@ -1,21 +1,21 @@
 package testcases.CWE476_NULL_Pointer_Dereference;
 import testcasesupport.*;
 public class J19656 extends AbstractTestCase {
-    private int[] badSource() throws Throwable {
+    private int[] bSce() throws Throwable {
         int[] data;
         data = null;
         return data;
     }
     public void handle() throws Throwable {
-        int[] data = badSource();
+        int[] data = bSce();
         IO.writeLine("" + data.length);
     }
-    private int[] processG2BSource() throws Throwable {
+    private int[] processG2BSce() throws Throwable {
         int[] data;
         data = new int[5];
         return data;
     }
-    private int[] processB2GSource() throws Throwable {
+    private int[] processB2GSce() throws Throwable {
         int[] data;
         data = null;
         return data;

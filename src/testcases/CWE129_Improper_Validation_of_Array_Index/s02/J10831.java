@@ -7,7 +7,7 @@ public class J10831 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(int data) throws Throwable {
+    private void gG2BS(int data) throws Throwable {
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -20,9 +20,9 @@ public class J10831 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         int data;
         data = 2;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(int data) throws Throwable {
+    private void gB2GS(int data) throws Throwable {
         int array[] = null;
         if (data > 0) {
             array = new int[data];
@@ -46,7 +46,7 @@ public class J10831 extends AbstractTestCase {
                 }
             }
         }
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

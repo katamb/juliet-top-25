@@ -7,9 +7,9 @@ public class J16150 extends AbstractTestCase {
         short data;
         data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(short data) throws Throwable {
+    private void bS(short data) throws Throwable {
         if (bPrivate) {
             if (data > 0)  {
                 short result = (short) (data * 2);

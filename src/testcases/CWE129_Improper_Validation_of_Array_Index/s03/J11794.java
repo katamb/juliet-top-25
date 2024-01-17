@@ -7,9 +7,9 @@ public class J11794 extends AbstractTestCase {
         int data;
         data = 100;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         if (bPrivate) {
             int array[] = {0, 1, 2, 3, 4};
             if (data >= 0) {

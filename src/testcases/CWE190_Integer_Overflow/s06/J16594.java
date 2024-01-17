@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J16594 extends AbstractTestCaseServlet {
-    private void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
@@ -12,9 +12,9 @@ public class J16594 extends AbstractTestCaseServlet {
         int data;
         data = Integer.MIN_VALUE;
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                String stringNumber = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                String stringNumber = cookieSces[0].getValue();
                 try {
                     data = Integer.parseInt(stringNumber.trim());
                 } catch (NumberFormatException exceptNumberFormat) {
@@ -22,7 +22,7 @@ public class J16594 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

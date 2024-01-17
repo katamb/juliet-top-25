@@ -8,7 +8,7 @@ public class J19615 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         Integer data = dataGdG2B;
         IO.writeLine("" + data.toString());
     }
@@ -16,9 +16,9 @@ public class J19615 extends AbstractTestCase {
         Integer data;
         data = Integer.valueOf(5);
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
-    private void gB2GSink() throws Throwable {
+    private void gB2GS() throws Throwable {
         Integer data = dataGdB2G;
         if (data != null) {
             IO.writeLine("" + data.toString());
@@ -30,7 +30,7 @@ public class J19615 extends AbstractTestCase {
         Integer data;
         data = null;
         dataGdB2G = data;
-        gB2GSink();
+        gB2GS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

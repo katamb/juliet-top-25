@@ -7,9 +7,9 @@ public class J16326 extends AbstractTestCase {
         byte data;
         data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(byte data) throws Throwable {
+    private void bS(byte data) throws Throwable {
         if (bPrivate) {
             data++;
             byte result = (byte) (data);

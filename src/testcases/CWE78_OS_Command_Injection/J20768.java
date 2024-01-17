@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.StringTokenizer;
 public class J20768 extends AbstractTestCaseServlet {
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
@@ -26,7 +26,7 @@ public class J20768 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

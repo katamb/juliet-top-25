@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23716 extends AbstractTestCaseServlet {
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
@@ -43,12 +43,12 @@ public class J23716 extends AbstractTestCaseServlet {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -14,7 +14,7 @@ public class J19687 extends AbstractTestCase {
             }
         }
     }
-    private void good2() throws Throwable {
+    private void g2() throws Throwable {
         if (IO.staticFive == 5) {
             {
                 String myString = null;
@@ -27,7 +27,7 @@ public class J19687 extends AbstractTestCase {
     }
     public void process() throws Throwable {
         process1();
-        good2();
+        g2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -8,7 +8,7 @@ public class J20773 extends AbstractTestCaseServlet {
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -23,7 +23,7 @@ public class J20773 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

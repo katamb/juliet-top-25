@@ -6,7 +6,7 @@ import java.sql.*;
 public class J18842 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -47,7 +47,7 @@ public class J18842 extends AbstractTestCase {
         String data;
         data = "7e5tc4s3";
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -13,7 +13,7 @@ public class J13827 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         int data = dataGdG2B;
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
@@ -22,9 +22,9 @@ public class J13827 extends AbstractTestCase {
         int data;
         data = 2;
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
-    private void gB2GSink() throws Throwable {
+    private void gB2GS() throws Throwable {
         int data = dataGdB2G;
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
             int result = (int) (data * data);
@@ -71,7 +71,7 @@ public class J13827 extends AbstractTestCase {
             }
         }
         dataGdB2G = data;
-        gB2GSink();
+        gB2GS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

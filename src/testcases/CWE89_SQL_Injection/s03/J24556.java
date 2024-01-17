@@ -10,7 +10,7 @@ public class J24556 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         if (data != null) {
             String names[] = data.split("-");
@@ -73,7 +73,7 @@ public class J24556 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

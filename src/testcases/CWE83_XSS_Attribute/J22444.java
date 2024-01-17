@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class J22444 extends AbstractTestCaseServlet {
     private String dataB;
     private String dataGdG2B;
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataB;
         if (data != null) {
             response.getWriter().println("<br>handle() - <img src=\"" + data + "\">");
@@ -64,7 +64,7 @@ public class J22444 extends AbstractTestCaseServlet {
             }
         }
         dataB = data;
-        badSink(request, response);
+        bS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -49,9 +49,9 @@ public class J16239 extends AbstractTestCase {
             }
         }
         gB2G1Private = false;
-        gB2G1Sink(data);
+        gB2G1S(data);
     }
-    private void gB2G1Sink(byte data) throws Throwable {
+    private void gB2G1S(byte data) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -98,9 +98,9 @@ public class J16239 extends AbstractTestCase {
             }
         }
         gB2G2Private = true;
-        goodB2G2Sink(data);
+        gB2G2S(data);
     }
-    private void goodB2G2Sink(byte data) throws Throwable {
+    private void gB2G2S(byte data) throws Throwable {
         if (gB2G2Private) {
             if (data < Byte.MAX_VALUE) {
                 data++;
@@ -115,9 +115,9 @@ public class J16239 extends AbstractTestCase {
         byte data;
         data = 2;
         gG2BPrivate = true;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gG2BSink(byte data) throws Throwable {
+    private void gG2BS(byte data) throws Throwable {
         if (gG2BPrivate) {
             data++;
             byte result = (byte) (data);

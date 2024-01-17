@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.StringTokenizer;
 public class J20240 extends AbstractTestCaseServlet {
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -28,7 +28,7 @@ public class J20240 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

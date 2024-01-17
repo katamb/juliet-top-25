@@ -10,7 +10,7 @@ public class J14487 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGdG2B;
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
@@ -19,9 +19,9 @@ public class J14487 extends AbstractTestCaseServlet {
         int data;
         data = 2;
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
-    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGdB2G;
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
             int result = (int) (data * data);
@@ -42,7 +42,7 @@ public class J14487 extends AbstractTestCaseServlet {
             }
         }
         dataGdB2G = data;
-        gB2GSink(request, response);
+        gB2GS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

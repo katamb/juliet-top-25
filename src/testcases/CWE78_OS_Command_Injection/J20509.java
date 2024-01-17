@@ -11,7 +11,7 @@ public class J20509 extends AbstractTestCase {
     public void process() throws Throwable {
         processG2B();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         String data = dataGdG2B;
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -26,7 +26,7 @@ public class J20509 extends AbstractTestCase {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

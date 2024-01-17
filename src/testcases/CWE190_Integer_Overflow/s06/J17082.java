@@ -5,7 +5,7 @@ public class J17082 extends AbstractTestCase {
     private long dataB;
     private long dataGdG2B;
     private long dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         long data = dataB;
         data++;
         long result = (long) (data);
@@ -15,7 +15,7 @@ public class J17082 extends AbstractTestCase {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

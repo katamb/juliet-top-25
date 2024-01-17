@@ -7,7 +7,7 @@ public class J11183 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0) {
             IO.writeLine(array[data]);
@@ -18,9 +18,9 @@ public class J11183 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        gG2BSink(data, request, response);
+        gG2BS(data, request, response);
     }
-    private void gB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
@@ -32,9 +32,9 @@ public class J11183 extends AbstractTestCaseServlet {
         int data;
         data = Integer.MIN_VALUE;
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                String stringNumber = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                String stringNumber = cookieSces[0].getValue();
                 try {
                     data = Integer.parseInt(stringNumber.trim());
                 } catch (NumberFormatException exceptNumberFormat) {
@@ -42,7 +42,7 @@ public class J11183 extends AbstractTestCaseServlet {
                 }
             }
         }
-        gB2GSink(data, request, response);
+        gB2GS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

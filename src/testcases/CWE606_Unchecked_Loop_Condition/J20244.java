@@ -6,7 +6,7 @@ public class J20244 extends AbstractTestCaseServlet {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataB;
         int numberOfLoops;
         try {
@@ -33,7 +33,7 @@ public class J20244 extends AbstractTestCaseServlet {
             }
         }
         dataB = data;
-        badSink(request, response);
+        bS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

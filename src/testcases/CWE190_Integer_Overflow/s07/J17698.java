@@ -7,7 +7,7 @@ public class J17698 extends AbstractTestCaseServlet {
     private int dataB;
     private int dataGdG2B;
     private int dataGdB2G;
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataB;
         int result = (int) (++data);
         IO.writeLine("result: " + result);
@@ -30,7 +30,7 @@ public class J17698 extends AbstractTestCaseServlet {
             }
         }
         dataB = data;
-        badSink(request, response);
+        bS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

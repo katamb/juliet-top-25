@@ -7,7 +7,7 @@ public class J16639 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
@@ -15,9 +15,9 @@ public class J16639 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        gG2BSink(data, request, response);
+        gG2BS(data, request, response);
     }
-    private void gB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (data < Integer.MAX_VALUE) {
             data++;
             int result = (int) (data);
@@ -37,7 +37,7 @@ public class J16639 extends AbstractTestCaseServlet {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
-        gB2GSink(data, request, response);
+        gB2GS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

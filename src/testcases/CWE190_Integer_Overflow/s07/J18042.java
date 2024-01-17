@@ -7,9 +7,9 @@ public class J18042 extends AbstractTestCase {
         long data;
         data = Long.MAX_VALUE;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(long data) throws Throwable {
+    private void bS(long data) throws Throwable {
         if (bPrivate) {
             long result = (long) (++data);
             IO.writeLine("result: " + result);

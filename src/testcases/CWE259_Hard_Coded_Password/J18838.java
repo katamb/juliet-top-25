@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.io.*;
 import java.sql.*;
 public class J18838 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -43,7 +43,7 @@ public class J18838 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = "7e5tc4s3";
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

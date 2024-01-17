@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 public class J21034 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -48,12 +48,12 @@ public class J21034 extends AbstractTestCaseServlet {
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         if (data != null) {
             response.getWriter().println("<br>handle(): data = " + data.replaceAll("(<script>)", ""));
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;

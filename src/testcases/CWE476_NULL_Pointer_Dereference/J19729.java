@@ -14,9 +14,9 @@ public class J19729 extends AbstractTestCase {
         StringBuilder data;
         data = null;
         gB2G1Private = false;
-        gB2G1Sink(data);
+        gB2G1S(data);
     }
-    private void gB2G1Sink(StringBuilder data) throws Throwable {
+    private void gB2G1S(StringBuilder data) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -31,9 +31,9 @@ public class J19729 extends AbstractTestCase {
         StringBuilder data;
         data = null;
         gB2G2Private = true;
-        goodB2G2Sink(data);
+        gB2G2S(data);
     }
-    private void goodB2G2Sink(StringBuilder data) throws Throwable {
+    private void gB2G2S(StringBuilder data) throws Throwable {
         if (gB2G2Private) {
             if (data != null) {
                 IO.writeLine("" + data.length());
@@ -46,9 +46,9 @@ public class J19729 extends AbstractTestCase {
         StringBuilder data;
         data = new StringBuilder();
         gG2BPrivate = true;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gG2BSink(StringBuilder data) throws Throwable {
+    private void gG2BS(StringBuilder data) throws Throwable {
         if (gG2BPrivate) {
             IO.writeLine("" + data.length());
         }

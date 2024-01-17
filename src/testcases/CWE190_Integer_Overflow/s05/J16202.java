@@ -5,7 +5,7 @@ public class J16202 extends AbstractTestCase {
     private short dataB;
     private short dataGdG2B;
     private short dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         short data = dataB;
         short result = (short) (data * data);
         IO.writeLine("result: " + result);
@@ -14,7 +14,7 @@ public class J16202 extends AbstractTestCase {
         short data;
         data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

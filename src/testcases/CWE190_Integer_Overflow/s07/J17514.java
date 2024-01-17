@@ -19,9 +19,9 @@ public class J17514 extends AbstractTestCase {
             }
         }
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         if (bPrivate) {
             int result = (int) (++data);
             IO.writeLine("result: " + result);

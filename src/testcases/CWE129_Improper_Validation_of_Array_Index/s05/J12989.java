@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 public class J12989 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -48,13 +48,13 @@ public class J12989 extends AbstractTestCase {
         }
         return data;
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = processG2BSource();
+        int data = processG2BSce();
         int array[] = {0, 1, 2, 3, 4};
         if (data < array.length) {
             IO.writeLine(array[data]);
@@ -62,7 +62,7 @@ public class J12989 extends AbstractTestCase {
             IO.writeLine("Array index out of bounds");
         }
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -103,7 +103,7 @@ public class J12989 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = processB2GSource();
+        int data = processB2GSce();
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);

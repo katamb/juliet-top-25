@@ -3,13 +3,13 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J14264 extends AbstractTestCaseServlet {
-    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                String stringNumber = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                String stringNumber = cookieSces[0].getValue();
                 try {
                     data = Integer.parseInt(stringNumber.trim());
                 } catch (NumberFormatException exceptNumberFormat) {
@@ -20,22 +20,22 @@ public class J14264 extends AbstractTestCaseServlet {
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = badSource(request, response);
+        int data = bSce(request, response);
         int result = (int) (data + 1);
         IO.writeLine("result: " + result);
     }
-    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                String stringNumber = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                String stringNumber = cookieSces[0].getValue();
                 try {
                     data = Integer.parseInt(stringNumber.trim());
                 } catch (NumberFormatException exceptNumberFormat) {

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J22838 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "";
         {
@@ -39,7 +39,7 @@ public class J22838 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
@@ -74,12 +74,12 @@ public class J22838 extends AbstractTestCase {
             }
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String data;
         data = "";
         {

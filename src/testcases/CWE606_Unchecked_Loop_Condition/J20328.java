@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J20328 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -40,7 +40,7 @@ public class J20328 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

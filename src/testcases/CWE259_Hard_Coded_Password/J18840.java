@@ -4,13 +4,13 @@ import java.util.logging.Level;
 import java.io.*;
 import java.sql.*;
 public class J18840 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "7e5tc4s3";
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -46,7 +46,7 @@ public class J18840 extends AbstractTestCase {
             }
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "";
         try {

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 public class J13957 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -54,17 +54,17 @@ public class J13957 extends AbstractTestCase {
         }
         return data;
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = processG2BSource();
+        int data = processG2BSce();
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -112,7 +112,7 @@ public class J13957 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = processB2GSource();
+        int data = processB2GSce();
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
             int result = (int) (data * data);
             IO.writeLine("result: " + result);

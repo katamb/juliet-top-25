@@ -4,13 +4,13 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23366 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = System.getenv("ADD");
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -41,12 +41,12 @@ public class J23366 extends AbstractTestCase {
             }
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String data;
         data = System.getenv("ADD");
         return data;

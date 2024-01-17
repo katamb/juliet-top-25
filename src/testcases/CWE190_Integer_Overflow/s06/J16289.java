@@ -2,29 +2,29 @@ package testcases.CWE190_Integer_Overflow.s06;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J16289 extends AbstractTestCase {
-    private byte badSource() throws Throwable {
+    private byte bSce() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
         return data;
     }
-    private byte processG2BSource() throws Throwable {
+    private byte processG2BSce() throws Throwable {
         byte data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        byte data = processG2BSource();
+        byte data = processG2BSce();
         data++;
         byte result = (byte) (data);
         IO.writeLine("result: " + result);
     }
-    private byte processB2GSource() throws Throwable {
+    private byte processB2GSce() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
         return data;
     }
     private void processB2G() throws Throwable {
-        byte data = processB2GSource();
+        byte data = processB2GSce();
         if (data < Byte.MAX_VALUE) {
             data++;
             byte result = (byte) (data);

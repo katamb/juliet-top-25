@@ -9,7 +9,7 @@ public class J13826 extends AbstractTestCase {
     private int dataB;
     private int dataGdG2B;
     private int dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         int data = dataB;
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
@@ -52,7 +52,7 @@ public class J13826 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

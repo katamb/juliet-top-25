@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class J20816 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -69,7 +69,7 @@ public class J20816 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class J21872 extends AbstractTestCaseServlet {
     private String dataB;
     private String dataGdG2B;
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataB;
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
@@ -56,7 +56,7 @@ public class J21872 extends AbstractTestCaseServlet {
             }
         }
         dataB = data;
-        badSink(request, response);
+        bS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

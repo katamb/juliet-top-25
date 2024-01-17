@@ -16,7 +16,7 @@ public class J19667 extends AbstractTestCase {
             }
         }
     }
-    private void good2() throws Throwable {
+    private void g2() throws Throwable {
         if (PRIVATE_STATIC_FINAL_TRUE) {
             {
                 String myString = null;
@@ -29,7 +29,7 @@ public class J19667 extends AbstractTestCase {
     }
     public void process() throws Throwable {
         process1();
-        good2();
+        g2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

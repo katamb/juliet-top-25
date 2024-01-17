@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 public class J10522 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0) {
             IO.writeLine(array[data]);
@@ -60,7 +60,7 @@ public class J10522 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

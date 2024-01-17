@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 public class J12986 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data < array.length) {
             IO.writeLine(array[data]);
@@ -54,7 +54,7 @@ public class J12986 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

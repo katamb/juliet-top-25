@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 public class J19861 extends AbstractTestCaseServlet {
     private static final int PRIVATE_STATIC_FINAL_FIVE = 5;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_FIVE != 5) {
             data = null;
@@ -52,7 +52,7 @@ public class J19861 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_FIVE == 5) {
             data = "10";
@@ -100,8 +100,8 @@ public class J19861 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

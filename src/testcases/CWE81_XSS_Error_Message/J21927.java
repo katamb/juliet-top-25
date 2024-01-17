@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 public class J21927 extends AbstractTestCaseServlet {
     private boolean privateTrue = true;
     private boolean privateFalse = false;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFalse) {
             data = null;
@@ -15,7 +15,7 @@ public class J21927 extends AbstractTestCaseServlet {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateTrue) {
             data = "foo";
@@ -27,8 +27,8 @@ public class J21927 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

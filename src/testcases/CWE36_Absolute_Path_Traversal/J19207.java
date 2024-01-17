@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J19207 extends AbstractTestCaseServlet {
     private static final int PRIVATE_STATIC_FINAL_FIVE = 5;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_FIVE != 5) {
             data = null;
@@ -14,35 +14,35 @@ public class J19207 extends AbstractTestCaseServlet {
         }
         if (data != null) {
             File file = new File(data);
-            FileInputStream streamFileInputSink = null;
-            InputStreamReader readerInputStreamSink = null;
-            BufferedReader readerBufferdSink = null;
+            FileInputStream streamFileInputS = null;
+            InputStreamReader readerInputStreamS = null;
+            BufferedReader readerBufferdS = null;
             if (file.exists() && file.isFile()) {
                 try {
-                    streamFileInputSink = new FileInputStream(file);
-                    readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
-                    readerBufferdSink = new BufferedReader(readerInputStreamSink);
-                    IO.writeLine(readerBufferdSink.readLine());
+                    streamFileInputS = new FileInputStream(file);
+                    readerInputStreamS = new InputStreamReader(streamFileInputS, "UTF-8");
+                    readerBufferdS = new BufferedReader(readerInputStreamS);
+                    IO.writeLine(readerBufferdS.readLine());
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
                     try {
-                        if (readerBufferdSink != null) {
-                            readerBufferdSink.close();
+                        if (readerBufferdS != null) {
+                            readerBufferdS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
                     try {
-                        if (readerInputStreamSink != null) {
-                            readerInputStreamSink.close();
+                        if (readerInputStreamS != null) {
+                            readerInputStreamS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                     try {
-                        if (streamFileInputSink != null) {
-                            streamFileInputSink.close();
+                        if (streamFileInputS != null) {
+                            streamFileInputS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
@@ -51,7 +51,7 @@ public class J19207 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_FIVE == 5) {
             data = "foo";
@@ -60,35 +60,35 @@ public class J19207 extends AbstractTestCaseServlet {
         }
         if (data != null) {
             File file = new File(data);
-            FileInputStream streamFileInputSink = null;
-            InputStreamReader readerInputStreamSink = null;
-            BufferedReader readerBufferdSink = null;
+            FileInputStream streamFileInputS = null;
+            InputStreamReader readerInputStreamS = null;
+            BufferedReader readerBufferdS = null;
             if (file.exists() && file.isFile()) {
                 try {
-                    streamFileInputSink = new FileInputStream(file);
-                    readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
-                    readerBufferdSink = new BufferedReader(readerInputStreamSink);
-                    IO.writeLine(readerBufferdSink.readLine());
+                    streamFileInputS = new FileInputStream(file);
+                    readerInputStreamS = new InputStreamReader(streamFileInputS, "UTF-8");
+                    readerBufferdS = new BufferedReader(readerInputStreamS);
+                    IO.writeLine(readerBufferdS.readLine());
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
                     try {
-                        if (readerBufferdSink != null) {
-                            readerBufferdSink.close();
+                        if (readerBufferdS != null) {
+                            readerBufferdS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
                     try {
-                        if (readerInputStreamSink != null) {
-                            readerInputStreamSink.close();
+                        if (readerInputStreamS != null) {
+                            readerInputStreamS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                     try {
-                        if (streamFileInputSink != null) {
-                            streamFileInputSink.close();
+                        if (streamFileInputS != null) {
+                            streamFileInputS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
@@ -98,8 +98,8 @@ public class J19207 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

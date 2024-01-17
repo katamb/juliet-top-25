@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J14614 extends AbstractTestCaseServlet {
-    private void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
@@ -25,7 +25,7 @@ public class J14614 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

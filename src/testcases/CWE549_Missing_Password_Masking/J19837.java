@@ -9,20 +9,20 @@ public class J19837 extends AbstractTestCaseServlet {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
         }
     }
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void g2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (IO.staticReturnsTrue()) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         process1(request, response);
-        good2(request, response);
+        g2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

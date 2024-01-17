@@ -8,9 +8,9 @@ public class J20142 extends AbstractTestCaseServlet {
             case 6:
                 data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
             break;

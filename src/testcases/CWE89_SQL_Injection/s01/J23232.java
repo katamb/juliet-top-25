@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23232 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -46,7 +46,7 @@ public class J23232 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getenv("ADD");
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

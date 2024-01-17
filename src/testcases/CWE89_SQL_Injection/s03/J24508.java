@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.sql.*;
 public class J24508 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -87,7 +87,7 @@ public class J24508 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

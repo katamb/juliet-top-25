@@ -4,13 +4,13 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J19890 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("id");
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         Connection dBConnection = IO.getDBConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -51,7 +51,7 @@ public class J19890 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "10";
         return data;

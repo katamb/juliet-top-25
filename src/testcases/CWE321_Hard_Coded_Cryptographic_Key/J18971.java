@@ -10,7 +10,7 @@ public class J18971 extends AbstractTestCase {
     public void process() throws Throwable {
         processG2B();
     }
-    private void gG2BSink(String data) throws Throwable {
+    private void gG2BS(String data) throws Throwable {
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
@@ -31,7 +31,7 @@ public class J18971 extends AbstractTestCase {
         } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
-        gG2BSink(data);
+        gG2BS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

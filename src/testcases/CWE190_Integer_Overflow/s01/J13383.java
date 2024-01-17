@@ -6,7 +6,7 @@ public class J13383 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(byte data) throws Throwable {
+    private void gG2BS(byte data) throws Throwable {
         if (data > 0)  {
             byte result = (byte) (data * 2);
             IO.writeLine("result: " + result);
@@ -15,9 +15,9 @@ public class J13383 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         byte data;
         data = 2;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(byte data) throws Throwable {
+    private void gB2GS(byte data) throws Throwable {
         if (data > 0)  {
             if (data < (Byte.MAX_VALUE / 2)) {
                 byte result = (byte) (data * 2);
@@ -30,7 +30,7 @@ public class J13383 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

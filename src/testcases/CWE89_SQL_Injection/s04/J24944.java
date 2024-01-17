@@ -9,9 +9,9 @@ public class J24944 extends AbstractTestCase {
         String data;
         data = System.getProperty("user.home");
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         if (bPrivate) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;

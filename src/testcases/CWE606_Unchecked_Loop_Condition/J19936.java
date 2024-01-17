@@ -10,7 +10,7 @@ public class J19936 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         int numberOfLoops;
         try {
@@ -62,7 +62,7 @@ public class J19936 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -5,7 +5,7 @@ public class J13474 extends AbstractTestCase {
     private byte dataB;
     private byte dataGdG2B;
     private byte dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         byte data = dataB;
         byte result = (byte) (data + 1);
         IO.writeLine("result: " + result);
@@ -14,7 +14,7 @@ public class J13474 extends AbstractTestCase {
         byte data;
         data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

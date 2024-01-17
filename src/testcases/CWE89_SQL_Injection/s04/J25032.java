@@ -41,9 +41,9 @@ public class J25032 extends AbstractTestCase {
             }
         }
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         if (bPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;

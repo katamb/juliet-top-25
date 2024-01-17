@@ -7,13 +7,13 @@ import java.util.logging.Level;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 public class J18972 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "23 ~j;asn!@#/>as";
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
@@ -24,7 +24,7 @@ public class J18972 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "";
         try {

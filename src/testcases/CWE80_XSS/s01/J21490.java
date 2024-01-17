@@ -8,9 +8,9 @@ public class J21490 extends AbstractTestCaseServlet {
         if (privateFive == 5) {
             data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
         } else {

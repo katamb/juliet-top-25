@@ -7,7 +7,7 @@ public class J12767 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(int data) throws Throwable {
+    private void gG2BS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data < array.length) {
             IO.writeLine(array[data]);
@@ -18,9 +18,9 @@ public class J12767 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         int data;
         data = 2;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(int data) throws Throwable {
+    private void gB2GS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
@@ -31,7 +31,7 @@ public class J12767 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

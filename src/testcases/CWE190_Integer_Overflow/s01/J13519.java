@@ -9,7 +9,7 @@ public class J13519 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         byte data = dataGdG2B;
         if (data > 0)  {
             byte result = (byte) (data * 2);
@@ -20,9 +20,9 @@ public class J13519 extends AbstractTestCase {
         byte data;
         data = 2;
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
-    private void gB2GSink() throws Throwable {
+    private void gB2GS() throws Throwable {
         byte data = dataGdB2G;
         if (data > 0)  {
             if (data < (Byte.MAX_VALUE / 2)) {
@@ -37,7 +37,7 @@ public class J13519 extends AbstractTestCase {
         byte data;
         data = (byte) ((new java.security.SecureRandom()).nextInt(1 + Byte.MAX_VALUE - Byte.MIN_VALUE) + Byte.MIN_VALUE);
         dataGdB2G = data;
-        gB2GSink();
+        gB2GS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

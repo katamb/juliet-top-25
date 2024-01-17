@@ -2,18 +2,18 @@ package testcases.CWE81_XSS_Error_Message;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J21958 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("name");
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;

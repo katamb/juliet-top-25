@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J19932 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -57,7 +57,7 @@ public class J19932 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

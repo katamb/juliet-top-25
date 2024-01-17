@@ -7,9 +7,9 @@ public class J17294 extends AbstractTestCase {
         byte data;
         data = Byte.MAX_VALUE;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(byte data) throws Throwable {
+    private void bS(byte data) throws Throwable {
         if (bPrivate) {
             byte result = (byte) (++data);
             IO.writeLine("result: " + result);

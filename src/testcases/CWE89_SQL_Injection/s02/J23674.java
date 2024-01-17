@@ -4,19 +4,19 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23674 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -55,18 +55,18 @@ public class J23674 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;

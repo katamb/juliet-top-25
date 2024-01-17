@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J15892 extends AbstractTestCase {
-    private short badSource() throws Throwable {
+    private short bSce() throws Throwable {
         short data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -42,18 +42,18 @@ public class J15892 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        short data = badSource();
+        short data = bSce();
         if (data > 0)  {
             short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
     }
-    private short processG2BSource() throws Throwable {
+    private short processG2BSce() throws Throwable {
         short data;
         data = 2;
         return data;
     }
-    private short processB2GSource() throws Throwable {
+    private short processB2GSce() throws Throwable {
         short data;
         data = -1;
         BufferedReader readerBuffered = null;

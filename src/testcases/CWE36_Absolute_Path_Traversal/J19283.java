@@ -9,39 +9,39 @@ public class J19283 extends AbstractTestCaseServlet {
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         if (data != null) {
             File file = new File(data);
-            FileInputStream streamFileInputSink = null;
-            InputStreamReader readerInputStreamSink = null;
-            BufferedReader readerBufferdSink = null;
+            FileInputStream streamFileInputS = null;
+            InputStreamReader readerInputStreamS = null;
+            BufferedReader readerBufferdS = null;
             if (file.exists() && file.isFile()) {
                 try {
-                    streamFileInputSink = new FileInputStream(file);
-                    readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
-                    readerBufferdSink = new BufferedReader(readerInputStreamSink);
-                    IO.writeLine(readerBufferdSink.readLine());
+                    streamFileInputS = new FileInputStream(file);
+                    readerInputStreamS = new InputStreamReader(streamFileInputS, "UTF-8");
+                    readerBufferdS = new BufferedReader(readerInputStreamS);
+                    IO.writeLine(readerBufferdS.readLine());
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
                     try {
-                        if (readerBufferdSink != null) {
-                            readerBufferdSink.close();
+                        if (readerBufferdS != null) {
+                            readerBufferdS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
                     try {
-                        if (readerInputStreamSink != null) {
-                            readerInputStreamSink.close();
+                        if (readerInputStreamS != null) {
+                            readerInputStreamS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                     try {
-                        if (streamFileInputSink != null) {
-                            streamFileInputSink.close();
+                        if (streamFileInputS != null) {
+                            streamFileInputS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
@@ -54,7 +54,7 @@ public class J19283 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

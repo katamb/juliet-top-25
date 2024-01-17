@@ -78,17 +78,17 @@ public class J23833 extends AbstractTestCaseServlet {
         if (IO.staticReturnsTrueOrFalse()) {
             data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
         } else {
             data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
         }

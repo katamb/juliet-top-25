@@ -7,9 +7,9 @@ public class J15710 extends AbstractTestCase {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(long data) throws Throwable {
+    private void bS(long data) throws Throwable {
         if (bPrivate) {
             long result = (long) (data + 1);
             IO.writeLine("result: " + result);

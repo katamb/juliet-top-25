@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J13690 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
@@ -56,7 +56,7 @@ public class J13690 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

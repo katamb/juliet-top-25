@@ -34,7 +34,7 @@ public class J19811 extends AbstractTestCaseServlet {
                 break;
         }
     }
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void g2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         switch (7) {
             case 7:
                 PrintWriter writer = null;
@@ -65,7 +65,7 @@ public class J19811 extends AbstractTestCaseServlet {
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         process1(request, response);
-        good2(request, response);
+        g2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

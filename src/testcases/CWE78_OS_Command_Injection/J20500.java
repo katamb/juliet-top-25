@@ -10,7 +10,7 @@ public class J20500 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         bPrivate = true;
-        data = bad_source();
+        data = b_source();
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
@@ -20,7 +20,7 @@ public class J20500 extends AbstractTestCase {
         Process process = Runtime.getRuntime().exec(osCommand + data);
         process.waitFor();
     }
-    private String bad_source() throws Throwable {
+    private String b_source() throws Throwable {
         String data;
         if (bPrivate) {
             data = "";
@@ -55,20 +55,20 @@ public class J20500 extends AbstractTestCase {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
-    private String goodG2B1_source() throws Throwable {
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
+    private String gdG2B1_source() throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "foo";
         }
         return data;
     }
-    private String goodG2B2_source() throws Throwable {
+    private String gdG2B2_source() throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "foo";
         } else {
             data = null;

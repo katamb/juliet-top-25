@@ -3,13 +3,13 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.security.SecureRandom;
 public class J12900 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
         return data;
     }
     public void handle() throws Throwable {
-        int data = badSource();
+        int data = bSce();
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -19,12 +19,12 @@ public class J12900 extends AbstractTestCase {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
         return data;

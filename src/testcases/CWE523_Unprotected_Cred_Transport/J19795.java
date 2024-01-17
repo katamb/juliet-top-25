@@ -32,7 +32,7 @@ public class J19795 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void g2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (privateFive == 5) {
             PrintWriter writer = null;
             try {
@@ -58,7 +58,7 @@ public class J19795 extends AbstractTestCaseServlet {
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         process1(request, response);
-        good2(request, response);
+        g2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

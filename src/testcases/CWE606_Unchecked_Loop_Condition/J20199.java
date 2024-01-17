@@ -2,18 +2,18 @@ package testcases.CWE606_Unchecked_Loop_Condition;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20199 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("name");
         return data;
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "5";
         return data;
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = goodG2BSource(request, response);
+        String data = gdG2BSce(request, response);
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -25,13 +25,13 @@ public class J20199 extends AbstractTestCaseServlet {
             IO.writeLine("hello world");
         }
     }
-    private String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("name");
         return data;
     }
     private void processB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = goodB2GSource(request, response);
+        String data = gdB2GSce(request, response);
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);

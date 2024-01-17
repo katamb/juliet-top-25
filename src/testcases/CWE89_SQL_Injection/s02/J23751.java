@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23751 extends AbstractTestCaseServlet {
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         switch (5) {
             case 6:
@@ -47,7 +47,7 @@ public class J23751 extends AbstractTestCaseServlet {
                 break;
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         switch (6) {
             case 6:
@@ -90,15 +90,15 @@ public class J23751 extends AbstractTestCaseServlet {
                 break;
         }
     }
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         switch (6) {
             case 6:
                 data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
             break;
@@ -140,15 +140,15 @@ public class J23751 extends AbstractTestCaseServlet {
                 break;
         }
     }
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         switch (6) {
             case 6:
                 data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
             break;
@@ -191,10 +191,10 @@ public class J23751 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
-        goodB2G1(request, response);
-        goodB2G2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
+        gB2G1(request, response);
+        gB2G2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

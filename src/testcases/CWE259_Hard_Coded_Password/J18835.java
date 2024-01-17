@@ -5,7 +5,7 @@ import java.io.*;
 import java.sql.*;
 public class J18835 extends AbstractTestCase {
     private boolean bPrivate = false;
-    private String bad_source() throws Throwable {
+    private String b_source() throws Throwable {
         String data;
         if (bPrivate) {
             data = "7e5tc4s3";
@@ -14,16 +14,16 @@ public class J18835 extends AbstractTestCase {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
     public void process() throws Throwable {
         processG2B1();
         processG2B2();
     }
     private void processG2B1() throws Throwable {
         String data;
-        goodG2B1_private = false;
-        data = goodG2B1_source();
+        gdG2B1_private = false;
+        data = gdG2B1_source();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -59,9 +59,9 @@ public class J18835 extends AbstractTestCase {
             }
         }
     }
-    private String goodG2B1_source() throws Throwable {
+    private String gdG2B1_source() throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "";
@@ -77,8 +77,8 @@ public class J18835 extends AbstractTestCase {
     }
     private void processG2B2() throws Throwable {
         String data;
-        goodG2B2_private = true;
-        data = goodG2B2_source();
+        gdG2B2_private = true;
+        data = gdG2B2_source();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -114,9 +114,9 @@ public class J18835 extends AbstractTestCase {
             }
         }
     }
-    private String goodG2B2_source() throws Throwable {
+    private String gdG2B2_source() throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "";
             try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");

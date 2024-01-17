@@ -4,19 +4,19 @@ import java.io.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J18488 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -25,35 +25,35 @@ public class J18488 extends AbstractTestCaseServlet {
         }
         if (data != null) {
             File file = new File(root + data);
-            FileInputStream streamFileInputSink = null;
-            InputStreamReader readerInputStreamSink = null;
-            BufferedReader readerBufferdSink = null;
+            FileInputStream streamFileInputS = null;
+            InputStreamReader readerInputStreamS = null;
+            BufferedReader readerBufferdS = null;
             if (file.exists() && file.isFile()) {
                 try {
-                    streamFileInputSink = new FileInputStream(file);
-                    readerInputStreamSink = new InputStreamReader(streamFileInputSink, "UTF-8");
-                    readerBufferdSink = new BufferedReader(readerInputStreamSink);
-                    IO.writeLine(readerBufferdSink.readLine());
+                    streamFileInputS = new FileInputStream(file);
+                    readerInputStreamS = new InputStreamReader(streamFileInputS, "UTF-8");
+                    readerBufferdS = new BufferedReader(readerInputStreamS);
+                    IO.writeLine(readerBufferdS.readLine());
                 } catch (IOException exceptIO) {
                     IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
                 } finally {
                     try {
-                        if (readerBufferdSink != null) {
-                            readerBufferdSink.close();
+                        if (readerBufferdS != null) {
+                            readerBufferdS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing BufferedReader", exceptIO);
                     }
                     try {
-                        if (readerInputStreamSink != null) {
-                            readerInputStreamSink.close();
+                        if (readerInputStreamS != null) {
+                            readerInputStreamS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing InputStreamReader", exceptIO);
                     }
                     try {
-                        if (streamFileInputSink != null) {
-                            streamFileInputSink.close();
+                        if (streamFileInputS != null) {
+                            streamFileInputS.close();
                         }
                     } catch (IOException exceptIO) {
                         IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
@@ -62,7 +62,7 @@ public class J18488 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;

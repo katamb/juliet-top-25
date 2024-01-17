@@ -8,7 +8,7 @@ public class J24861 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(String data) throws Throwable {
+    private void gG2BS(String data) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -38,9 +38,9 @@ public class J24861 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(String data) throws Throwable {
+    private void gB2GS(String data) throws Throwable {
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -71,7 +71,7 @@ public class J24861 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         String data;
         data = System.getProperty("user.home");
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

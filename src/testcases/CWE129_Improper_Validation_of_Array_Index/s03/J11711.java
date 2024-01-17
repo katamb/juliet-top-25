@@ -8,7 +8,7 @@ public class J11711 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -21,9 +21,9 @@ public class J11711 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        gG2BSink(data, request, response);
+        gG2BS(data, request, response);
     }
-    private void gB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = null;
         if (data > 0) {
             array = new int[data];
@@ -50,7 +50,7 @@ public class J11711 extends AbstractTestCaseServlet {
                 }
             }
         }
-        gB2GSink(data, request, response);
+        gB2GS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

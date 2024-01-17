@@ -8,7 +8,7 @@ public class J19884 extends AbstractTestCaseServlet {
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         bPrivate = true;
-        data = bad_source(request, response);
+        data = b_source(request, response);
         Connection dBConnection = IO.getDBConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -49,7 +49,7 @@ public class J19884 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String b_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (bPrivate) {
             data = request.getParameter("id");
@@ -58,20 +58,20 @@ public class J19884 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
-    private String goodG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
+    private String gdG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "10";
         }
         return data;
     }
-    private String goodG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "10";
         } else {
             data = null;

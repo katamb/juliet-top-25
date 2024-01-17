@@ -5,7 +5,7 @@ public class J15982 extends AbstractTestCase {
     private short dataB;
     private short dataGdG2B;
     private short dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         short data = dataB;
         short result = (short) (data + 1);
         IO.writeLine("result: " + result);
@@ -14,7 +14,7 @@ public class J15982 extends AbstractTestCase {
         short data;
         data = Short.MAX_VALUE;
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

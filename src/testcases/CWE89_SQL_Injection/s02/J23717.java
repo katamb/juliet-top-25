@@ -8,7 +8,7 @@ public class J23717 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
@@ -46,9 +46,9 @@ public class J23717 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
-        gG2BSink(data, request, response);
+        gG2BS(data, request, response);
     }
-    private void gB2GSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         ResultSet resultSet = null;
@@ -88,12 +88,12 @@ public class J23717 extends AbstractTestCaseServlet {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
-        gB2GSink(data, request, response);
+        gB2GS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

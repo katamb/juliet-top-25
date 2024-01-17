@@ -8,7 +8,7 @@ public class J24204 extends AbstractTestCaseServlet {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataB;
         Connection dbConnection = null;
         Statement sqlStatement = null;
@@ -50,7 +50,7 @@ public class J24204 extends AbstractTestCaseServlet {
             }
         }
         dataB = data;
-        badSink(request, response);
+        bS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

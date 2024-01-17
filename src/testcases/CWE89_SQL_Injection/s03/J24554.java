@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J24554 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "";
         {
@@ -32,7 +32,7 @@ public class J24554 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -71,12 +71,12 @@ public class J24554 extends AbstractTestCase {
             }
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String data;
         data = "";
         {

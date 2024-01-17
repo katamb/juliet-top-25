@@ -16,9 +16,9 @@ public class J11486 extends AbstractTestCaseServlet {
             }
         }
         bPrivate = true;
-        badSink(data, request, response);
+        bS(data, request, response);
     }
-    private void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (bPrivate) {
             int array[] = null;
             if (data >= 0) {

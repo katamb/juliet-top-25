@@ -7,9 +7,9 @@ public class J14830 extends AbstractTestCase {
         int data;
         data = Integer.MAX_VALUE;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         if (bPrivate) {
             if (data > 0)  {
                 int result = (int) (data * 2);

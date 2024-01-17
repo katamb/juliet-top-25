@@ -5,20 +5,20 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 public class J18884 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "7e5tc4s3";
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
             IO.writeLine(key.toString());
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "";
         try {

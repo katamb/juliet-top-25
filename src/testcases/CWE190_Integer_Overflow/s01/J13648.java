@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J13648 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -55,18 +55,18 @@ public class J13648 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        int data = badSource();
+        int data = bSce();
         if (data > 0)  {
             int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {

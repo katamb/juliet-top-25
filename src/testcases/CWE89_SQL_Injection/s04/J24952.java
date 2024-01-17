@@ -7,7 +7,7 @@ public class J24952 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
@@ -43,7 +43,7 @@ public class J24952 extends AbstractTestCase {
         String data;
         data = System.getProperty("user.home");
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

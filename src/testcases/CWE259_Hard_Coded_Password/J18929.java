@@ -4,12 +4,12 @@ import java.util.logging.Level;
 import java.io.*;
 import java.net.PasswordAuthentication;
 public class J18929 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "7e5tc4s3";
         return data;
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "";
         try {
@@ -22,7 +22,7 @@ public class J18929 extends AbstractTestCase {
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = processG2BSource();
+        String data = processG2BSce();
         if (data != null) {
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());

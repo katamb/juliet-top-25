@@ -15,7 +15,7 @@ public class J18795 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(String password) throws Throwable {
+    private void gG2BS(String password) throws Throwable {
         Connection dBConnection = null;
         try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
@@ -58,9 +58,9 @@ public class J18795 extends AbstractTestCase {
             String decryptedPassword = new String(aesCipher.doFinal(password.getBytes("UTF-8")), "UTF-8");
             password = decryptedPassword;
         }
-        gG2BSink(password);
+        gG2BS(password);
     }
-    private void gB2GSink(String password) throws Throwable {
+    private void gB2GS(String password) throws Throwable {
         {
             Cipher aesCipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec("ABCDEFGHABCDEFGH".getBytes("UTF-8"), "AES");
@@ -103,7 +103,7 @@ public class J18795 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
-        gB2GSink(password);
+        gB2GS(password);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

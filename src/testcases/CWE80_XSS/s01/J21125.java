@@ -7,7 +7,7 @@ public class J21125 extends AbstractTestCaseServlet {
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         if (data != null) {
             response.getWriter().println("<br>handle(): data = " + data.replaceAll("(<script>)", ""));
@@ -17,7 +17,7 @@ public class J21125 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

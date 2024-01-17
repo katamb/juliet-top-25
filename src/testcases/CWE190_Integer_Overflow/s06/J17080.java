@@ -2,23 +2,23 @@ package testcases.CWE190_Integer_Overflow.s06;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J17080 extends AbstractTestCase {
-    private long badSource() throws Throwable {
+    private long bSce() throws Throwable {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
         return data;
     }
     public void handle() throws Throwable {
-        long data = badSource();
+        long data = bSce();
         data++;
         long result = (long) (data);
         IO.writeLine("result: " + result);
     }
-    private long processG2BSource() throws Throwable {
+    private long processG2BSce() throws Throwable {
         long data;
         data = 2;
         return data;
     }
-    private long processB2GSource() throws Throwable {
+    private long processB2GSce() throws Throwable {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
         return data;

@@ -11,7 +11,7 @@ public class J24553 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(String data) throws Throwable {
+    private void gG2BS(String data) throws Throwable {
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -53,9 +53,9 @@ public class J24553 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(String data) throws Throwable {
+    private void gB2GS(String data) throws Throwable {
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -117,7 +117,7 @@ public class J24553 extends AbstractTestCase {
                 }
             }
         }
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

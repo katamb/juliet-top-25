@@ -2,19 +2,19 @@ package testcases.CWE606_Unchecked_Loop_Condition;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20154 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -26,18 +26,18 @@ public class J20154 extends AbstractTestCaseServlet {
             IO.writeLine("hello world");
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "5";
         return data;
     }
-    private String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;

@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24860 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -34,7 +34,7 @@ public class J24860 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getProperty("user.home");
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

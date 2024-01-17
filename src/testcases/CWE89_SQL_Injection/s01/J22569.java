@@ -56,9 +56,9 @@ public class J22569 extends AbstractTestCase {
             }
         }
         gB2G1Private = false;
-        gB2G1Sink(data);
+        gB2G1S(data);
     }
-    private void gB2G1Sink(String data) throws Throwable {
+    private void gB2G1S(String data) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -141,9 +141,9 @@ public class J22569 extends AbstractTestCase {
             }
         }
         gB2G2Private = true;
-        goodB2G2Sink(data);
+        gB2G2S(data);
     }
-    private void goodB2G2Sink(String data) throws Throwable {
+    private void gB2G2S(String data) throws Throwable {
         if (gB2G2Private) {
             if (data != null) {
                 String names[] = data.split("-");
@@ -189,9 +189,9 @@ public class J22569 extends AbstractTestCase {
         String data;
         data = "foo";
         gG2BPrivate = true;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gG2BSink(String data) throws Throwable {
+    private void gG2BS(String data) throws Throwable {
         if (gG2BPrivate) {
             if (data != null) {
                 String names[] = data.split("-");

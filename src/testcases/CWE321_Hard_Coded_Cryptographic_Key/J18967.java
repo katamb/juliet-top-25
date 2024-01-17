@@ -8,7 +8,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 public class J18967 extends AbstractTestCase {
     private boolean bPrivate = false;
-    private String bad_source() throws Throwable {
+    private String b_source() throws Throwable {
         String data;
         if (bPrivate) {
             data = "23 ~j;asn!@#/>as";
@@ -17,16 +17,16 @@ public class J18967 extends AbstractTestCase {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
     public void process() throws Throwable {
         processG2B1();
         processG2B2();
     }
     private void processG2B1() throws Throwable {
         String data;
-        goodG2B1_private = false;
-        data = goodG2B1_source();
+        gdG2B1_private = false;
+        data = gdG2B1_source();
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
@@ -37,9 +37,9 @@ public class J18967 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private String goodG2B1_source() throws Throwable {
+    private String gdG2B1_source() throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "";
@@ -55,8 +55,8 @@ public class J18967 extends AbstractTestCase {
     }
     private void processG2B2() throws Throwable {
         String data;
-        goodG2B2_private = true;
-        data = goodG2B2_source();
+        gdG2B2_private = true;
+        data = gdG2B2_source();
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
@@ -67,9 +67,9 @@ public class J18967 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private String goodG2B2_source() throws Throwable {
+    private String gdG2B2_source() throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "";
             try {
                 InputStreamReader readerInputStream = new InputStreamReader(System.in, "UTF-8");

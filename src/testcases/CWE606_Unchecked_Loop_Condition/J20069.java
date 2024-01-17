@@ -9,7 +9,7 @@ public class J20069 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         String data = dataGdG2B;
         int numberOfLoops;
         try {
@@ -26,9 +26,9 @@ public class J20069 extends AbstractTestCase {
         String data;
         data = "5";
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
-    private void gB2GSink() throws Throwable {
+    private void gB2GS() throws Throwable {
         String data = dataGdB2G;
         int numberOfLoops;
         try {
@@ -47,7 +47,7 @@ public class J20069 extends AbstractTestCase {
         String data;
         data = System.getenv("ADD");
         dataGdB2G = data;
-        gB2GSink();
+        gB2GS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -41,9 +41,9 @@ public class J16986 extends AbstractTestCase {
             }
         }
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(long data) throws Throwable {
+    private void bS(long data) throws Throwable {
         if (bPrivate) {
             data++;
             long result = (long) (data);

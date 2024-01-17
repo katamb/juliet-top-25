@@ -5,7 +5,7 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 public class J18882 extends AbstractTestCase {
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -15,7 +15,7 @@ public class J18882 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = "7e5tc4s3";
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

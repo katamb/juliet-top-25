@@ -6,9 +6,9 @@ public class J21510 extends AbstractTestCaseServlet {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         for (int i = 0; i < 1; i++) {

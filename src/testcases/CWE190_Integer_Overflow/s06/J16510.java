@@ -6,7 +6,7 @@ public class J16510 extends AbstractTestCase {
     private int dataB;
     private int dataGdG2B;
     private int dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         int data = dataB;
         data++;
         int result = (int) (data);
@@ -27,7 +27,7 @@ public class J16510 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

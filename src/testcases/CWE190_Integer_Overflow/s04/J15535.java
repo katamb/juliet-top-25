@@ -49,9 +49,9 @@ public class J15535 extends AbstractTestCase {
             }
         }
         gB2G1Private = false;
-        gB2G1Sink(data);
+        gB2G1S(data);
     }
-    private void gB2G1Sink(long data) throws Throwable {
+    private void gB2G1S(long data) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -97,9 +97,9 @@ public class J15535 extends AbstractTestCase {
             }
         }
         gB2G2Private = true;
-        goodB2G2Sink(data);
+        gB2G2S(data);
     }
-    private void goodB2G2Sink(long data) throws Throwable {
+    private void gB2G2S(long data) throws Throwable {
         if (gB2G2Private) {
             if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Long.MAX_VALUE))) {
                 long result = (long) (data * data);
@@ -113,9 +113,9 @@ public class J15535 extends AbstractTestCase {
         long data;
         data = 2;
         gG2BPrivate = true;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gG2BSink(long data) throws Throwable {
+    private void gG2BS(long data) throws Throwable {
         if (gG2BPrivate) {
             long result = (long) (data * data);
             IO.writeLine("result: " + result);

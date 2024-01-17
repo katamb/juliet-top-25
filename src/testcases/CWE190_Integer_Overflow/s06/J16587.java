@@ -21,9 +21,9 @@ public class J16587 extends AbstractTestCaseServlet {
         while (true) {
             data = Integer.MIN_VALUE;
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    String stringNumber = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    String stringNumber = cookieSces[0].getValue();
                     try {
                         data = Integer.parseInt(stringNumber.trim());
                     } catch (NumberFormatException exceptNumberFormat) {

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J21782 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -48,12 +48,12 @@ public class J21782 extends AbstractTestCaseServlet {
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;

@@ -7,9 +7,9 @@ public class J21104 extends AbstractTestCaseServlet {
         if (IO.staticReturnsTrueOrFalse()) {
             data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
         } else {

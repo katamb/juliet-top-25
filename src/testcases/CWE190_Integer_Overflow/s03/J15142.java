@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J15142 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
@@ -18,7 +18,7 @@ public class J15142 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

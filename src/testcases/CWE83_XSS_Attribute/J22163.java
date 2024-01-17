@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J22163 extends AbstractTestCaseServlet {
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE != 5) {
             data = null;
@@ -18,7 +18,7 @@ public class J22163 extends AbstractTestCaseServlet {
             response.getWriter().println("<br>handle() - <img src=\"" + data + "\">");
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE == 5) {
             data = "foo";
@@ -30,8 +30,8 @@ public class J22163 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

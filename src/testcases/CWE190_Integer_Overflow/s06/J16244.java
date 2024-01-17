@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J16244 extends AbstractTestCase {
-    private byte badSource() throws Throwable {
+    private byte bSce() throws Throwable {
         byte data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -42,17 +42,17 @@ public class J16244 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        byte data = badSource();
+        byte data = bSce();
         data++;
         byte result = (byte) (data);
         IO.writeLine("result: " + result);
     }
-    private byte processG2BSource() throws Throwable {
+    private byte processG2BSce() throws Throwable {
         byte data;
         data = 2;
         return data;
     }
-    private byte processB2GSource() throws Throwable {
+    private byte processB2GSce() throws Throwable {
         byte data;
         data = -1;
         BufferedReader readerBuffered = null;

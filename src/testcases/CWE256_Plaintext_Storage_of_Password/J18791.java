@@ -41,9 +41,9 @@ public class J18791 extends AbstractTestCase {
             }
         }
         gB2G1Private = false;
-        gB2G1Sink(password);
+        gB2G1S(password);
     }
-    private void gB2G1Sink(String password) throws Throwable {
+    private void gB2G1S(String password) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -91,9 +91,9 @@ public class J18791 extends AbstractTestCase {
             }
         }
         gB2G2Private = true;
-        goodB2G2Sink(password);
+        gB2G2S(password);
     }
-    private void goodB2G2Sink(String password) throws Throwable {
+    private void gB2G2S(String password) throws Throwable {
         if (gB2G2Private) {
             {
                 Cipher aesCipher = Cipher.getInstance("AES");
@@ -146,9 +146,9 @@ public class J18791 extends AbstractTestCase {
             password = decryptedPassword;
         }
         gG2BPrivate = true;
-        gG2BSink(password);
+        gG2BS(password);
     }
-    private void gG2BSink(String password) throws Throwable {
+    private void gG2BS(String password) throws Throwable {
         if (gG2BPrivate) {
             Connection dBConnection = null;
             try {

@@ -4,7 +4,7 @@ public class J19780 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         IO.writeLine("" + data.length());
     }
@@ -12,7 +12,7 @@ public class J19780 extends AbstractTestCase {
         String data;
         data = null;
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

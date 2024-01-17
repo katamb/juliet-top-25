@@ -8,9 +8,9 @@ public class J12894 extends AbstractTestCase {
         int data;
         data = (new SecureRandom()).nextInt();
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         if (bPrivate) {
             int array[] = null;
             if (data >= 0) {

@@ -20,9 +20,9 @@ public class J24108 extends AbstractTestCaseServlet {
             }
         }
         bPrivate = true;
-        badSink(data, request, response);
+        bS(data, request, response);
     }
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (bPrivate) {
             if (data != null) {
                 String names[] = data.split("-");

@@ -7,15 +7,15 @@ public class J20148 extends AbstractTestCaseServlet {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         bPrivate = true;
-        badSink(data, request, response);
+        bS(data, request, response);
     }
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (bPrivate) {
             int numberOfLoops;
             try {

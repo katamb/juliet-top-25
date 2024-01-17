@@ -10,7 +10,7 @@ public class J13650 extends AbstractTestCase {
     private int dataB;
     private int dataGdG2B;
     private int dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         int data = dataB;
         if (data > 0)  {
             int result = (int) (data * 2);
@@ -63,7 +63,7 @@ public class J13650 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

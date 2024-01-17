@@ -2,22 +2,22 @@ package testcases.CWE190_Integer_Overflow.s05;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J16200 extends AbstractTestCase {
-    private short badSource() throws Throwable {
+    private short bSce() throws Throwable {
         short data;
         data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
         return data;
     }
     public void handle() throws Throwable {
-        short data = badSource();
+        short data = bSce();
         short result = (short) (data * data);
         IO.writeLine("result: " + result);
     }
-    private short processG2BSource() throws Throwable {
+    private short processG2BSce() throws Throwable {
         short data;
         data = 2;
         return data;
     }
-    private short processB2GSource() throws Throwable {
+    private short processB2GSce() throws Throwable {
         short data;
         data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
         return data;

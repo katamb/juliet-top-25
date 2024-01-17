@@ -7,9 +7,9 @@ public class J20060 extends AbstractTestCase {
         String data;
         data = System.getenv("ADD");
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(String data) throws Throwable {
+    private void bS(String data) throws Throwable {
         if (bPrivate) {
             int numberOfLoops;
             try {

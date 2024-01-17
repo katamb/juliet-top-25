@@ -13,7 +13,7 @@ public class J21801 extends AbstractTestCaseServlet {
     private boolean privateReturnsFalse() {
         return false;
     }
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateReturnsFalse()) {
             data = null;
@@ -24,7 +24,7 @@ public class J21801 extends AbstractTestCaseServlet {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateReturnsTrue()) {
             data = "foo";
@@ -36,8 +36,8 @@ public class J21801 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

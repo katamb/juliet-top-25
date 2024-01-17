@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class J18796 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -34,7 +34,7 @@ public class J18796 extends AbstractTestCase {
         return password;
     }
     public void handle() throws Throwable {
-        String password = badSource();
+        String password = bSce();
         Connection dBConnection = null;
         try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
@@ -50,7 +50,7 @@ public class J18796 extends AbstractTestCase {
             }
         }
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -79,7 +79,7 @@ public class J18796 extends AbstractTestCase {
         }
         return password;
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();

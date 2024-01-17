@@ -9,7 +9,7 @@ public class J17126 extends AbstractTestCase {
     private short dataB;
     private short dataGdG2B;
     private short dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         short data = dataB;
         data++;
         short result = (short) (data);
@@ -49,7 +49,7 @@ public class J17126 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

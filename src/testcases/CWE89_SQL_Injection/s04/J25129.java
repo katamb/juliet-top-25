@@ -16,7 +16,7 @@ public class J25129 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink() throws Throwable {
+    private void gG2BS() throws Throwable {
         String data = dataGdG2B;
         Connection dbConnection = null;
         Statement sqlStatement = null;
@@ -52,9 +52,9 @@ public class J25129 extends AbstractTestCase {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink();
+        gG2BS();
     }
-    private void gB2GSink() throws Throwable {
+    private void gB2GS() throws Throwable {
         String data = dataGdB2G;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
@@ -118,7 +118,7 @@ public class J25129 extends AbstractTestCase {
             }
         }
         dataGdB2G = data;
-        gB2GSink();
+        gB2GS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

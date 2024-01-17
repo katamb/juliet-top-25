@@ -2,18 +2,18 @@ package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J11889 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = 100;
         return data;
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = processG2BSource();
+        int data = processG2BSce();
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -23,13 +23,13 @@ public class J11889 extends AbstractTestCase {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = 100;
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = processB2GSource();
+        int data = processB2GSce();
         int array[] = null;
         if (data > 0) {
             array = new int[data];

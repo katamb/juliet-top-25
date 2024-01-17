@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J22041 extends AbstractTestCaseServlet {
     private boolean bPrivate = false;
-    private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String b_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (bPrivate) {
             data = "";
@@ -62,40 +62,40 @@ public class J22041 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        goodG2B1_private = false;
-        data = goodG2B1_source(request, response);
+        gdG2B1_private = false;
+        data = gdG2B1_source(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private String goodG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "foo";
         }
         return data;
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        goodG2B2_private = true;
-        data = goodG2B2_source(request, response);
+        gdG2B2_private = true;
+        data = gdG2B2_source(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private String goodG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "foo";
         } else {
             data = null;

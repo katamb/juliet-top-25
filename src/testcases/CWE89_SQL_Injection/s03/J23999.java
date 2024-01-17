@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 public class J23999 extends AbstractTestCaseServlet {
     private int privateFive = 5;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFive != 5) {
             data = null;
@@ -44,7 +44,7 @@ public class J23999 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFive == 5) {
             data = "foo";
@@ -83,7 +83,7 @@ public class J23999 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFive == 5) {
             data = request.getParameter("name");
@@ -125,7 +125,7 @@ public class J23999 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFive == 5) {
             data = request.getParameter("name");
@@ -166,10 +166,10 @@ public class J23999 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
-        goodB2G1(request, response);
-        goodB2G2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
+        gB2G1(request, response);
+        gB2G2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

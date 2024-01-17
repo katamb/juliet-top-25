@@ -33,9 +33,9 @@ public class J18790 extends AbstractTestCase {
             }
         }
         bPrivate = true;
-        badSink(password);
+        bS(password);
     }
-    private void badSink(String password) throws Throwable {
+    private void bS(String password) throws Throwable {
         if (bPrivate) {
             Connection dBConnection = null;
             try {

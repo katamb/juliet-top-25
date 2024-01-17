@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J14617 extends AbstractTestCaseServlet {
-    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -23,17 +23,17 @@ public class J14617 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = goodG2BSource(request, response);
+        int data = gdG2BSce(request, response);
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
-    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -53,7 +53,7 @@ public class J14617 extends AbstractTestCaseServlet {
         return data;
     }
     private void processB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = goodB2GSource(request, response);
+        int data = gdB2GSce(request, response);
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Integer.MAX_VALUE))) {
             int result = (int) (data * data);
             IO.writeLine("result: " + result);

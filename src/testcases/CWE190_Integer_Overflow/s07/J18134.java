@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J18134 extends AbstractTestCase {
-    private void badSink(short data) throws Throwable {
+    private void bS(short data) throws Throwable {
         short result = (short) (++data);
         IO.writeLine("result: " + result);
     }
@@ -43,7 +43,7 @@ public class J18134 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

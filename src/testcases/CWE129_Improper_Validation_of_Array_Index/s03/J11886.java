@@ -2,7 +2,7 @@ package testcases.CWE129_Improper_Validation_of_Array_Index.s03;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J11886 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -15,7 +15,7 @@ public class J11886 extends AbstractTestCase {
     public void handle() throws Throwable {
         int data;
         data = 100;
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

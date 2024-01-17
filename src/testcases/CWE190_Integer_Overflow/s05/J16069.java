@@ -2,28 +2,28 @@ package testcases.CWE190_Integer_Overflow.s05;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J16069 extends AbstractTestCase {
-    private short badSource() throws Throwable {
+    private short bSce() throws Throwable {
         short data;
         data = Short.MAX_VALUE;
         return data;
     }
-    private short processG2BSource() throws Throwable {
+    private short processG2BSce() throws Throwable {
         short data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        short data = processG2BSource();
+        short data = processG2BSce();
         short result = (short) (data * data);
         IO.writeLine("result: " + result);
     }
-    private short processB2GSource() throws Throwable {
+    private short processB2GSce() throws Throwable {
         short data;
         data = Short.MAX_VALUE;
         return data;
     }
     private void processB2G() throws Throwable {
-        short data = processB2GSource();
+        short data = processB2GSce();
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Short.MAX_VALUE))) {
             short result = (short) (data * data);
             IO.writeLine("result: " + result);

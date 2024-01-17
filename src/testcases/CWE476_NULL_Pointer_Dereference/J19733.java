@@ -5,15 +5,15 @@ public class J19733 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(StringBuilder data) throws Throwable {
+    private void gG2BS(StringBuilder data) throws Throwable {
         IO.writeLine("" + data.length());
     }
     private void processG2B() throws Throwable {
         StringBuilder data;
         data = new StringBuilder();
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(StringBuilder data) throws Throwable {
+    private void gB2GS(StringBuilder data) throws Throwable {
         if (data != null) {
             IO.writeLine("" + data.length());
         } else {
@@ -23,7 +23,7 @@ public class J19733 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         StringBuilder data;
         data = null;
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

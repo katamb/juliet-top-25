@@ -10,11 +10,11 @@ public class J24153 extends AbstractTestCaseServlet {
     private boolean gB2G2Private = false;
     private boolean gG2BPrivate = false;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodB2G1(request, response);
-        goodB2G2(request, response);
+        gB2G1(request, response);
+        gB2G2(request, response);
         processG2B(request, response);
     }
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -28,9 +28,9 @@ public class J24153 extends AbstractTestCaseServlet {
             }
         }
         gB2G1Private = false;
-        gB2G1Sink(data, request, response);
+        gB2G1S(data, request, response);
     }
-    private void gB2G1Sink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G1S(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -70,7 +70,7 @@ public class J24153 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -84,9 +84,9 @@ public class J24153 extends AbstractTestCaseServlet {
             }
         }
         gB2G2Private = true;
-        goodB2G2Sink(data, request, response);
+        gB2G2S(data, request, response);
     }
-    private void goodB2G2Sink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G2S(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (gB2G2Private) {
             Connection dbConnection = null;
             PreparedStatement sqlStatement = null;
@@ -128,9 +128,9 @@ public class J24153 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         gG2BPrivate = true;
-        gG2BSink(data, request, response);
+        gG2BS(data, request, response);
     }
-    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         if (gG2BPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;

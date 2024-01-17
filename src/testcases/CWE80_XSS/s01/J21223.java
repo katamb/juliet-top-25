@@ -10,7 +10,7 @@ import java.util.logging.Level;
 public class J21223 extends AbstractTestCaseServlet {
     private boolean privateTrue = true;
     private boolean privateFalse = false;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateFalse) {
             data = null;
@@ -21,7 +21,7 @@ public class J21223 extends AbstractTestCaseServlet {
             response.getWriter().println("<br>handle(): data = " + data.replaceAll("(<script>)", ""));
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (privateTrue) {
             data = "foo";
@@ -33,8 +33,8 @@ public class J21223 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

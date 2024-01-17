@@ -11,7 +11,7 @@ public class J23677 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         if (data != null) {
             String names[] = data.split("-");
@@ -55,9 +55,9 @@ public class J23677 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
-    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdB2G;
         if (data != null) {
             String names[] = data.split("-");
@@ -102,13 +102,13 @@ public class J23677 extends AbstractTestCaseServlet {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         dataGdB2G = data;
-        gB2GSink(request, response);
+        gB2GS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

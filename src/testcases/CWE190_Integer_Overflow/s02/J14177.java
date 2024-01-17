@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J14177 extends AbstractTestCase {
-    private int badSource() throws Throwable {
+    private int bSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -56,19 +56,19 @@ public class J14177 extends AbstractTestCase {
         }
         return data;
     }
-    private int processG2BSource() throws Throwable {
+    private int processG2BSce() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = processG2BSource();
+        int data = processG2BSce();
         if (data > 0)  {
             int result = (int) (data * 2);
             IO.writeLine("result: " + result);
         }
     }
-    private int processB2GSource() throws Throwable {
+    private int processB2GSce() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -117,7 +117,7 @@ public class J14177 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = processB2GSource();
+        int data = processB2GSce();
         if (data > 0)  {
             if (data < (Integer.MAX_VALUE / 2)) {
                 int result = (int) (data * 2);

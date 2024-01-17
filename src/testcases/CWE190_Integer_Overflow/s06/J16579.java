@@ -25,9 +25,9 @@ public class J16579 extends AbstractTestCaseServlet {
         if (IO.staticReturnsTrueOrFalse()) {
             data = Integer.MIN_VALUE;
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    String stringNumber = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    String stringNumber = cookieSces[0].getValue();
                     try {
                         data = Integer.parseInt(stringNumber.trim());
                     } catch (NumberFormatException exceptNumberFormat) {
@@ -38,9 +38,9 @@ public class J16579 extends AbstractTestCaseServlet {
         } else {
             data = Integer.MIN_VALUE;
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    String stringNumber = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    String stringNumber = cookieSces[0].getValue();
                     try {
                         data = Integer.parseInt(stringNumber.trim());
                     } catch (NumberFormatException exceptNumberFormat) {

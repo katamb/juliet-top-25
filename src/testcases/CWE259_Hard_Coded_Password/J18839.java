@@ -7,7 +7,7 @@ public class J18839 extends AbstractTestCase {
     public void process() throws Throwable {
         processG2B();
     }
-    private void gG2BSink(String data) throws Throwable {
+    private void gG2BS(String data) throws Throwable {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -53,7 +53,7 @@ public class J18839 extends AbstractTestCase {
         } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
-        gG2BSink(data);
+        gG2BS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

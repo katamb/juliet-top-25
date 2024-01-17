@@ -12,7 +12,7 @@ public class J23588 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
     private String dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         Connection dbConnection = null;
         Statement sqlStatement = null;
@@ -84,7 +84,7 @@ public class J23588 extends AbstractTestCase {
             }
         }
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

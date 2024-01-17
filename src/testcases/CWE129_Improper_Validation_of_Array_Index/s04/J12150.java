@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J12150 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         array[data] = 42;
     }
@@ -67,7 +67,7 @@ public class J12150 extends AbstractTestCase {
                 }
             }
         }
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

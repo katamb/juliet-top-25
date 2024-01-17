@@ -10,7 +10,7 @@ public class J17123 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(short data) throws Throwable {
+    private void gG2BS(short data) throws Throwable {
         data++;
         short result = (short) (data);
         IO.writeLine("result: " + result);
@@ -18,9 +18,9 @@ public class J17123 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         short data;
         data = 2;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(short data) throws Throwable {
+    private void gB2GS(short data) throws Throwable {
         if (data < Short.MAX_VALUE) {
             data++;
             short result = (short) (data);
@@ -62,7 +62,7 @@ public class J17123 extends AbstractTestCase {
                 }
             }
         }
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

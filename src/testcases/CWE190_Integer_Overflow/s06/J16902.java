@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.security.SecureRandom;
 public class J16902 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
@@ -11,7 +11,7 @@ public class J16902 extends AbstractTestCase {
     public void handle() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

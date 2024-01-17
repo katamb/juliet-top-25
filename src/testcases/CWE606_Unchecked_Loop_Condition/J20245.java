@@ -10,7 +10,7 @@ public class J20245 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         int numberOfLoops;
         try {
@@ -27,9 +27,9 @@ public class J20245 extends AbstractTestCaseServlet {
         String data;
         data = "5";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
-    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdB2G;
         int numberOfLoops;
         try {
@@ -58,7 +58,7 @@ public class J20245 extends AbstractTestCaseServlet {
             }
         }
         dataGdB2G = data;
-        gB2GSink(request, response);
+        gB2GS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

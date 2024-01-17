@@ -2,7 +2,7 @@ package testcases.CWE81_XSS_Error_Message;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J21903 extends AbstractTestCaseServlet {
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
         switch (5) {
             case 6:
@@ -16,7 +16,7 @@ public class J21903 extends AbstractTestCaseServlet {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
         switch (6) {
             case 6:
@@ -31,8 +31,8 @@ public class J21903 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

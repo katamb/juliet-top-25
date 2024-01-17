@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J16569 extends AbstractTestCaseServlet {
     private int privateFive = 5;
-    private void goodG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         if (privateFive != 5) {
             data = 0;
@@ -17,7 +17,7 @@ public class J16569 extends AbstractTestCaseServlet {
             IO.writeLine("result: " + result);
         }
     }
-    private void goodG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2B2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         if (privateFive == 5) {
             data = 2;
@@ -30,14 +30,14 @@ public class J16569 extends AbstractTestCaseServlet {
             IO.writeLine("result: " + result);
         }
     }
-    private void goodB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         if (privateFive == 5) {
             data = Integer.MIN_VALUE;
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    String stringNumber = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    String stringNumber = cookieSces[0].getValue();
                     try {
                         data = Integer.parseInt(stringNumber.trim());
                     } catch (NumberFormatException exceptNumberFormat) {
@@ -60,14 +60,14 @@ public class J16569 extends AbstractTestCaseServlet {
             }
         }
     }
-    private void goodB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2G2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         if (privateFive == 5) {
             data = Integer.MIN_VALUE;
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    String stringNumber = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    String stringNumber = cookieSces[0].getValue();
                     try {
                         data = Integer.parseInt(stringNumber.trim());
                     } catch (NumberFormatException exceptNumberFormat) {
@@ -89,10 +89,10 @@ public class J16569 extends AbstractTestCaseServlet {
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        goodG2B1(request, response);
-        goodG2B2(request, response);
-        goodB2G1(request, response);
-        goodB2G2(request, response);
+        gG2B1(request, response);
+        gG2B2(request, response);
+        gB2G1(request, response);
+        gB2G2(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

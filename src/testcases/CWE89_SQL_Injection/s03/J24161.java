@@ -12,7 +12,7 @@ public class J24161 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdG2B;
         Connection dbConnection = null;
         Statement sqlStatement = null;
@@ -52,9 +52,9 @@ public class J24161 extends AbstractTestCaseServlet {
         String data;
         data = "foo";
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
-    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = dataGdB2G;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
@@ -105,7 +105,7 @@ public class J24161 extends AbstractTestCaseServlet {
             }
         }
         dataGdB2G = data;
-        gB2GSink(request, response);
+        gB2GS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

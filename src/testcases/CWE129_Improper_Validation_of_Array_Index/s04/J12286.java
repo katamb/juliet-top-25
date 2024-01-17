@@ -5,7 +5,7 @@ public class J12286 extends AbstractTestCase {
     private int dataB;
     private int dataGdG2B;
     private int dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         int data = dataB;
         int array[] = {0, 1, 2, 3, 4};
         array[data] = 42;
@@ -14,7 +14,7 @@ public class J12286 extends AbstractTestCase {
         int data;
         data = -1;
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.StringTokenizer;
 public class J22003 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -18,13 +18,13 @@ public class J22003 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = goodG2BSource(request, response);
+        String data = gdG2BSce(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }

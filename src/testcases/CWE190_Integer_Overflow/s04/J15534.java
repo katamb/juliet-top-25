@@ -41,9 +41,9 @@ public class J15534 extends AbstractTestCase {
             }
         }
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(long data) throws Throwable {
+    private void bS(long data) throws Throwable {
         if (bPrivate) {
             long result = (long) (data * data);
             IO.writeLine("result: " + result);

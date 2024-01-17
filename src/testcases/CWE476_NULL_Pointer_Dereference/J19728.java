@@ -6,9 +6,9 @@ public class J19728 extends AbstractTestCase {
         StringBuilder data;
         data = null;
         bPrivate = true;
-        badSink(data);
+        bS(data);
     }
-    private void badSink(StringBuilder data) throws Throwable {
+    private void bS(StringBuilder data) throws Throwable {
         if (bPrivate) {
             IO.writeLine("" + data.length());
         }

@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J11713 extends AbstractTestCaseServlet {
-    private int badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -23,13 +23,13 @@ public class J11713 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private int goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = goodG2BSource(request, response);
+        int data = gdG2BSce(request, response);
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -39,7 +39,7 @@ public class J11713 extends AbstractTestCaseServlet {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private int gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -59,7 +59,7 @@ public class J11713 extends AbstractTestCaseServlet {
         return data;
     }
     private void processB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = goodB2GSource(request, response);
+        int data = gdB2GSce(request, response);
         int array[] = null;
         if (data > 0) {
             array = new int[data];

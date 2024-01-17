@@ -6,7 +6,7 @@ public class J20676 extends AbstractTestCaseServlet {
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         bPrivate = true;
-        data = bad_source(request, response);
+        data = b_source(request, response);
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
@@ -16,14 +16,14 @@ public class J20676 extends AbstractTestCaseServlet {
         Process process = Runtime.getRuntime().exec(osCommand + data);
         process.waitFor();
     }
-    private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String b_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         if (bPrivate) {
             data = "";
             {
-                Cookie cookieSources[] = request.getCookies();
-                if (cookieSources != null) {
-                    data = cookieSources[0].getValue();
+                Cookie cookieSces[] = request.getCookies();
+                if (cookieSces != null) {
+                    data = cookieSces[0].getValue();
                 }
             }
         } else {
@@ -31,20 +31,20 @@ public class J20676 extends AbstractTestCaseServlet {
         }
         return data;
     }
-    private boolean goodG2B1_private = false;
-    private boolean goodG2B2_private = false;
-    private String goodG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private boolean gdG2B1_private = false;
+    private boolean gdG2B2_private = false;
+    private String gdG2B1_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B1_private) {
+        if (gdG2B1_private) {
             data = null;
         } else {
             data = "foo";
         }
         return data;
     }
-    private String goodG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2B2_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data = null;
-        if (goodG2B2_private) {
+        if (gdG2B2_private) {
             data = "foo";
         } else {
             data = null;

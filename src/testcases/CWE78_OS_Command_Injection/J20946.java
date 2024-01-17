@@ -8,7 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 public class J20946 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = "";
         {
@@ -41,7 +41,7 @@ public class J20946 extends AbstractTestCase {
         return data;
     }
     public void handle() throws Throwable {
-        String data = badSource();
+        String data = bSce();
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
@@ -51,7 +51,7 @@ public class J20946 extends AbstractTestCase {
         Process process = Runtime.getRuntime().exec(osCommand + data);
         process.waitFor();
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "foo";
         return data;

@@ -5,7 +5,7 @@ public class J16290 extends AbstractTestCase {
     private byte dataB;
     private byte dataGdG2B;
     private byte dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         byte data = dataB;
         data++;
         byte result = (byte) (data);
@@ -15,7 +15,7 @@ public class J16290 extends AbstractTestCase {
         byte data;
         data = Byte.MAX_VALUE;
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

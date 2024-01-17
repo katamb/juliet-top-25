@@ -15,9 +15,9 @@ public class J17779 extends AbstractTestCase {
         int data;
         data = Integer.MAX_VALUE;
         gB2G1Private = false;
-        gB2G1Sink(data);
+        gB2G1S(data);
     }
-    private void gB2G1Sink(int data) throws Throwable {
+    private void gB2G1S(int data) throws Throwable {
         if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
@@ -33,9 +33,9 @@ public class J17779 extends AbstractTestCase {
         int data;
         data = Integer.MAX_VALUE;
         gB2G2Private = true;
-        goodB2G2Sink(data);
+        gB2G2S(data);
     }
-    private void goodB2G2Sink(int data) throws Throwable {
+    private void gB2G2S(int data) throws Throwable {
         if (gB2G2Private) {
             if (data < Integer.MAX_VALUE) {
                 int result = (int) (++data);
@@ -49,9 +49,9 @@ public class J17779 extends AbstractTestCase {
         int data;
         data = 2;
         gG2BPrivate = true;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gG2BSink(int data) throws Throwable {
+    private void gG2BS(int data) throws Throwable {
         if (gG2BPrivate) {
             int result = (int) (++data);
             IO.writeLine("result: " + result);

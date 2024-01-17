@@ -9,7 +9,7 @@ import javax.crypto.Cipher;
 public class J18974 extends AbstractTestCase {
     private String dataB;
     private String dataGdG2B;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String data = dataB;
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
@@ -25,7 +25,7 @@ public class J18974 extends AbstractTestCase {
         String data;
         data = "23 ~j;asn!@#/>as";
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

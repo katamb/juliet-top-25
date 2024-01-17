@@ -10,7 +10,7 @@ public class J16599 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGdG2B;
         data++;
         int result = (int) (data);
@@ -20,9 +20,9 @@ public class J16599 extends AbstractTestCaseServlet {
         int data;
         data = 2;
         dataGdG2B = data;
-        gG2BSink(request, response);
+        gG2BS(request, response);
     }
-    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GS(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data = dataGdB2G;
         if (data < Integer.MAX_VALUE) {
             data++;
@@ -36,9 +36,9 @@ public class J16599 extends AbstractTestCaseServlet {
         int data;
         data = Integer.MIN_VALUE;
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                String stringNumber = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                String stringNumber = cookieSces[0].getValue();
                 try {
                     data = Integer.parseInt(stringNumber.trim());
                 } catch (NumberFormatException exceptNumberFormat) {
@@ -47,7 +47,7 @@ public class J16599 extends AbstractTestCaseServlet {
             }
         }
         dataGdB2G = data;
-        gB2GSink(request, response);
+        gB2GS(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

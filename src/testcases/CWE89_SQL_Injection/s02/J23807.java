@@ -4,24 +4,24 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23807 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = goodG2BSource(request, response);
+        String data = gdG2BSce(request, response);
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -52,19 +52,19 @@ public class J23807 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
-            Cookie cookieSources[] = request.getCookies();
-            if (cookieSources != null) {
-                data = cookieSources[0].getValue();
+            Cookie cookieSces[] = request.getCookies();
+            if (cookieSces != null) {
+                data = cookieSces[0].getValue();
             }
         }
         return data;
     }
     private void processB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = goodB2GSource(request, response);
+        String data = gdB2GSce(request, response);
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {

@@ -4,7 +4,7 @@ public class J19736 extends AbstractTestCase {
     private StringBuilder dataB;
     private StringBuilder dataGdG2B;
     private StringBuilder dataGdB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         StringBuilder data = dataB;
         IO.writeLine("" + data.length());
     }
@@ -12,7 +12,7 @@ public class J19736 extends AbstractTestCase {
         StringBuilder data;
         data = null;
         dataB = data;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

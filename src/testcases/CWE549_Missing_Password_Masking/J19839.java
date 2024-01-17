@@ -7,12 +7,12 @@ public class J19839 extends AbstractTestCaseServlet {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
         } else {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
-            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-good\" /></form>");
+            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"log-in\" /></form>");
         }
     }
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {

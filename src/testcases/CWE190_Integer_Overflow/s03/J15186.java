@@ -3,14 +3,14 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.security.SecureRandom;
 public class J15186 extends AbstractTestCase {
-    private void badSink(int data) throws Throwable {
+    private void bS(int data) throws Throwable {
         int result = (int) (data + 1);
         IO.writeLine("result: " + result);
     }
     public void handle() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
-        badSink(data);
+        bS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

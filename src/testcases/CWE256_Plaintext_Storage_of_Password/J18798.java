@@ -14,7 +14,7 @@ public class J18798 extends AbstractTestCase {
     private String passwordBad;
     private String passwordGoodG2B;
     private String passwordGoodB2G;
-    private void badSink() throws Throwable {
+    private void bS() throws Throwable {
         String password = passwordBad;
         Connection dBConnection = null;
         try {
@@ -52,7 +52,7 @@ public class J18798 extends AbstractTestCase {
             }
         }
         passwordBad = password;
-        badSink();
+        bS();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -2,18 +2,18 @@ package testcases.CWE606_Unchecked_Loop_Condition;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20375 extends AbstractTestCase {
-    private String badSource() throws Throwable {
+    private String bSce() throws Throwable {
         String data;
         data = System.getProperty("user.home");
         return data;
     }
-    private String processG2BSource() throws Throwable {
+    private String processG2BSce() throws Throwable {
         String data;
         data = "5";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = processG2BSource();
+        String data = processG2BSce();
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -25,13 +25,13 @@ public class J20375 extends AbstractTestCase {
             IO.writeLine("hello world");
         }
     }
-    private String processB2GSource() throws Throwable {
+    private String processB2GSce() throws Throwable {
         String data;
         data = System.getProperty("user.home");
         return data;
     }
     private void processB2G() throws Throwable {
-        String data = processB2GSource();
+        String data = processB2GSce();
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);

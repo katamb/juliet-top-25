@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24200 extends AbstractTestCaseServlet {
-    private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void bS(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -45,7 +45,7 @@ public class J24200 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badSink(data, request, response);
+        bS(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

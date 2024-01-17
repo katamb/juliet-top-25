@@ -6,7 +6,7 @@ public class J17079 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void gG2BSink(long data) throws Throwable {
+    private void gG2BS(long data) throws Throwable {
         data++;
         long result = (long) (data);
         IO.writeLine("result: " + result);
@@ -14,9 +14,9 @@ public class J17079 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         long data;
         data = 2;
-        gG2BSink(data);
+        gG2BS(data);
     }
-    private void gB2GSink(long data) throws Throwable {
+    private void gB2GS(long data) throws Throwable {
         if (data < Long.MAX_VALUE) {
             data++;
             long result = (long) (data);
@@ -28,7 +28,7 @@ public class J17079 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
-        gB2GSink(data);
+        gB2GS(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

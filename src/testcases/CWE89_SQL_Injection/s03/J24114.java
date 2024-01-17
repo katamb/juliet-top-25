@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24114 extends AbstractTestCaseServlet {
-    private String badSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String bSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
@@ -21,7 +21,7 @@ public class J24114 extends AbstractTestCaseServlet {
         return data;
     }
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = badSource(request, response);
+        String data = bSce(request, response);
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -60,12 +60,12 @@ public class J24114 extends AbstractTestCaseServlet {
             }
         }
     }
-    private String goodG2BSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdG2BSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String goodB2GSource(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private String gdB2GSce(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
         {
