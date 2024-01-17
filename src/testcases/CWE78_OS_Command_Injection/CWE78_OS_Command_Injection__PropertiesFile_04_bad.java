@@ -1,0 +1,50 @@
+package testcases.CWE78_OS_Command_Injection;
+import testcasesupport.*;
+import javax.servlet.http.*;
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+public class CWE78_OS_Command_Injection__PropertiesFile_04_bad extends AbstractTestCase {
+    private static final boolean PRIVATE_STATIC_FINAL_TRUE = true;
+    private static final boolean PRIVATE_STATIC_FINAL_FALSE = false;
+    public void bad() throws Throwable {
+        String data;
+        if (PRIVATE_STATIC_FINAL_TRUE) {
+            data = "";
+            {
+                Properties properties = new Properties();
+                FileInputStream streamFileInput = null;
+                try {
+                    streamFileInput = new FileInputStream("../common/config.properties");
+                    properties.load(streamFileInput);
+                    data = properties.getProperty("data");
+                } catch (IOException exceptIO) {
+                    IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
+                } finally {
+                    try {
+                        if (streamFileInput != null) {
+                            streamFileInput.close();
+                        }
+                    } catch (IOException exceptIO) {
+                        IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
+                    }
+                }
+            }
+        } else {
+            data = null;
+        }
+        String osCommand;
+        if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
+            osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
+        } else {
+            osCommand = "/bin/ls ";
+        }
+        Process process = Runtime.getRuntime().exec(osCommand + data);
+        process.waitFor();
+    }
+    public static void main(String[] args) throws ClassNotFoundException,
+            InstantiationException, IllegalAccessException {
+        mainFromParent(args);
+    }
+}
