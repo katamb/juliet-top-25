@@ -6,13 +6,13 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J20509 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     public void process() throws Throwable {
         processG2B();
     }
-    private void goodG2BSink() throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        String data = dataGdG2B;
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";
@@ -25,8 +25,8 @@ public class J20509 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

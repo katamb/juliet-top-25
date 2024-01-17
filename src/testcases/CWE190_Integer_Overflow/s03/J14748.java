@@ -70,12 +70,12 @@ public class J14748 extends AbstractTestCase {
         int result = (int) (data * data);
         IO.writeLine("result: " + result);
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {

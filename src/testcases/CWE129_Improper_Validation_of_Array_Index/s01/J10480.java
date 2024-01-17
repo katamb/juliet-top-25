@@ -63,12 +63,12 @@ public class J10480 extends AbstractTestCase {
             IO.writeLine("Array index out of bounds");
         }
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {

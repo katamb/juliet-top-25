@@ -9,7 +9,7 @@ public class J18929 extends AbstractTestCase {
         data = "7e5tc4s3";
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {
@@ -22,7 +22,7 @@ public class J18929 extends AbstractTestCase {
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         if (data != null) {
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());

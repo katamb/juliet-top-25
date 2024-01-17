@@ -48,13 +48,13 @@ public class J19105 extends AbstractTestCase {
         }
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;

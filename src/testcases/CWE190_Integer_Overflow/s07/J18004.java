@@ -46,12 +46,12 @@ public class J18004 extends AbstractTestCase {
         long result = (long) (++data);
         IO.writeLine("result: " + result);
     }
-    private long goodG2BSource() throws Throwable {
+    private long processG2BSource() throws Throwable {
         long data;
         data = 2;
         return data;
     }
-    private long goodB2GSource() throws Throwable {
+    private long processB2GSource() throws Throwable {
         long data;
         data = -1;
         BufferedReader readerBuffered = null;

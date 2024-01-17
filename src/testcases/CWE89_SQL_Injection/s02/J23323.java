@@ -9,13 +9,13 @@ public class J23323 extends AbstractTestCase {
         data = System.getenv("ADD");
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -42,13 +42,13 @@ public class J23323 extends AbstractTestCase {
             }
         }
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String data;
         data = System.getenv("ADD");
         return data;
     }
     private void processB2G() throws Throwable {
-        String data = goodB2GSource();
+        String data = processB2GSource();
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {

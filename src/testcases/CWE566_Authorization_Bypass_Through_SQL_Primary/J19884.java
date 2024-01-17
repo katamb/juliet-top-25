@@ -4,10 +4,10 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J19884 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source(request, response);
         Connection dBConnection = IO.getDBConnection();
         PreparedStatement preparedStatement = null;
@@ -51,7 +51,7 @@ public class J19884 extends AbstractTestCaseServlet {
     }
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("id");
         } else {
             data = null;

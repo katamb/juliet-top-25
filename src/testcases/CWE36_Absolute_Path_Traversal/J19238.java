@@ -4,10 +4,10 @@ import java.io.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J19238 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
@@ -56,7 +56,7 @@ public class J19238 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.io.*;
 import java.net.PasswordAuthentication;
 public class J18909 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (IO.staticReturnsFalse()) {
             data = null;
@@ -23,7 +23,7 @@ public class J18909 extends AbstractTestCase {
             IO.writeLine(credentials.toString());
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (IO.staticReturnsTrue()) {
             data = "";
@@ -43,8 +43,8 @@ public class J18909 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

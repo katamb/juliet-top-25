@@ -2,10 +2,10 @@ package testcases.CWE83_XSS_Attribute;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J22348 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source(request, response);
         if (data != null) {
             response.getWriter().println("<br>handle() - <img src=\"" + data + "\">");
@@ -13,7 +13,7 @@ public class J22348 extends AbstractTestCaseServlet {
     }
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("name");
         } else {
             data = null;

@@ -47,13 +47,13 @@ public class J20551 extends AbstractTestCase {
         }
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             osCommand = "c:\\WINDOWS\\SYSTEM32\\cmd.exe /c dir ";

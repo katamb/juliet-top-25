@@ -24,7 +24,7 @@ public class J18972 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {

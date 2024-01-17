@@ -7,7 +7,7 @@ public class J19889 extends AbstractTestCaseServlet {
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
     }
-    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dBConnection = IO.getDBConnection();
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -51,7 +51,7 @@ public class J19889 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "10";
-        goodG2BSink(data, request, response);
+        gG2BSink(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

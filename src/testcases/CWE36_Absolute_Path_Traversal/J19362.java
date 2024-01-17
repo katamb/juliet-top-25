@@ -9,10 +9,10 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J19362 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source();
         if (data != null) {
             File file = new File(data);
@@ -55,7 +55,7 @@ public class J19362 extends AbstractTestCase {
     }
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 ServerSocket listener = null;

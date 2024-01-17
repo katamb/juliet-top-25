@@ -6,26 +6,26 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J10439 extends AbstractTestCase {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     public void process() throws Throwable {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink() throws Throwable {
-        int data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        int data = dataGdG2B;
         int array[] = {0, 1, 2, 3, 4};
         array[data] = 42;
     }
     private void processG2B() throws Throwable {
         int data;
         data = 2;
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
-    private void goodB2GSink() throws Throwable {
-        int data = dataGoodB2G;
+    private void gB2GSink() throws Throwable {
+        int data = dataGdB2G;
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             array[data] = 42;
@@ -70,8 +70,8 @@ public class J10439 extends AbstractTestCase {
                 }
             }
         }
-        dataGoodB2G = data;
-        goodB2GSink();
+        dataGdB2G = data;
+        gB2GSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

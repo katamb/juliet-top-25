@@ -6,15 +6,15 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J15895 extends AbstractTestCase {
-    private short dataBad;
-    private short dataGoodG2B;
-    private short dataGoodB2G;
+    private short dataB;
+    private short dataGdG2B;
+    private short dataGdB2G;
     public void process() throws Throwable {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink() throws Throwable {
-        short data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        short data = dataGdG2B;
         if (data > 0)  {
             short result = (short) (data * 2);
             IO.writeLine("result: " + result);
@@ -23,11 +23,11 @@ public class J15895 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         short data;
         data = 2;
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
-    private void goodB2GSink() throws Throwable {
-        short data = dataGoodB2G;
+    private void gB2GSink() throws Throwable {
+        short data = dataGdB2G;
         if (data > 0)  {
             if (data < (Short.MAX_VALUE / 2)) {
                 short result = (short) (data * 2);
@@ -70,8 +70,8 @@ public class J15895 extends AbstractTestCase {
                 }
             }
         }
-        dataGoodB2G = data;
-        goodB2GSink();
+        dataGdB2G = data;
+        gB2GSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

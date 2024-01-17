@@ -18,7 +18,7 @@ public class J18799 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink() throws Throwable {
+    private void gG2BSink() throws Throwable {
         String password = passwordGoodG2B;
         Connection dBConnection = null;
         try {
@@ -63,9 +63,9 @@ public class J18799 extends AbstractTestCase {
             password = decryptedPassword;
         }
         passwordGoodG2B = password;
-        goodG2BSink();
+        gG2BSink();
     }
-    private void goodB2GSink() throws Throwable {
+    private void gB2GSink() throws Throwable {
         String password = passwordGoodB2G;
         {
             Cipher aesCipher = Cipher.getInstance("AES");
@@ -110,7 +110,7 @@ public class J18799 extends AbstractTestCase {
             }
         }
         passwordGoodB2G = password;
-        goodB2GSink();
+        gB2GSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

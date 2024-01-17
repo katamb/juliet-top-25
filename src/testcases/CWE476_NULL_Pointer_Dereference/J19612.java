@@ -10,12 +10,12 @@ public class J19612 extends AbstractTestCase {
         Integer data = badSource();
         IO.writeLine("" + data.toString());
     }
-    private Integer goodG2BSource() throws Throwable {
+    private Integer processG2BSource() throws Throwable {
         Integer data;
         data = Integer.valueOf(5);
         return data;
     }
-    private Integer goodB2GSource() throws Throwable {
+    private Integer processB2GSource() throws Throwable {
         Integer data;
         data = null;
         return data;

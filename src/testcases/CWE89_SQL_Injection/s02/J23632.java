@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J23632 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -83,7 +83,7 @@ public class J23632 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

@@ -2,10 +2,10 @@ package testcases.CWE78_OS_Command_Injection;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20588 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source();
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -18,7 +18,7 @@ public class J20588 extends AbstractTestCase {
     }
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = System.getenv("ADD");
         } else {
             data = null;

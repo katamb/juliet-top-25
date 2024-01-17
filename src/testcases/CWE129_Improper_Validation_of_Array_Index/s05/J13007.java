@@ -14,7 +14,7 @@ public class J13007 extends AbstractTestCase {
     private boolean privateReturnsFalse() {
         return false;
     }
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         int data;
         if (privateReturnsFalse()) {
             data = 0;
@@ -30,7 +30,7 @@ public class J13007 extends AbstractTestCase {
             }
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         int data;
         if (privateReturnsTrue()) {
             data = 2;
@@ -46,7 +46,7 @@ public class J13007 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         int data;
         if (privateReturnsTrue()) {
             data = Integer.MIN_VALUE;
@@ -99,7 +99,7 @@ public class J13007 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         int data;
         if (privateReturnsTrue()) {
             data = Integer.MIN_VALUE;
@@ -151,10 +151,10 @@ public class J13007 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
-        goodB2G1();
-        goodB2G2();
+        processG2B1();
+        processG2B2();
+        processB2G1();
+        processB2G2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

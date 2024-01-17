@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J20324 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
         data = "";
@@ -29,11 +29,11 @@ public class J20324 extends AbstractTestCase {
                 }
             }
         }
-        badPrivate = true;
+        bPrivate = true;
         badSink(data);
     }
     private void badSink(String data) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             int numberOfLoops;
             try {
                 numberOfLoops = Integer.parseInt(data);
@@ -46,9 +46,9 @@ public class J20324 extends AbstractTestCase {
             }
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

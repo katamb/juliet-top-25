@@ -5,11 +5,11 @@ import java.util.StringTokenizer;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24160 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
@@ -57,7 +57,7 @@ public class J24160 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

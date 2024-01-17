@@ -4,11 +4,11 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23236 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -50,7 +50,7 @@ public class J23236 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getenv("ADD");
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

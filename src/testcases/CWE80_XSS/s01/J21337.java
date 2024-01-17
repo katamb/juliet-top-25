@@ -8,10 +8,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 public class J21337 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 URLConnection urlConnection = (new URL("http://www.example.org/")).openConnection();

@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J10247 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         int data;
         if (IO.staticFive != 5) {
             data = 0;
@@ -22,7 +22,7 @@ public class J10247 extends AbstractTestCase {
             }
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         int data;
         if (IO.staticFive == 5) {
             data = 2;
@@ -38,7 +38,7 @@ public class J10247 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         int data;
         if (IO.staticFive == 5) {
             data = Integer.MIN_VALUE;
@@ -90,7 +90,7 @@ public class J10247 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         int data;
         if (IO.staticFive == 5) {
             data = Integer.MIN_VALUE;
@@ -141,10 +141,10 @@ public class J10247 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
-        goodB2G1();
-        goodB2G2();
+        processG2B1();
+        processG2B2();
+        processB2G1();
+        processB2G2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

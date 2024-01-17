@@ -9,10 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J19194 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
@@ -91,7 +91,7 @@ public class J19194 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

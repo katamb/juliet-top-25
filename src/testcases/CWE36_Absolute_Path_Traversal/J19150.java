@@ -4,10 +4,10 @@ import java.io.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J19150 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
@@ -50,7 +50,7 @@ public class J19150 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getenv("ADD");
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

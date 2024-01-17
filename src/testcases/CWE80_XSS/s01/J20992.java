@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J20992 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             response.getWriter().println("<br>handle(): data = " + data.replaceAll("(<script>)", ""));
         }
@@ -53,7 +53,7 @@ public class J20992 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

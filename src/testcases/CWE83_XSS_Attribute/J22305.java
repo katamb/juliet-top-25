@@ -2,10 +2,10 @@ package testcases.CWE83_XSS_Attribute;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J22305 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 Cookie cookieSources[] = request.getCookies();

@@ -4,11 +4,11 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24908 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -42,7 +42,7 @@ public class J24908 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getProperty("user.home");
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

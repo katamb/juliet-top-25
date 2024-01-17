@@ -4,15 +4,15 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23985 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = dataGdG2B;
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -42,11 +42,11 @@ public class J23985 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink(request, response);
+        dataGdG2B = data;
+        gG2BSink(request, response);
     }
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataGoodB2G;
+    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = dataGdB2G;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -77,8 +77,8 @@ public class J23985 extends AbstractTestCaseServlet {
     private void processB2G(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("name");
-        dataGoodB2G = data;
-        goodB2GSink(request, response);
+        dataGdB2G = data;
+        gB2GSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

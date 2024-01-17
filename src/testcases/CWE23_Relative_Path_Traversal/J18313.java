@@ -38,13 +38,13 @@ public class J18313 extends AbstractTestCase {
         }
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";

@@ -7,25 +7,25 @@ public class J15629 extends AbstractTestCase {
         data = Long.MAX_VALUE;
         return data;
     }
-    private long goodG2BSource() throws Throwable {
+    private long processG2BSource() throws Throwable {
         long data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        long data = goodG2BSource();
+        long data = processG2BSource();
         if (data > 0)  {
             long result = (long) (data * 2);
             IO.writeLine("result: " + result);
         }
     }
-    private long goodB2GSource() throws Throwable {
+    private long processB2GSource() throws Throwable {
         long data;
         data = Long.MAX_VALUE;
         return data;
     }
     private void processB2G() throws Throwable {
-        long data = goodB2GSource();
+        long data = processB2GSource();
         if (data > 0)  {
             if (data < (Long.MAX_VALUE / 2)) {
                 long result = (long) (data * 2);

@@ -7,7 +7,7 @@ public class J18531 extends AbstractTestCaseServlet {
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
     }
-    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -56,7 +56,7 @@ public class J18531 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
-        goodG2BSink(data, request, response);
+        gG2BSink(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

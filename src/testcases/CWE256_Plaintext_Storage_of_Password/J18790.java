@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class J18790 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String password;
         password = "";
@@ -32,11 +32,11 @@ public class J18790 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
-        badPrivate = true;
+        bPrivate = true;
         badSink(password);
     }
     private void badSink(String password) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             Connection dBConnection = null;
             try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
@@ -53,9 +53,9 @@ public class J18790 extends AbstractTestCase {
             }
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

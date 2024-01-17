@@ -1,25 +1,25 @@
 package testcases.CWE476_NULL_Pointer_Dereference;
 import testcasesupport.*;
 public class J19737 extends AbstractTestCase {
-    private StringBuilder dataBad;
-    private StringBuilder dataGoodG2B;
-    private StringBuilder dataGoodB2G;
+    private StringBuilder dataB;
+    private StringBuilder dataGdG2B;
+    private StringBuilder dataGdB2G;
     public void process() throws Throwable {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink() throws Throwable {
-        StringBuilder data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        StringBuilder data = dataGdG2B;
         IO.writeLine("" + data.length());
     }
     private void processG2B() throws Throwable {
         StringBuilder data;
         data = new StringBuilder();
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
-    private void goodB2GSink() throws Throwable {
-        StringBuilder data = dataGoodB2G;
+    private void gB2GSink() throws Throwable {
+        StringBuilder data = dataGdB2G;
         if (data != null) {
             IO.writeLine("" + data.length());
         } else {
@@ -29,8 +29,8 @@ public class J19737 extends AbstractTestCase {
     private void processB2G() throws Throwable {
         StringBuilder data;
         data = null;
-        dataGoodB2G = data;
-        goodB2GSink();
+        dataGdB2G = data;
+        gB2GSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

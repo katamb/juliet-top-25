@@ -8,10 +8,10 @@ import java.net.Socket;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 public class J22041 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 ServerSocket listener = null;

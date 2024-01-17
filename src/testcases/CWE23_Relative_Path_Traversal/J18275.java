@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J18275 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (false) {
             data = null;
@@ -59,7 +59,7 @@ public class J18275 extends AbstractTestCase {
             }
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (true) {
             data = "foo";
@@ -112,8 +112,8 @@ public class J18275 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

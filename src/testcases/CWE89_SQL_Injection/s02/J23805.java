@@ -8,7 +8,7 @@ public class J23805 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -42,9 +42,9 @@ public class J23805 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
-        goodG2BSink(data, request, response);
+        gG2BSink(data, request, response);
     }
-    private void goodB2GSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -85,7 +85,7 @@ public class J23805 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        goodB2GSink(data, request, response);
+        gB2GSink(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

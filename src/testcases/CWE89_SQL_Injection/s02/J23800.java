@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23800 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "";
@@ -14,11 +14,11 @@ public class J23800 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        badPrivate = true;
+        bPrivate = true;
         badSink(data, request, response);
     }
     private void badSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
             try {
@@ -50,9 +50,9 @@ public class J23800 extends AbstractTestCaseServlet {
             }
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

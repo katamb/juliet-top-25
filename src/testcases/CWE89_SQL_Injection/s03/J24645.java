@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J24645 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     public void process() throws Throwable {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink() throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        String data = dataGdG2B;
         Connection dbConnection = null;
         Statement sqlStatement = null;
         try {
@@ -45,11 +45,11 @@ public class J24645 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
-    private void goodB2GSink() throws Throwable {
-        String data = dataGoodB2G;
+    private void gB2GSink() throws Throwable {
+        String data = dataGdB2G;
         Connection dbConnection = null;
         PreparedStatement sqlStatement = null;
         try {
@@ -99,8 +99,8 @@ public class J24645 extends AbstractTestCase {
                 }
             }
         }
-        dataGoodB2G = data;
-        goodB2GSink();
+        dataGdB2G = data;
+        gB2GSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -6,7 +6,7 @@ import java.sql.*;
 public class J18807 extends AbstractTestCase {
     private static final boolean PRIVATE_STATIC_FINAL_TRUE = true;
     private static final boolean PRIVATE_STATIC_FINAL_FALSE = false;
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_FALSE) {
             data = null;
@@ -55,7 +55,7 @@ public class J18807 extends AbstractTestCase {
             }
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (PRIVATE_STATIC_FINAL_TRUE) {
             data = "";
@@ -105,8 +105,8 @@ public class J18807 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

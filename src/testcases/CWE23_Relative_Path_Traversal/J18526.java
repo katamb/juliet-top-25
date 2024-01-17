@@ -4,10 +4,10 @@ import java.io.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J18526 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source(request, response);
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -56,7 +56,7 @@ public class J18526 extends AbstractTestCaseServlet {
     }
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("name");
         } else {
             data = null;

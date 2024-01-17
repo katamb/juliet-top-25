@@ -7,13 +7,13 @@ import java.util.logging.Level;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 public class J18975 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     public void process() throws Throwable {
         processG2B();
     }
-    private void goodG2BSink() throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        String data = dataGdG2B;
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");
@@ -34,8 +34,8 @@ public class J18975 extends AbstractTestCase {
         } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

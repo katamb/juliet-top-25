@@ -3,11 +3,11 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J11362 extends AbstractTestCaseServlet {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = dataBad;
+        int data = dataB;
         int array[] = {0, 1, 2, 3, 4};
         if (data < array.length) {
             IO.writeLine(array[data]);
@@ -26,7 +26,7 @@ public class J11362 extends AbstractTestCaseServlet {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

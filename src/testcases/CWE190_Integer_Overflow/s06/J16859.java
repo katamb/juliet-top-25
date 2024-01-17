@@ -7,7 +7,7 @@ public class J16859 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink(int data) throws Throwable {
+    private void gG2BSink(int data) throws Throwable {
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
@@ -15,9 +15,9 @@ public class J16859 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         int data;
         data = 2;
-        goodG2BSink(data);
+        gG2BSink(data);
     }
-    private void goodB2GSink(int data) throws Throwable {
+    private void gB2GSink(int data) throws Throwable {
         if (data < Integer.MAX_VALUE) {
             data++;
             int result = (int) (data);
@@ -37,7 +37,7 @@ public class J16859 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Number format exception parsing data from string", exceptNumberFormat);
             }
         }
-        goodB2GSink(data);
+        gB2GSink(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

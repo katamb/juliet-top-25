@@ -2,7 +2,7 @@ package testcases.CWE190_Integer_Overflow.s04;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J15679 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         long data;
         if (false) {
             data = 0L;
@@ -14,7 +14,7 @@ public class J15679 extends AbstractTestCase {
             IO.writeLine("result: " + result);
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         long data;
         if (true) {
             data = 2;
@@ -26,7 +26,7 @@ public class J15679 extends AbstractTestCase {
             IO.writeLine("result: " + result);
         }
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         long data;
         if (true) {
             data = (new java.security.SecureRandom()).nextLong();
@@ -44,7 +44,7 @@ public class J15679 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         long data;
         if (true) {
             data = (new java.security.SecureRandom()).nextLong();
@@ -61,10 +61,10 @@ public class J15679 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
-        goodB2G1();
-        goodB2G2();
+        processG2B1();
+        processG2B2();
+        processB2G1();
+        processB2G2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

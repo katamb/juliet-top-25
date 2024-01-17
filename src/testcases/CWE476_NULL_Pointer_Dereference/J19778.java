@@ -10,12 +10,12 @@ public class J19778 extends AbstractTestCase {
         String data = badSource();
         IO.writeLine("" + data.length());
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "This is not null";
         return data;
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String data;
         data = null;
         return data;

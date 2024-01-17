@@ -12,12 +12,12 @@ public class J11844 extends AbstractTestCase {
         int array[] = {0, 1, 2, 3, 4};
         IO.writeLine(array[data]);
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = 100;
         return data;

@@ -10,12 +10,12 @@ public class J19734 extends AbstractTestCase {
         StringBuilder data = badSource();
         IO.writeLine("" + data.length());
     }
-    private StringBuilder goodG2BSource() throws Throwable {
+    private StringBuilder processG2BSource() throws Throwable {
         StringBuilder data;
         data = new StringBuilder();
         return data;
     }
-    private StringBuilder goodB2GSource() throws Throwable {
+    private StringBuilder processB2GSource() throws Throwable {
         StringBuilder data;
         data = null;
         return data;

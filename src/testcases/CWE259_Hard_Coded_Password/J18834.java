@@ -4,10 +4,10 @@ import java.util.logging.Level;
 import java.io.*;
 import java.sql.*;
 public class J18834 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -46,7 +46,7 @@ public class J18834 extends AbstractTestCase {
     }
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "7e5tc4s3";
         } else {
             data = null;

@@ -2,11 +2,11 @@ package testcases.CWE606_Unchecked_Loop_Condition;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20068 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -21,7 +21,7 @@ public class J20068 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = System.getenv("ADD");
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

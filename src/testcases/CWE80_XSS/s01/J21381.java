@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J21381 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 Socket socket = null;

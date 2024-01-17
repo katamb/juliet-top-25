@@ -8,7 +8,7 @@ public class J11623 extends AbstractTestCaseServlet {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void goodG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0) {
             IO.writeLine(array[data]);
@@ -19,9 +19,9 @@ public class J11623 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        goodG2BSink(data, request, response);
+        gG2BSink(data, request, response);
     }
-    private void goodB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+    private void gB2GSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
@@ -46,7 +46,7 @@ public class J11623 extends AbstractTestCaseServlet {
                 }
             }
         }
-        goodB2GSink(data, request, response);
+        gB2GSink(data, request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

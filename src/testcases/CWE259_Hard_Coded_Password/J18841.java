@@ -9,7 +9,7 @@ public class J18841 extends AbstractTestCase {
         data = "7e5tc4s3";
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {
@@ -22,7 +22,7 @@ public class J18841 extends AbstractTestCase {
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

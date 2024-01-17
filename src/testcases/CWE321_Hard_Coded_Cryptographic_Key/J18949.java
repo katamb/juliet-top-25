@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 public class J18949 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FALSE) {
             data = null;
@@ -31,7 +31,7 @@ public class J18949 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_TRUE) {
             data = "";
@@ -56,8 +56,8 @@ public class J18949 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

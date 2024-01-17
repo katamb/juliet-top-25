@@ -2,10 +2,10 @@ package testcases.CWE606_Unchecked_Loop_Condition;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20149 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean bPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodB2G1(request, response);
         goodB2G2(request, response);
@@ -20,11 +20,11 @@ public class J20149 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        goodB2G1Private = false;
-        goodB2G1Sink(data, request, response);
+        gB2G1Private = false;
+        gB2G1Sink(data, request, response);
     }
-    private void goodB2G1Sink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodB2G1Private) {
+    private void gB2G1Sink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
             int numberOfLoops;
@@ -50,11 +50,11 @@ public class J20149 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        goodB2G2Private = true;
+        gB2G2Private = true;
         goodB2G2Sink(data, request, response);
     }
     private void goodB2G2Sink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodB2G2Private) {
+        if (gB2G2Private) {
             int numberOfLoops;
             try {
                 numberOfLoops = Integer.parseInt(data);
@@ -72,11 +72,11 @@ public class J20149 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "5";
-        goodG2BPrivate = true;
-        goodG2BSink(data, request, response);
+        gG2BPrivate = true;
+        gG2BSink(data, request, response);
     }
-    private void goodG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodG2BPrivate) {
+    private void gG2BSink(String data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (gG2BPrivate) {
             int numberOfLoops;
             try {
                 numberOfLoops = Integer.parseInt(data);

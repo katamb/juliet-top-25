@@ -4,11 +4,11 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J11626 extends AbstractTestCaseServlet {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = dataBad;
+        int data = dataB;
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0) {
             IO.writeLine(array[data]);
@@ -33,7 +33,7 @@ public class J11626 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

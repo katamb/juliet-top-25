@@ -2,10 +2,10 @@ package testcases.CWE81_XSS_Error_Message;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J21952 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source(request, response);
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
@@ -13,7 +13,7 @@ public class J21952 extends AbstractTestCaseServlet {
     }
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("name");
         } else {
             data = null;

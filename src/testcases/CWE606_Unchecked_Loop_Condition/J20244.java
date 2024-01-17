@@ -3,11 +3,11 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.StringTokenizer;
 public class J20244 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -32,7 +32,7 @@ public class J20244 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

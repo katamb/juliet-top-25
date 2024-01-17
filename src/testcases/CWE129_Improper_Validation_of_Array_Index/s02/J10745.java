@@ -19,13 +19,13 @@ public class J10745 extends AbstractTestCase {
         }
         return data;
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = goodG2BSource();
+        int data = processG2BSource();
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0) {
             IO.writeLine(array[data]);
@@ -33,7 +33,7 @@ public class J10745 extends AbstractTestCase {
             IO.writeLine("Array index out of bounds");
         }
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -50,7 +50,7 @@ public class J10745 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = goodB2GSource();
+        int data = processB2GSource();
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);

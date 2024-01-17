@@ -18,7 +18,7 @@ public class J18884 extends AbstractTestCase {
             IO.writeLine(key.toString());
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {

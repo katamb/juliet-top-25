@@ -11,16 +11,16 @@ import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class J18791 extends AbstractTestCase {
-    private boolean badPrivate = false;
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean bPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public void process() throws Throwable {
-        goodB2G1();
-        goodB2G2();
+        processB2G1();
+        processB2G2();
         processG2B();
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -40,11 +40,11 @@ public class J18791 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
-        goodB2G1Private = false;
-        goodB2G1Sink(password);
+        gB2G1Private = false;
+        gB2G1Sink(password);
     }
-    private void goodB2G1Sink(String password) throws Throwable {
-        if (goodB2G1Private) {
+    private void gB2G1Sink(String password) throws Throwable {
+        if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
             {
@@ -70,7 +70,7 @@ public class J18791 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -90,11 +90,11 @@ public class J18791 extends AbstractTestCase {
                 IO.logger.log(Level.WARNING, "Error closing FileInputStream", exceptIO);
             }
         }
-        goodB2G2Private = true;
+        gB2G2Private = true;
         goodB2G2Sink(password);
     }
     private void goodB2G2Sink(String password) throws Throwable {
-        if (goodB2G2Private) {
+        if (gB2G2Private) {
             {
                 Cipher aesCipher = Cipher.getInstance("AES");
                 SecretKeySpec secretKeySpec = new SecretKeySpec("ABCDEFGHABCDEFGH".getBytes("UTF-8"), "AES");
@@ -145,11 +145,11 @@ public class J18791 extends AbstractTestCase {
             String decryptedPassword = new String(aesCipher.doFinal(password.getBytes("UTF-8")), "UTF-8");
             password = decryptedPassword;
         }
-        goodG2BPrivate = true;
-        goodG2BSink(password);
+        gG2BPrivate = true;
+        gG2BSink(password);
     }
-    private void goodG2BSink(String password) throws Throwable {
-        if (goodG2BPrivate) {
+    private void gG2BSink(String password) throws Throwable {
+        if (gG2BPrivate) {
             Connection dBConnection = null;
             try {
                 dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);

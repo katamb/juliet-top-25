@@ -7,10 +7,10 @@ import java.util.logging.Level;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.Cipher;
 public class J18966 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source();
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
@@ -24,7 +24,7 @@ public class J18966 extends AbstractTestCase {
     }
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "23 ~j;asn!@#/>as";
         } else {
             data = null;

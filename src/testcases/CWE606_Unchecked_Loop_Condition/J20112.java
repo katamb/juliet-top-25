@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J20112 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         int numberOfLoops;
         try {
             numberOfLoops = Integer.parseInt(data);
@@ -63,7 +63,7 @@ public class J20112 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

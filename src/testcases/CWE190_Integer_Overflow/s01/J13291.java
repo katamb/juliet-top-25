@@ -6,16 +6,16 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J13291 extends AbstractTestCase {
-    private boolean badPrivate = false;
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean bPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public void process() throws Throwable {
-        goodB2G1();
-        goodB2G2();
+        processB2G1();
+        processB2G2();
         processG2B();
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         byte data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -48,11 +48,11 @@ public class J13291 extends AbstractTestCase {
                 }
             }
         }
-        goodB2G1Private = false;
-        goodB2G1Sink(data);
+        gB2G1Private = false;
+        gB2G1Sink(data);
     }
-    private void goodB2G1Sink(byte data) throws Throwable {
-        if (goodB2G1Private) {
+    private void gB2G1Sink(byte data) throws Throwable {
+        if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
             if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Byte.MAX_VALUE))) {
@@ -63,7 +63,7 @@ public class J13291 extends AbstractTestCase {
             }
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         byte data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -96,11 +96,11 @@ public class J13291 extends AbstractTestCase {
                 }
             }
         }
-        goodB2G2Private = true;
+        gB2G2Private = true;
         goodB2G2Sink(data);
     }
     private void goodB2G2Sink(byte data) throws Throwable {
-        if (goodB2G2Private) {
+        if (gB2G2Private) {
             if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Byte.MAX_VALUE))) {
                 byte result = (byte) (data * data);
                 IO.writeLine("result: " + result);
@@ -112,11 +112,11 @@ public class J13291 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         byte data;
         data = 2;
-        goodG2BPrivate = true;
-        goodG2BSink(data);
+        gG2BPrivate = true;
+        gG2BSink(data);
     }
-    private void goodG2BSink(byte data) throws Throwable {
-        if (goodG2BPrivate) {
+    private void gG2BSink(byte data) throws Throwable {
+        if (gG2BPrivate) {
             byte result = (byte) (data * data);
             IO.writeLine("result: " + result);
         }

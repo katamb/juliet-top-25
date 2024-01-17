@@ -37,12 +37,12 @@ public class J24862 extends AbstractTestCase {
             }
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String data;
         data = System.getProperty("user.home");
         return data;

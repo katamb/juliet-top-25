@@ -4,10 +4,10 @@ import java.io.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J18534 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -56,7 +56,7 @@ public class J18534 extends AbstractTestCaseServlet {
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = request.getParameter("name");
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

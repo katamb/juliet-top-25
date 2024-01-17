@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 public class J18358 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -95,7 +95,7 @@ public class J18358 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

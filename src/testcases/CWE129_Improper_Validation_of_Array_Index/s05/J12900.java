@@ -19,12 +19,12 @@ public class J12900 extends AbstractTestCase {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
         return data;

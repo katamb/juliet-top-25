@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J17258 extends AbstractTestCase {
-    private byte dataBad;
-    private byte dataGoodG2B;
-    private byte dataGoodB2G;
+    private byte dataB;
+    private byte dataGdG2B;
+    private byte dataGdB2G;
     private void badSink() throws Throwable {
-        byte data = dataBad;
+        byte data = dataB;
         byte result = (byte) (++data);
         IO.writeLine("result: " + result);
     }
@@ -47,7 +47,7 @@ public class J17258 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

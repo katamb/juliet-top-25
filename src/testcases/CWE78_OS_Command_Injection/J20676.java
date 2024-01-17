@@ -2,10 +2,10 @@ package testcases.CWE78_OS_Command_Injection;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J20676 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source(request, response);
         String osCommand;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
@@ -18,7 +18,7 @@ public class J20676 extends AbstractTestCaseServlet {
     }
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 Cookie cookieSources[] = request.getCookies();

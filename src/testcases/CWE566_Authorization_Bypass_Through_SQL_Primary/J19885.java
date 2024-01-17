@@ -4,10 +4,10 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J19885 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("id");
         } else {
             data = null;

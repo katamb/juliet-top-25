@@ -5,10 +5,10 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 public class J18879 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "7e5tc4s3";
         } else {
             data = null;
@@ -18,10 +18,10 @@ public class J18879 extends AbstractTestCase {
     private boolean goodG2B1_private = false;
     private boolean goodG2B2_private = false;
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         goodG2B1_private = false;
         data = goodG2B1_source();
@@ -47,7 +47,7 @@ public class J18879 extends AbstractTestCase {
         }
         return data;
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         goodG2B2_private = true;
         data = goodG2B2_source();

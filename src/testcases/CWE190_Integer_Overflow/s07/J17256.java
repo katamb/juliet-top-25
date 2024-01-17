@@ -46,12 +46,12 @@ public class J17256 extends AbstractTestCase {
         byte result = (byte) (++data);
         IO.writeLine("result: " + result);
     }
-    private byte goodG2BSource() throws Throwable {
+    private byte processG2BSource() throws Throwable {
         byte data;
         data = 2;
         return data;
     }
-    private byte goodB2GSource() throws Throwable {
+    private byte processB2GSource() throws Throwable {
         byte data;
         data = -1;
         BufferedReader readerBuffered = null;

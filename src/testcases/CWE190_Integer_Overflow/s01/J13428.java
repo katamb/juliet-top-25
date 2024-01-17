@@ -12,12 +12,12 @@ public class J13428 extends AbstractTestCase {
         byte result = (byte) (data * data);
         IO.writeLine("result: " + result);
     }
-    private byte goodG2BSource() throws Throwable {
+    private byte processG2BSource() throws Throwable {
         byte data;
         data = 2;
         return data;
     }
-    private byte goodB2GSource() throws Throwable {
+    private byte processB2GSource() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
         return data;

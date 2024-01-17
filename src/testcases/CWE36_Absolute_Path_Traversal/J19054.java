@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J19054 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
-        badPrivate = true;
+        bPrivate = true;
         data = bad_source();
         if (data != null) {
             File file = new File(data);
@@ -53,7 +53,7 @@ public class J19054 extends AbstractTestCase {
     }
     private String bad_source() throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = "";
             {
                 InputStreamReader readerInputStream = null;

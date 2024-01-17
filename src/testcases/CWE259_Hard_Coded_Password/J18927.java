@@ -7,7 +7,7 @@ public class J18927 extends AbstractTestCase {
     public void process() throws Throwable {
         processG2B();
     }
-    private void goodG2BSink(String data) throws Throwable {
+    private void gG2BSink(String data) throws Throwable {
         if (data != null) {
             PasswordAuthentication credentials = new PasswordAuthentication("user", data.toCharArray());
             IO.writeLine(credentials.toString());
@@ -23,7 +23,7 @@ public class J18927 extends AbstractTestCase {
         } catch (IOException exceptIO) {
             IO.logger.log(Level.WARNING, "Error with stream reading", exceptIO);
         }
-        goodG2BSink(data);
+        gG2BSink(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -2,10 +2,10 @@ package testcases.CWE81_XSS_Error_Message;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J21953 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     private String bad_source(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
-        if (badPrivate) {
+        if (bPrivate) {
             data = request.getParameter("name");
         } else {
             data = null;

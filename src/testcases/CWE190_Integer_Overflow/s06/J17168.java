@@ -13,12 +13,12 @@ public class J17168 extends AbstractTestCase {
         short result = (short) (data);
         IO.writeLine("result: " + result);
     }
-    private short goodG2BSource() throws Throwable {
+    private short processG2BSource() throws Throwable {
         short data;
         data = 2;
         return data;
     }
-    private short goodB2GSource() throws Throwable {
+    private short processB2GSource() throws Throwable {
         short data;
         data = Short.MAX_VALUE;
         return data;

@@ -7,24 +7,24 @@ public class J17081 extends AbstractTestCase {
         data = (new java.security.SecureRandom()).nextLong();
         return data;
     }
-    private long goodG2BSource() throws Throwable {
+    private long processG2BSource() throws Throwable {
         long data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        long data = goodG2BSource();
+        long data = processG2BSource();
         data++;
         long result = (long) (data);
         IO.writeLine("result: " + result);
     }
-    private long goodB2GSource() throws Throwable {
+    private long processB2GSource() throws Throwable {
         long data;
         data = (new java.security.SecureRandom()).nextLong();
         return data;
     }
     private void processB2G() throws Throwable {
-        long data = goodB2GSource();
+        long data = processB2GSource();
         if (data < Long.MAX_VALUE) {
             data++;
             long result = (long) (data);

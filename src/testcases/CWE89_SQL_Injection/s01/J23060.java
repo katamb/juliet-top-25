@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J23060 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         Connection dbConnection = null;
         Statement sqlStatement = null;
         ResultSet resultSet = null;
@@ -85,7 +85,7 @@ public class J23060 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

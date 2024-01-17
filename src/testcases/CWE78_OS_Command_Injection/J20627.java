@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J20627 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data = null;
         switch (5) {
             case 6:
@@ -27,7 +27,7 @@ public class J20627 extends AbstractTestCase {
         Process process = Runtime.getRuntime().exec(osCommand + data);
         process.waitFor();
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data = null;
         switch (6) {
             case 6:
@@ -47,8 +47,8 @@ public class J20627 extends AbstractTestCase {
         process.waitFor();
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

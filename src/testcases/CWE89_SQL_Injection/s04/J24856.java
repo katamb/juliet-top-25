@@ -4,15 +4,15 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24856 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         String data;
         data = System.getProperty("user.home");
-        badPrivate = true;
+        bPrivate = true;
         badSink(data);
     }
     private void badSink(String data) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             Connection dbConnection = null;
             Statement sqlStatement = null;
             try {
@@ -40,9 +40,9 @@ public class J24856 extends AbstractTestCase {
             }
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

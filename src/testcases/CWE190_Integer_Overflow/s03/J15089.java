@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J15089 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         int data;
         switch (5) {
             case 6:
@@ -25,7 +25,7 @@ public class J15089 extends AbstractTestCase {
                 break;
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         int data;
         switch (6) {
             case 6:
@@ -47,7 +47,7 @@ public class J15089 extends AbstractTestCase {
                 break;
         }
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         int data;
         switch (6) {
             case 6:
@@ -81,7 +81,7 @@ public class J15089 extends AbstractTestCase {
                 break;
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         int data;
         switch (6) {
             case 6:
@@ -116,10 +116,10 @@ public class J15089 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
-        goodB2G1();
-        goodB2G2();
+        processG2B1();
+        processG2B2();
+        processB2G1();
+        processB2G2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

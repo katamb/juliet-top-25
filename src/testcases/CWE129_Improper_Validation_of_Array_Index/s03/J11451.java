@@ -3,26 +3,26 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J11451 extends AbstractTestCaseServlet {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = dataGoodG2B;
+    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        int data = dataGdG2B;
         int array[] = {0, 1, 2, 3, 4};
         IO.writeLine(array[data]);
     }
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        dataGoodG2B = data;
-        goodG2BSink(request, response);
+        dataGdG2B = data;
+        gG2BSink(request, response);
     }
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = dataGoodB2G;
+    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        int data = dataGdB2G;
         int array[] = {0, 1, 2, 3, 4};
         if (data >= 0 && data < array.length) {
             IO.writeLine(array[data]);
@@ -41,8 +41,8 @@ public class J11451 extends AbstractTestCaseServlet {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
-        dataGoodB2G = data;
-        goodB2GSink(request, response);
+        dataGdB2G = data;
+        gB2GSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

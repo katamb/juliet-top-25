@@ -5,7 +5,7 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 public class J18869 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE != 5) {
             data = null;
@@ -25,7 +25,7 @@ public class J18869 extends AbstractTestCase {
             IO.writeLine(key.toString());
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE == 5) {
             data = "";
@@ -46,8 +46,8 @@ public class J18869 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

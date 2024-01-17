@@ -41,19 +41,19 @@ public class J15893 extends AbstractTestCase {
         }
         return data;
     }
-    private short goodG2BSource() throws Throwable {
+    private short processG2BSource() throws Throwable {
         short data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        short data = goodG2BSource();
+        short data = processG2BSource();
         if (data > 0)  {
             short result = (short) (data * 2);
             IO.writeLine("result: " + result);
         }
     }
-    private short goodB2GSource() throws Throwable {
+    private short processB2GSource() throws Throwable {
         short data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -89,7 +89,7 @@ public class J15893 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        short data = goodB2GSource();
+        short data = processB2GSource();
         if (data > 0)  {
             if (data < (Short.MAX_VALUE / 2)) {
                 short result = (short) (data * 2);

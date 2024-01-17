@@ -7,7 +7,7 @@ import javax.security.auth.kerberos.KerberosKey;
 public class J18853 extends AbstractTestCase {
     private boolean privateTrue = true;
     private boolean privateFalse = false;
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (privateFalse) {
             data = null;
@@ -27,7 +27,7 @@ public class J18853 extends AbstractTestCase {
             IO.writeLine(key.toString());
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (privateTrue) {
             data = "";
@@ -48,8 +48,8 @@ public class J18853 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

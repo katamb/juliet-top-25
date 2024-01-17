@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J15886 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         short data;
         data = -1;
@@ -40,20 +40,20 @@ public class J15886 extends AbstractTestCase {
                 }
             }
         }
-        badPrivate = true;
+        bPrivate = true;
         badSink(data);
     }
     private void badSink(short data) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             if (data > 0)  {
                 short result = (short) (data * 2);
                 IO.writeLine("result: " + result);
             }
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

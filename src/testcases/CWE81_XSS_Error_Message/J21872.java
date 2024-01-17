@@ -8,10 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J21872 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             response.sendError(404, "<br>handle() - Parameter name has value " + data);
         }
@@ -55,7 +55,7 @@ public class J21872 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

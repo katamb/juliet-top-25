@@ -5,15 +5,15 @@ import java.util.StringTokenizer;
 import java.sql.*;
 import java.util.logging.Level;
 public class J24117 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         processG2B(request, response);
         processB2G(request, response);
     }
-    private void goodG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = dataGdG2B;
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -55,11 +55,11 @@ public class J24117 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink(request, response);
+        dataGdG2B = data;
+        gG2BSink(request, response);
     }
-    private void goodB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataGoodB2G;
+    private void gB2GSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        String data = dataGdB2G;
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -112,8 +112,8 @@ public class J24117 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataGoodB2G = data;
-        goodB2GSink(request, response);
+        dataGdB2G = data;
+        gB2GSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

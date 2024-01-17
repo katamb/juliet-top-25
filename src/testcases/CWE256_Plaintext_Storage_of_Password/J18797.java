@@ -33,7 +33,7 @@ public class J18797 extends AbstractTestCase {
         }
         return password;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -63,7 +63,7 @@ public class J18797 extends AbstractTestCase {
         return password;
     }
     private void processG2B() throws Throwable {
-        String password = goodG2BSource();
+        String password = processG2BSource();
         Connection dBConnection = null;
         try {
             dBConnection = DriverManager.getConnection("192.168.105.23", "sa", password);
@@ -79,7 +79,7 @@ public class J18797 extends AbstractTestCase {
             }
         }
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -102,7 +102,7 @@ public class J18797 extends AbstractTestCase {
         return password;
     }
     private void processB2G() throws Throwable {
-        String password = goodB2GSource();
+        String password = processB2GSource();
         {
             Cipher aesCipher = Cipher.getInstance("AES");
             SecretKeySpec secretKeySpec = new SecretKeySpec("ABCDEFGHABCDEFGH".getBytes("UTF-8"), "AES");

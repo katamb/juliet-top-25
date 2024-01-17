@@ -97,7 +97,7 @@ public class J18444 extends AbstractTestCase {
             }
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "foo";
         return data;

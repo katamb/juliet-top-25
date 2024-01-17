@@ -10,16 +10,16 @@ public class J15539 extends AbstractTestCase {
         processG2B();
         processB2G();
     }
-    private void goodG2BSink(long data) throws Throwable {
+    private void gG2BSink(long data) throws Throwable {
         long result = (long) (data * data);
         IO.writeLine("result: " + result);
     }
     private void processG2B() throws Throwable {
         long data;
         data = 2;
-        goodG2BSink(data);
+        gG2BSink(data);
     }
-    private void goodB2GSink(long data) throws Throwable {
+    private void gB2GSink(long data) throws Throwable {
         if ((data != Integer.MIN_VALUE) && (data != Long.MIN_VALUE) && (Math.abs(data) <= (long) Math.sqrt(Long.MAX_VALUE))) {
             long result = (long) (data * data);
             IO.writeLine("result: " + result);
@@ -60,7 +60,7 @@ public class J15539 extends AbstractTestCase {
                 }
             }
         }
-        goodB2GSink(data);
+        gB2GSink(data);
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

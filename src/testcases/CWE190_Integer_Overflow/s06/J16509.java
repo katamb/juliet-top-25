@@ -19,18 +19,18 @@ public class J16509 extends AbstractTestCase {
         }
         return data;
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = goodG2BSource();
+        int data = processG2BSource();
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -47,7 +47,7 @@ public class J16509 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = goodB2GSource();
+        int data = processB2GSource();
         if (data < Integer.MAX_VALUE) {
             data++;
             int result = (int) (data);

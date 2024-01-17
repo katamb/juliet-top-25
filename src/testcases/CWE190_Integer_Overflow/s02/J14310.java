@@ -3,11 +3,11 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J14310 extends AbstractTestCaseServlet {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        int data = dataBad;
+        int data = dataB;
         if (data > 0)  {
             int result = (int) (data * 2);
             IO.writeLine("result: " + result);
@@ -27,7 +27,7 @@ public class J14310 extends AbstractTestCaseServlet {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

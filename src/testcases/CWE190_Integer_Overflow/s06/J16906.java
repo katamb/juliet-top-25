@@ -3,11 +3,11 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.security.SecureRandom;
 public class J16906 extends AbstractTestCase {
-    private int dataBad;
-    private int dataGoodG2B;
-    private int dataGoodB2G;
+    private int dataB;
+    private int dataGdG2B;
+    private int dataGdB2G;
     private void badSink() throws Throwable {
-        int data = dataBad;
+        int data = dataB;
         data++;
         int result = (int) (data);
         IO.writeLine("result: " + result);
@@ -15,7 +15,7 @@ public class J16906 extends AbstractTestCase {
     public void handle() throws Throwable {
         int data;
         data = (new SecureRandom()).nextInt();
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

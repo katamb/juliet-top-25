@@ -7,13 +7,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 public class J19415 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     public void process() throws Throwable {
         processG2B();
     }
-    private void goodG2BSink() throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        String data = dataGdG2B;
         if (data != null) {
             File file = new File(data);
             FileInputStream streamFileInputSink = null;
@@ -56,8 +56,8 @@ public class J19415 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

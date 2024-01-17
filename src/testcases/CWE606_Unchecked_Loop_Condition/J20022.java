@@ -60,12 +60,12 @@ public class J20022 extends AbstractTestCase {
             IO.writeLine("hello world");
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "5";
         return data;
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String data;
         data = "";
         {

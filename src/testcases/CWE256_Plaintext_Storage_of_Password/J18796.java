@@ -50,7 +50,7 @@ public class J18796 extends AbstractTestCase {
             }
         }
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();
@@ -79,7 +79,7 @@ public class J18796 extends AbstractTestCase {
         }
         return password;
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String password;
         password = "";
         Properties properties = new Properties();

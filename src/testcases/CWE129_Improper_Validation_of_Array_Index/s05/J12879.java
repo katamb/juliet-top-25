@@ -3,7 +3,7 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.security.SecureRandom;
 public class J12879 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         int data;
         if (IO.staticFalse) {
             data = 0;
@@ -21,7 +21,7 @@ public class J12879 extends AbstractTestCase {
             IO.writeLine(array[0]);
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         int data;
         if (IO.staticTrue) {
             data = 2;
@@ -39,7 +39,7 @@ public class J12879 extends AbstractTestCase {
             IO.writeLine(array[0]);
         }
     }
-    private void goodB2G1() throws Throwable {
+    private void processB2G1() throws Throwable {
         int data;
         if (IO.staticTrue) {
             data = (new SecureRandom()).nextInt();
@@ -59,7 +59,7 @@ public class J12879 extends AbstractTestCase {
             IO.writeLine(array[0]);
         }
     }
-    private void goodB2G2() throws Throwable {
+    private void processB2G2() throws Throwable {
         int data;
         if (IO.staticTrue) {
             data = (new SecureRandom()).nextInt();
@@ -78,10 +78,10 @@ public class J12879 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
-        goodB2G1();
-        goodB2G2();
+        processG2B1();
+        processG2B2();
+        processB2G1();
+        processB2G2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

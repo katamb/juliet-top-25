@@ -10,7 +10,7 @@ public class J18885 extends AbstractTestCase {
         data = "7e5tc4s3";
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {
@@ -23,7 +23,7 @@ public class J18885 extends AbstractTestCase {
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);

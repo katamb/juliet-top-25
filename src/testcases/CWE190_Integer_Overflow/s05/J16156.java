@@ -14,12 +14,12 @@ public class J16156 extends AbstractTestCase {
             IO.writeLine("result: " + result);
         }
     }
-    private short goodG2BSource() throws Throwable {
+    private short processG2BSource() throws Throwable {
         short data;
         data = 2;
         return data;
     }
-    private short goodB2GSource() throws Throwable {
+    private short processB2GSource() throws Throwable {
         short data;
         data = (short) ((new java.security.SecureRandom()).nextInt(1 + Short.MAX_VALUE - Short.MIN_VALUE) + Short.MIN_VALUE);
         return data;

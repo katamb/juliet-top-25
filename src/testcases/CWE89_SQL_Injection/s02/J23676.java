@@ -4,11 +4,11 @@ import javax.servlet.http.*;
 import java.sql.*;
 import java.util.logging.Level;
 public class J23676 extends AbstractTestCaseServlet {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -56,7 +56,7 @@ public class J23676 extends AbstractTestCaseServlet {
                 data = cookieSources[0].getValue();
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink(request, response);
     }
     public static void main(String[] args) throws ClassNotFoundException,

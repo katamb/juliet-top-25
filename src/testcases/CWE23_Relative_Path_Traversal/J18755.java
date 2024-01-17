@@ -9,13 +9,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
 public class J18755 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     public void process() throws Throwable {
         processG2B();
     }
-    private void goodG2BSink() throws Throwable {
-        String data = dataGoodG2B;
+    private void gG2BSink() throws Throwable {
+        String data = dataGdG2B;
         String root;
         if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
             root = "C:\\uploads\\";
@@ -64,8 +64,8 @@ public class J18755 extends AbstractTestCase {
     private void processG2B() throws Throwable {
         String data;
         data = "foo";
-        dataGoodG2B = data;
-        goodG2BSink();
+        dataGdG2B = data;
+        gG2BSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

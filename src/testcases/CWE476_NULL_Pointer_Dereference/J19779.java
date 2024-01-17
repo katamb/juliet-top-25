@@ -6,22 +6,22 @@ public class J19779 extends AbstractTestCase {
         data = null;
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "This is not null";
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         IO.writeLine("" + data.length());
     }
-    private String goodB2GSource() throws Throwable {
+    private String processB2GSource() throws Throwable {
         String data;
         data = null;
         return data;
     }
     private void processB2G() throws Throwable {
-        String data = goodB2GSource();
+        String data = processB2GSource();
         if (data != null) {
             IO.writeLine("" + data.length());
         } else {

@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.sql.*;
 public class J22796 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
-    private String dataGoodB2G;
+    private String dataB;
+    private String dataGdG2B;
+    private String dataGdB2G;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             String names[] = data.split("-");
             int successCount = 0;
@@ -79,7 +79,7 @@ public class J22796 extends AbstractTestCase {
                 }
             }
         }
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

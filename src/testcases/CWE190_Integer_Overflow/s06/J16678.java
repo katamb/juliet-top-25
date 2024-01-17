@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 public class J16678 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
@@ -22,19 +22,19 @@ public class J16678 extends AbstractTestCaseServlet {
                 }
             }
         }
-        badPrivate = true;
+        bPrivate = true;
         badSink(data, request, response);
     }
     private void badSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             data++;
             int result = (int) (data);
             IO.writeLine("result: " + result);
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

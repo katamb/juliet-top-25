@@ -56,13 +56,13 @@ public class J11053 extends AbstractTestCase {
         }
         return data;
     }
-    private int goodG2BSource() throws Throwable {
+    private int processG2BSource() throws Throwable {
         int data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        int data = goodG2BSource();
+        int data = processG2BSource();
         int array[] = null;
         if (data >= 0) {
             array = new int[data];
@@ -72,7 +72,7 @@ public class J11053 extends AbstractTestCase {
         array[0] = 5;
         IO.writeLine(array[0]);
     }
-    private int goodB2GSource() throws Throwable {
+    private int processB2GSource() throws Throwable {
         int data;
         data = Integer.MIN_VALUE;
         {
@@ -121,7 +121,7 @@ public class J11053 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        int data = goodB2GSource();
+        int data = processB2GSource();
         int array[] = null;
         if (data > 0) {
             array = new int[data];

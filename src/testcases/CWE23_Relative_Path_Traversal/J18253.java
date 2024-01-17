@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 public class J18253 extends AbstractTestCase {
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE != 5) {
             data = null;
@@ -60,7 +60,7 @@ public class J18253 extends AbstractTestCase {
             }
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (IO.STATIC_FINAL_FIVE == 5) {
             data = "foo";
@@ -113,8 +113,8 @@ public class J18253 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

@@ -5,10 +5,10 @@ import java.io.*;
 import javax.security.auth.kerberos.KerberosPrincipal;
 import javax.security.auth.kerberos.KerberosKey;
 public class J18886 extends AbstractTestCase {
-    private String dataBad;
-    private String dataGoodG2B;
+    private String dataB;
+    private String dataGdG2B;
     private void badSink() throws Throwable {
-        String data = dataBad;
+        String data = dataB;
         if (data != null) {
             KerberosPrincipal principal = new KerberosPrincipal("test");
             KerberosKey key = new KerberosKey(principal, data.toCharArray(), null);
@@ -18,7 +18,7 @@ public class J18886 extends AbstractTestCase {
     public void handle() throws Throwable {
         String data;
         data = "7e5tc4s3";
-        dataBad = data;
+        dataB = data;
         badSink();
     }
     public static void main(String[] args) throws ClassNotFoundException,

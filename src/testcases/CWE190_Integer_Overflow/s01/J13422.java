@@ -2,22 +2,22 @@ package testcases.CWE190_Integer_Overflow.s01;
 import testcasesupport.*;
 import javax.servlet.http.*;
 public class J13422 extends AbstractTestCase {
-    private boolean badPrivate = false;
+    private boolean bPrivate = false;
     public void handle() throws Throwable {
         byte data;
         data = Byte.MAX_VALUE;
-        badPrivate = true;
+        bPrivate = true;
         badSink(data);
     }
     private void badSink(byte data) throws Throwable {
-        if (badPrivate) {
+        if (bPrivate) {
             byte result = (byte) (data * data);
             IO.writeLine("result: " + result);
         }
     }
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {
         mainFromParent(args);

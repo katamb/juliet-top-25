@@ -12,7 +12,7 @@ public class J18973 extends AbstractTestCase {
         data = "23 ~j;asn!@#/>as";
         return data;
     }
-    private String goodG2BSource() throws Throwable {
+    private String processG2BSource() throws Throwable {
         String data;
         data = "";
         try {
@@ -25,7 +25,7 @@ public class J18973 extends AbstractTestCase {
         return data;
     }
     private void processG2B() throws Throwable {
-        String data = goodG2BSource();
+        String data = processG2BSource();
         if (data != null) {
             String stringToEncrypt = "Super secret Squirrel";
             byte[] byteStringToEncrypt = stringToEncrypt.getBytes("UTF-8");

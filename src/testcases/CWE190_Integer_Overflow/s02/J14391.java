@@ -3,10 +3,10 @@ import testcasesupport.*;
 import javax.servlet.http.*;
 import java.util.logging.Level;
 public class J14391 extends AbstractTestCaseServlet {
-    private boolean badPrivate = false;
-    private boolean goodB2G1Private = false;
-    private boolean goodB2G2Private = false;
-    private boolean goodG2BPrivate = false;
+    private boolean bPrivate = false;
+    private boolean gB2G1Private = false;
+    private boolean gB2G2Private = false;
+    private boolean gG2BPrivate = false;
     public void process(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         goodB2G1(request, response);
         goodB2G2(request, response);
@@ -23,11 +23,11 @@ public class J14391 extends AbstractTestCaseServlet {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
-        goodB2G1Private = false;
-        goodB2G1Sink(data, request, response);
+        gB2G1Private = false;
+        gB2G1Sink(data, request, response);
     }
-    private void goodB2G1Sink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodB2G1Private) {
+    private void gB2G1Sink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (gB2G1Private) {
             IO.writeLine("Benign, fixed string");
         } else {
             if (data < Integer.MAX_VALUE) {
@@ -49,11 +49,11 @@ public class J14391 extends AbstractTestCaseServlet {
                 IO.logger.log(Level.WARNING, "Number format exception reading data from parameter 'name'", exceptNumberFormat);
             }
         }
-        goodB2G2Private = true;
+        gB2G2Private = true;
         goodB2G2Sink(data, request, response);
     }
     private void goodB2G2Sink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodB2G2Private) {
+        if (gB2G2Private) {
             if (data < Integer.MAX_VALUE) {
                 int result = (int) (data + 1);
                 IO.writeLine("result: " + result);
@@ -65,11 +65,11 @@ public class J14391 extends AbstractTestCaseServlet {
     private void processG2B(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         int data;
         data = 2;
-        goodG2BPrivate = true;
-        goodG2BSink(data, request, response);
+        gG2BPrivate = true;
+        gG2BSink(data, request, response);
     }
-    private void goodG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (goodG2BPrivate) {
+    private void gG2BSink(int data, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        if (gG2BPrivate) {
             int result = (int) (data + 1);
             IO.writeLine("result: " + result);
         }

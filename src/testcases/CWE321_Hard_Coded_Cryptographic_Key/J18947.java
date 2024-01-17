@@ -13,7 +13,7 @@ public class J18947 extends AbstractTestCase {
     private boolean privateReturnsFalse() {
         return false;
     }
-    private void goodG2B1() throws Throwable {
+    private void processG2B1() throws Throwable {
         String data;
         if (privateReturnsFalse()) {
             data = null;
@@ -37,7 +37,7 @@ public class J18947 extends AbstractTestCase {
             IO.writeLine(IO.toHex(byteCipherText));
         }
     }
-    private void goodG2B2() throws Throwable {
+    private void processG2B2() throws Throwable {
         String data;
         if (privateReturnsTrue()) {
             data = "";
@@ -62,8 +62,8 @@ public class J18947 extends AbstractTestCase {
         }
     }
     public void process() throws Throwable {
-        goodG2B1();
-        goodG2B2();
+        processG2B1();
+        processG2B2();
     }
     public static void main(String[] args) throws ClassNotFoundException,
             InstantiationException, IllegalAccessException {

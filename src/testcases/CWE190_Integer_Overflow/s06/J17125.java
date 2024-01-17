@@ -41,18 +41,18 @@ public class J17125 extends AbstractTestCase {
         }
         return data;
     }
-    private short goodG2BSource() throws Throwable {
+    private short processG2BSource() throws Throwable {
         short data;
         data = 2;
         return data;
     }
     private void processG2B() throws Throwable {
-        short data = goodG2BSource();
+        short data = processG2BSource();
         data++;
         short result = (short) (data);
         IO.writeLine("result: " + result);
     }
-    private short goodB2GSource() throws Throwable {
+    private short processB2GSource() throws Throwable {
         short data;
         data = -1;
         BufferedReader readerBuffered = null;
@@ -88,7 +88,7 @@ public class J17125 extends AbstractTestCase {
         return data;
     }
     private void processB2G() throws Throwable {
-        short data = goodB2GSource();
+        short data = processB2GSource();
         if (data < Short.MAX_VALUE) {
             data++;
             short result = (short) (data);
