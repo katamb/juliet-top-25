@@ -1,18 +1,9 @@
 package testcases.CWE549_Missing_Password_Masking;
 import testcasesupport.*;
 import javax.servlet.http.*;
-public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCaseServlet {
-    private int privateFive = 5;
-    public void bad(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (privateFive == 5) {
-            response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
-            response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
-            response.getWriter().println("Password: <input name=\"password\" type=\"text\" tabindex=\"10\" />");
-            response.getWriter().println("<input type=\"submit\" name=\"submit\" value=\"Login-bad\" /></form>");
-        }
-    }
+public class CWE549_Missing_Password_Masking__Servlet_09_good extends AbstractTestCaseServlet {
     private void good1(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (privateFive != 5) {
+        if (IO.STATIC_FINAL_FALSE) {
             IO.writeLine("Benign, fixed string");
         } else {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
@@ -22,7 +13,7 @@ public class CWE549_Missing_Password_Masking__Servlet_07 extends AbstractTestCas
         }
     }
     private void good2(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        if (privateFive == 5) {
+        if (IO.STATIC_FINAL_TRUE) {
             response.getWriter().println("<form id=\"form\" name=\"form\" method=\"post\" action=\"password-test-servlet\">");
             response.getWriter().println("Username: <input name=\"username\" type=\"text\" tabindex=\"10\" /><br><br>");
             response.getWriter().println("Password: <input name=\"password\" type=\"password\" tabindex=\"10\" />");
