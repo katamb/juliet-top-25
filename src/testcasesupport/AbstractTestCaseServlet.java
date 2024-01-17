@@ -23,11 +23,15 @@ public abstract class AbstractTestCaseServlet extends AbstractTestCaseServletBas
 {
     private static final long serialVersionUID = 1L; /* needed since Servlets are serializable */
     
-    public abstract void bad(HttpServletRequest request,
-            HttpServletResponse response) throws Throwable;
+    public void bad(HttpServletRequest request,
+            HttpServletResponse response) throws Throwable {
 
-    public abstract void good(HttpServletRequest request,
-            HttpServletResponse response) throws Throwable;
+    }
+
+    public void good(HttpServletRequest request,
+            HttpServletResponse response) throws Throwable {
+
+    }
 
     /* this method runs the tests, but assumes that the html document has already
      * been started.  It is called by runTestSolo and by ServletMain
