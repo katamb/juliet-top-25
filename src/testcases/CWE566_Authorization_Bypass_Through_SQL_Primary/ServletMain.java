@@ -136,14 +136,8 @@ public class ServletMain extends HttpServlet {
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19874()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19871()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19870()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19857()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19856()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19869()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19868()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19883()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19882()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19873()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19872()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19881()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19880()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19877()).runTest(request, response);
@@ -152,8 +146,6 @@ public class ServletMain extends HttpServlet {
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19866()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19889()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19888()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19851()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19850()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19861()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19860()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19891()).runTest(request, response);
@@ -162,8 +154,6 @@ public class ServletMain extends HttpServlet {
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19886()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19863()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19862()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19893()).runTest(request, response);
-            (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19892()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19853()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19852()).runTest(request, response);
             (new testcases.CWE566_Authorization_Bypass_Through_SQL_Primary.J19879()).runTest(request, response);
