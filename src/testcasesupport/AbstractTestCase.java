@@ -9,9 +9,12 @@ package testcasesupport;
 
 public abstract class AbstractTestCase extends AbstractTestCaseBase 
 {
-    public abstract void bad() throws Throwable;
+    public void bad() throws Throwable {
 
-    public abstract void good() throws Throwable;
+    }
+    public void good() throws Throwable {
+
+    }
     
     public void runTest(String className) 
     {
