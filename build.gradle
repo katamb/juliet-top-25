@@ -1,9 +1,24 @@
+import com.github.spotbugs.snom.Effort
+
 plugins {
     id 'java'
     id "org.sonarqube" version "4.4.1.3373"
-    id "com.github.spotbugs" version "6.0.0-rc.3"
+    id "com.github.spotbugs" version "6.0.7"
 }
 
+spotbugsMain {
+    effort = Effort.MAX
+    ignoreFailures = false
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
+    reports {
+        text.enabled true
+        sarif.enabled true
+        xml.enabled true
+        html.enabled true
+    }
+}
 sourceCompatibility = 1.8
 
 sourceSets {
@@ -20,6 +35,7 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'lib', include: '*.jar')
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
 
     implementation group: 'junit', name: 'junit', version: '4.11'
 }
