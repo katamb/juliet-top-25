@@ -1,5 +1,5 @@
 # A pre-processed Juliet 1.3 dataset for LLM and SCAT testing
-Original dataset is published by NSA Center for Assured Software and is available here: https://samate.nist.gov/SARD/test-suites/112.
+Original dataset is published by NSA Center for Assured Software and is available here: https://samate.nist.gov/SARD/test-suites/111.
 Both the original and modified dataset are available under the CC0 1.0 Public Domain License.
 
 ## Manual processes
