@@ -1,8 +1,42 @@
+import com.github.spotbugs.snom.Effort
+import com.github.spotbugs.snom.SpotBugsTask
+
 plugins {
     id 'java'
-    id "org.sonarqube" version "4.4.1.3373"
-    id "com.github.spotbugs" version "6.0.0-rc.3"
+    id 'org.sonarqube' version '4.4.1.3373'
+    id 'com.github.spotbugs' version '6.0.7'  // SpotBugs plugin
+    id 'pmd'  // PMD plugin
 }
+
+// PMD config start
+pmd {
+    consoleOutput = true
+    toolVersion = '6.21.0'
+    rulesMinimumPriority = 5
+    // Included everything that seemed relevant to the CWE's we are looking for based on: https://docs.pmd-code.org/pmd-doc-6.21.0/pmd_rules_java.html
+    ruleSets = ['category/java/security.xml','category/java/errorprone.xml/NullAssignment','category/java/errorprone.xml/BrokenNullCheck']
+}
+
+tasks.withType(Pmd) {
+    maxHeapSize = '2g' // Adjust the heap size as needed
+}
+// PMD config end
+
+// SpotBugs config start
+spotbugsMain {
+    effort = Effort.MAX
+    ignoreFailures = false
+}
+
+tasks.withType(SpotBugsTask) {
+    reports {
+        text.enabled true
+        sarif.enabled false
+        xml.enabled false
+        html.enabled true
+    }
+}
+// SpotBugs config end
 
 sourceCompatibility = 1.8
 
@@ -20,6 +54,9 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'lib', include: '*.jar')
+
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0' // Adds find-sec-bugs plugin to SpotBugs: https://find-sec-bugs.github.io/download.htm
+    spotbugsPlugins 'com.mebigfatguy.fb-contrib:fb-contrib:7.6.4'  // Adds fb-contrib plugin to SpotBugs: https://fb-contrib.sourceforge.net/
 
     implementation group: 'junit', name: 'junit', version: '4.11'
 }
