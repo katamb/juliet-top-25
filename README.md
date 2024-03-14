@@ -2,6 +2,8 @@
 Original dataset is published by NSA Center for Assured Software and is available here: https://samate.nist.gov/SARD/test-suites/111.
 Both the original and modified dataset are available under the CC0 1.0 Public Domain License.
 
+This repository contains multiple branches. The dataset use in the study is in the `main` branch. 
+
 ## Manual processes
 1. First the testcases in MITRE top 25 and the sub-categories of the top 25 were selected from the Juliet 1.3 full set.
 2. Then the ant build tooling was replaced with gradle tooling.
