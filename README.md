@@ -25,9 +25,9 @@ tokens, as running LLMs is expensive, so we want to remove unnecessary whitespac
    to the vulnerabilities and marks whether the file is vulnerable or not.
 5. The resulting dataset is in the `main` and `full-pre-processed-set` branches.
 
-NB!: The package names are not change here. Before sending the files to LLM, the script replaces the package
-name. Feel free to change the package names in the pre-processing steps, however for easier understanding of the dataset,
-this was done in later stages during the experimentation.
+NB!: The package names are not changed here. Before sending the files to LLM, the script replaces the package name. 
+Feel free to change the package names in the pre-processing steps, however to simplify some manual steps, 
+we only overwrote the package names before sending the file to the LLM.
 
 ## Stats about current dataset
 | CWE       | Count   |
