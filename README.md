@@ -1,10 +1,10 @@
-# A pre-processed Juliet 1.3 dataset for LLM and SCAT testing.
+# A pre-processed Juliet 1.3 dataset for LLM and SCAT testing
 
 ## Manual processes
 1. First the testcases in MITRE top 25 and the sub-categories of the top 25 were selected from the Juliet 1.3 full set. 
 2. Then the ant build tooling was replaced with gradle tooling.
 3. This state was uploaded to the branch `original-set`.
-4Use IntelliJ code reformatting to reformat the code. This makes it easier to read and compacts the code a little.
+4. Use IntelliJ code reformatting to reformat the code. This makes it easier to read and compacts the code a little.
 
 ## Automated pre-processing steps
 Then the tooling in `https://github.com/katamb/thesis-scripts/tree/main/dataset-normalization` was used to prepare the 
@@ -26,27 +26,27 @@ name. Feel free to change the package names in the pre-processing steps, however
 this was done in later stages during the experimentation.
 
 ## Stats about current dataset
-| CWE     | File count |
-|---------|------------|
-| CWE-23  | 528        |
-| CWE-36  | 528        |
-| CWE-78  | 528        |
-| CWE-80  | 792        |
-| CWE-81  | 396        |
-| CWE-83  | 396        |
-| CWE-89  | 2640       |
-| CWE-129 | 3168       |
-| CWE-190 | 5060       |
-| CWE-256 | 44         |
-| CWE-259 | 132        |
-| CWE-321 | 44         |
-| CWE-476 | 278        |
-| CWE-523 | 34         |
-| CWE-549 | 34         |
-| CWE-566 | 44         |
-| CWE-606 | 528        |
-|---------|------------|
-| SUM     | 15174      |
+| CWE       | File count   |
+|-----------|--------------|
+| CWE-23    | 528          |
+| CWE-36    | 528          |
+| CWE-78    | 528          |
+| CWE-80    | 792          |
+| CWE-81    | 396          |
+| CWE-83    | 396          |
+| CWE-89    | 2640         |
+| CWE-129   | 3168         |
+| CWE-190   | 5060         |
+| CWE-256   | 44           |
+| CWE-259   | 132          |
+| CWE-321   | 44           |
+| CWE-476   | 278          |
+| CWE-523   | 34           |
+| CWE-549   | 34           |
+| CWE-566   | 44           |
+| CWE-606   | 528          |
+| --------- | ------------ |
+| SUM       | 15174        |
 
 ## Creating a smaller subset
 This currently contains 15174 testcases, from which 7587 are "good" and 7587 are "bad". Running these amounts of data 
